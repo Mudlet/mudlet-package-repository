@@ -22,7 +22,7 @@ jobs:
           repo: ${{ github.repository }}
           ref: ${{ github.ref }}
           path: "."
-          ext: ".yml"
+          ext: ".mpackage"
   Test:
     needs: list-files
     strategy:
