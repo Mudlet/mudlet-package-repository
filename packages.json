@@ -1,0 +1,25 @@
+{
+  "name": "mudlet package repository listing",
+  "updated": "2014-06-25T00:00:00.000Z",
+    "packages": [
+      {
+        "mpackage": "generic_mapper",
+        "author": "mudlet dev team",
+        "title": "generic mapper short description",
+        "description": "generic mapper long description",
+        "version": "1.23",
+        "dependencies": 0,
+        "created": "2024-05-19T15:39:12+04:00"
+      }
+      {
+        "mpackage": "echo",
+        "author": "author name",
+        "title": "echo package short description",
+        "description": "echo package long description",
+        "version": "5",
+        "dependencies": "enable-accessibility,generic_mapper",
+        "created": "2024-01-19T12:13:14+04:00"
+      }
+    ]
+  }
+}
