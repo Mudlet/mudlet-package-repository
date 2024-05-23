@@ -35,8 +35,8 @@
         "icon": "mudlet.png",
         "title": "Run Lua code directly from the command line.",
         "description": "# run-lua-code-v4\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n"
-        "created" = "2023-06-22T12:14:36+10:00",
-        "version" = "0.1"
+        "created": "2023-06-22T12:14:36+10:00",
+        "version": "0.1"
       }      
     ]
 }
