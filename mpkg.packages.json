@@ -34,7 +34,7 @@
         "author": "Mudlet Default Package",
         "icon": "mudlet.png",
         "title": "Run Lua code directly from the command line.",
-        "description" = "
+        "description": "
 # run-lua-code-v4
 
 A simple package that provides a `lua` alias that allows the user to
