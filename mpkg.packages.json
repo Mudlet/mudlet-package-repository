@@ -9,7 +9,7 @@
         "title": "Semi-automatic mapping, designed to work with many MUDs.",
         "description": "# generic_mapper Package\\n\\nThis script allows for semi-automatic mapping using the included triggers.\\nWhile different games can have dramatically different ways of displaying\\ninformation, some effort has been put into giving the script a wide range of\\npotential patterns to look for, so that it can work with minimal effort in\\nmany cases.\\n\\ngeneric_mapper looks at a combination of room titles, descriptions and exits\\nto locate and follow your character around maps you can make yourself, share\\nand download for your MUD.\\n\\nTwo commands to get started are;\\n```\\n> map basics\\n> map help\\n```\\n\\nSee [this forum thread](https://forums.mudlet.org/viewtopic.php?f=13&t=6105) for further assistance.\\n\\nSee [this forum thread](https://forums.mudlet.org/search.php?keywords=mapping+script&terms=all&author=&sc=1&sf=titleonly&sr=topics&sk=t&sd=d&st=0&ch=400&t=0&submit=Search&pk_vid=08fcc4383ef3530916874145245184da) for more mapping scripts.\\n]]",
         "created": "2023-06-22T12:16:27+10:00",
-        "version": "2.1.1"
+        "version": "2.11"
       },
       {
         "mpackage": "echo",
