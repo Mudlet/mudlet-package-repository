@@ -3,6 +3,14 @@
   "updated": "2014-06-25T00:00:00.000Z",
     "packages": [
       {
+        "mpackage": "mpkg",
+        "author": "Zooka",
+        "title": "A command line package manager for Mudlet.",
+        "description": "mpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.",
+        "created": "2024-05-26T04:32:35+04:00",
+        "version": "1"
+      },      
+      {
         "mpackage": "generic_mapper",
         "author": "Mudlet Default Package",
         "icon": "mudlet.png",
