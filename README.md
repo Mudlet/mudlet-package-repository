@@ -1,4 +1,6 @@
-### A package repository for [Mudlet](https://www.mudlet.org) ###
+## A package repository for [Mudlet](https://www.mudlet.org) ##
+
+### Installation ###
 
 **mpkg** is a command line interface for managing packages used in [Mudlet](https://www.mudlet.org).  
 You can install, remove, search the repository and update packages using this interface.
@@ -24,3 +26,8 @@ Commands:
   mpkg update           -- update your package listing
   mpkg debug            -- turn on debugging messages
 ```
+
+### Submit a Package ###
+
+Have you created a package you wish to share?  Submit a [pull request](https://github.com/ZookaOnGit/mudlet-package-repository/pulls)
+to have it included in the mudlet package repository.
