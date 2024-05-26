@@ -9,6 +9,14 @@
         "description": "mpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.",
         "created": "2024-05-26T04:32:35+04:00",
         "version": "1"
+      }, 
+      {
+        "mpackage": "simple-mapper",
+        "author": "Zooka",
+        "title": "Create simple maps using directional commands only.",
+        "description": "Create a simple map using only directional commands.\nSupports n,s,e,w,ne,nw,se,sw,u,d.  This mapper does\nnot capture any game data so can also be used offline\nfor creating areas.",
+        "created": "2024-05-26T05:16:40+04:00",
+        "version": "1"
       },      
       {
         "mpackage": "generic_mapper",
