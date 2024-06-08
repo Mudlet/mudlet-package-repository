@@ -8,7 +8,7 @@
         "title": "A command line package manager for Mudlet.",
         "description": "mpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.",
         "created": "2024-05-26T04:32:35+04:00",
-        "version": "1"
+        "version": "1.5"
       }, 
       {
         "mpackage": "simple-mapper",
