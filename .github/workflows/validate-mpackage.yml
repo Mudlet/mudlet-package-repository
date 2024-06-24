@@ -31,7 +31,7 @@ jobs:
     - name: Unzip the mpackage and check config.lua exists
       id: unzip-mpackage-file
       run: |
-        FILE=${{ ${{ steps.check-file-count.outputs.FILE }} }}
+        FILE=${{ steps.check-file-count.outputs.FILE }}
         echo $FILE
 
         # unzip the mpackage
