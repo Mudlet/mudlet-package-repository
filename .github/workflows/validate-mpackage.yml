@@ -39,37 +39,37 @@ jobs:
         fi
 
         #grep for some vital details
-        if grep "mpackage =" unzipped_contents/config.lua;
+        if grep -q "mpackage =" unzipped_contents/config.lua; then
+          echo "Pass: has a valid mpackage name"
+        else
           echo "Error: not a valid mpackage file"
           exit(1)
-        else
-          echo "Pass: has a valid mpackage name"
         fi
         
-        if grep "version =" unzipped_contents/config.lua;
-          echo "Error: does not contain a version number"
-          exit(1)
-        else
+        if grep -q "version =" unzipped_contents/config.lua; then
           echo "Pass: config.lua contains a version number"
+        else
+          echo "Error: does not contain a version number"
+          exit(1)          
         fi   
 
-        if grep "mpackage =" unzipped_contents/config.lua;
-          echo "Error: not a valid mpackage file"
-          exit(1)          
-        else
+        if grep -q "mpackage =" unzipped_contents/config.lua; then
           echo "Pass: has a valid mpackage name"
+        else
+          echo "Error: not a valid mpackage file"
+          exit(1)            
         fi        
 
-        if grep "author =" unzipped_contents/config.lua;
+        if grep -q "author =" unzipped_contents/config.lua; then         
+          echo "Pass: has a valid author name"
+        else
           echo "Error: does not contain a valid author name"
           exit(1)          
-        else
-          echo "Pass: has a valid author name"
         fi  
 
-        if grep "description =" unzipped_contents/config.lua;
-          echo "Error: does not contain a valid description"
-          exit(1)          
+        if grep -q "description =" unzipped_contents/config.lua; then
+          echo "Pass: has a valid description"      
         else
-          echo "Pass: has a valid description"
+          echo "Error: does not contain a valid description"
+          exit(1)             
         fi
