@@ -17,19 +17,11 @@ jobs:
       id: list-files
       run: |
         echo "Files changed in this PR:"
-        git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
-
-    - name: Set output
-      id: output
-      run: |
-        FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
-        echo "::set-output name=files::$FILES"
-    
-    - name: Display files
-      run: echo "${{ steps.output.outputs.files }}"
+        FILES=$(gh pr view https://github.com/ZookaOnGit/mudlet-package-repository/pull/3 --json files --jq '.files[].path')
+        echo $FILES
 
     - name: Unzip archive
-      run: unzip -o archive.zip -d unzipped_contents
+      run: unzip -o $FILES -d unzipped_contents
 
     - name: List contents of the ZIP file
       run: ls -R unzipped_contents
