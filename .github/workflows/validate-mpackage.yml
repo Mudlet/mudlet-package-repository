@@ -27,7 +27,7 @@ jobs:
         fi
 
         # unzip the mpackage
-        unzip -o $FILE -d unzipped_contents
+        unzip -o $FILE -d unzipped_package
         ls -al unzipped_package
 
         #only valid if it has a config.lua
@@ -43,33 +43,33 @@ jobs:
           echo "Pass: has a valid mpackage name"
         else
           echo "Error: not a valid mpackage file"
-          exit(1)
+          exit 1
         fi
         
         if grep -q "version =" unzipped_contents/config.lua; then
           echo "Pass: config.lua contains a version number"
         else
           echo "Error: does not contain a version number"
-          exit(1)          
+          exit 1
         fi   
 
         if grep -q "mpackage =" unzipped_contents/config.lua; then
           echo "Pass: has a valid mpackage name"
         else
           echo "Error: not a valid mpackage file"
-          exit(1)            
+          exit 1
         fi        
 
         if grep -q "author =" unzipped_contents/config.lua; then         
           echo "Pass: has a valid author name"
         else
           echo "Error: does not contain a valid author name"
-          exit(1)          
+          exit 1
         fi  
 
         if grep -q "description =" unzipped_contents/config.lua; then
           echo "Pass: has a valid description"      
         else
           echo "Error: does not contain a valid description"
-          exit(1)             
+          exit 1
         fi
