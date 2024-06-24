@@ -8,11 +8,8 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install unzip
-      run: sudo apt-get install -y unzip
-
+      uses: actions/checkout@master
+      
     - name: List files in the pull request
       id: list-files
       run: |
@@ -28,10 +25,12 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
         echo "Fetching contents of $FILE"
-        curl -s -H "Authorization: Bearer $GH_TOKEN" \
-            -H "Accept: application/vnd.github.v3.raw" \
-            -o "$(basename "$FILE")" \
-               "https://api.github.com/repos/${{ github.repository }}/contents/$FILE?ref=${{ github.event.pull_request.head.sha }}"
+        echo "Repo is: ${{ github.repository }}"
+        echo "SHA is : ${{ github.event.pull_request.head.sha }}"
+      : #  curl -s -H "Authorization: Bearer $GH_TOKEN" \
+      : #      -H "Accept: application/vnd.github.v3.raw" \
+      : #      -o "$(basename "$FILE")" \
+      : #      "https://api.github.com/repos/${{ github.repository }}/contents/$FILE?ref=${{ github.event.pull_request.head.sha }}"
         ls -al .
     - name: Unzip archive
       run: unzip -o $FILE -d unzipped_contents
