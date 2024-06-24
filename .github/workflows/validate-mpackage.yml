@@ -23,9 +23,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Unzip archive
-      run: |
-        echo "Unzipping $FILES"
-        unzip -o $FILES -d unzipped_contents
+      run: unzip -o $FILES -d unzipped_contents
 
     - name: List contents of the ZIP file
       run: ls -R unzipped_contents
