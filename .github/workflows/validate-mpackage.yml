@@ -24,7 +24,7 @@ jobs:
         
     - name: Fetch contents of changed files
       id: fetch_contents
-    - env:
+      env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
         echo "Fetching contents of $file"
