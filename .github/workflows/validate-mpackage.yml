@@ -33,7 +33,7 @@ jobs:
         FILE=${{ steps.check-file-count.outputs.FILE }}
 
         # unzip the mpackage
-        unzip -o $FILE -d unzipped_package
+        unzip -q -o $FILE -d unzipped_package
         ls -al unzipped_package
 
         #only valid if it has a config.lua
