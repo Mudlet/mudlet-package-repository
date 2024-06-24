@@ -3,14 +3,14 @@ name: Validate mpackage file
 on: pull_request
 
 jobs:
-  check-zip-contents:
+  check-mpackage-contents:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@master
       
-    - name: Unzip the file and check it out
+    - name: Unzip the mpackage and check config.lua
       id: validate-mpackage-file
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
