@@ -10,10 +10,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@master
       
-    - name: Unzip the mpackage and check config.lua
-      id: validate-mpackage-file
+    - name: Only one file per PR is allowed
+      id: check-file-count
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FILE: ${{ secrets.GITHUB_TOKEN }}      
       run: |
         FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
         echo $FILE
@@ -25,6 +25,14 @@ jobs:
         else
           echo "Pass: just one file uploaded."
         fi
+
+        echo "FILE=$FILE" >> $GITHUB_OUTPUT
+      
+    - name: Unzip the mpackage and check config.lua exists
+      id: unzip-mpackage-file
+      run: |
+        FILE=${{ ${{ steps.check-file-count.outputs.FILE }} }}
+        echo $FILE
 
         # unzip the mpackage
         unzip -o $FILE -d unzipped_package
