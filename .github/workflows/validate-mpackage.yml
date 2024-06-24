@@ -14,7 +14,7 @@ jobs:
       id: list-files
       run: |
         FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
-        echo "File changed in this PR: $FILE"        
+        echo $FILE
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
