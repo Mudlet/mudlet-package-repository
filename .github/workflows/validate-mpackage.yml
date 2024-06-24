@@ -16,7 +16,6 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
         FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
-        echo $FILE
         
         # check only 1 file has been uploaded per PR
         if [ `echo "$FILE" |wc -l` -gt 1 ]; then
@@ -32,7 +31,6 @@ jobs:
       id: unzip-mpackage-file
       run: |
         FILE=${{ steps.check-file-count.outputs.FILE }}
-        echo $FILE
 
         # unzip the mpackage
         unzip -o $FILE -d unzipped_package
@@ -46,6 +44,11 @@ jobs:
           exit 1
         fi
 
+    - name: Check config.lua contains all required information
+      id: check-config-lua
+      run: |
+        FILE=${{ steps.check-file-count.outputs.FILE }}
+        
         #grep for some vital details
         if grep -q "mpackage =" unzipped_package/config.lua; then
           echo "Pass: has a valid mpackage name"
