@@ -19,9 +19,9 @@ jobs:
         echo $FILE
         
         # check only 1 file has been uploaded per PR
-        if [ `echo "$FILE" |wc -l`  -gt 1 ]; then
+        if [ `echo "$FILE" |wc -l` -gt 1 ]; then
           echo "Error: Only one package file per pull request please."
-          exit(1)
+          exit 1
         else
           echo "Pass: just one file uploaded."
         fi
