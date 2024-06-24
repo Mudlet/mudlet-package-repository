@@ -12,25 +12,26 @@ jobs:
       
     - name: List files in the pull request
       id: list-files
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
         echo $FILE
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Fetch contents of changed files
-      id: fetch_contents
+      id: fetch-contents
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
         echo "Fetching contents of $FILE"
         echo "Repo is: ${{ github.repository }}"
         echo "SHA is : ${{ github.event.pull_request.head.sha }}"
+        ls -al .
       #  curl -s -H "Authorization: Bearer $GH_TOKEN" \
       #      -H "Accept: application/vnd.github.v3.raw" \
       #      -o "$(basename $FILE)" \
       #      "https://api.github.com/repos/${{ github.repository }}/contents/$FILE?ref=${{ github.event.pull_request.head.sha }}"
-        ls -al .
+
     - name: Unzip archive
       run: unzip -o $FILE -d unzipped_contents
 
