@@ -10,38 +10,66 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@master
       
-    - name: List files in the pull request
-      id: list-files
+    - name: Unzip the file and check it out
+      id: validate-mpackage-file
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
         echo $FILE
+        
+        # check only 1 file has been uploaded per PR
+        if [ `echo "$FILE" |wc -l`  -gt 1 ]; then
+          echo "Error: Only one package file per pull request please."
+          exit(1)
+        else
+          echo "Pass: just one file uploaded."
+        fi
+
+        # unzip the mpackage
         unzip -o $FILE -d unzipped_contents
-        ls -al
+        ls -al unzipped_package
 
-    - name: Fetch contents of changed files
-      id: fetch-contents
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
-      run: |
-        echo "Fetching contents of $FILE"
-        echo "Repo is: ${{ github.repository }}"
-        echo "SHA is : ${{ github.event.pull_request.head.sha }}"
-        ls -al .
-      #  curl -s -H "Authorization: Bearer $GH_TOKEN" \
-      #      -H "Accept: application/vnd.github.v3.raw" \
-      #      -o "$(basename $FILE)" \
-      #      "https://api.github.com/repos/${{ github.repository }}/contents/$FILE?ref=${{ github.event.pull_request.head.sha }}"
-
-    - name: List contents of the ZIP file
-      run: ls -R unzipped_contents
-
-    - name: Check for specific file
-      run: |
-        if [ -f "unzipped_contents/config.lua" ]; then
-          echo "config.lua is present."
+        #only valid if it has a config.lua
+        if [ -f "unzipped_package/config.lua" ]; then
+          echo "Pass: config.lua is present"
         else
           echo "Error: config.lua is missing."
           exit 1
+        fi
+
+        #grep for some vital details
+        if grep "mpackage =" unzipped_contents/config.lua;
+          echo "Error: not a valid mpackage file"
+          exit(1)
+        else
+          echo "Pass: has a valid mpackage name"
+        fi
+        
+        if grep "version =" unzipped_contents/config.lua;
+          echo "Error: does not contain a version number"
+          exit(1)
+        else
+          echo "Pass: config.lua contains a version number"
+        fi   
+
+        if grep "mpackage =" unzipped_contents/config.lua;
+          echo "Error: not a valid mpackage file"
+          exit(1)          
+        else
+          echo "Pass: has a valid mpackage name"
+        fi        
+
+        if grep "author =" unzipped_contents/config.lua;
+          echo "Error: does not contain a valid author name"
+          exit(1)          
+        else
+          echo "Pass: has a valid author name"
+        fi  
+
+        if grep "description =" unzipped_contents/config.lua;
+          echo "Error: does not contain a valid description"
+          exit(1)          
+        else
+          echo "Pass: has a valid description"
         fi
