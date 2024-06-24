@@ -20,7 +20,7 @@ jobs:
         FILES=$(gh pr view https://github.com/ZookaOnGit/mudlet-package-repository/pull/3 --json files --jq '.files[].path')
         echo $FILES
       env:
-        GH_TOKEN: ${{ GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Unzip archive
       run: unzip -o $FILES -d unzipped_contents
