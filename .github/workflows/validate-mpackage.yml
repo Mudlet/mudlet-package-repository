@@ -18,7 +18,7 @@ jobs:
       run: |
         echo "File changed in this PR:"
         FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
-        echo $FILES
+        echo $FILE
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
@@ -27,7 +27,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
-        echo "Fetching contents of $file"
+        echo "Fetching contents of $FILE"
         curl -s -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github.v3.raw" \
             -o "$(basename "$FILE")" \
