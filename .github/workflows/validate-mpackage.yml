@@ -31,6 +31,13 @@ jobs:
       id: unzip-mpackage-file
       run: |
         FILE=${{ steps.check-file-count.outputs.FILE }}
+        echo $FILE
+
+        FILE=$FILE
+        echo $FILE
+
+        FILE=${{ env.FILE }}
+        echo $FILE
 
         # unzip the mpackage
         unzip -q -o $FILE -d unzipped_package
