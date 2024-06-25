@@ -1,4 +1,4 @@
-name: reindex
+name: create-package-index
 
 on:
   push:
@@ -34,9 +34,8 @@ jobs:
         luarocks install luazip
         luarocks install inspect
 
-    - name: Run reindexing
+    - name: Run indexing
       run: |
-        ls -al
         lua reindex.lua
 
     # Commit all changed files back to the repository
@@ -44,7 +43,8 @@ jobs:
       with:
         commit_message: Automated package index update.
         file_pattern: '*.packages.json'
-        
+
+    # push to githib.io
     - name: Checkout
       uses: actions/checkout@v4
       
