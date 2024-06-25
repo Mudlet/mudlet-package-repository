@@ -1,0 +1,26 @@
+name: reindex
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: leafo/gh-actions-lua@v10
+
+    - uses: leafo/gh-actions-luarocks@v4
+  
+    - name: Install libzzip-dev
+      run: sudo apt-get install -y libzzip-dev
+
+    - name: build
+      run: |
+        luarocks install json-lua
+        luarocks install luazip
+
+    - name: test
+      run: |
+        lua -v
