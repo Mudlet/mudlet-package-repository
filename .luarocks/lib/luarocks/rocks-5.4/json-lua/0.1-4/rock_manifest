@@ -1,0 +1,9 @@
+rock_manifest = {
+   doc = {
+      ["README.md"] = "8f7f20297443eebff72985e6b623181a"
+   },
+   ["json-lua-0.1-4.rockspec"] = "7b82d1b5859b4cf55c03f3bb87c405a6",
+   lua = {
+      ["JSON.lua"] = "9cea93d1d0c4422198d7f71aa9f9c633"
+   }
+}
