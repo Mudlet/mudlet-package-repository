@@ -20,6 +20,7 @@ jobs:
       run: |
         luarocks install json-lua
         luarocks install luazip
+        luarocks install inspect
 
     - name: test
       run: |
