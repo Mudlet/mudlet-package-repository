@@ -72,7 +72,7 @@ jobs:
           exit 1
         fi   
 
-        if grep -q "creation =" unzipped_package/config.lua; then
+        if grep -q "created =" unzipped_package/config.lua; then
           echo "Pass: has a valid creation date"
         else
           echo "Error: not a valid creation date"
