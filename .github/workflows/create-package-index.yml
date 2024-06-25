@@ -1,5 +1,4 @@
-name: create-package-index
-
+name: Create json index and deploy to github.io
 on:
   push:
     branches: 
