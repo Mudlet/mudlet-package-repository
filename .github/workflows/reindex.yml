@@ -23,4 +23,5 @@ jobs:
 
     - name: test
       run: |
-        lua -v
+        ls -al
+        lua reindex.lua
