@@ -56,6 +56,13 @@ jobs:
           echo "Error: not a valid mpackage file"
           exit 1
         fi
+
+        if grep -q "title =" unzipped_package/config.lua; then
+          echo "Pass: has a valid title"
+        else
+          echo "Error: does not contain a valid title"
+          exit 1
+        fi
         
         if grep -q "version =" unzipped_package/config.lua; then
           echo "Pass: config.lua contains a version number"
@@ -64,10 +71,10 @@ jobs:
           exit 1
         fi   
 
-        if grep -q "mpackage =" unzipped_package/config.lua; then
-          echo "Pass: has a valid mpackage name"
+        if grep -q "creation =" unzipped_package/config.lua; then
+          echo "Pass: has a valid creation date"
         else
-          echo "Error: not a valid mpackage file"
+          echo "Error: not a valid creation date"
           exit 1
         fi        
 
