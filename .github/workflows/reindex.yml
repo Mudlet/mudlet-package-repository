@@ -1,6 +1,9 @@
 name: reindex
 
-on: [push]
+on:
+  push:
+    branches: 
+    - main
 
 jobs:
   reindex-json-file:
