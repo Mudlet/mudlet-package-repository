@@ -3,11 +3,18 @@ name: reindex
 on: [push]
 
 jobs:
-  test:
+  reindex-json-file:
     runs-on: ubuntu-latest
 
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write    
+
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}    
 
     - uses: leafo/gh-actions-lua@v10
 
@@ -26,3 +33,6 @@ jobs:
       run: |
         ls -al
         lua reindex.lua
+
+    # Commit all changed files back to the repository
+    - uses: stefanzweifel/git-auto-commit-action@v5        
