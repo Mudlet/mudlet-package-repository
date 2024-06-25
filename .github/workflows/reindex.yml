@@ -11,8 +11,10 @@ jobs:
 
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write    
+      # added or changed files to the repository and github.io
+      contents: write
+      pages: write
+      id-token: write
 
     steps:
     - uses: actions/checkout@v4
@@ -26,13 +28,13 @@ jobs:
     - name: Install libzzip-dev
       run: sudo apt-get install -y libzzip-dev
 
-    - name: build
+    - name: Install luarocks modules
       run: |
         luarocks install json-lua
         luarocks install luazip
         luarocks install inspect
 
-    - name: test
+    - name: Run reindexing
       run: |
         ls -al
         lua reindex.lua
@@ -42,3 +44,23 @@ jobs:
       with:
         commit_message: Automated package index update.
         file_pattern: '*.packages.json'
+        
+  # deploy to github.io
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
