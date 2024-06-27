@@ -31,3 +31,8 @@ Commands:
 
 Have you created a package you wish to share?  Submit a [pull request](https://github.com/ZookaOnGit/mudlet-package-repository/pulls)
 to have it included in the mudlet package repository.
+
+### Report Issues ###
+
+Report [issues here](https://github.com/ZookaOnGit/mudlet-package-repository/issues).
+
