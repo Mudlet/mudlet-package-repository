@@ -1,4 +1,4 @@
-name: Create json index and deploy to github.io
+name: Create json index
 on:
   push:
     branches: 
@@ -10,9 +10,8 @@ jobs:
 
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository and github.io
+      # added or changed files to the repository
       contents: write
-      pages: write
       id-token: write
 
     steps:
@@ -42,20 +41,3 @@ jobs:
       with:
         commit_message: Automated package index update.
         file_pattern: '*.packages.json'
-
-    # push to githib.io
-    - name: Checkout
-      uses: actions/checkout@v4
-      
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
-      
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        # Upload entire repository
-        path: '.'
-        
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
