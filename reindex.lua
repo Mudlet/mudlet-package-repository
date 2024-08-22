@@ -8,8 +8,10 @@ local zip = require "zip"
 
 local pkg = {}
 
+print("Running creation loop.")
+
 -- loop through all .mpackage files in the directory
-for file in io.popen([[ls -pa packages/*.mpackage | grep -v /]]):lines() do
+for file in io.popen([[ls -pa packages/*.mpackage]]):lines() do
     print("Found "..file)
 
     -- read config.lua from the zip file
