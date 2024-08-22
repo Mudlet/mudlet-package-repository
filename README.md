@@ -5,15 +5,10 @@
 **mpkg** is a command line interface for managing packages used in [Mudlet](https://www.mudlet.org).  
 You can install, remove, search the repository and update packages using this interface.
 
-To get started install the mpkg client in Mudlet by issuing;
+To get started, install the mpkg client in Mudlet by issuing;
 
 ```lua installPackage("https://mudlet.github.io/mudlet-package-repository/packages/mpkg.mpackage")```
 
-then type
-
-```mpkg update```
-
-to get the repository info.
 
 ```
 Commands:
