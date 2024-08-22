@@ -9,7 +9,7 @@ local zip = require "zip"
 local pkg = {}
 
 -- loop through all .mpackage files in the directory
-for file in io.popen([[ls -pa *.mpackage | grep -v /]]):lines() do
+for file in io.popen([[ls -pa packages/*.mpackage | grep -v /]]):lines() do
     print("Found "..file)
 
     -- read config.lua from the zip file
@@ -36,7 +36,7 @@ local index = {}
 
 table.insert(index, { ["name"] = "mudlet package repository listing", ["updated"] = os.date("%c"), ["packages"] = pkg } )
 
-indexFile = io.open("mpkg.packages.json", "w+")
+indexFile = io.open("packages/mpkg.packages.json", "w+")
 io.output(indexFile)
 io.write(json:encode(index[1]))
 io.close(indexFile)
