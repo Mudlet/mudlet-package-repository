@@ -29,10 +29,10 @@ Commands:
 
 ### Submit a Package ###
 
-Have you created a package you wish to share?  Submit a [pull request](https://github.com/ZookaOnGit/mudlet-package-repository/pulls)
+Have you created a package you wish to share?  Submit a [pull request](https://github.com/Mudlet/mudlet-package-repository/pulls)
 to have it included in the mudlet package repository.
 
 ### Report Issues ###
 
-Report [issues here](https://github.com/ZookaOnGit/mudlet-package-repository/issues).
+Report [issues here](https://github.com/Mudlet/mudlet-package-repository/issues).
 
