@@ -7,13 +7,13 @@ You can install, remove, search the repository and update packages using this in
 
 To get started install the mpkg client in Mudlet by issuing;
 
-```lua installPackage("https://mudlet.github.io/mudlet-package-repository/mpkg.mpackage")```
+```lua installPackage("https://mudlet.github.io/mudlet-package-repository/packages/mpkg.mpackage")```
 
 then type
 
 ```mpkg update```
 
-to get a repository info.
+to get the repository info.
 
 ```
 Commands:
@@ -24,6 +24,7 @@ Commands:
   mpkg search           -- search for a package via name and description
   mpkg show             -- show detailed information about a package
   mpkg update           -- update your package listing
+  mpkg upgradeable      -- show packages that can be upgraded
   mpkg debug            -- turn on debugging messages
 ```
 
