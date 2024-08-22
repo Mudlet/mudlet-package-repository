@@ -7,7 +7,7 @@ You can install, remove, search the repository and update packages using this in
 
 To get started install the mpkg client in Mudlet by issuing;
 
-```lua installPackage("https://zookaongit.github.io/mudlet-package-repository/mpkg.mpackage")```
+```lua installPackage("https://mudlet.github.io/mudlet-package-repository/mpkg.mpackage")```
 
 then type
 
