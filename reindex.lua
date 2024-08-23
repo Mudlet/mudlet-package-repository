@@ -1,6 +1,6 @@
 -- Requires:
 -- sudo apt install libzzip-dev
--- sudo luarocks install json
+-- sudo luarocks install json-lua
 -- sudo luarocks install luazip
 
 local json = require "JSON"
@@ -40,5 +40,5 @@ table.insert(index, { ["name"] = "mudlet package repository listing", ["updated"
 
 indexFile = io.open("packages/mpkg.packages.json", "w+")
 io.output(indexFile)
-io.write(json:encode(index[1]))
+io.write(json:encode_pretty(index[1], nil, { pretty = true, align_keys = true, array_newline = true, indent = "  " }))
 io.close(indexFile)
