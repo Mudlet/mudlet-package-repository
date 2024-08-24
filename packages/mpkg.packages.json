@@ -75,11 +75,11 @@
                 },
                 {
                        "author": "Zooka",
-                      "created": "2024-08-22T15:32:57+02:00",
-                  "description": "### Description\n\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://zookaongit.github.io/mudlet-package-repository/",
+                      "created": "2024-08-24T07:16:46+02:00",
+                  "description": "### Description\n\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                      "version": "2.1"
+                      "version": "2.2"
                 },
                 {
                        "author": "Zooka",
@@ -98,5 +98,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Aug 23 14:37:47 2024"
+   "updated": "Sat Aug 24 05:22:17 2024"
 }
