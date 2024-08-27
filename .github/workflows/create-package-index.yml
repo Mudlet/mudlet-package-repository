@@ -14,16 +14,20 @@ jobs:
       contents: write
 
     steps:
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y libzzip-dev
+        sudo apt-get install -y git-lfs
+        git lfs install
+        
     - uses: actions/checkout@v4
       with:
-        ref: ${{ github.head_ref }}    
+        ref: ${{ github.head_ref }} 
+        lfs: 'true'
 
     - uses: leafo/gh-actions-lua@v10
 
     - uses: leafo/gh-actions-luarocks@v4
-  
-    - name: Install libzzip-dev
-      run: sudo apt-get install -y libzzip-dev
 
     - name: Install luarocks modules
       run: |
