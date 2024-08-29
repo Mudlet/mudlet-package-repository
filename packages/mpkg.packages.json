@@ -35,11 +35,11 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2023-06-22T12:15:17+10:00",
+                      "created": "2024-08-24T08:26:45+02:00",
                   "description": "# deleteOldProfiles Package\n\nMudlet continuiously creates backups of important data.  This can result in a lot\nof files.  This package deletes old profiles, maps and modules in the \n\"current\", \"map\" and \"moduleBackups\" folders of the Mudlet home directory that are\nno longer required.\n\nThe commands are;\n\n```\n> delete old profiles [days]\n> delete old maps [days]\n> delete old modules[days]\n```\n\nDays is optional, the default is 31 days.\n\nThe following files are NOT deleted:\n\n- Files newer than the amount of days specified, or 31 days if not specified.\n- One file for every month before that. Specifically: The first available file of every month prior to this.\n\n```\n-- Examples: \n> delete old profiles   -- deletes profiles older than 31 days  \n> delete old maps 10    -- deletes maps older than 10 days\n```\n",
                      "mpackage": "deleteOldProfiles",
                         "title": "Remove excess backup files.",
-                      "version": "1.1"
+                      "version": "1"
                 },
                 {
                        "author": "Zooka",
@@ -51,7 +51,7 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2023-06-22T12:10:55+10:00",
+                      "created": "2024-08-24T08:27:19+02:00",
                   "description": "# Echo Package\n\nThe echo package provides a means of testing triggers via the command line with four command aliases;\n`` `echo, `cecho, `decho, `hecho``.  \n\nAll act as if the given text came from the game itself and will fire any matching triggers.  \n\nSee [Triggers](https://wiki.mudlet.org/w/Manual:Introduction#Triggers) for further information on matching text.\n  \n## `echo Alias\n\nDisplays text on the screen and tells all matching triggers to fire.  For coloring use one\nof the other functions mentioned below.\n\n```\n-- examples\n> `echo text - displays text on the main screen and tells all matching triggers to fire\n> `echo This is a sample line from the game$$And this is a new line.\n```\nSee [echo](https://wiki.mudlet.org/w/Manual:Lua_Functions#echo), [feedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#feedTriggers), \n  \n## `cecho Alias\n\nLike echo, but you can add color information using color names and ANSI values.\n\n```\n-- example: color format is <foreground:background>\n> `cecho <green:red>green on red<r> reset$$<124:100>foreground of ANSI124 and background of ANSI100<r>\n```\nSee [cecho](https://wiki.mudlet.org/w/Manual:Lua_Functions#cecho), [cfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#cfeedTriggers).\n\n## `decho Alias\n\nLike cecho, but you can add color information using <r,g,b> format.\n\n```\n-- example\n> `decho <0,128,0:128,0,0>green on red<r> reset\n```\nSee [decho](https://wiki.mudlet.org/w/Manual:Lua_Functions#decho), [dfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#dfeedTriggers).\n\n## `hecho Alias\n\nLike cecho, but you can add color information using hex #RRGGBB format.\n\n```\n-- example\n> `hecho #008000,800000green on red#r reset\n```\nSee [hecho](https://wiki.mudlet.org/w/Manual:Lua_Functions#hecho), [hfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#hfeedTriggers).\n",
                      "mpackage": "echo",
                         "title": "A set of aliases to test triggers on the command line.",
@@ -59,7 +59,7 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2023-06-22T12:15:38+10:00",
+                      "created": "2024-08-24T08:27:33+02:00",
                   "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
@@ -67,11 +67,11 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2024-07-04T09:35:47+04:00",
+                      "created": "2024-07-14T08:01:32+04:00",
                   "description": "# generic_mapper Package\n\nThis script allows for semi-automatic mapping using the included triggers.\nWhile different games can have dramatically different ways of displaying\ninformation, some effort has been put into giving the script a wide range of\npotential patterns to look for, so that it can work with minimal effort in\nmany cases.\n\ngeneric_mapper looks at a combination of room titles, descriptions and exits\nto locate and follow your character around maps you can make yourself, share\nand download for your MUD.\n\nTwo commands to get started are;\n```\n> map basics\n> map help\n```\n\nSee [this forum thread](https://forums.mudlet.org/viewtopic.php?f=13&t=6105) for further assistance.\n\nSee [this forum thread](https://forums.mudlet.org/search.php?keywords=mapping+script&terms=all&author=&sc=1&sf=titleonly&sr=topics&sk=t&sd=d&st=0&ch=400&t=0&submit=Search&pk_vid=08fcc4383ef3530916874145245184da) for more mapping scripts.\n",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                      "version": "2.1.2"
+                      "version": "2.1.4"
                 },
                 {
                        "author": "Zooka",
@@ -80,6 +80,14 @@
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
                       "version": "2.4"
+                },
+                {
+                       "author": "Mudlet Default Package",
+                      "created": "2024-08-24T08:28:56+02:00",
+                  "description": "# run-lua-code\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n",
+                     "mpackage": "run-lua-code",
+                        "title": "Run Lua code directly from the command line.",
+                      "version": "5"
                 },
                 {
                        "author": "Xanthia",
@@ -106,5 +114,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Thu Aug 29 09:58:41 2024"
+   "updated": "Thu Aug 29 10:19:41 2024"
 }
