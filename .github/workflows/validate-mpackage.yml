@@ -9,8 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y git-lfs
+        git lfs install
+        
     - name: Checkout repository
       uses: actions/checkout@master
+      with:
+        lfs: 'true'
       
     - name: Only one file per PR is allowed
       id: check-file-count
