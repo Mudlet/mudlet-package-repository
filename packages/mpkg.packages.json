@@ -82,6 +82,14 @@
                       "version": "2.3"
                 },
                 {
+                       "author": "Xanthia",
+                      "created": "2024-08-29T13:17:18+08:00",
+                  "description": "Easily play default sounds with a single command or lua code function.  List of 100 sounds currently available.",
+                     "mpackage": "shaxamm",
+                        "title": "Xanthia's Audio Manager Module",
+                      "version": "1.0"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-05-29T09:30:59+04:00",
                   "description": "### Description\n\nCreate a simple map using only directional commands.\nSupports n,s,e,w,ne,nw,se,sw,u,d.  This mapper does\nnot capture any game data so can also be used offline\nfor creating areas.\n\n### Usage\nType smap help for the help file.\n\nTo get started on a new map issue the following command: <yellow>smap new area My Area<reset> and starting moving around.\n```\n",
@@ -98,5 +106,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Thu Aug 29 06:09:39 2024"
+   "updated": "Thu Aug 29 09:38:00 2024"
 }
