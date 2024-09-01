@@ -75,6 +75,14 @@
                 },
                 {
                        "author": "Zooka",
+                      "created": "2024-09-01T16:21:44+02:00",
+                  "description": "### Description\n\nMaster Spam suppress lines of text for a specified number of times, allowing one to get through every now and then.\n\n### Usage\n\nInsert the lines you want to match into the masterSpam.masterSpam table, and add the number of lines you want to suppress.\n\n### See Also\n\nI make Mudlet scripts for a living.  Please support my work if you have found this package helpful!\n\n* https://buymeacoffee.com/zookaongit\n* https://github.com/ZookaOnGit\n",
+                     "mpackage": "master-spam",
+                        "title": "Suppress lines of spamminess.",
+                      "version": "1"
+                },
+                {
+                       "author": "Zooka",
                       "created": "2024-08-31T14:05:08+02:00",
                   "description": "### Description\n\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgrade          -- upgrade a specific package\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/",
                      "mpackage": "mpkg",
@@ -114,5 +122,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Sep  1 08:59:29 2024"
+   "updated": "Sun Sep  1 14:29:24 2024"
 }
