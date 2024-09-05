@@ -17,7 +17,7 @@ jobs:
         uses: demonnic/build-with-muddler@main
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@master
         with:
           name: mpkg.mpackage
           path: build/mpkg.mpackage
