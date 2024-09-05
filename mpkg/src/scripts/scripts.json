@@ -1,0 +1,14 @@
+[
+       {
+              "name": "Mudlet Package Manager CLI",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Semantic Versioning",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       }
+]

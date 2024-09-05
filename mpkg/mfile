@@ -1,0 +1,10 @@
+{
+       "package": "mpkg",
+       "title": "A command line package manager for Mudlet.",
+       "description": "",
+       "version": "2.5",
+       "author": "Zooka",
+       "icon": "inventory-management.png",
+       "dependencies": "",
+       "outputFile": false
+}

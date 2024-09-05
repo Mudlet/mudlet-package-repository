@@ -1,0 +1,24 @@
+name: Build mpkg project using muddler and upload artifact
+
+on:
+  push:
+    paths: mpkg/*
+  pull_request:
+    paths: mpkg/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Muddle
+        uses: demonnic/build-with-muddler@main
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: mpkg.mpackage
+          path: build/mpkg.mpackage
+          overwrite: true
