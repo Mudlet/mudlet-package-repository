@@ -18,6 +18,8 @@ jobs:
 
       - name: Muddle
         uses: demonnic/build-with-muddler@main
+        with:
+          workingDir: mpkg/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@master
