@@ -1,10 +1,10 @@
 name: Build mpkg project using muddler and upload artifact
 
 on:
-  push:
-    paths: mpkg/*
-  pull_request:
-    paths: mpkg/*
+#  push:
+#    paths: mpkg/*
+#  pull_request:
+#    paths: mpkg/*
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
