@@ -29,5 +29,5 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: mpkg.mpackage
-          path: mpkg/build/mpkg.mpackage
+          path: packages/mpkg.mpackage
           overwrite: true
