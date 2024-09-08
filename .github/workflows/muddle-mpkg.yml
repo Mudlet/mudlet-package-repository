@@ -23,6 +23,8 @@ jobs:
 
       - name: Copy to packages directory
         run: |
+          ls -al mpkg/build/mpkg.mpackage
+          ls -al packages/
           cp -v mpkg/build/mpkg.mpackage packages/
 
       - name: Upload Artifact
