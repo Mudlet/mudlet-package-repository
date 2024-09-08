@@ -21,10 +21,8 @@ jobs:
         with:
           workingDir: mpkg/
 
-      - name: Copy to packages directory
+      - name: Copy mpkg.mpackage to packages directory
         run: |
-          ls -al mpkg/build/mpkg.mpackage
-          ls -al packages/
           cp -v mpkg/build/mpkg.mpackage packages/
 
       # Commit all changed files back to the repository
