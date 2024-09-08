@@ -1,0 +1,32 @@
+name: Build mpkg project using muddler
+
+on:
+  push:
+    paths: mpkg/*
+  pull_request:
+    paths: mpkg/*
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Muddle
+        uses: demonnic/build-with-muddler@main
+        with:
+          workingDir: mpkg/
+
+      - name: Copy mpkg.mpackage to packages directory
+        run: |
+          cp -v mpkg/build/mpkg.mpackage packages/
+
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5        
+        with:
+          commit_message: Auto-muddled mpkg.mpackage uploaded.
+          file_pattern: 'packages/mpkg.mpackage'
