@@ -23,7 +23,7 @@ jobs:
 
       - name: Copy to packages directory
         run: |
-          cp mpkg/build/mpkg.mpackage packages/
+          cp -v mpkg/build/mpkg.mpackage packages/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@master
