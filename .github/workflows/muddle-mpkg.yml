@@ -27,9 +27,8 @@ jobs:
           ls -al packages/
           cp -v mpkg/build/mpkg.mpackage packages/
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: mpkg.mpackage
-          path: packages/mpkg.mpackage
-          overwrite: true
+    # Commit all changed files back to the repository
+    - uses: stefanzweifel/git-auto-commit-action@v5        
+      with:
+        commit_message: Auto-muddled mpkg.mpackage uploaded.
+        file_pattern: 'packages/mpkg.mpackage'
