@@ -21,6 +21,10 @@ jobs:
         with:
           workingDir: mpkg/
 
+      - name: Copy to packages directory
+        run: |
+          cp mpkg/build/mpkg.mpackage packages/
+
       - name: Upload Artifact
         uses: actions/upload-artifact@master
         with:
