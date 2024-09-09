@@ -30,26 +30,30 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: leafo/gh-actions-lua@v10
-      - uses: leafo/gh-actions-luarocks@v4
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install luarocks modules
-        run: |
-          luarocks install json-lua
+    - uses: leafo/gh-actions-lua@v10
+      
+    - uses: leafo/gh-actions-luarocks@v4
+      
+    - name: Checkout
+      uses: actions/checkout@v4
+        
+    - name: Install luarocks modules
+      run: luarocks install json-lua
 
-      - name: Compile webpage
-        run: |
-          lua html/build-html.lua
-          cp html/style.css .
+    - name: Compile webpage
+      run: |
+        lua html/build-html.lua
+        cp html/style.css .
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        # Upload entire repository
+        path: '.'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
