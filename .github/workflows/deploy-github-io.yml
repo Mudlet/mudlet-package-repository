@@ -37,7 +37,6 @@ jobs:
       - name: Install luarocks modules
         run: |
           luarocks install json-lua
-          luarocks install luazip
 
       - name: Compile webpage
         run: |
