@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudlet Package Repository</title>
+    <meta name="description" content="The package repository for Mudlet.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<header>
+		<div id="logo">> Mudlet Package Repository</div>
+	</header>
+	<section id="pageContent">
+		<main role="main">
+			<article>
+				<h2>What is this?</h2>
+				<p>mpkg is a command line package manager for Mudlet which allows you to install, remove, update and search for
+				packages in this repository.  Packages like mappers, GUI's, tutorials and helpful functions, all created by Mudlet
+				users.  Think of it as a software manager for Mudlet.</p>
+			</article>
+			<article>
+				<h2>Installation</h2>
+				<p>To access this repository from within Mudlet copy/paste the following to your command line;<br><br>
+				<strong>lua installPackage("https://mudlet.github.io/mudlet-package-repository/packages/mpkg.mpackage")</strong></p>
+			</article>
+			<article>
+				<h2>Further help</h2>
+				<p>Once installed access the help via:<br><br>
+				<strong>mpkg help</strong></p>
+			</article>
+			<article>
+				<h2>Submit a package</h2>
+				<p>Visit our <a href="https://github.com/Mudlet/mudlet-package-repository">Github repository</a> for instructions on submitting your package.<p>
+			</article>
+			<article>
+				<h2>All Packages</h2>
+				<p>See the entire package listing <a href="all-packages.html">here</a>.</p>
+				</p>
+			</article>
+		</main>
+	</section>
