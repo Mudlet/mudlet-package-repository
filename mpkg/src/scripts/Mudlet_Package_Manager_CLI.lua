@@ -28,11 +28,11 @@ Commands:
 --- Entry point of script.
 --  If we switch to an event handler this will be the function that is to be called.
 function mpkg.initialise()
-    mpkg.updatePackageList()
+    mpkg.updatePackageList(true)
 end
 
 
---- Pretty print any script echoes to users know where the information came from.
+--- Pretty print any script echoes so users know where the information came from.
 -- @param args the string to echo to the main console
 function mpkg.echo(args)
   cecho(string.format("%s  - %s\n", "<khaki>[ MPKG ]<reset>", args))
@@ -137,14 +137,11 @@ function mpkg.checkForUpgrades()
   end
 
   if not table.is_empty(requireUpgrade) then
-    mpkg.echo("The following packages can be upgraded;")
+    mpkg.echo("New packages updates available.  The following packages can be upgraded:")
     mpkg.echo("")
     for k,v in pairs(requireUpgrade) do
       mpkg.echoLink("<b>" .. v .. "</b>" .. " v" .. mpkg.getInstalledVersion(v) .. " to v" .. mpkg.getRepositoryVersion(v), " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(v) end, "Click to upgrade", true)
     end
-    return
-  else
-    mpkg.echo("All packages are up to date.")
   end
 end
 
@@ -198,7 +195,7 @@ function mpkg.install(args)
         -- TODO: automatic dependency resolution?
         if not table.is_empty(unmet) then
           mpkg.echo("This package has unmet dependencies.")
-          mpkg.echo("Please install the following modules first.")
+          mpkg.echo("Please install the following packages first.")
           mpkg.echo("")
 
           for _,v in pairs(unmet) do
@@ -275,10 +272,13 @@ end
 
 
 --- Fetch the latest package information from the repository.
-function mpkg.updatePackageList()
+-- @param silent if true, do not display update messages
+function mpkg.updatePackageList(silent)
   local saveto = getMudletHomeDir() .. "/" .. mpkg.filename
   downloadFile(saveto, mpkg.repository .. "/" .. mpkg.filename)
-  mpkg.echo("Updating package listing from repository.")
+  if not silent then
+    mpkg.echo("Updating package listing from repository.")
+  end
 end
 
 
@@ -413,7 +413,7 @@ end
 
 --- Reacts to downloading of repository files.
 -- @param event the event which called this handler; sysDownloadError, sysDownloadDone
--- @param args all event args, including the filename associated with the download
+-- @param arg all event args, including the filename associated with the download
 function mpkg.eventHandler(event, ...)
 
   if mpkg.debug then
@@ -427,7 +427,7 @@ function mpkg.eventHandler(event, ...)
   end
 
   if event == "sysDownloadDone" and arg[1] == getMudletHomeDir() .. "/" .. mpkg.filename then
-    mpkg.echo("Package listing downloaded.")
+    --mpkg.echo("Package listing downloaded.")
 
     local file, error, content = io.open(arg[1])
 
@@ -441,7 +441,7 @@ function mpkg.eventHandler(event, ...)
     end
     
     if semver(mpkg.getInstalledVersion("mpkg")) < semver(mpkg.getRepositoryVersion("mpkg")) then
-      mpkg.echo("New version of mpkg found, automatically upgrading to " .. mpkg.getRepositoryVersion("mpkg"))
+      mpkg.echo("New version of mpkg found.  Automatically upgrading to " .. mpkg.getRepositoryVersion("mpkg"))
       mpkg.remove("mpkg")
       tempTimer(2, function() mpkg.install("mpkg") end)
     end    
@@ -449,6 +449,9 @@ function mpkg.eventHandler(event, ...)
 
 end
 
+-- Setup a named timer for automatic repository listing updates every 12 hours (60s*60m*12h=43200s)
+deleteNamedTimer("mpkg", "mpkg update package listing timer")
+registerNamedTimer("mpkg", "mpkg update package listing timer", 43200, function() mpkg.updatePackageList(true) end, true)
 
 -- Setup the event handlers, removing any previous ones.
 for _,v in pairs(mpkg.handlers) do
@@ -472,7 +475,7 @@ table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) debug$", mpkg.toggleDebug))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) install(?: (.+))?$", function() mpkg.install(matches[3]) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) remove(?: (.+))?$", function() mpkg.remove(matches[3]) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) list$", mpkg.listInstalledPackages))
-table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", mpkg.updatePackageList))
+table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (.+))?$", function() mpkg.upgrade(matches[3]) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgradeable$", mpkg.checkForUpgrades))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show(?: (.+))?$", function() mpkg.show(matches[3]) end))
