@@ -91,11 +91,11 @@
                 },
                 {
                        "author": "Zooka",
-                      "created": "2024-09-09T11:25:25+0000",
+                      "created": "2024-09-13T14:23:02+0000",
                   "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgrade          -- upgrade a specific package\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                      "version": "2.5"
+                      "version": "2.6"
                 },
                 {
                        "author": "Mudlet Default Package",
@@ -130,5 +130,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Sep 13 14:22:05 2024"
+   "updated": "Fri Sep 20 14:04:02 2024"
 }
