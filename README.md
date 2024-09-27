@@ -25,13 +25,9 @@ Commands:
 
 ### Submit a Package ###
 
-Have you created a package you wish to share?  There are currently three methods to get your package added to this repository.
+Have you created a package you wish to share?  There are currently two methods to get your package added to this repository.
 
-#### via Web Browser ####
-
-- navigate to the [packages sub directory](https://github.com/Mudlet/mudlet-package-repository/upload/main/packages) in the package repository, then follow the file upload prompts to add your mpackage.
-
-####  via Traditional Github Method ####
+####  via Github Method ####
 
 Contribute your mpackage using Github's "[fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)" method
 - create a fork and clone the repository, 
