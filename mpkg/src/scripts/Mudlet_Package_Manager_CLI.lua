@@ -137,12 +137,15 @@ function mpkg.checkForUpgrades()
   end
 
   if not table.is_empty(requireUpgrade) then
-    mpkg.echo("New packages updates available.  The following packages can be upgraded:")
+    mpkg.echo("New packages upgrades available.  The following packages can be upgraded:")
     mpkg.echo("")
     for k,v in pairs(requireUpgrade) do
       mpkg.echoLink("<b>" .. v .. "</b>" .. " v" .. mpkg.getInstalledVersion(v) .. " to v" .. mpkg.getRepositoryVersion(v), " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(v) end, "Click to upgrade", true)
     end
+  else
+    mpkg.echo("No package upgrades are available.")
   end
+
 end
 
 
