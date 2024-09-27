@@ -10,6 +10,14 @@
                       "version": "1.3.3"
                 },
                 {
+                       "author": "Kymbahl, Kronos",
+                      "created": "2024-09-27T10:28:27+0000",
+                  "description": "# MedUI - A User Interface for Medievia\n\n### Authors: Kymbahl and Kronos\n\n### Features\nMedUI is a package for the Medievia MUD which provides a more modern user experience.\nIncluded in this package is:\n1. External Map window   - This captures the in-game ASCII map and places it in its own window.\n2. Communications Window - This captures common game channels and places them in another window.\n3. Player Vitals Gauges  - Health/Mana/Breath/Movement bars that update from your prompt data.\n4. Buff Bar              - A visual indication of which buffs your player is affected by.\n5. Custom Medievia Font  - A special TrueType font designed for rendering the in-game ASCII map.\n\n### Configuration\nMost configuration options may be toggled using the 'medui' alias menu, such as:\n1. Toggle on/off the gauges display\n2. Toggle timestamps in the chat window\n3. Toggle showing the inline map (in your main display)",
+                     "mpackage": "MedUI",
+                        "title": "User Interface for Medievia",
+                      "version": "1.7.2"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2022-05-19T00:28:05+0000",
                   "description": "# Busted, packaged for Windows Mudlet\n\nBusted is a robust testing framework for Lua with a lot of functionality, but it has some compiled C components and is not trivial for Windows users to install for use with their Mudlet systems. Since we use busted for testing Mudlet itself I thought it would be good to get a version repackaged which Mudlet users could install for their own use.\n## Usage\n\nThis comes with one alias, `runTests`. By default, it will look for every file in your profile directory named `*_spec.lua` and run the tests defined within. If you wish to only run tests for a specific package, you can use the package name as the argument to the alias, for instance `runTests REPLet` will run any test files in the REPLet package if installed. If you want to run a specific test file, you can use `runTests REPLet/coreTests_spec.lua` to point to the specific file.\n\n## Writing tests\n\nThere are some very good [docs](https://olivinelabs.com/busted/) available from the authors. For some practical examples, you can check out the [Mudlet busted tests](https://github.com/Mudlet/Mudlet/tree/development/src/mudlet-lua/tests)\n\n## TO-DO\n\nI have not yet included the libraries to enable asynchronous testing (libev and the copas and lua-libev luarocks) so you won't be able to ",
@@ -130,5 +138,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Sep 20 14:04:02 2024"
+   "updated": "Fri Sep 27 11:10:00 2024"
 }
