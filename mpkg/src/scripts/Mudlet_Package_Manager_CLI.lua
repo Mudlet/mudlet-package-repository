@@ -107,7 +107,8 @@ end
 --- Check if there are any packages that can be upgraded to a new version.
 -- Checks if the installed version of a package is less than the repository
 -- version using semantic versioning methods.
-function mpkg.checkForUpgrades()
+-- @param silent if true, do not display update messages
+function mpkg.checkForUpgrades(silent)
   local packages = mpkg.packages["packages"]
   local requireUpgrade = {}
 
@@ -137,12 +138,17 @@ function mpkg.checkForUpgrades()
   end
 
   if not table.is_empty(requireUpgrade) then
-    mpkg.echo("New packages updates available.  The following packages can be upgraded:")
+    mpkg.echo("New packages upgrades available.  The following packages can be upgraded:")
     mpkg.echo("")
     for k,v in pairs(requireUpgrade) do
       mpkg.echoLink("<b>" .. v .. "</b>" .. " v" .. mpkg.getInstalledVersion(v) .. " to v" .. mpkg.getRepositoryVersion(v), " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(v) end, "Click to upgrade", true)
     end
+  else
+    if not silent then
+      mpkg.echo("No package upgrades are available.")
+    end
   end
+
 end
 
 
@@ -161,7 +167,7 @@ end
 --- Install a new package from the repository.
 -- @param args the package name as listed in the repository
 -- @return false if there was an error
--- @return true if package was installed successfully 
+-- @return true if package was installed successfully
 function mpkg.install(args)
 
   if not args then
@@ -214,7 +220,7 @@ function mpkg.install(args)
   end
 
   mpkg.echo("Unable to locate <b>" .. args .. "</b> in repository.")
-  
+
   return false
 end
 
@@ -247,7 +253,7 @@ function mpkg.remove(args)
     mpkg.echo("Unable to uninstall.")
   end
   ]]--
-  
+
   return true
 end
 
@@ -263,7 +269,7 @@ function mpkg.upgrade(args)
     mpkg.echo("Syntax: mpkg upgrade <package_name>")
     return false
   end
-  
+
   -- if no errors removing then install
   if mpkg.remove(args) then
     tempTimer(2, function() mpkg.install(args) end)
@@ -437,14 +443,14 @@ function mpkg.eventHandler(event, ...)
       content = file:read("*a")
       mpkg.packages = json_to_value(content)
       io.close(file)
-      mpkg.checkForUpgrades()
+      mpkg.checkForUpgrades(true)
     end
-    
+
     if semver(mpkg.getInstalledVersion("mpkg")) < semver(mpkg.getRepositoryVersion("mpkg")) then
       mpkg.echo("New version of mpkg found.  Automatically upgrading to " .. mpkg.getRepositoryVersion("mpkg"))
       mpkg.remove("mpkg")
       tempTimer(2, function() mpkg.install("mpkg") end)
-    end    
+    end
   end
 
 end
@@ -477,7 +483,7 @@ table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) remove(?: (.+))?$", function() 
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) list$", mpkg.listInstalledPackages))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (.+))?$", function() mpkg.upgrade(matches[3]) end))
-table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgradeable$", mpkg.checkForUpgrades))
+table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgradeable$", function() mpkg.checkForUpgrades(false) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show(?: (.+))?$", function() mpkg.show(matches[3]) end))
 table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) search(?: (.+))?$", function() mpkg.search(matches[3]) end))
 
