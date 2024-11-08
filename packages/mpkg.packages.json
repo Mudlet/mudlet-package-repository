@@ -11,11 +11,11 @@
                 },
                 {
                        "author": "Kymbahl, Kronos",
-                      "created": "2024-11-04T12:22:09+0000",
+                      "created": "2024-11-07T21:29:40+0000",
                   "description": "# MedUI - A User Interface for Medievia\n\n### Authors: Kymbahl and Kronos\n\n### Features\nMedUI is a package for the Medievia MUD which provides a more modern user experience.\nIncluded in this package is:\n1. External Map window   - This captures the in-game ASCII map and places it in its own window.\n2. Communications Window - This captures common game channels and places them in another window.\n3. Player Vitals Gauges  - Health/Mana/Breath/Movement bars that update from your prompt data.\n4. Buff Bar              - A visual indication of which buffs your player is affected by.\n5. Custom Medievia Font  - A special TrueType font designed for rendering the in-game ASCII map.\n\n### Configuration\nMost configuration options may be toggled using the 'medui' alias menu, such as:\n1. Toggle on/off the gauges display\n2. Toggle timestamps in the chat window\n3. Toggle showing the inline map (in your main display)",
                      "mpackage": "MedUI",
                         "title": "User Interface for Medievia",
-                      "version": "1.7.7"
+                      "version": "1.7.8"
                 },
                 {
                        "author": "Demonnic",
@@ -146,5 +146,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Mon Nov  4 13:34:52 2024"
+   "updated": "Fri Nov  8 12:55:44 2024"
 }
