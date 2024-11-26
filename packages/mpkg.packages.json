@@ -131,11 +131,11 @@
                 },
                 {
                        "author": "Zooka",
-                      "created": "2024-05-29T09:30:59+04:00",
+                      "created": "2024-11-26T15:02:05+04:00",
                   "description": "### Description\n\nCreate a simple map using only directional commands.\nSupports n,s,e,w,ne,nw,se,sw,u,d.  This mapper does\nnot capture any game data so can also be used offline\nfor creating areas.\n\n### Usage\nType smap help for the help file.\n\nTo get started on a new map issue the following command: <yellow>smap new area My Area<reset> and starting moving around.\n```\n",
                      "mpackage": "simple-mapper",
                         "title": "Create simple maps using directional commands only.",
-                      "version": "2"
+                      "version": "2.1"
                 },
                 {
                        "author": "demonnic (mods by Zooka)",
@@ -146,5 +146,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sat Nov  9 14:58:51 2024"
+   "updated": "Tue Nov 26 11:12:38 2024"
 }
