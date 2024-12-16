@@ -26,6 +26,7 @@ local function buildWhatsNew()
 
     -- pull the 5 latest entries
     for file in io.popen([[ls -c packages/*.mpackage | head -n 5]]):lines() do
+        print("whats new file: " .. file)
         local tempStr = string.gsub(file, "packages/", "")
         tempStr = string.gsub(tempStr, ".mpackage", "")
         table.insert(whatsNew, tempStr)
