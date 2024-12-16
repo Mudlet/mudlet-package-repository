@@ -39,6 +39,10 @@ jobs:
           luarocks install json-lua 
           luarocks install luafilesystem
 
+    # Fix timestamps
+      - name: restore timestamps
+        uses: chetan/git-restore-mtime-action@v2          
+
       - name: Compile webpage
         run: |
           lua html/build-html.lua
