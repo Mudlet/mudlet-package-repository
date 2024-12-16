@@ -37,6 +37,10 @@ local function getRecentModifiedPackages(directory, count)
         end
     end
 
+    for i = 1, #files do
+        print(string.format("%-40s %s", files[i].name, os.date("%Y-%m-%d %H:%M:%S", files[i].modification)))
+    end
+
     -- Sort files by modification time (newest first)
     table.sort(files, function(a, b)
         return a.modification > b.modification
