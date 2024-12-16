@@ -98,6 +98,14 @@
                       "version": "2.1.4"
                 },
                 {
+                       "author": "Mudlet Default Package",
+                      "created": "2024-12-13T13:16:38+04:00",
+                  "description": "Allow a user to drag and drop an image on the main screen which will turn it into a label and AdjustableContainer.\n\n### Description\n\nThis packages allows a user to drag and drop an image on the main screen which will turn it into a label and AdjustableContainer.\nThe resultant script can be found in GUIDropManager which can then be tailored further as per normal scripting rules.  The images\nare copied to %user-profile/GUIDropImages/\n\n### Usage\n\nJust drop an image file into the main window.  It will be converted into a label inside an AdjustableContainer.\n",
+                     "mpackage": "gui-drop",
+                        "title": "Drag and drop images onto the main window to turn into a label and container.",
+                      "version": "1"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-09-01T16:21:44+02:00",
                   "description": "### Description\n\nMaster Spam suppress lines of text for a specified number of times, allowing one to get through every now and then.\n\n### Usage\n\nInsert the lines you want to match into the masterSpam.masterSpam table, and add the number of lines you want to suppress.\n\n### See Also\n\nI make Mudlet scripts for a living.  Please support my work if you have found this package helpful!\n\n* https://buymeacoffee.com/zookaongit\n* https://github.com/ZookaOnGit\n",
@@ -146,5 +154,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Tue Nov 26 11:12:38 2024"
+   "updated": "Mon Dec 16 07:09:06 2024"
 }
