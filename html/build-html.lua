@@ -1,4 +1,7 @@
 local json = require "JSON"
+local lfs = require "lfs"
+
+local WHATS_NEW_COUNT = 5
 
 local function readFile(args)
 
@@ -14,6 +17,44 @@ end
 
 local packages = json:decode(readFile("packages/mpkg.packages.json"))
 
+local function getRecentModifiedPackages(directory, count)
+
+    count = count or 5
+
+    local files = {}
+
+    for file in lfs.dir(directory) do
+        if string.match(file, "%.mpackage$" ) then
+            local filepath = directory .. "/" .. file
+            local attr = lfs.attributes(filepath)
+
+            if attr and attr.mode == "file" then
+                table.insert(files, {
+                    name = filepath,
+                    modification = attr.modification
+                })
+            end
+        end
+    end
+
+    -- Sort files by modification time (newest first)
+    table.sort(files, function(a, b)
+        return a.modification > b.modification
+    end)
+
+    -- Extract just the filenames from the sorted results
+    local result = {}
+    for i = 1, math.min(count, #files) do
+        local listing = files[i].name
+        listing = string.gsub(listing, "packages/", "")
+        listing = string.gsub(listing, ".mpackage", "")
+        table.insert(result, listing)
+    end
+
+    return result
+end
+
+
 local function buildWhatsNew()
 
     -- html section preamble
@@ -21,16 +62,8 @@ local function buildWhatsNew()
         <main role="main">
         <h2>Recent Uploads</h2><br><br>]]
 
-    -- sort packages by creation time, newest first
-    local whatsNew = {}
-
     -- pull the 5 latest entries
-    for file in io.popen([[ls -c packages/*.mpackage | head -n 5]]):lines() do
-        print("whats new file: " .. file)
-        local tempStr = string.gsub(file, "packages/", "")
-        tempStr = string.gsub(tempStr, ".mpackage", "")
-        table.insert(whatsNew, tempStr)
-    end
+    local whatsNew = getRecentModifiedPackages("packages", WHATS_NEW_COUNT)
 
     for j = 1, #whatsNew do
         for i = 1, #packages["packages"] do
