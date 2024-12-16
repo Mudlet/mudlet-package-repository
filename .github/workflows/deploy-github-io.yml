@@ -43,6 +43,12 @@ jobs:
           lua html/build-html.lua
           cp html/style.css .
 
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5        
+        with:
+          commit_message: Updating webpage html.
+          file_pattern: '*.html'          
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
