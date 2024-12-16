@@ -1,35 +1,73 @@
-<h2>A package repository for <a href="https://www.mudlet.org">Mudlet</a></h2>
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudlet Package Repository</title>
+    <meta name="description" content="The package repository for Mudlet.">
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<h3>Installation</h3>
-
-<b>mpkg</b> is a command line interface for managing packages used in <a href="https://www.mudlet.org">Mudlet</a>.  
-You can install, remove, search the repository and update packages using this interface.
-
-<h3>Getting Started</h3>
-<pre>lua installPackage("https://mudlet.github.io/mudlet-package-repository/packages/mpkg.mpackage")
-mpkg help
-mpkg update
-</pre>
-
-<h3>Help</h3>
-
-<p><pre>
-Commands:
-  mpkg help             -- show this help
-  mpkg install          -- install a new package
-  mpkg list             -- list all installed packages  
-  mpkg remove           -- remove an existing package
-  mpkg search           -- search for a package via name and description
-  mpkg show             -- show detailed information about a package
-  mpkg update           -- update your package listing
-  mpkg upgradeable      -- show packages that can be upgraded 
-  mpkg debug            -- turn on debugging messages
-</pre></p>
-
-<h3>Submit a Package</h3>
-
-<p>Have you created a package you wish to share?  Submit a <a href="https://github.com/mudlet/mudlet-package-repository/pulls">pull request</a>
-to have it included in the mudlet package repository.</p>
-
-<h3>Report Issues</h3>
-Report issues and ideas <a href="https://github.com/mudlet/mudlet-package-repository/issues">here</a>.
+<body>
+	<header>
+		<div id="logo">> Mudlet Package Repository</div>
+	</header>
+	<section id="pageContent">
+		<main role="main">
+			<article>
+				<h2>What is this?</h2>
+				<p>mpkg is a command line package manager for Mudlet which allows you to install, remove, update and search for
+				packages in this repository.  Packages like mappers, GUI's, tutorials and helpful functions, all created by Mudlet
+				users.  Think of it as a software manager for Mudlet.</p>
+			</article>
+			<article>
+				<h2>Installation</h2>
+				<p>To access this repository from within Mudlet copy/paste the following to your command line;<br><br>
+				<strong>lua installPackage("https://mudlet.github.io/mudlet-package-repository/packages/mpkg.mpackage")</strong></p>
+			</article>
+			<article>
+				<h2>Further help</h2>
+				<p>Once installed access the help via:<br><br>
+				<strong>mpkg help</strong></p>
+			</article>
+			<article>
+				<h2>Submit a package</h2>
+				<p>Visit our <a href="https://github.com/Mudlet/mudlet-package-repository">Github repository</a> for instructions on submitting your package.<p>
+			</article>
+			<article>
+				<h2>All Packages</h2>
+				<p>See the entire package listing <a href="all-packages.html">here</a>.</p>
+				</p>
+			</article>
+		</main>
+	</section>
+    <section id="pageContent">
+        <main role="main">
+        <h2>Recent Uploads</h2><br><br>            <article>
+                <h2><a href="http://mudlet.github.io/mudlet-package-repository/packages/deleteOldProfiles.mpackage">deleteOldProfiles</a></h2>
+                <p>by Mudlet Default Package, version 1</p><br><br>
+                <p>Remove excess backup files.</p>
+            </article>
+            <article>
+                <h2><a href="http://mudlet.github.io/mudlet-package-repository/packages/dice.mpackage">dice</a></h2>
+                <p>by Zooka, version 1</p><br><br>
+                <p>Simulate dice rolls with these simple functions.</p>
+            </article>
+            <article>
+                <h2><a href="http://mudlet.github.io/mudlet-package-repository/packages/echo.mpackage">echo</a></h2>
+                <p>by Mudlet Default Package, version 1</p><br><br>
+                <p>A set of aliases to test triggers on the command line.</p>
+            </article>
+            <article>
+                <h2><a href="http://mudlet.github.io/mudlet-package-repository/packages/enable-accessibility.mpackage">enable-accessibility</a></h2>
+                <p>by Mudlet Default Package, version 1</p><br><br>
+                <p>Configuration for visually impaired users.</p>
+            </article>
+            <article>
+                <h2><a href="http://mudlet.github.io/mudlet-package-repository/packages/generic_mapper.mpackage">generic_mapper</a></h2>
+                <p>by Mudlet Default Package, version 2.1.4</p><br><br>
+                <p>Semi-automatic mapping, designed to work with many MUDs.</p>
+            </article>
+</body>
+</html>
