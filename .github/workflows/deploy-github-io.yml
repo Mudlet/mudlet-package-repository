@@ -42,6 +42,7 @@ jobs:
         run: |
           lua html/build-html.lua
           cp html/style.css .
+          git status
 
       # Commit all changed files back to the repository
       - uses: stefanzweifel/git-auto-commit-action@v5        
