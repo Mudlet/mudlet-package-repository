@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { getServerSession } from 'next-auth'
 import { Auth } from './components/Auth'
+import { Navigation } from './components/Navigation'
 import { SessionProvider } from './components/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,6 +20,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <header className="p-4 border-b">
             <Auth />
+            <Navigation />
           </header>
           {children}
         </SessionProvider>
