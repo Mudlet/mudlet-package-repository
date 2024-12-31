@@ -27,7 +27,7 @@ export const Auth = () => {
       >
         Sign in with GitHub
       </button>
-      <button
+      {/* <button
         onClick={() => signIn('facebook')}
         className="px-4 py-2 bg-blue-600 text-white rounded"
       >
@@ -44,7 +44,7 @@ export const Auth = () => {
         className="px-4 py-2 bg-blue-500 text-white rounded"
       >
         Sign in with Microsoft
-      </button>
+      </button> */}
     </div>
   )
 }
