@@ -18,14 +18,17 @@ interface Package {
       <section className="page-content">
         <main role="main">
           {displayPackages.map((pkg) => (
-            <article key={pkg.mpackage}>
-              <h2>
-                <a href={`http://mudlet.github.io/mudlet-package-repository/packages/${pkg.mpackage}.mpackage`}>
+            <article key={pkg.mpackage} className="bg-white rounded-lg shadow hover:shadow-md transition-shadow">
+              <h2 className="text-xl font-semibold mb-2">
+                <a 
+                  href={`http://mudlet.github.io/mudlet-package-repository/packages/${pkg.mpackage}.mpackage`}
+                  className="text-blue-600 hover:text-blue-800"
+                >
                   {pkg.mpackage}
                 </a>
               </h2>
-              <p>by {pkg.author}, version {pkg.version}</p>
-              <p>{pkg.title}</p>
+              <p className="text-gray-600 mb-2">by {pkg.author}, version {pkg.version}</p>
+              <p className="text-gray-800">{pkg.title}</p>
             </article>
           ))}
         </main>
