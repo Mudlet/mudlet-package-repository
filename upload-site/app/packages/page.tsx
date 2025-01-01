@@ -1,5 +1,4 @@
-import { PackageList } from './components/PackageList';
-import { IntroSection } from './components/IntroSection';
+import { PackageList } from '../components/PackageList';
 
 async function getPackages() {
   const response = await fetch('https://mudlet.github.io/mudlet-package-repository/packages/mpkg.packages.json');
@@ -7,14 +6,13 @@ async function getPackages() {
   return data.packages;
 }
 
-export default async function Home() {
+export default async function PackagesPage() {
   const packages = await getPackages();
   
   return (
     <main className="min-h-screen p-8">
-      <IntroSection />
-      <h2 className="text-2xl font-bold mb-8">Recent uploads</h2>
-      <PackageList packages={packages} limit={5} />
+      <h1 className="text-2xl font-bold mb-8">All available packages</h1>
+      <PackageList packages={packages} />
     </main>
   );
 }
