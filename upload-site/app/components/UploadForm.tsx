@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { PackagePreview } from './PackagePreview'
 import type { PackageMetadata } from '@/app/lib/packageParser'
+import type { ValidationResult } from '@/app/lib/types'
 
 export function UploadForm() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [previewData, setPreviewData] = useState<{
     metadata: PackageMetadata;
     filename: string;
+    validation: ValidationResult;
   } | null>(null)
   const [isUploading, setIsUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -37,6 +39,7 @@ export function UploadForm() {
         setPreviewData({
           metadata: data.metadata,
           filename: data.filename,
+          validation: data.validation
         })
       }
     } catch (err) {
@@ -135,6 +138,7 @@ export function UploadForm() {
         <PackagePreview
           metadata={previewData.metadata}
           filename={previewData.filename}
+          validation={previewData.validation}
           onConfirm={handleConfirmUpload}
           onCancel={() => {
             setPreviewData(null)
