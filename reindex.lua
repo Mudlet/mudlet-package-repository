@@ -2,13 +2,23 @@
 -- sudo apt install libzzip-dev
 -- sudo luarocks install json-lua
 -- sudo luarocks install luazip
+-- sudo luarocks install luafilesystem
 
 local json = require "JSON"
 local zip = require "zip"
+local lfs = require "lfs"
+
+local function getFileModTime(filepath)
+    local attr = lfs.attributes(filepath)
+    if attr and attr.mode == "file" then
+        return attr.modification
+    end
+    return os.time() -- fallback to current time if we can't get the file time
+end
 
 local pkg = {}
 
-print("Running creation loop.")
+print("Running creation loop...")
 
 -- loop through all .mpackage files in the directory
 for file in io.popen([[ls -pa packages/*.mpackage]]):lines() do
@@ -27,7 +37,15 @@ for file in io.popen([[ls -pa packages/*.mpackage]]):lines() do
     dofile("config.lua")
 
     -- insert package details in table
-    table.insert(pkg, { ["mpackage"] = mpackage, ["author"] = author, ["title"] = title, ["description"] = description, ["created"] = created, ["version"] = version} )
+    table.insert(pkg, { 
+        ["mpackage"] = mpackage,
+        ["author"] = author,
+        ["title"] = title,
+        ["description"] = description,
+        ["created"] = created, 
+        ["version"] = version,
+        ["uploaded"] = getFileModTime(file)
+    })
 
     f1:close()
     zfile:close()
