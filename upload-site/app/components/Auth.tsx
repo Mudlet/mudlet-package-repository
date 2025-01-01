@@ -27,17 +27,17 @@ export const Auth = () => {
       >
         Sign in with GitHub
       </button>
-      {/* <button
-        onClick={() => signIn('facebook')}
-        className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
-      >
-        Sign in with Facebook
-      </button>
       <button
         onClick={() => signIn('apple')}
         className="px-4 py-2 text-sm bg-black hover:bg-gray-900 text-white rounded-md transition-colors"
       >
         Sign in with Apple
+      </button>
+      {/* <button
+        onClick={() => signIn('facebook')}
+        className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+      >
+        Sign in with Facebook
       </button>
       <button
         onClick={() => signIn('azure-ad')}

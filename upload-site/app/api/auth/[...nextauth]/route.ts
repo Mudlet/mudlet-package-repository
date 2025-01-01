@@ -17,12 +17,33 @@ const handler = NextAuth({
     AppleProvider({
       clientId: process.env.APPLE_ID!,
       clientSecret: process.env.APPLE_SECRET!,
-    }),
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name?.firstName 
+            ? `${profile.name.firstName} ${profile.name.lastName}`
+            : profile.email?.split('@')[0],
+          email: profile.email,
+        }
+      },
+    }),    
     MicrosoftProvider({
       clientId: process.env.MICROSOFT_ID!,
       clientSecret: process.env.MICROSOFT_SECRET!,
     })
   ],
+  /* only for development - fixing Apple login */
+  cookies: {
+    pkceCodeVerifier: {
+      name: "next-auth.pkce.code_verifier",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: true,
+      },
+    },
+  },
 })
 
 export { handler as GET, handler as POST }
