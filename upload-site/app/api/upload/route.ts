@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { createBranch, uploadFile, createPullRequest, getFileSha } from '@/app/lib/github'
+import * as AdmZip from 'adm-zip'
+import { parseConfigLua } from '@/app/lib/packageParser'
 
 export async function POST(request: Request) {
   const session = await getServerSession()
@@ -18,6 +20,22 @@ export async function POST(request: Request) {
   if (!file || (!file.name.endsWith('.mpackage') && !file.name.endsWith('.zip'))) {
     console.log('Invalid file format detected')
     return NextResponse.json({ error: 'Invalid file format' }, { status: 400 })
+  }
+
+  // Extract metadata from package
+  const fileBuffer = Buffer.from(await file.arrayBuffer())
+  const zip = new AdmZip(fileBuffer)
+  const configEntry = zip.getEntry('config.lua')
+  
+  if (!configEntry) {
+    return NextResponse.json({ error: 'Missing config.lua' }, { status: 400 })
+  }
+
+  const configContent = configEntry.getData().toString('utf8')
+  const metadata = parseConfigLua(configContent)
+
+  if (!metadata) {
+    return NextResponse.json({ error: 'Invalid or incomplete config.lua' }, { status: 400 })
   }
 
   console.log('Generating branch name...')
@@ -47,11 +65,22 @@ export async function POST(request: Request) {
     
     console.log('File uploaded successfully')
     
+    const prDescription = `Package information:
+- Name: ${metadata.mpackage}
+- Title: ${metadata.title}
+- Version: ${metadata.version}
+- Author: ${metadata.author}
+- Package ${existingSha ? 'updated' : 'added'} by ${session.user?.name || 'unknown user'}
+- Created: ${metadata.created}
+
+---
+${metadata.description}`
+
     console.log('Creating PR...')
     const pr = await createPullRequest(
       branchName,
       existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
-      `${existingSha ? 'Updated' : 'Added'} by ${session.user?.name || 'unknown user'}`
+      prDescription
     )    
 
     console.log('Returning success response...')
