@@ -27,19 +27,6 @@ export function IntroSection() {
         </pre>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Submit a package</h2>
-        <p className="mb-4">
-          Visit our <a href="https://github.com/Mudlet/mudlet-package-repository" className="text-blue-600 hover:underline">Github repository</a> for instructions on submitting your package.
-        </p>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">All Packages</h2>
-        <p className="mb-4">
-          See the <a href="/packages" className="text-blue-600 hover:underline">entire package listing here</a>.
-        </p>
-      </section>
     </div>
   );
 }
