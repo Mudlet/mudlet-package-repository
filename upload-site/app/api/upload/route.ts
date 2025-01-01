@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       fileContent,
       branchName,
       existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
-      existingSha
+      existingSha ?? undefined
     )
     
     console.log('File uploaded successfully')
