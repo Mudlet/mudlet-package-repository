@@ -12,13 +12,13 @@ export const Navigation = () => {
         href="/" 
         className={`text-lg hover:text-blue-600 transition-colors ${pathname === '/' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}
       >
-        Package Repository
+        Package repository
       </Link>
       <Link 
         href="/upload"
         className={`text-lg hover:text-blue-600 transition-colors ${pathname === '/upload' ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}
       >
-        Upload Package
+        Upload package
       </Link>
     </nav>
   )

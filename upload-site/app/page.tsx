@@ -12,7 +12,7 @@ export default async function Home() {
   
   return (
     <main className="min-h-screen p-8">
-      <h1 className="text-2xl font-bold mb-8">Recent Uploads</h1>
+      <h1 className="text-2xl font-bold mb-8">Recent uploads</h1>
       <PackageList packages={packages} limit={5} />
     </main>
   );
