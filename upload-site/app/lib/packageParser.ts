@@ -1,33 +1,35 @@
-interface PackageMetadata {
-  mpackage: string;
-  title: string;
-  version: string;
-  created: string;
-  author: string;
-  description: string;
+export interface PackageMetadata {
+  mpackage: string | null;
+  title: string | null;
+  version: string | null;
+  created: string | null;
+  author: string | null;
+  description: string | null;
 }
 
-export function parseConfigLua(content: string): PackageMetadata | null {
-  const fields = {
-    mpackage: content.match(/mpackage\s*=\s*["'](.+?)["']/),
-    title: content.match(/title\s*=\s*["'](.+?)["']/),
-    version: content.match(/version\s*=\s*["'](.+?)["']/),
-    created: content.match(/created\s*=\s*["'](.+?)["']/),
-    author: content.match(/author\s*=\s*["'](.+?)["']/),
-    description: content.match(/description\s*=\s*["'](.+?)["']/)
-  }
-
-  // Verify all required fields are present
-  if (Object.values(fields).some(match => !match)) {
-    return null;
+export function parseConfigLua(content: string): PackageMetadata {
+  // Helper function to safely extract values
+  const extractValue = (pattern: string): string | null => {
+    const match = content.match(new RegExp(`${pattern}\\s*=\\s*["'](.+?)["']`))
+    return match ? match[1] : null
   }
 
   return {
-    mpackage: fields.mpackage![1],
-    title: fields.title![1],
-    version: fields.version![1],
-    created: fields.created![1],
-    author: fields.author![1],
-    description: fields.description![1]
+    mpackage: extractValue('mpackage'),
+    title: extractValue('title'),
+    version: extractValue('version'),
+    created: extractValue('created'),
+    author: extractValue('author'),
+    description: extractValue('description')
   }
+}
+
+// Optional helper to check if metadata has minimum required fields
+export function hasRequiredFields(metadata: PackageMetadata): boolean {
+  // You can define which fields are absolutely required
+  return Boolean(
+    metadata.mpackage && 
+    metadata.title && 
+    metadata.version
+  )
 }
