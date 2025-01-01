@@ -10,9 +10,9 @@ export interface PackageMetadata {
 export function parseConfigLua(content: string): PackageMetadata {
   // Helper function to safely extract values
   const extractValue = (pattern: string): string | null => {
-    const match = content.match(new RegExp(`${pattern}\\s*=\\s*["'](.+?)["']`))
-    return match ? match[1] : null
-  }
+    const match = content.match(new RegExp(`${pattern}\\s*=\\s*(?:\\[\\[|["'])(.*?)(?:\\]\\]|["'])`, 'ms'))
+    return match ? match[1].trim() : null
+  }  
 
   return {
     mpackage: extractValue('mpackage'),
