@@ -1,9 +1,13 @@
+'use client'
+
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { PackagePreview } from './PackagePreview'
 import type { PackageMetadata } from '@/app/lib/packageParser'
 import type { ValidationResult } from '@/app/lib/types'
 
 export function UploadForm() {
+  const { data: session } = useSession()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [previewData, setPreviewData] = useState<{
     metadata: PackageMetadata;
@@ -70,7 +74,7 @@ export function UploadForm() {
   }
 
   const handleConfirmUpload = async () => {
-    if (!selectedFile) return
+    if (!selectedFile || !session) return
     setError(null)
     setIsUploading(true)
 
@@ -95,6 +99,16 @@ export function UploadForm() {
     } finally {
       setIsUploading(false)
     }
+  }
+
+  if (!session) {
+    return (
+      <div className="max-w-2xl mx-auto p-4">
+        <div className="text-center py-8">
+          <p className="text-gray-600 text-lg">Please sign in to upload packages</p>
+        </div>
+      </div>
+    )
   }
 
   return (
