@@ -26,9 +26,9 @@ export function PackagePreview({
   }
 
   const getMissingFieldsMessage = () => {
-    if (validation.missingFields.length === 0) return null
+    if (validation.missingFields.length === 0) return ''
     return `Missing required fields: ${validation.missingFields.join(', ')}`
-  }
+  }  
 
   return (
     <div className="border rounded-lg p-6 bg-background">
