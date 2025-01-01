@@ -1,4 +1,4 @@
-import { type PackageMetadata } from '@/app/lib/packageParser'
+import { PackageMetadata } from '@/app/lib/types'
 import { ValidationResult } from '@/app/lib/types'
 
 interface PackagePreviewProps {

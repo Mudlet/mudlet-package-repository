@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { PackagePreview } from './PackagePreview'
-import type { PackageMetadata } from '@/app/lib/packageParser'
+import { PackageMetadata } from '@/app/lib/types'
 import type { ValidationResult } from '@/app/lib/types'
 
 export function UploadForm() {
