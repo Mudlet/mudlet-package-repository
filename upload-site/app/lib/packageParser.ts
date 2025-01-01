@@ -1,11 +1,4 @@
-export interface PackageMetadata {
-  mpackage: string | null;
-  title: string | null;
-  version: string | null;
-  created: string | null;
-  author: string | null;
-  description: string | null;
-}
+import { PackageMetadata } from '@/app/lib/types'
 
 export function parseConfigLua(content: string): PackageMetadata {
   // Helper function to safely extract values

@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
-import { ValidationResult } from '@/app/lib/types'
+import { ValidationResult, PackageMetadata } from '@/app/lib/types'
 
 
-function validateMetadata(metadata: any): ValidationResult {
+function validateMetadata(metadata: PackageMetadata): ValidationResult {
   const requiredFields = [
     'mpackage',
     'title',
@@ -15,7 +15,7 @@ function validateMetadata(metadata: any): ValidationResult {
     'description'
   ]
   
-  const missingFields = requiredFields.filter(field => !metadata[field])
+  const missingFields = requiredFields.filter(field => !metadata[field as keyof PackageMetadata])
   
   return {
     isValid: missingFields.length === 0,

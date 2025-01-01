@@ -1,13 +1,7 @@
-interface Package {
-    mpackage: string;
-    author: string;
-    title: string;
-    version: string;
-    description?: string;
-  }
+import { PackageMetadata } from '@/app/lib/types'
   
   interface PackageListProps {
-    packages: Package[];
+    packages: PackageMetadata[];
     limit?: number;
   }
   
