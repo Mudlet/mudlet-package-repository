@@ -69,7 +69,7 @@ export function UploadForm() {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
       input.files = dataTransfer.files
-      handleFileSelect({ target: input } as any)
+      handleFileSelect({ target: input } as React.ChangeEvent<HTMLInputElement>)
     }
   }
 
