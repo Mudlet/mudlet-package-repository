@@ -20,8 +20,10 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <header className="bg-white border-b shadow-sm">
             <div className="max-w-6xl mx-auto">
-              <Auth />
-              <Navigation />
+              <div className="flex justify-between items-center"> {/* Added flex container */}
+                <Navigation />
+                <Auth />
+              </div>
             </div>
           </header>
           <div className="max-w-6xl mx-auto">
