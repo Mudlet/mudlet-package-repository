@@ -45,6 +45,27 @@ export function UploadForm() {
     }
   }
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    const file = e.dataTransfer.files?.[0]
+    if (!file) return
+    
+    const input = document.getElementById('fileInput') as HTMLInputElement
+    if (input) {
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+      input.files = dataTransfer.files
+      handleFileSelect({ target: input } as any)
+    }
+  }
+
   const handleConfirmUpload = async () => {
     if (!selectedFile) return
     setError(null)
@@ -83,14 +104,18 @@ export function UploadForm() {
 
       {uploadSuccess ? (
         <div className="p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-        <p>✓ Package received! {prUrl && (
-          <a href={prUrl} rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
-            Track your submission →
-          </a>
-        )}</p>
-      </div>      
+          <p>✓ Package received! {prUrl && (
+            <a href={prUrl} rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
+              Track your submission →
+            </a>
+          )}</p>
+        </div>      
       ) : !previewData ? (
-        <div className="border-2 border-dashed rounded-lg p-8 text-center">
+        <div 
+          className="border-2 border-dashed rounded-lg p-8 text-center"
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
           <input
             type="file"
             accept=".mpackage,.zip"
@@ -103,7 +128,7 @@ export function UploadForm() {
             htmlFor="fileInput"
             className={`cursor-pointer text-lg hover:text-blue-600 ${isUploading ? 'opacity-50' : ''}`}
           >
-            Click to select package file
+            Click to select or drag and drop package file here
           </label>
         </div>
       ) : (
