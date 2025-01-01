@@ -11,6 +11,7 @@ export function UploadForm() {
   const [isUploading, setIsUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uploadSuccess, setUploadSuccess] = useState(false)
+  const [prUrl, setPrUrl] = useState<string | null>(null)
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null)
@@ -64,6 +65,7 @@ export function UploadForm() {
       }
 
       setUploadSuccess(true)
+      setPrUrl(data.pr.html_url)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to upload package')
     } finally {
@@ -81,8 +83,12 @@ export function UploadForm() {
 
       {uploadSuccess ? (
         <div className="p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-          Package uploaded successfully! Your pull request has been created.
-        </div>
+        <p>✓ Package received! {prUrl && (
+          <a href={prUrl} rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
+            Track your submission →
+          </a>
+        )}</p>
+      </div>      
       ) : !previewData ? (
         <div className="border-2 border-dashed rounded-lg p-8 text-center">
           <input
