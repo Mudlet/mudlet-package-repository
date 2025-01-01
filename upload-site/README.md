@@ -1,13 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Setup Instructions
+## Setup instructions
+1. Copy `.env.local.example` to `.env.local`
 
-1. Set up Package Upload Permissions
+2. Set up package upload permissions
    - Create a Personal Access Token (Classic) at GitHub.com → Settings → Developer Settings → Personal Access Tokens
    - Required scope: `repo` (for creating branches, uploading files, and creating PRs)
-   - Save this token as `GITHUB_API_TOKEN` in your environment
+   - Save this token as `GITHUB_API_TOKEN` in `.env.local`:
 
-2. Enable GitHub Login
+3. Enable GitHub Login
    - Create OAuth App at GitHub Settings → Developer Settings → OAuth Apps
    - Set callback URL: `http://localhost:3000/api/auth/callback/github`
    - Save Client ID and Secret in `.env.local`:
