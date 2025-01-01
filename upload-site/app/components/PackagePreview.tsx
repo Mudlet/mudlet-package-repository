@@ -1,4 +1,6 @@
 import { type PackageMetadata } from '@/app/lib/packageParser'
+import { ValidationResult } from '@/app/lib/types'
+
 
 interface PackagePreviewProps {
   metadata: PackageMetadata
@@ -6,6 +8,7 @@ interface PackagePreviewProps {
   onConfirm: () => void
   onCancel: () => void
   isUploading: boolean
+  validation: ValidationResult
 }
 
 export function PackagePreview({ 
@@ -13,8 +16,16 @@ export function PackagePreview({
   filename, 
   onConfirm, 
   onCancel, 
-  isUploading 
+  isUploading,
+  validation 
 }: PackagePreviewProps) {
+  const getFieldStatus = (fieldName: string) => {
+    if (validation.missingFields.includes(fieldName)) {
+      return <span className="text-red-500 ml-2">Required field missing</span>
+    }
+    return <span className="text-green-500 ml-2">✓</span>
+  }
+
   return (
     <div className="border rounded-lg p-6 bg-background">
       <h2 className="text-2xl font-bold mb-4">Package preview</h2>
@@ -27,42 +38,60 @@ export function PackagePreview({
         
         <div className="grid grid-cols-[120px,1fr] gap-2">
           <label className="font-semibold">Package name:</label>
-          <p className="break-all">{metadata.mpackage}</p>
+          <div className="flex items-center">
+            <p className="break-all">{metadata.mpackage}</p>
+            {getFieldStatus('mpackage')}
+          </div>
         </div>
 
         <div className="grid grid-cols-[120px,1fr] gap-2">
           <label className="font-semibold">Title:</label>
-          <p className="break-all">{metadata.title}</p>
+          <div className="flex items-center">
+            <p className="break-all">{metadata.title}</p>
+            {getFieldStatus('title')}
+          </div>
         </div>
 
         <div className="grid grid-cols-[120px,1fr] gap-2">
           <label className="font-semibold">Version:</label>
-          <p>{metadata.version}</p>
+          <div className="flex items-center">
+            <p>{metadata.version}</p>
+            {getFieldStatus('version')}
+          </div>
         </div>
 
         <div className="grid grid-cols-[120px,1fr] gap-2">
           <label className="font-semibold">Author:</label>
-          <p>{metadata.author}</p>
+          <div className="flex items-center">
+            <p>{metadata.author}</p>
+            {getFieldStatus('author')}
+          </div>
         </div>
 
         <div className="grid grid-cols-[120px,1fr] gap-2">
           <label className="font-semibold">Created:</label>
-          <p>{metadata.created}</p>
+          <div className="flex items-center">
+            <p>{metadata.created}</p>
+            {getFieldStatus('created')}
+          </div>
         </div>
 
         <div className="grid grid-cols-[120px,1fr] gap-2">
           <label className="font-semibold">Description:</label>
-          <p className="whitespace-pre-wrap break-words">{metadata.description}</p>
+          <div className="flex items-center">
+            <p className="whitespace-pre-wrap break-words">{metadata.description}</p>
+            {getFieldStatus('description')}
+          </div>
         </div>
       </div>
 
       <div className="flex gap-4">
         <button 
           onClick={onConfirm}
-          disabled={isUploading}
+          disabled={isUploading || !validation.isValid}
           className={`
             px-4 py-2 rounded text-white
-            ${isUploading 
+            ${isUploading || !validation.isValid
               ? 'bg-green-400 cursor-not-allowed' 
               : 'bg-green-600 hover:bg-green-700'
             }

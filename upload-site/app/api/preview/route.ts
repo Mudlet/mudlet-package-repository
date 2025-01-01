@@ -2,6 +2,26 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
+import { ValidationResult } from '@/app/lib/types'
+
+
+function validateMetadata(metadata: any): ValidationResult {
+  const requiredFields = [
+    'mpackage',
+    'title',
+    'version',
+    'created',
+    'author',
+    'description'
+  ]
+  
+  const missingFields = requiredFields.filter(field => !metadata[field])
+  
+  return {
+    isValid: missingFields.length === 0,
+    missingFields
+  }
+}
 
 export async function POST(request: Request) {
   const session = await getServerSession()
@@ -32,9 +52,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid or incomplete config.lua' }, { status: 400 })
   }
 
+  const validation = validateMetadata(metadata)
+
   return NextResponse.json({
     success: true,
     metadata,
-    filename: file.name
+    filename: file.name,
+    validation
   })
 }
