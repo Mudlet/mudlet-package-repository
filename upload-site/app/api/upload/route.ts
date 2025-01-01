@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { createBranch, uploadFile, createPullRequest, getFileSha } from '@/app/lib/github'
-import * as AdmZip from 'adm-zip'
+import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
 
 export async function POST(request: Request) {

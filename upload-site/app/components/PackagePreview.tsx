@@ -17,7 +17,7 @@ export function PackagePreview({
 }: PackagePreviewProps) {
   return (
     <div className="border rounded-lg p-6 bg-background">
-      <h2 className="text-2xl font-bold mb-4">Package Preview</h2>
+      <h2 className="text-2xl font-bold mb-4">Package preview</h2>
       
       <div className="space-y-4 mb-6">
         <div className="grid grid-cols-[120px,1fr] gap-2">
@@ -26,7 +26,7 @@ export function PackagePreview({
         </div>
         
         <div className="grid grid-cols-[120px,1fr] gap-2">
-          <label className="font-semibold">Package Name:</label>
+          <label className="font-semibold">Package name:</label>
           <p className="break-all">{metadata.mpackage}</p>
         </div>
 
@@ -90,7 +90,7 @@ export function PackagePreview({
               Uploading...
             </>
           ) : (
-            'Confirm Upload'
+            'Confirm upload'
           )}
         </button>
         
