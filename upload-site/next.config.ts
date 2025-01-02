@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  basePath: '/mudlet-package-repository',
+  /* config options here */
 };
 
 export default nextConfig;
