@@ -22,16 +22,10 @@ export const Auth = () => {
   return (
     <div className="flex flex-wrap gap-3 py-4">
       <button
-        onClick={() => signIn('github')}
+        onClick={() => signIn()}
         className="px-4 py-2 text-sm bg-gray-800 hover:bg-gray-900 text-white rounded-md transition-colors"
       >
-        Sign in with GitHub
-      </button>
-      <button
-        onClick={() => signIn('apple')}
-        className="px-4 py-2 text-sm bg-black hover:bg-gray-900 text-white rounded-md transition-colors"
-      >
-        Sign in with Apple
+        Sign in
       </button>
     </div>
   )
