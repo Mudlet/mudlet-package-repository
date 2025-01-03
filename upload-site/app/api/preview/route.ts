@@ -6,6 +6,7 @@ import { ValidationResult, PackageMetadata } from '@/app/lib/types'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
 
 async function validateMetadata(metadata: PackageMetadata): Promise<ValidationResult> {
+  console.log('metadata:', metadata)
   const requiredFields = [
     'mpackage',
     'title',
@@ -14,30 +15,37 @@ async function validateMetadata(metadata: PackageMetadata): Promise<ValidationRe
     'author',
     'description'
   ]
+  console.log('requiredFields:', requiredFields)
   
   const missingFields = requiredFields.filter(field => !metadata[field as keyof PackageMetadata])
-  const validationErrors: string[] = []
+  console.log('missingFields:', missingFields)
+  const fieldErrors: Record<string, string[]> = {}
+  console.log('fieldErrors initialized:', fieldErrors)
 
-  // Case-insensitive package name validation
-  if (metadata.mpackage) {
+  if (metadata.title) {
+    console.log('checking title:', metadata.title)
     const existingPackages = await fetchRepositoryPackages()
-    const packageExists = existingPackages.some(pkg => 
-      pkg.mpackage?.toLowerCase() === metadata.mpackage?.toLowerCase() &&
-      pkg.mpackage !== metadata.mpackage
+    console.log('existingPackages:', existingPackages)
+    const titleExists = existingPackages.some(pkg => 
+      pkg.title?.toLowerCase() === metadata.title?.toLowerCase() &&
+      pkg.title !== metadata.title
     )
+    console.log('titleExists:', titleExists)
 
-    if (packageExists) {
-      validationErrors.push(`Package name already exists with different capitalization`)
+    if (titleExists) {
+      fieldErrors.title = ['Title already exists with different capitalization']
+      console.log('fieldErrors after title check:', fieldErrors)
     }
   }
   
-  return {
-    isValid: missingFields.length === 0 && validationErrors.length === 0,
+  const result = {
+    isValid: missingFields.length === 0 && Object.keys(fieldErrors).length === 0,
     missingFields,
-    validationErrors
+    fieldErrors
   }
+  console.log('final result:', result)
+  return result
 }
-
 export async function POST(request: Request) {
   const session = await getServerSession()
   

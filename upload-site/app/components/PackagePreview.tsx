@@ -22,6 +22,9 @@ export function PackagePreview({
     if (validation.missingFields.includes(fieldName)) {
       return <span className="text-red-500 ml-1">✗</span>
     }
+    if (validation.fieldErrors[fieldName]) {
+      return <span className="text-red-500 ml-1">✗</span>
+    }
     return <span className="text-green-500 ml-1">✓</span>
   }
 
@@ -31,8 +34,9 @@ export function PackagePreview({
   }  
 
   const getValidationErrorsMessage = () => {
-    if (!validation.validationErrors?.length) return ''
-    return validation.validationErrors.join(', ')
+    return Object.entries(validation.fieldErrors)
+      .map(([field, errors]) => errors.join(', '))
+      .join(', ')
   }
 
   return (
@@ -132,7 +136,7 @@ export function PackagePreview({
             {validation.missingFields.length > 0 && (
               <div>{getMissingFieldsMessage()}</div>
             )}
-            {validation.validationErrors?.length > 0 && (
+            {Object.keys(validation.fieldErrors).length > 0 && (
               <div>{getValidationErrorsMessage()}</div>
             )}
           </div>

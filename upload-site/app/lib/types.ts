@@ -1,7 +1,7 @@
 export interface ValidationResult {
-  isValid: boolean
-  missingFields: string[]
-  validationErrors: string[]
+  isValid: boolean;
+  missingFields: string[];
+  fieldErrors: Record<string, string[]>;
 }
 
 export interface PackageMetadata {
