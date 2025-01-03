@@ -3,17 +3,31 @@ import GithubProvider from "next-auth/providers/github"
 import FacebookProvider from "next-auth/providers/facebook"
 import AppleProvider from "next-auth/providers/apple"
 import MicrosoftProvider from "next-auth/providers/azure-ad"
+import CredentialsProvider from "next-auth/providers/credentials"
 
 const handler = NextAuth({
   providers: [
+    ...(process.env.NODE_ENV === 'development' ? [
+      CredentialsProvider({
+        name: "Development Login",
+        credentials: {},
+        async authorize() {
+          return {
+            id: "dev-user",
+            name: "Development User",
+            email: "dev@example.com",
+          }
+        },
+      })
+    ] : []),
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
     }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID!,
-      clientSecret: process.env.FACEBOOK_SECRET!,
-    }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_ID!,
+    //   clientSecret: process.env.FACEBOOK_SECRET!,
+    // }),
     AppleProvider({
       clientId: process.env.APPLE_ID!,
       clientSecret: process.env.APPLE_SECRET!,
@@ -27,10 +41,10 @@ const handler = NextAuth({
         }
       },
     }),    
-    MicrosoftProvider({
-      clientId: process.env.MICROSOFT_ID!,
-      clientSecret: process.env.MICROSOFT_SECRET!,
-    })
+    // MicrosoftProvider({
+    //   clientId: process.env.MICROSOFT_ID!,
+    //   clientSecret: process.env.MICROSOFT_SECRET!,
+    // })
   ],
   /* only for development - fixing Apple login */
   cookies: {
