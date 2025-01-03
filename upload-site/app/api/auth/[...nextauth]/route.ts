@@ -1,8 +1,6 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
-import FacebookProvider from "next-auth/providers/facebook"
 import AppleProvider from "next-auth/providers/apple"
-import MicrosoftProvider from "next-auth/providers/azure-ad"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 
