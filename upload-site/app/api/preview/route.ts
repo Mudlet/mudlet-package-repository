@@ -22,19 +22,18 @@ async function validateMetadata(metadata: PackageMetadata): Promise<ValidationRe
   const fieldErrors: Record<string, string[]> = {}
   console.log('fieldErrors initialized:', fieldErrors)
 
-  if (metadata.title) {
-    console.log('checking title:', metadata.title)
+  if (metadata.mpackage) {
+    console.log('checking mpackage:', metadata.mpackage)
     const existingPackages = await fetchRepositoryPackages()
-    console.log('existingPackages:', existingPackages)
-    const titleExists = existingPackages.some(pkg => 
-      pkg.title?.toLowerCase() === metadata.title?.toLowerCase() &&
-      pkg.title !== metadata.title
+    const mpackageExists = existingPackages.some(pkg => 
+      pkg.mpackage?.toLowerCase() === metadata.mpackage?.toLowerCase() &&
+      pkg.mpackage !== metadata.mpackage
     )
-    console.log('titleExists:', titleExists)
+    console.log('mpackageExists:', mpackageExists)
 
-    if (titleExists) {
-      fieldErrors.title = ['Title already exists with different capitalization']
-      console.log('fieldErrors after title check:', fieldErrors)
+    if (mpackageExists) {
+      fieldErrors.mpackage = ['A package with the same name but different capitalisation already exists']
+      console.log('fieldErrors after mpackage check:', fieldErrors)
     }
   }
   
