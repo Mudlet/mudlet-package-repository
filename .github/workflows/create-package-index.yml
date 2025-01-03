@@ -29,6 +29,7 @@ jobs:
       run: |
         luarocks install json-lua
         luarocks install luazip
+        luarocks install lfs
 
     - name: Run indexing
       run: |
