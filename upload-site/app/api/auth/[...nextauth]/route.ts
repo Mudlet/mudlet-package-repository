@@ -37,19 +37,7 @@ const handler = NextAuth({
         }
       },
     })
-  ],
-  /* only for development - fixing Apple login */
-  cookies: {
-    pkceCodeVerifier: {
-      name: "next-auth.pkce.code_verifier",
-      options: {
-        httpOnly: true,
-        sameSite: "none",
-        path: "/",
-        secure: true,
-      },
-    },
-  },
+  ]
 })
 
 export { handler as GET, handler as POST }
