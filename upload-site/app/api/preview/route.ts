@@ -6,7 +6,6 @@ import { ValidationResult, PackageMetadata } from '@/app/lib/types'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
 
 async function validateMetadata(metadata: PackageMetadata): Promise<ValidationResult> {
-  console.log('metadata:', metadata)
   const requiredFields = [
     'mpackage',
     'title',
@@ -15,25 +14,19 @@ async function validateMetadata(metadata: PackageMetadata): Promise<ValidationRe
     'author',
     'description'
   ]
-  console.log('requiredFields:', requiredFields)
   
   const missingFields = requiredFields.filter(field => !metadata[field as keyof PackageMetadata])
-  console.log('missingFields:', missingFields)
   const fieldErrors: Record<string, string[]> = {}
-  console.log('fieldErrors initialized:', fieldErrors)
 
   if (metadata.mpackage) {
-    console.log('checking mpackage:', metadata.mpackage)
     const existingPackages = await fetchRepositoryPackages()
     const mpackageExists = existingPackages.some(pkg => 
       pkg.mpackage?.toLowerCase() === metadata.mpackage?.toLowerCase() &&
       pkg.mpackage !== metadata.mpackage
     )
-    console.log('mpackageExists:', mpackageExists)
 
     if (mpackageExists) {
       fieldErrors.mpackage = ['A package with the same name but different capitalisation already exists']
-      console.log('fieldErrors after mpackage check:', fieldErrors)
     }
   }
   
@@ -42,9 +35,9 @@ async function validateMetadata(metadata: PackageMetadata): Promise<ValidationRe
     missingFields,
     fieldErrors
   }
-  console.log('final result:', result)
   return result
 }
+
 export async function POST(request: Request) {
   const session = await getServerSession()
   
