@@ -2,6 +2,7 @@
 
 import { PackageMetadata } from '@/app/lib/types'
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 interface PackageListProps {
   packages: PackageMetadata[];
@@ -38,7 +39,9 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
             <p className="text-gray-800">{pkg.title}</p>
             {expandedPackage === pkg.mpackage && (
               <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-gray-700">{pkg.description}</p>
+                <ReactMarkdown className="prose prose-blue max-w-none">
+                  {pkg.description}
+                </ReactMarkdown>
               </div>
             )}
           </article>
