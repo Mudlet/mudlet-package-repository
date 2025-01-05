@@ -4,8 +4,17 @@ import { getServerSession } from 'next-auth'
 import { Auth } from './components/Auth'
 import { Navigation } from './components/Navigation'
 import { SessionProvider } from './components/SessionProvider'
+import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Mudlet packages',
+  description: 'Upload and share Mudlet packages',
+  icons: {
+    icon: '/mudlet-package-repo.ico'
+  }
+}
 
 export default async function RootLayout({
   children,
@@ -20,7 +29,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <header className="bg-white border-b shadow-sm">
             <div className="max-w-6xl mx-auto">
-              <div className="flex justify-between items-center"> {/* Added flex container */}
+              <div className="flex justify-between items-center">
                 <Navigation />
                 <Auth />
               </div>
