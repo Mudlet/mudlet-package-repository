@@ -361,6 +361,12 @@ function mpkg.upgrade(args)
     return false
   end
 
+  if not semver(mpkg.getRepositoryVersion(args)) then
+    mpkg("Aborting, unable to read repository information.  Retrying package listing update.")
+    mpkg.updatePackageList()
+    return
+  end
+
   if semver(mpkg.getInstalledVersion(args)) < semver(mpkg.getRepositoryVersion(args)) then
     -- if no errors removing then install
     if mpkg.remove(args) then
