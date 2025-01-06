@@ -44,7 +44,8 @@ for file in io.popen([[ls -pa packages/*.mpackage]]):lines() do
         ["description"] = description,
         ["created"] = created, 
         ["version"] = version,
-        ["uploaded"] = getFileModTime(file)
+        ["uploaded"] = getFileModTime(file),
+        ["filename"] = file:gsub("packages/", "")            
     })
 
     f1:close()
