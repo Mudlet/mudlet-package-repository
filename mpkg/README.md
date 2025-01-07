@@ -14,7 +14,6 @@ Commands:
   mpkg search           -- search for a package via name and description
   mpkg show             -- show detailed information about a package
   mpkg update           -- update your package listing
-  mpkg upgrade          -- upgrade a specific package
 ```
 ### See Also
 

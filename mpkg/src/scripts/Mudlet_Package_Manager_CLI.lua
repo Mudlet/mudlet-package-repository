@@ -1,5 +1,4 @@
 --- Command line package manager for Mudlet.
---
 
 mpkg = mpkg or {}
 mpkg.aliases = mpkg.aliases or {}
@@ -9,22 +8,6 @@ mpkg.repository = "https://mudlet.github.io/mudlet-package-repository/packages"
 mpkg.website = "http://packages.mudlet.org"
 mpkg.websiteUploads = f"{mpkg.website}/upload"
 mpkg.filename = "mpkg.packages.json"
-mpkg.help = [[
-
-<b>mpkg</b> is a command line interface for managing packages
-used in Mudlet. You can install, remove, search the package
-repository and update installed packages using this interface.
-
-Commands:
-  mpkg install          -- install a new package
-  mpkg list             -- list all installed packages
-  mpkg remove           -- remove an existing package
-  mpkg search           -- search for a package via name and description
-  mpkg show             -- show detailed information about a package
-  mpkg update           -- update your package listing
-  mpkg upgrade          -- upgrade a specific package
-  mpkg upload           -- upload/update package in mpkg
-]]
 
 
 --- Entry point of script.
@@ -46,16 +29,36 @@ function mpkg.initialise()
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) remove(?: (.+))?$", function() mpkg.remove(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show(?: (.+))?$", function() mpkg.show(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) search(?: (.+))?$", function() mpkg.search(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade all$", function() mpkg.performUpgradeAll(false) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (?!all$)(.+))?$", function() mpkg.upgrade(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upload$", mpkg.openWebUploads))
+  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
+  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade all$", function() mpkg.performUpgradeAll(false) end))
+  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (?!all$)(.+))?$", function() mpkg.upgrade(matches[3]) end))
+  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upload$", mpkg.openWebUploads))
 
   -- Setup a named timer for automatic repository listing updates every 12 hours (60s*60m*12h=43200s)
   registerNamedTimer("mpkg", "mpkg update package listing timer", 43200, function() mpkg.updatePackageList(true) end, true)
 
   mpkg.reloadPackageListFromFile()
   mpkg.updatePackageList(true)
+end
+
+
+--- Check if mpkg is ready for use.
+-- External factors, e.g., no internet connection can cause
+-- mpkg to fail.  Well call this in functions where failure
+-- is likely.
+function mpkg.ready(silent)
+
+  if mpkg.packages and mpkg.packages['packages'] then return true end
+
+  if not silent then
+    mpkg.echo("Aborting, unable to read repository information.  Retrying package listing update.")
+    mpkg.updatePackageList(false)
+  else
+    mpkg.updatePackageList(true)
+  end
+
+  return false
+
 end
 
 
@@ -82,8 +85,6 @@ function mpkg.reloadPackageListFromFile()
 
     local file, error, content = io.open(filename)
 
-    mpkg.echo("Loading local file: " .. filename)
-
     if not error then
       content = file:read("*a")
       mpkg.packages = json_to_value(content)
@@ -99,15 +100,16 @@ end
 -- @return nil and error message if not found
 -- @return string containing a version if found
 function mpkg.getInstalledVersion(args)
-    local installedVersion = getPackageInfo(args, "version")
 
-    if installedVersion == "" then
-      return nil, "No version found."
-    else
-      return installedVersion
-    end
+  local installedVersion = getPackageInfo(args, "version")
 
-    return nil, "No package found."
+  if installedVersion == "" then
+    return nil, "No version found."
+  else
+    return installedVersion
+  end
+
+  return nil, "No package found."
 end
 
 
@@ -116,6 +118,9 @@ end
 -- @return nil and error message if not found
 -- @return string containing a version if found
 function mpkg.getRepositoryVersion(args)
+
+  if not mpkg.ready() then return end
+
   local packages = mpkg.packages["packages"]
 
   for i = 1, #packages do
@@ -133,6 +138,9 @@ end
 -- @return nil and error message if not found
 -- @return an empty table (if no dependencies) or table containing package names if found
 function mpkg.getDependencies(args)
+
+  if not mpkg.ready() then return end
+
   local packages = mpkg.packages["packages"]
 
   for i = 1, #packages do
@@ -154,16 +162,19 @@ end
 -- version using semantic versioning methods.
 -- @param silent if true, do not display update messages
 function mpkg.checkForUpgrades(silent)
+
+  if not mpkg.ready(silent) then return end
+
   local packages = mpkg.packages["packages"]
   local requireUpgrade = {}
 
-  for k,v in pairs(getPackages()) do
-    local installedVersion = mpkg.getInstalledVersion(v)
-    local repoVersion = mpkg.getRepositoryVersion(v)
+  for _, pkg in pairs(getPackages()) do
+    local installedVersion = mpkg.getInstalledVersion(pkg)
+    local repoVersion = mpkg.getRepositoryVersion(pkg)
 
     if repoVersion and installedVersion then
       if semver(installedVersion) < semver(repoVersion) then
-        table.insert(requireUpgrade, v)
+        table.insert(requireUpgrade, pkg)
       end
     end
   end
@@ -172,8 +183,8 @@ function mpkg.checkForUpgrades(silent)
     if not table.is_empty(requireUpgrade) then
       mpkg.echo("New package upgrades available.  The following packages can be upgraded:")
       mpkg.echo("")
-      for k,v in pairs(requireUpgrade) do
-        mpkg.echoLink(f"<b>{v}</b> v{mpkg.getInstalledVersion(v)} to v{mpkg.getRepositoryVersion(v)}", " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(v) end, "Click to upgrade", true)
+      for _, pkg in pairs(requireUpgrade) do
+        mpkg.echoLink(f"<b>{pkg}</b> v{mpkg.getInstalledVersion(pkg)} to v{mpkg.getRepositoryVersion(pkg)}", " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(pkg) end, "Click to upgrade", true)
       end
     else
         mpkg.echo("No package upgrades are available.")
@@ -182,29 +193,37 @@ function mpkg.checkForUpgrades(silent)
 
 end
 
+
+--- Upgrade all packages at once.
+-- @param silent do not show mpkg messages, system messages will continue to show
 function mpkg.performUpgradeAll(silent)
+
+  if not mpkg.ready() then return end
+
   local packages = mpkg.packages["packages"]
   local requireUpgrade = {}
 
-  for k,v in pairs(getPackages()) do
-    local installedVersion = mpkg.getInstalledVersion(v)
-    local repoVersion = mpkg.getRepositoryVersion(v)
+  for _, pkg in pairs(getPackages()) do
+    local installedVersion = mpkg.getInstalledVersion(pkg)
+    local repoVersion = mpkg.getRepositoryVersion(pkg)
 
     if repoVersion and installedVersion then
       if semver(installedVersion) < semver(repoVersion) then
-        table.insert(requireUpgrade, v)
+        table.insert(requireUpgrade, pkg)
       end
     end
   end
 
   if not table.is_empty(requireUpgrade) then
-    mpkg.echo("New package upgrades available.  The following packages will be upgraded:")
-    mpkg.echo("")
-    for _,v in pairs(requireUpgrade) do
-      mpkg.echo(f"<b>{v}</b> v{mpkg.getInstalledVersion(v)} to v{mpkg.getRepositoryVersion(v)}")
+    if not silent then
+      mpkg.echo("New package upgrades available.  The following packages will be upgraded:")
+      mpkg.echo("")
+      for _, pkg in pairs(requireUpgrade) do
+        mpkg.echo(f"<b>{pkg}</b> v{mpkg.getInstalledVersion(pkg)} to v{mpkg.getRepositoryVersion(pkg)}")
+      end
     end
-    for _,v in pairs(requireUpgrade) do
-      mpkg.upgrade(v)
+    for _, pkg in pairs(requireUpgrade) do
+      mpkg.upgrade(pkg)
     end
   else
     if not silent then
@@ -221,11 +240,28 @@ function mpkg.displayHelp()
   mpkg.echo("<u>Mudlet Package Repository Client (mpkg)</u>")
   mpkg.echoLink("", f"[{mpkg.website}]\n", function() openUrl(mpkg.website) end, "open package website", true)
 
-  local help = string.split(mpkg.help, "\n")
+local help = [[
+
+<b>mpkg</b> is a command line interface for managing packages in Mudlet.
+You can install, update, remove and search the package repository.
+
+Commands:
+  mpkg install          -- install/upgrade a package
+  mpkg list             -- list all installed packages
+  mpkg remove           -- remove an existing package
+  mpkg search           -- search for a package
+  mpkg show             -- show detailed information about a package
+  mpkg update           -- update package listing from repository
+
+]]
+
+  local help = string.split(help, "\n")
 
   for i = 1, #help do
     mpkg.echo(help[i])
   end
+
+mpkg.echoLink("", "Visit https://packages.mudlet.org/upload to share your package.", function() mpkg.openWebUploads() end, "open browser at upload website", true)
 
 end
 
@@ -242,8 +278,11 @@ function mpkg.install(args)
     return false
   end
 
+  if not mpkg.ready() then return end
+
   if table.contains(getPackages(), args) then
-    mpkg.echo(f"<b>{args}</b> package is already installed, use <yellow>mpkg upgrade<reset> to install a newer version.")
+    mpkg.echo(f"<b>{args}</b> package is already installed.  Checking for updates.")
+    mpkg.upgrade(args)
     return false
   end
 
@@ -258,9 +297,9 @@ function mpkg.install(args)
 
         local unmet = {}
 
-        for _,v in pairs(depends) do
-          if not table.contains(getPackages(), v) then
-            table.insert(unmet, v)
+        for _, dep in pairs(depends) do
+          if not table.contains(getPackages(), dep) then
+            table.insert(unmet, dep)
           end
         end
 
@@ -270,7 +309,7 @@ function mpkg.install(args)
           mpkg.echo("Please install the following packages first.")
           mpkg.echo("")
 
-          for _,v in pairs(unmet) do
+          for _, v in pairs(unmet) do
             mpkg.echo(v)
           end
 
@@ -310,16 +349,6 @@ function mpkg.remove(args)
   local success = uninstallPackage(args)
   mpkg.echo(f"<b>{args}</b> package removed.")
 
-  -- TODO: uninstallPackage doesn't currently provide a return value
-  -- is it necessary to perform a post check on installed packages and compare?
-  --[[
-  if success then
-    mpkg.echo(f"{args} uninstalled.")
-  else
-    mpkg.echo("Unable to uninstall.")
-  end
-  ]]--
-
   return true
 end
 
@@ -330,6 +359,7 @@ end
 -- @return false if there was an error
 -- @return true if packages was successfully uninstalled/removed
 function mpkg.upgrade(args)
+
   if not args then
     mpkg.echo("Missing package name.")
     mpkg.echo("Syntax: mpkg upgrade <package_name>")
@@ -342,11 +372,7 @@ function mpkg.upgrade(args)
     return false
   end
 
-  if not mpkg.packages or mpkg.getRepositoryVersion(args) == "" then
-    mpkg.echo("Aborting, unable to read repository information.  Retrying package listing update.")
-    mpkg.updatePackageList()
-    return
-  end
+  if not mpkg.ready() then return false end
 
   if semver(mpkg.getInstalledVersion(args)) < semver(mpkg.getRepositoryVersion(args)) then
     -- if no errors removing then install
@@ -354,7 +380,7 @@ function mpkg.upgrade(args)
       tempTimer(2, function() mpkg.install(args) end)
     end
   else
-    mpkg.echo(f"<b>{args}</b> package is already on the latest version.")
+    mpkg.echo(f"Currently installed, <b>{args}</b> v{mpkg.getInstalledVersion(args)} is the latest version.")
   end
 end
 
@@ -373,6 +399,8 @@ end
 
 --- Print a list of locally installed packages in Mudlet.
 function mpkg.listInstalledPackages()
+
+  if not mpkg.ready() then return end
 
   local sf = string.format
 
@@ -412,6 +440,8 @@ function mpkg.search(args)
     mpkg.echo("Syntax: mpkg search <package_name>")
     return
   end
+
+  if not mpkg.ready() then return end
 
   mpkg.echo(f"Searching for <b>{args}</b> in repository.")
 
@@ -458,6 +488,8 @@ function mpkg.show(args, repoOnly)
     end
     return false
   end
+
+  if not mpkg.ready() then return end
 
   local packages
 
@@ -538,11 +570,6 @@ end
 -- @param arg all event args, including the filename associated with the download
 function mpkg.eventHandler(event, ...)
 
-  if mpkg.debug then
-    display(event)
-    display(arg)
-  end
-
   if event == "sysDownloadError" and string.ends(arg[2], mpkg.filename) then
     if not mpkg.silentFailures then
       mpkg.echo("Failed to download package listing.")
@@ -588,7 +615,7 @@ function mpkg.eventHandler(event, ...)
 
 end
 
-
+--- Open a browser at the uploads URL.
 function mpkg.openWebUploads()
 
   mpkg.echo("Redirecting to the package repository website.")
@@ -606,9 +633,8 @@ function mpkg.uninstallSelf()
   deleteNamedEventHandler("mpkg", "installed")
   deleteNamedEventHandler("mpkg", "uninstalled")
 
-
   if mpkg and mpkg.aliases then
-    for _,v in pairs(mpkg.aliases) do
+    for _, v in pairs(mpkg.aliases) do
       killAlias(v)
     end
   end
