@@ -2,7 +2,9 @@ name: Validate mpackage file
 
 on:
   pull_request:
-    paths: packages/*.mpackage
+      paths: 
+        - 'packages/*.mpackage'
+        - 'packages/*.zip'
 
 jobs:
   check-mpackage-contents:

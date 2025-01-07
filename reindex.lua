@@ -21,34 +21,37 @@ local pkg = {}
 print("Running creation loop...")
 
 -- loop through all .mpackage files in the directory
-for file in io.popen([[ls -pa packages/*.mpackage]]):lines() do
+for file in io.popen("ls -pa packages/*"):lines() do
     print("Found "..file)
 
     -- read config.lua from the zip file
     local zfile, err = zip.open(file)
-    local f1, err = zfile:open('config.lua')
-    local s1 = f1:read("*a")
+    if not err then
+        local f1, err = zfile:open('config.lua')
+        local s1 = f1:read("*a")
 
-    -- output config.lua and run it to gather the variables inside
-    infoFile = io.open("config.lua", "w+")
-    io.output(infoFile)
-    io.write(s1)
-    io.close(infoFile)
-    dofile("config.lua")
+        -- output config.lua and run it to gather the variables inside
+        infoFile = io.open("config.lua", "w+")
+        io.output(infoFile)
+        io.write(s1)
+        io.close(infoFile)
+        dofile("config.lua")
 
-    -- insert package details in table
-    table.insert(pkg, { 
-        ["mpackage"] = mpackage,
-        ["author"] = author,
-        ["title"] = title,
-        ["description"] = description,
-        ["created"] = created, 
-        ["version"] = version,
-        ["uploaded"] = getFileModTime(file)
-    })
+        -- insert package details in table
+        table.insert(pkg, {
+            ["mpackage"] = mpackage,
+            ["author"] = author,
+            ["title"] = title,
+            ["description"] = description,
+            ["created"] = created,
+            ["version"] = version,
+            ["uploaded"] = getFileModTime(file),
+            ["filename"] = file:gsub("packages/", "")
+        })
 
-    f1:close()
-    zfile:close()
+        f1:close()
+        zfile:close()
+    end
 
 end
 
