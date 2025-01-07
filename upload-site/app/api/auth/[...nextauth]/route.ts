@@ -1,8 +1,8 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
-import FacebookProvider from "next-auth/providers/facebook"
 import AppleProvider from "next-auth/providers/apple"
-import MicrosoftProvider from "next-auth/providers/azure-ad"
+import GoogleProvider from "next-auth/providers/google"
+import GitLabProvider from "next-auth/providers/gitlab"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 const handler = NextAuth({
@@ -20,9 +20,17 @@ const handler = NextAuth({
         },
       })
     ] : []),
+    GitLabProvider({
+      clientId: process.env.GITLAB_ID!,
+      clientSecret: process.env.GITLAB_SECRET!,
+    }),
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
     }),
     AppleProvider({
       clientId: process.env.APPLE_ID!,
@@ -38,7 +46,7 @@ const handler = NextAuth({
       },
     })
   ],
-  /* only for development - fixing Apple login */
+  /* necessary for apple login */
   cookies: {
     pkceCodeVerifier: {
       name: "next-auth.pkce.code_verifier",

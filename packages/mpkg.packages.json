@@ -5,182 +5,222 @@
                        "author": "Erikka, Demonnic",
                       "created": "2024-03-15T02:21:34+0000",
                   "description": "# Achaea Chat Tabs\n\nSet of chat tabs similarly laid out to KaiUI, but using demonnic's latest version of EMCO which provides for automatic logging among other things, and not part of an all or nothing UI.\n\nBy default, the logs are kept in `getMudletHomeDir() .. \"/log/Chatbox/YYYY/MM/DD/tabname.html\"`\n\nWill start on the right side, attached to the right border. Resize, move, adjust how you see fit.\n\n## Configuration Alias\n* `act|act usage`\n  * prints a list of aliases and their usage in the main window\n* `act hide`\n  * hides the chat tabs\n* `act show`\n  * shows the chat tabs again.\n* `act save`\n  * saves the configuration\n* `act load`\n  * loads the configuration\n* `act font <new font name>`\n  * Sets the font for the chat consoles. Will not allow you to set one which does not exist.\n* `act fontSize <new font size>`\n  * Sets the font size for the chat consoles\n* `act blink <true|false>`\n  * set whether it should blink\n* `act timestamp <true|false>`\n  * set whether it should add a timestamp at the front\n* `act commandLine <true|false>`\n  * set whether it should show command lines\n* `act blankLine`\n  * set whether it should automatically add a newline to things echoed.\n* `act gaglist`\n  * lists the mobs and lines being gagged in the chat tabs.\n* `act gagmob <Lua pattern>`\n  * add a Lua pattern to check speakers against. See [this tutorial from lua-users.org](http://lua-users.org/wiki/PatternsTutorial) for more information. If the speaker matches the pattern, anything they say or emote on any channel will be gagged from the tabbed chat consoles. Does not affect the main window. Uses gmcp.Comm.Channel.Text.talker to make the determination.\n    * `act gagmob Vellis`\n      * gags any mob with \"Vellis\" in the speaker name in gmcp.\n    * `act gagmob a sick .+ child`\n      * gags `a sick human child` and `a sick tsol child` and `a sick mhun child` etc\n* `act ungagmob <Lua pattern>`\n  * Removes a lua pattern from the gagged mobs list.\n* `act gag <Lua pattern>`\n  * add a Lua pattern to check lines against. See [this tutorial from lua-users.org](http://lua-users.org/wiki/PatternsTutorial) for more information. If the content of the line matches any of the patterns then the line will be gagged from the tabbed chat consoles. Does not affect the main window.\n    * `act gag .- shouts \"I love cheese!\"`\n      * will gag anyone shouting \"I love cheese!\"\n* `act ungag <Lua pattern>`\n  * removes a lua pattern from the gagged lines list.\n* `act notify <tab name>`\n  * will send OS notifications when somethings is written to the tab specified. If a tab is not provided, will give a list of tabs that currently have notify enabled.\n    * `act notify guild`\n      * sends OS notifications whenever something comes in on the Guild tab\n* `act unnotify <tab name>`\n  * Stop sending OS notifications for a tab\n   * `act unnotify house`\n    * stop sending OS notifications when something comes in on the House tab\n* `act color <option> <color>`\n  * customize the colors of the chat window\n   * `act color usage`\n    * prints the color alias usage information\n* `act update`\n  * updates the package to the latest version\n* `act reset|act reset color`\n  * resets the chat window to defaults/resets chat colors only (remember to 'act save' after to save the defaults into the config file)\n\n## Power Users\nEMCO is a highly customizable chat script with a plethora of options to make it better/smarter/good looking that are by no means limited by only these aliases! If you want to further customize your chat box and its behavior refer to the [EMCO API](https://demonnic.github.io/mdk/current/classes/EMCO.html).\n",
+                     "filename": "AchaeaChatTabs.mpackage",
                      "mpackage": "AchaeaChatTabs",
                         "title": "Chat tabs for Achaea",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1.3.3"
+                },
+                {
+                       "author": "bscross32",
+                      "created": "2024-01-29T15:47:53-0500",
+                  "description": "# ChannelHistory\n\n## Virtual buffering system for screen reader users.\n\n## Installation instructions\nIn Mudlet, type the following command:\n```\nlua uninstallPackage(\"ChannelHistory\");installPackage(\"https://github.com/ironcross32/ChannelHistory/releases/latest/download/ChannelHistory.mpackage\")\n```\n## Usage\n\nfor those who are familiar with the channel_history plugin for MUSHclient, this package behaves in much the same way, though with a more limited feature set.\n* Alt+left/Alt+right - navigate between categories in the virtual buffer\n* Alt+up/Alt+down - navigate through the messages in the selected category\n* Alt+home/Alt+end - jump to the first and last message in the selected category\n* Alt+Shift+T - Toggles hearing relative time that a given message entered the buffer\n* Alt+Shift+delete - removes the selected category along with all of its messages\n\nHolding the alt key and tapping a number from 1 to 0 on the number row will retrieve a recent message. For example, Alt+1 would retrieve the most recent message, while Alt+5 would retrieve the fifth most, and Alt+0 would retrieve the tenth most recent message. While holding alt, double tapping a number will have its message copied to the clipboard.\n\nTo add a new message to any given buffer, simply call `channel_history.add(STR category_name, STR message)`. Here's an example of a regular expression trigger:\n\n`\\[(chat|advice|events)\\] (\\w+)(.+s)`\n\nAnd, how this information is parsed and passed along to `channel_history:add()`\n\n```\nlocal where = matches[2]\nlocal message = matches[3] .. \": \" .. matches[4]\nchannel_history.add(where, message)\n```\n\n## Credits\n\nAs much of this project is a port from channel_history.xml from MushZ, thanks goes out to its authors:\n* Tyler Spivey\n* Oriol Gomez\n* Weyoun\n\nThanks also goes to Demonnic for graciously offering assistance with questions related to Muddler, which is used to package this project, and for helping with debugging some initial code. And of course, to the Mudlet team as a hole for creating a fast, powerful, and feature-rich MUD client.\n",
+                     "filename": "ChannelHistory.mpackage",
+                     "mpackage": "ChannelHistory",
+                        "title": "Virtual buffering system for screen reader users.",
+                     "uploaded": 1736219362,
+                      "version": "1.0.0"
                 },
                 {
                        "author": "Akaya, mods by Zooka",
                       "created": "2024-12-24T13:05:23+04:00",
                   "description": "### Description\n\nThis package contains a basic GUI template that serves as a basis for creating your own.  It uses modern Geyser elements such as Adjustable Containers and Geyser Buttons for a flexible layout which can be arranged and styled anyway you like.  This is an updated, modern version of Akaya's excellent original template.\n\n### Usage\n\nSimply install this package and the GUI will be displayed.  Start customising!\n\n### See Also\n\n* [Akaya's original template](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&pk_vid=09b619c5f5c4537b1735030856a9723a)",
+                     "filename": "GUIFlex.mpackage",
                      "mpackage": "GUIFlex",
                         "title": "A basic but modern GUI template created with Geyser.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Kymbahl, Kronos",
                       "created": "2024-11-09T13:51:15+0000",
                   "description": "# MedUI - A User Interface for Medievia\n\n### Authors: Kymbahl and Kronos\n\n### Features\nMedUI is a package for the Medievia MUD which provides a more modern user experience.\nIncluded in this package is:\n1. External Map window   - This captures the in-game ASCII map and places it in its own window.\n2. Communications Window - This captures common game channels and places them in another window.\n3. Player Vitals Gauges  - Health/Mana/Breath/Movement bars that update from your prompt data.\n4. Buff Bar              - A visual indication of which buffs your player is affected by.\n5. Custom Medievia Font  - A special TrueType font designed for rendering the in-game ASCII map.\n\n### Configuration\nMost configuration options may be toggled using the 'medui' alias menu, such as:\n1. Toggle on/off the gauges display\n2. Toggle timestamps in the chat window\n3. Toggle showing the inline map (in your main display)",
+                     "filename": "MedUI.mpackage",
                      "mpackage": "MedUI",
                         "title": "User Interface for Medievia",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1.7.8"
                 },
                 {
                        "author": "Demonnic",
                       "created": "2022-05-19T00:28:05+0000",
                   "description": "# Busted, packaged for Windows Mudlet\n\nBusted is a robust testing framework for Lua with a lot of functionality, but it has some compiled C components and is not trivial for Windows users to install for use with their Mudlet systems. Since we use busted for testing Mudlet itself I thought it would be good to get a version repackaged which Mudlet users could install for their own use.\n## Usage\n\nThis comes with one alias, `runTests`. By default, it will look for every file in your profile directory named `*_spec.lua` and run the tests defined within. If you wish to only run tests for a specific package, you can use the package name as the argument to the alias, for instance `runTests REPLet` will run any test files in the REPLet package if installed. If you want to run a specific test file, you can use `runTests REPLet/coreTests_spec.lua` to point to the specific file.\n\n## Writing tests\n\nThere are some very good [docs](https://olivinelabs.com/busted/) available from the authors. For some practical examples, you can check out the [Mudlet busted tests](https://github.com/Mudlet/Mudlet/tree/development/src/mudlet-lua/tests)\n\n## TO-DO\n\nI have not yet included the libraries to enable asynchronous testing (libev and the copas and lua-libev luarocks) so you won't be able to ",
+                     "filename": "MudletBusted.mpackage",
                      "mpackage": "MudletBusted",
                         "title": "The Busted testing suite, packaged for Mudlet",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "2.0.0"
                 },
                 {
                        "author": "Oneymus",
                       "created": "2024-06-28T14:07:07+04:00",
                   "description": "N, S, E, W, NW, NE, SW, SE, IN, OUT, UP, DOWN\nassigned to the number pad.",
+                     "filename": "NumPad.mpackage",
                      "mpackage": "NumPad",
                         "title": "Cardinal movement commands assigned to number pad keys.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-08-04T14:41:00+03:00",
                   "description": "### Description\n\nSearch for matching function names and open the Mudlet API from the command line.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> !api`\n\nsimply open the API webpage\n\n`> !api gotoRoom`\n\nopen the API at the function description of gotoRoom\n\n`> !api trigger`\n\n    No matching functions found.  Possible match:\n    cfeedTriggers\n    dfeedTriggers\n    disableTrigger\n    ...\n    ...",
+                     "filename": "command-line-api.mpackage",
                      "mpackage": "command-line-api",
                         "title": "Search and open Mudlet API webpage from the command line",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-10-21T13:33:38+02:00",
                   "description": "### Description\n\nCron Daemon is a script that schedules jobs (functions or actions) to be run periodically at fixed times, dates or intervals.  It can schedule down to the nearest minute and as far out as once per year.\n\nA job is a table that is passed to the cron monitor specifying when to execute a command.\n\nThe job daemon/monitor will wake up once per minute as the minute ticks over to execute any matching jobs.  It relies on your operating system time for\naccuracy.\n\nWish to see further additions to this script? Consider supporting my efforts at https://buymeacoffee.com/zookaongit\n\n### Usage\n    cron help   - to see this help\n    cron [list] - to see a list of scheduled jobs\n\n#### Time Formats\nhour (0..23)\n\nminute (0..59)\n\nday (1..31, of the month)\n\nweekday (0..6, Sunday is 0)\n\nmonth (1..12)\n\nTimes can contain ranges 1-3, enumerations 1-3,5,7 or * (every time).\n\ne.g.\n\nhour = \"*\" - match every hour\n\nday = \"1,10,20\" - match 1st, 10th, 20th of each month only\n\nweekday = \"1-3\" - match Monday, Tuesday, Wednesday only\n\nmonth = \"1,10-12\" - match January, October, November, December only\n\nJobs must contain all time entries as mentioned above.\n\nJobs must match EVERY entry before they will fire (use * for always).\n\n#### Job Commands\nThe command field is the function name to run without parenthesis.\n\nCommands are specified in two common formats;\n    command = functionName,\n    command = function() send(\"look\") end,\n\nCron functions in the first format do not accept arguments, use the second format to bring in variables for more elaborate jobs or multiple commands/functions.\n\n#### ID\nUsed to identify a particular job, typically unique.  Jobs can have the same name, but deleting one will delete only one of the jobs with the same ID.\n\n#### Job Examples\n\n    -- perform myFunction() every minute\n    local job1 = { id = \"my first job\",\n                   command = myFunction,\n                   hour = \"*\",\n                   minute = \"*\",\n                   day = \"*\",\n                   weekday = \"*\",\n                   month = \"*\"\n                 }\n    \n    -- go to work at 8:15am, but only on weekdays\n    local job2 = { id = \"off to work\",\n                   command = function()\n                        echo(\"You'll be late for work!\")\n                        disconnect()\n                   end,\n                   hour = \"8\",\n                   minute = \"15\",\n                   day = \"*\",\n                   weekday = \"1-5\",\n                   month = \"*\"\n                }\n    \n    -- Wishing you a happy birthday (at 10am, Jan 31st)\n    local job3 = { id = \"birthday\",\n                   command = function()\n                        echo(\"Happy Birthday!\")\n                   end,\n                   hour = \"10\",\n                   minute = \"0\",\n                   day = \"31\",\n                   weekday = \"*\",\n                   month = \"1\"\n                }\n    \n    -- add them to the scheduler\n    cron.add(job1)\n    cron.add(job2)\n    cron.add(job3)\n\n    -- delete them later\n    cron.delete(\"my first job\")\n    -- or alternatively\n    cron.delete(job2.id)",
+                     "filename": "cron-daemon.mpackage",
                      "mpackage": "cron-daemon",
                         "title": "A cron daemon/scheduler to perform tasks at fixed times, dates or intervals.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
+                },
+                {
+                       "author": "Pato",
+                      "created": "2025-01-01T00:00:00+0:00",
+                  "description": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.\nFeatures that include upgrades to the user interface, automation, and reporting are all included.\nIt includes a conversation window across the top as well as a character information panel in the\nbottom right next to the command window. DartMUDlet automatically counts and reports skill improves\nfor both you and your pets, and will attempt to autocorrect when a skill rolls to the next level.\n\nDartMUDlet will also block and queue up commands while you are performing interruptable actions\n(e.g. spells, books, scrolls), then release them afterwards when the action is complete.\n\nType /setup to initialize DartMUDlet once installed.\nType /help for a full list of commands.\n",
+                     "filename": "dartmudlet-1.8.1.zip",
+                     "mpackage": "DartMUDlet",
+                        "title": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.",
+                     "uploaded": 1736219362,
+                      "version": "1.8.1"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-07-10T20:19:30+04:00",
                   "description": "### Description\n\nThis package gives you the ability to delay the incoming text from your game.  This gives you time to see any changes and read the text.\n\n### Usage\n\nTurn the package on or off with \n\n`> delay on`\n`> delay off`\n\nChange the delay time by going to the Script Editor (ALT+E) then Timers (CTRL+4) and adjust the stopwatch under Delay Scrolling Time.",
+                     "filename": "delay-scrolling.mpackage",
                      "mpackage": "delay-scrolling",
                         "title": "Slow down the main window buffer giving you time to read.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1.1"
                 },
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-24T08:26:45+02:00",
                   "description": "# deleteOldProfiles Package\n\nMudlet continuiously creates backups of important data.  This can result in a lot\nof files.  This package deletes old profiles, maps and modules in the \n\"current\", \"map\" and \"moduleBackups\" folders of the Mudlet home directory that are\nno longer required.\n\nThe commands are;\n\n```\n> delete old profiles [days]\n> delete old maps [days]\n> delete old modules[days]\n```\n\nDays is optional, the default is 31 days.\n\nThe following files are NOT deleted:\n\n- Files newer than the amount of days specified, or 31 days if not specified.\n- One file for every month before that. Specifically: The first available file of every month prior to this.\n\n```\n-- Examples: \n> delete old profiles   -- deletes profiles older than 31 days  \n> delete old maps 10    -- deletes maps older than 10 days\n```\n",
+                     "filename": "deleteOldProfiles.mpackage",
                      "mpackage": "deleteOldProfiles",
                         "title": "Remove excess backup files.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-06-29T12:05:08+04:00",
                   "description": "### Description\n\nFunctions and aliases to simulate random dice rolls.\n\n### Usage\n\nThere are three aliaes, diceroll, dicemin and dicemax.  They accept dice in the following format xdy where x is the number of dice, y is the number of sides per dice.  It also allows appending an number to add (or subtract) from the dice roll.  ie. diceroll 2d6+3, or dicemin 3d5-1.  The functions can also be called directly from other scripts; dice.roll(num, sides, append), dice.min(...), dice.max(...)\n\n`> diceroll 2d6+3`\n\n    8",
+                     "filename": "dice.mpackage",
                      "mpackage": "dice",
                         "title": "Simulate dice rolls with these simple functions.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-24T08:27:19+02:00",
                   "description": "# Echo Package\n\nThe echo package provides a means of testing triggers via the command line with four command aliases;\n`` `echo, `cecho, `decho, `hecho``.  \n\nAll act as if the given text came from the game itself and will fire any matching triggers.  \n\nSee [Triggers](https://wiki.mudlet.org/w/Manual:Introduction#Triggers) for further information on matching text.\n  \n## `echo Alias\n\nDisplays text on the screen and tells all matching triggers to fire.  For coloring use one\nof the other functions mentioned below.\n\n```\n-- examples\n> `echo text - displays text on the main screen and tells all matching triggers to fire\n> `echo This is a sample line from the game$$And this is a new line.\n```\nSee [echo](https://wiki.mudlet.org/w/Manual:Lua_Functions#echo), [feedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#feedTriggers), \n  \n## `cecho Alias\n\nLike echo, but you can add color information using color names and ANSI values.\n\n```\n-- example: color format is <foreground:background>\n> `cecho <green:red>green on red<r> reset$$<124:100>foreground of ANSI124 and background of ANSI100<r>\n```\nSee [cecho](https://wiki.mudlet.org/w/Manual:Lua_Functions#cecho), [cfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#cfeedTriggers).\n\n## `decho Alias\n\nLike cecho, but you can add color information using <r,g,b> format.\n\n```\n-- example\n> `decho <0,128,0:128,0,0>green on red<r> reset\n```\nSee [decho](https://wiki.mudlet.org/w/Manual:Lua_Functions#decho), [dfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#dfeedTriggers).\n\n## `hecho Alias\n\nLike cecho, but you can add color information using hex #RRGGBB format.\n\n```\n-- example\n> `hecho #008000,800000green on red#r reset\n```\nSee [hecho](https://wiki.mudlet.org/w/Manual:Lua_Functions#hecho), [hfeedTriggers](https://wiki.mudlet.org/w/Manual:Lua_Functions#hfeedTriggers).\n",
+                     "filename": "echo.mpackage",
                      "mpackage": "echo",
                         "title": "A set of aliases to test triggers on the command line.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-24T08:27:33+02:00",
                   "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
+                     "filename": "enable-accessibility.mpackage",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-07-14T08:01:32+04:00",
                   "description": "# generic_mapper Package\n\nThis script allows for semi-automatic mapping using the included triggers.\nWhile different games can have dramatically different ways of displaying\ninformation, some effort has been put into giving the script a wide range of\npotential patterns to look for, so that it can work with minimal effort in\nmany cases.\n\ngeneric_mapper looks at a combination of room titles, descriptions and exits\nto locate and follow your character around maps you can make yourself, share\nand download for your MUD.\n\nTwo commands to get started are;\n```\n> map basics\n> map help\n```\n\nSee [this forum thread](https://forums.mudlet.org/viewtopic.php?f=13&t=6105) for further assistance.\n\nSee [this forum thread](https://forums.mudlet.org/search.php?keywords=mapping+script&terms=all&author=&sc=1&sf=titleonly&sr=topics&sk=t&sd=d&st=0&ch=400&t=0&submit=Search&pk_vid=08fcc4383ef3530916874145245184da) for more mapping scripts.\n",
+                     "filename": "generic_mapper.mpackage",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "2.1.4"
                 },
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-12-13T13:16:38+04:00",
                   "description": "Allow a user to drag and drop an image on the main screen which will turn it into a label and AdjustableContainer.\n\n### Description\n\nThis packages allows a user to drag and drop an image on the main screen which will turn it into a label and AdjustableContainer.\nThe resultant script can be found in GUIDropManager which can then be tailored further as per normal scripting rules.  The images\nare copied to %user-profile/GUIDropImages/\n\n### Usage\n\nJust drop an image file into the main window.  It will be converted into a label inside an AdjustableContainer.\n",
+                     "filename": "gui-drop.mpackage",
                      "mpackage": "gui-drop",
                         "title": "Drag and drop images onto the main window to turn into a label and container.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-09-01T16:21:44+02:00",
                   "description": "### Description\n\nMaster Spam suppress lines of text for a specified number of times, allowing one to get through every now and then.\n\n### Usage\n\nInsert the lines you want to match into the masterSpam.masterSpam table, and add the number of lines you want to suppress.\n\n### See Also\n\nI make Mudlet scripts for a living.  Please support my work if you have found this package helpful!\n\n* https://buymeacoffee.com/zookaongit\n* https://github.com/ZookaOnGit\n",
+                     "filename": "master-spam.mpackage",
                      "mpackage": "master-spam",
                         "title": "Suppress lines of spamminess.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-09-27T11:46:46+0000",
                   "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgrade          -- upgrade a specific package\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/",
+                     "filename": "mpkg.mpackage",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "2.8"
                 },
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-24T08:28:56+02:00",
                   "description": "# run-lua-code\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n",
+                     "filename": "run-lua-code.mpackage",
                      "mpackage": "run-lua-code",
                         "title": "Run Lua code directly from the command line.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "5"
                 },
                 {
                        "author": "Xanthia",
                       "created": "2024-08-29T13:17:18+08:00",
                   "description": "Easily play default sounds with a single command or lua code function.  List of 100 sounds currently available.",
+                     "filename": "shaxamm.mpackage",
                      "mpackage": "shaxamm",
                         "title": "Xanthia's Audio Manager Module",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "1.0"
                 },
                 {
                        "author": "Zooka",
                       "created": "2024-11-26T15:02:05+04:00",
                   "description": "### Description\n\nCreate a simple map using only directional commands.\nSupports n,s,e,w,ne,nw,se,sw,u,d.  This mapper does\nnot capture any game data so can also be used offline\nfor creating areas.\n\n### Usage\nType smap help for the help file.\n\nTo get started on a new map issue the following command: <yellow>smap new area My Area<reset> and starting moving around.\n```\n",
+                     "filename": "simple-mapper.mpackage",
                      "mpackage": "simple-mapper",
                         "title": "Create simple maps using directional commands only.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "2.1"
                 },
                 {
                        "author": "demonnic (mods by Zooka)",
                       "created": "2024-06-30T16:47:33+04:00",
                   "description": "### Description\n\nRecords a speedwalk with the ability to play back, and in reverse. Makes use of the speedwalk() function.\n\n### Usage\n```\nspeedrecord <name of speedwalk route>\n```\nThis begins the recording. When you do this, it activates an alias which consumes everything you put in the command line and adds it to the route it is recording. When done, type:\n```\nstopRecording\n```\nand it will end the recording mode and add the route to the list of routes it knows. To walk the route:\n```\nswalk <name of speedwalk route>\n```\nAnd if you want to walk it in reverse:\n```\nrwalk <name of speedwalk route to reverse>\n```\nTo see a list of saved speedwalks with clickable links;\n```\nlwalk\n```\nTo set the speedwalk delay type:\n```\ndelaywalk <number>\n```\nTo remove a speedwalk;\n```\nremovewalk <name of speedwalk route>\n```",
+                     "filename": "speedWalkRecorder.mpackage",
                      "mpackage": "speedWalkRecorder",
                         "title": "Records a speedwalk with the ability to play back, and in reverse.",
-                     "uploaded": 1735908592,
+                     "uploaded": 1736219362,
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Jan  3 12:50:04 2025"
+   "updated": "Tue Jan  7 03:09:32 2025"
 }

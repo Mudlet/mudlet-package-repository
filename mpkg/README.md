@@ -1,6 +1,9 @@
 ### Description
 mpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.
 
+### Development
+Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.
+
 ### Usage
 
 ```
