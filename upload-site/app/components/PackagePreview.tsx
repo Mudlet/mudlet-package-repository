@@ -22,6 +22,9 @@ export function PackagePreview({
     if (validation.missingFields.includes(fieldName)) {
       return <span className="text-red-500 ml-1">✗</span>
     }
+    if (validation.fieldErrors[fieldName]) {
+      return <span className="text-red-500 ml-1">✗</span>
+    }
     return <span className="text-green-500 ml-1">✓</span>
   }
 
@@ -29,6 +32,12 @@ export function PackagePreview({
     if (validation.missingFields.length === 0) return ''
     return `Missing required fields: ${validation.missingFields.join(', ')}`
   }  
+
+  const getValidationErrorsMessage = () => {
+    return Object.entries(validation.fieldErrors)
+      .map(([field, errors]) => errors.join(', '))
+      .join(', ')
+  }
 
   return (
     <div className="border rounded-lg p-6 bg-background">
@@ -123,8 +132,13 @@ export function PackagePreview({
 
       <div className="flex flex-col gap-4">
         {!validation.isValid && (
-          <div className="text-red-500 text-sm">
-            {getMissingFieldsMessage()}
+          <div className="text-red-500 text-sm space-y-2">
+            {validation.missingFields.length > 0 && (
+              <div>{getMissingFieldsMessage()}</div>
+            )}
+            {Object.keys(validation.fieldErrors).length > 0 && (
+              <div>{getValidationErrorsMessage()}</div>
+            )}
           </div>
         )}
         <div className="flex gap-4">
@@ -139,7 +153,7 @@ export function PackagePreview({
               }
               flex items-center gap-2
             `}
-            title={!validation.isValid ? getMissingFieldsMessage() : 'Confirm upload'}
+            title={!validation.isValid ? `${getMissingFieldsMessage()} ${getValidationErrorsMessage()}` : 'Confirm upload'}
           >
             {isUploading ? (
               <>
