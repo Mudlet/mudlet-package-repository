@@ -16,17 +16,14 @@ used in Mudlet. You can install, remove, search the package
 repository and update installed packages using this interface.
 
 Commands:
-  mpkg help             -- show this help
   mpkg install          -- install a new package
   mpkg list             -- list all installed packages
   mpkg remove           -- remove an existing package
   mpkg search           -- search for a package via name and description
   mpkg show             -- show detailed information about a package
-  mpkg show-repo        -- show package information from the repository only
   mpkg update           -- update your package listing
   mpkg upgrade          -- upgrade a specific package
-  mpkg upgradeable      -- show packages that can be upgraded
-  mpkg upload           -- opens the repository upload website
+  mpkg upload           -- upload/update package in mpkg
 ]]
 
 
@@ -44,21 +41,20 @@ function mpkg.initialise()
   mpkg.aliases = mpkg.aliases or {}
 
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp)( help)?$", mpkg.displayHelp))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) debug$", mpkg.toggleDebug))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) install(?: (.+))?$", function() mpkg.install(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) list$", mpkg.listInstalledPackages))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) remove(?: (.+))?$", function() mpkg.remove(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show(?: (.+))?$", function() mpkg.show(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show-repo(?: (.+))?$", function() mpkg.show(matches[3], true) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) search(?: (.+))?$", function() mpkg.search(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (.+))?$", function() mpkg.upgrade(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgradeable$", function() mpkg.checkForUpgrades(false) end))
+  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade all$", function() mpkg.performUpgradeAll(false) end))
+  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (?!all$)(.+))?$", function() mpkg.upgrade(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upload$", mpkg.openWebUploads))
 
   -- Setup a named timer for automatic repository listing updates every 12 hours (60s*60m*12h=43200s)
   registerNamedTimer("mpkg", "mpkg update package listing timer", 43200, function() mpkg.updatePackageList(true) end, true)
 
+  mpkg.reloadPackageListFromFile()
   mpkg.updatePackageList(true)
 end
 
@@ -78,6 +74,24 @@ function mpkg.echoLink(args, ...)
   cechoLink(...)
 end
 
+
+--- Load the local package list if available.
+function mpkg.reloadPackageListFromFile()
+
+    local filename = getMudletHomeDir() .. "/" .. mpkg.filename
+
+    local file, error, content = io.open(filename)
+
+    mpkg.echo("Loading local file: " .. filename)
+
+    if not error then
+      content = file:read("*a")
+      mpkg.packages = json_to_value(content)
+      io.close(file)
+      mpkg.checkForUpgrades(true)
+    end
+
+end
 
 
 --- Get which version of a package is installed on in Mudlet.
@@ -144,22 +158,8 @@ function mpkg.checkForUpgrades(silent)
   local requireUpgrade = {}
 
   for k,v in pairs(getPackages()) do
-    local installedVersion, iError = mpkg.getInstalledVersion(v)
-    local repoVersion, rError = mpkg.getRepositoryVersion(v)
-
-    if mpkg.debug then
-      if iError then
-        mpkg.echo(f"Checking local package <green>'{v}': v '{iError}'<reset>")
-      else
-        mpkg.echo(f"Checking local package <green>'{v}': v '{installedVersion}'<reset>")
-      end
-
-      if repoVersion then
-        mpkg.echo(f"Checking repo package <green>'{v}': v '{repoVersion}'<reset>")
-      else
-        mpkg.echo(f"Package not in repository <green>'{v}'<reset>")
-      end
-    end
+    local installedVersion = mpkg.getInstalledVersion(v)
+    local repoVersion = mpkg.getRepositoryVersion(v)
 
     if repoVersion and installedVersion then
       if semver(installedVersion) < semver(repoVersion) then
@@ -168,15 +168,15 @@ function mpkg.checkForUpgrades(silent)
     end
   end
 
-  if not table.is_empty(requireUpgrade) then
-    mpkg.echo("New package upgrades available.  The following packages can be upgraded:")
-    mpkg.echo("")
-    for k,v in pairs(requireUpgrade) do
-      mpkg.echoLink(f"<b>{v}</b> v{mpkg.getInstalledVersion(v)} to v{mpkg.getRepositoryVersion(v)}", " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(v) end, "Click to upgrade", true)
-    end
-  else
-    if not silent then
-      mpkg.echo("No package upgrades are available.")
+  if not silent then
+    if not table.is_empty(requireUpgrade) then
+      mpkg.echo("New package upgrades available.  The following packages can be upgraded:")
+      mpkg.echo("")
+      for k,v in pairs(requireUpgrade) do
+        mpkg.echoLink(f"<b>{v}</b> v{mpkg.getInstalledVersion(v)} to v{mpkg.getRepositoryVersion(v)}", " (<b>click to upgrade</b>)\n", function() mpkg.upgrade(v) end, "Click to upgrade", true)
+      end
+    else
+        mpkg.echo("No package upgrades are available.")
     end
   end
 
@@ -187,22 +187,8 @@ function mpkg.performUpgradeAll(silent)
   local requireUpgrade = {}
 
   for k,v in pairs(getPackages()) do
-    local installedVersion, iError = mpkg.getInstalledVersion(v)
-    local repoVersion, rError = mpkg.getRepositoryVersion(v)
-
-    if mpkg.debug then
-      if iError then
-        mpkg.echo(f"Checking local package <green>'{v}': v '{iError}'<reset>")
-      else
-        mpkg.echo(f"Checking local package <green>'{v}': v '{installedVersion}'<reset>")
-      end
-
-      if repoVersion then
-        mpkg.echo(f"Checking repo package <green>'{v}': v '{repoVersion}'<reset>")
-      else
-        mpkg.echo(f"Package not in repository <green>'{v}'<reset>")
-      end
-    end
+    local installedVersion = mpkg.getInstalledVersion(v)
+    local repoVersion = mpkg.getRepositoryVersion(v)
 
     if repoVersion and installedVersion then
       if semver(installedVersion) < semver(repoVersion) then
@@ -293,7 +279,7 @@ function mpkg.install(args)
       end
 
       mpkg.echo(f"Installing <b>{args}</b> (v{packages[i]['version']}).")
-      installPackage(f"{mpkg.repository}/{args}.mpackage")
+      installPackage(f"{mpkg.repository}/{packages[i]['filename']}")
       return true
 
     end
@@ -351,18 +337,13 @@ function mpkg.upgrade(args)
     return false
   end
 
-  if args == "all" then
-    mpkg.performUpgradeAll(false)
-    return true
-  end
-
   if not table.contains(getPackages(), args) then
     mpkg.echo(f"<b>{args}</b> package is not installed.")
     return false
   end
 
-  if not semver(mpkg.getRepositoryVersion(args)) then
-    mpkg("Aborting, unable to read repository information.  Retrying package listing update.")
+  if not mpkg.packages or mpkg.getRepositoryVersion(args) == "" then
+    mpkg.echo("Aborting, unable to read repository information.  Retrying package listing update.")
     mpkg.updatePackageList()
     return
   end
@@ -393,19 +374,22 @@ end
 --- Print a list of locally installed packages in Mudlet.
 function mpkg.listInstalledPackages()
 
-  mpkg.echo("Listing locally installed packages:")
+  local sf = string.format
 
-  if mpkg.debug then
-    mpkg.echo("DEBUG:")
-    display(getPackages())
-  end
+  mpkg.echo("Listing locally installed packages:")
 
   for _,v in pairs(getPackages()) do
     local version, error = mpkg.getInstalledVersion(v)
     if error then
-      mpkg.echoLink("  ", f"<b>{v}</b> (unknown version)\n", function() mpkg.show(v) end, "show details", true)
+      mpkg.echoLink("  ", sf("<b>%-30s</b> %-20s\n", v, "(unknown version)"), function() mpkg.show(v) end, "show details", true)
     else
-      mpkg.echoLink("  ", f"<b>{v}</b> (v{mpkg.getInstalledVersion(v)})\n", function() mpkg.show(v) end, "show details", true)
+      mpkg.echoLink("  ", sf("<b>%-30s</b> %-20s", v, f"(v{mpkg.getInstalledVersion(v)})"), function() mpkg.show(v) end, "show details", true)
+
+      if semver(mpkg.getInstalledVersion(v)) < semver(mpkg.getRepositoryVersion(v)) then
+        echoLink("", "[update available]\n", function() mpkg.upgrade(v) end, "click to update package", true)
+      else
+        echo("\n")
+      end
     end
   end
 
@@ -487,7 +471,7 @@ function mpkg.show(args, repoOnly)
       local version = getPackageInfo(args, "version")
 
       if name == "" then
-        mpkg.echo("This package does not contain any further details.  It was likely installed from a XML import.")
+        mpkg.echo("This package does not contain any further details.  It was likely installed from a XML import and not an mpackage.")
       else
         mpkg.echo(f"Package: <b>{name}</b>")
         mpkg.echo(f"         {title}")
@@ -501,6 +485,11 @@ function mpkg.show(args, repoOnly)
         for i = 1, #description do
           mpkg.echo(description[i])
         end
+      end
+
+      if semver(mpkg.getInstalledVersion(args)) < semver(mpkg.getRepositoryVersion(args)) then
+        mpkg.echo("")
+        mpkg.echoLink("There is also a ", "<b>newer version available.</b>\n", function() mpkg.show(args, true) end, "view details", true)
       end
 
       return true
@@ -540,22 +529,6 @@ function mpkg.show(args, repoOnly)
 
   mpkg.echo(f"No package matching <b>{args}</b> found in the repository. Try <yellow>mpkg search<reset>.")
   return false
-
-end
-
-
---- Toggles debugging information for program diagnostics.
--- Prints out further information when debug is true (default: false) when calling;
--- checkForUpgrades(), listInstalledPackages(), whenever the eventHandler is fired.
-function mpkg.toggleDebug()
-
-  if mpkg.debug then
-    mpkg.debug = false
-    mpkg.echo("mpackage debugging disabled.")
-  else
-    mpkg.debug = true
-    mpkg.echo("mpackage debugging <b>ENABLED</b>.")
-  end
 
 end
 
