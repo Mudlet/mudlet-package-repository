@@ -37,14 +37,14 @@ function mpkg.initialise()
   -- Setup a named timer for automatic repository listing updates every 12 hours (60s*60m*12h=43200s)
   registerNamedTimer("mpkg", "mpkg update package listing timer", 43200, function() mpkg.updatePackageList(true) end, true)
 
-  mpkg.reloadPackageListFromFile()
+  --mpkg.reloadPackageListFromFile()
   mpkg.updatePackageList(true)
 end
 
 
 --- Check if mpkg is ready for use.
 -- External factors, e.g., no internet connection can cause
--- mpkg to fail.  Well call this in functions where failure
+-- mpkg to fail.  We'll call this in functions where failure
 -- is likely.
 function mpkg.ready(silent)
 
@@ -519,7 +519,9 @@ function mpkg.show(args, repoOnly)
         end
       end
 
-      if semver(mpkg.getInstalledVersion(args)) < semver(mpkg.getRepositoryVersion(args)) then
+      -- check it's not a non-versioned XML/package first
+      local installedVersion = mpkg.getInstalledVersion(args)
+      if installedVersion and (semver(installedVersion) < semver(mpkg.getRepositoryVersion(args))) then
         mpkg.echo("")
         mpkg.echoLink("There is also a ", "<b>newer version available.</b>\n", function() mpkg.show(args, true) end, "view details", true)
       end
@@ -644,4 +646,5 @@ function mpkg.uninstallSelf()
 end
 
 -- call the script entry point function
-mpkg.initialise()
+-- delay this because we need semantic versioning to be loaded as well
+tempTimer(0, function() mpkg.initialise() end, false)
