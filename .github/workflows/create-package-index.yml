@@ -32,6 +32,10 @@ jobs:
         luarocks install luazip
         luarocks install luafilesystem
 
+    # Fix timestamps
+    - name: restore timestamps
+      uses: chetan/git-restore-mtime-action@v2
+
     - name: Run indexing
       run: |
         lua reindex.lua
