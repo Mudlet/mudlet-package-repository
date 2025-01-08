@@ -408,7 +408,7 @@ function mpkg.listInstalledPackages()
 
   local sf = string.format
 
-  mpkg.echo("Listing locally installed packages:")
+  mpkg.echo("Listing installed packages:")
 
   for _,v in pairs(getPackages()) do
     local version, error = mpkg.getInstalledVersion(v)
