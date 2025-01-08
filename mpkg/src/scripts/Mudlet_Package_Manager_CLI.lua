@@ -28,10 +28,7 @@ function mpkg.initialise()
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) remove(?: (.+))?$", function() mpkg.remove(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show(?: (.+))?$", function() mpkg.show(matches[3]) end))
   table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) search(?: (.+))?$", function() mpkg.search(matches[3]) end))
-  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
-  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade all$", function() mpkg.performUpgradeAll(false) end))
-  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upgrade(?: (?!all$)(.+))?$", function() mpkg.upgrade(matches[3]) end))
-  --table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) upload$", mpkg.openWebUploads))
+  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
 
   -- Setup a named timer for automatic repository listing updates every 12 hours (60s*60m*12h=43200s)
   registerNamedTimer("mpkg", "mpkg update package listing timer", 43200, function() mpkg.updatePackageList(true) end, true)
@@ -400,6 +397,7 @@ function mpkg.updatePackageList(silent)
   if not silent then
     mpkg.echo("Updating package listing from repository.")
     mpkg.displayUpdateMessage = true
+    mpkg.silentFailures = nil
   end
 end
 
