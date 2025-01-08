@@ -2,9 +2,9 @@ name: Validate mpackage file
 
 on:
   pull_request:
-      paths: 
-        - 'packages/*.mpackage'
-        - 'packages/*.zip'
+    paths: 
+      - 'packages/*.mpackage'
+      - 'packages/*.zip'
 
 jobs:
   check-mpackage-contents:
@@ -96,3 +96,39 @@ jobs:
           echo "Error: does not contain a valid description"
           exit 1
         fi
+
+    - name: Extract package name and check for duplicates
+      id: check-package-name
+      run: |
+        # Extract the package name from config.lua
+        PACKAGE_NAME=$(grep "mpackage =" unzipped_package/config.lua | cut -d'"' -f2)
+        echo "Package name: $PACKAGE_NAME"
+        
+        # Get current PR file name
+        CURRENT_FILE=${{ steps.check-file-count.outputs.FILE }}
+        CURRENT_BASENAME=$(basename "$CURRENT_FILE")
+        
+        # Create temporary directory for checking other packages
+        mkdir temp_check
+        
+        # Extract config.lua from all other packages, excluding current one if it exists
+        for package in packages/*.{mpackage,zip}; do
+          if [ "$package" != "$CURRENT_FILE" ]; then
+            BASENAME=$(basename "$package")
+            unzip -q -o "$package" config.lua -d "temp_check/$BASENAME"
+          fi
+        done
+        
+        # Check for case-insensitive duplicates
+        for config in temp_check/**/config.lua; do
+          if [ -f "$config" ]; then
+            OTHER_NAME=$(grep "mpackage =" "$config" | cut -d'"' -f2)
+            if [ "${PACKAGE_NAME,,}" = "${OTHER_NAME,,}" ]; then
+              echo "Error: Package name '$PACKAGE_NAME' conflicts with existing package '$OTHER_NAME' (case-insensitive match)"
+              exit 1
+            fi
+          fi
+        done
+        
+        echo "Pass: No duplicate package names found"
+        echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_OUTPUT
