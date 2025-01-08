@@ -38,6 +38,9 @@ Contribute your mpackage using Github's "[fork and pull request](https://docs.gi
 
 If you are having trouble submitting via Github, or do not yet have an account (and we really suggest you do to help support Mudlet!), you can contact Zooka on [Mudlet's Discord server](https://discordapp.com/invite/kuYvMQ9) and he will assist in getting your package submitted.
 
+### Development ###
+Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.
+
 ### Report Issues ###
 
 Report any [issues here](https://github.com/Mudlet/mudlet-package-repository/issues) or find us on [Mudlet's Discord server](https://discordapp.com/invite/kuYvMQ9).
