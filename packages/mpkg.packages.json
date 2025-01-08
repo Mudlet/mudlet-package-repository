@@ -8,17 +8,17 @@
                      "filename": "AchaeaChatTabs.mpackage",
                      "mpackage": "AchaeaChatTabs",
                         "title": "Chat tabs for Achaea",
-                     "uploaded": 1736219362,
+                     "uploaded": 1725842089,
                       "version": "1.3.3"
                 },
                 {
                        "author": "bscross32",
                       "created": "2024-01-29T15:47:53-0500",
-                  "description": "# ChannelHistory\n\n## Virtual buffering system for screen reader users.\n\n## Installation instructions\nIn Mudlet, type the following command:\n```\nlua uninstallPackage(\"ChannelHistory\");installPackage(\"https://github.com/ironcross32/ChannelHistory/releases/latest/download/ChannelHistory.mpackage\")\n```\n## Usage\n\nfor those who are familiar with the channel_history plugin for MUSHclient, this package behaves in much the same way, though with a more limited feature set.\n* Alt+left/Alt+right - navigate between categories in the virtual buffer\n* Alt+up/Alt+down - navigate through the messages in the selected category\n* Alt+home/Alt+end - jump to the first and last message in the selected category\n* Alt+Shift+T - Toggles hearing relative time that a given message entered the buffer\n* Alt+Shift+delete - removes the selected category along with all of its messages\n\nHolding the alt key and tapping a number from 1 to 0 on the number row will retrieve a recent message. For example, Alt+1 would retrieve the most recent message, while Alt+5 would retrieve the fifth most, and Alt+0 would retrieve the tenth most recent message. While holding alt, double tapping a number will have its message copied to the clipboard.\n\nTo add a new message to any given buffer, simply call `channel_history.add(STR category_name, STR message)`. Here's an example of a regular expression trigger:\n\n`\\[(chat|advice|events)\\] (\\w+)(.+s)`\n\nAnd, how this information is parsed and passed along to `channel_history:add()`\n\n```\nlocal where = matches[2]\nlocal message = matches[3] .. \": \" .. matches[4]\nchannel_history.add(where, message)\n```\n\n## Credits\n\nAs much of this project is a port from channel_history.xml from MushZ, thanks goes out to its authors:\n* Tyler Spivey\n* Oriol Gomez\n* Weyoun\n\nThanks also goes to Demonnic for graciously offering assistance with questions related to Muddler, which is used to package this project, and for helping with debugging some initial code. And of course, to the Mudlet team as a hole for creating a fast, powerful, and feature-rich MUD client.\n",
+                  "description": "# ChannelHistory\n\n## Virtual buffering system for screen reader users.\n\n## Installation instructions\nIn Mudlet, type the following command:\n```\nlua uninstallPackage(\"ChannelHistory\");installPackage(\"https://github.com/ironcross32/ChannelHistory/releases/latest/download/ChannelHistory.mpackage\")\n```\n## Usage\n\nfor those who are familiar with the channel_history plugin for MUSHclient, this package behaves in much the same way, though with a more limited feature set.\n* Alt+left/Alt+right - navigate between categories in the virtual buffer\n* Alt+up/Alt+down - navigate through the messages in the selected category\n* Alt+home/Alt+end - jump to the first and last message in the selected category\n* Alt+Shift+T - Toggles hearing relative time that a given message entered the buffer\n* Alt+Shift+delete - removes the selected category along with all of its messages\n\nHolding the alt key and tapping a number from 1 to 0 on the number row will retrieve a recent message. For example, Alt+1 would retrieve the most recent message, while Alt+5 would retrieve the fifth most, and Alt+0 would retrieve the tenth most recent message. While holding alt, double tapping a number will have its message copied to the clipboard.\n\nTo add a new message to any given buffer, simply call `channel_history.add(STR category_name, STR message)`. Here's an example of a regular expression trigger:\n\n`\\[(chat|advice|events)\\] (\\w+)(.+s)`\n\nAnd, how this information is parsed and passed along to `channel_history:add()`\n\n```\nlocal where = matches[2]\nlocal message = matches[3] .. \": \" .. matches[4]\nchannel_history.add(where, message)\n```\n\n## Credits\n\nAs much of this project is a port from channel_history.xml from MushZ, thanks goes out to its authors:\n* Tyler Spivey\n* Oriol Gómez\n* Weyoun\n\nThanks also goes to Demonnic for graciously offering assistance with questions related to Muddler, which is used to package this project, and for helping with debugging some initial code. And of course, to the Mudlet team as a hole for creating a fast, powerful, and feature-rich MUD client.\n",
                      "filename": "ChannelHistory.mpackage",
                      "mpackage": "ChannelHistory",
                         "title": "Virtual buffering system for screen reader users.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1736186864,
                       "version": "1.0.0"
                 },
                 {
@@ -28,7 +28,7 @@
                      "filename": "GUIFlex.mpackage",
                      "mpackage": "GUIFlex",
                         "title": "A basic but modern GUI template created with Geyser.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1735031443,
                       "version": "1"
                 },
                 {
@@ -38,7 +38,7 @@
                      "filename": "MedUI.mpackage",
                      "mpackage": "MedUI",
                         "title": "User Interface for Medievia",
-                     "uploaded": 1736219362,
+                     "uploaded": 1731160325,
                       "version": "1.7.8"
                 },
                 {
@@ -48,7 +48,7 @@
                      "filename": "MudletBusted.mpackage",
                      "mpackage": "MudletBusted",
                         "title": "The Busted testing suite, packaged for Mudlet",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724911580,
                       "version": "2.0.0"
                 },
                 {
@@ -58,7 +58,7 @@
                      "filename": "NumPad.mpackage",
                      "mpackage": "NumPad",
                         "title": "Cardinal movement commands assigned to number pad keys.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724911580,
                       "version": "1"
                 },
                 {
@@ -68,7 +68,7 @@
                      "filename": "command-line-api.mpackage",
                      "mpackage": "command-line-api",
                         "title": "Search and open Mudlet API webpage from the command line",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724911580,
                       "version": "1"
                 },
                 {
@@ -78,7 +78,7 @@
                      "filename": "cron-daemon.mpackage",
                      "mpackage": "cron-daemon",
                         "title": "A cron daemon/scheduler to perform tasks at fixed times, dates or intervals.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1729510555,
                       "version": "1"
                 },
                 {
@@ -88,7 +88,7 @@
                      "filename": "dartmudlet-1.8.1.zip",
                      "mpackage": "DartMUDlet",
                         "title": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1736170420,
                       "version": "1.8.1"
                 },
                 {
@@ -98,7 +98,7 @@
                      "filename": "delay-scrolling.mpackage",
                      "mpackage": "delay-scrolling",
                         "title": "Slow down the main window buffer giving you time to read.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724911580,
                       "version": "1.1"
                 },
                 {
@@ -108,7 +108,7 @@
                      "filename": "deleteOldProfiles.mpackage",
                      "mpackage": "deleteOldProfiles",
                         "title": "Remove excess backup files.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724918844,
                       "version": "1"
                 },
                 {
@@ -118,7 +118,7 @@
                      "filename": "dice.mpackage",
                      "mpackage": "dice",
                         "title": "Simulate dice rolls with these simple functions.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724911580,
                       "version": "1"
                 },
                 {
@@ -128,7 +128,7 @@
                      "filename": "echo.mpackage",
                      "mpackage": "echo",
                         "title": "A set of aliases to test triggers on the command line.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724918844,
                       "version": "1"
                 },
                 {
@@ -138,7 +138,7 @@
                      "filename": "enable-accessibility.mpackage",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724918844,
                       "version": "1"
                 },
                 {
@@ -148,7 +148,7 @@
                      "filename": "generic_mapper.mpackage",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724918844,
                       "version": "2.1.4"
                 },
                 {
@@ -158,7 +158,7 @@
                      "filename": "gui-drop.mpackage",
                      "mpackage": "gui-drop",
                         "title": "Drag and drop images onto the main window to turn into a label and container.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1734332722,
                       "version": "1"
                 },
                 {
@@ -168,17 +168,17 @@
                      "filename": "master-spam.mpackage",
                      "mpackage": "master-spam",
                         "title": "Suppress lines of spamminess.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1725200902,
                       "version": "1"
                 },
                 {
                        "author": "Zooka",
-                      "created": "2024-09-27T11:46:46+0000",
-                  "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgrade          -- upgrade a specific package\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/",
+                      "created": "2025-01-08T10:31:46+0000",
+                  "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgrade          -- upgrade a specific package\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/\n",
                      "filename": "mpkg.mpackage",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1736332308,
                       "version": "2.8"
                 },
                 {
@@ -188,7 +188,7 @@
                      "filename": "run-lua-code.mpackage",
                      "mpackage": "run-lua-code",
                         "title": "Run Lua code directly from the command line.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724918844,
                       "version": "5"
                 },
                 {
@@ -198,7 +198,7 @@
                      "filename": "shaxamm.mpackage",
                      "mpackage": "shaxamm",
                         "title": "Xanthia's Audio Manager Module",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724924182,
                       "version": "1.0"
                 },
                 {
@@ -208,7 +208,7 @@
                      "filename": "simple-mapper.mpackage",
                      "mpackage": "simple-mapper",
                         "title": "Create simple maps using directional commands only.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1732619400,
                       "version": "2.1"
                 },
                 {
@@ -218,9 +218,9 @@
                      "filename": "speedWalkRecorder.mpackage",
                      "mpackage": "speedWalkRecorder",
                         "title": "Records a speedwalk with the ability to play back, and in reverse.",
-                     "uploaded": 1736219362,
+                     "uploaded": 1724911580,
                       "version": "2.3"
                 }
               ],
-   "updated": "Tue Jan  7 03:09:32 2025"
+   "updated": "Wed Jan  8 10:33:13 2025"
 }
