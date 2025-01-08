@@ -248,7 +248,6 @@ Commands:
   mpkg search           -- search for a package
   mpkg show             -- show detailed information about a package
   mpkg update           -- update package listing from repository
-
 ]]
 
   local help = string.split(help, "\n")
@@ -257,7 +256,7 @@ Commands:
     mpkg.echo(help[i])
   end
 
-mpkg.echoLink("", "Visit https://packages.mudlet.org/upload to share your package.", function() mpkg.openWebUploads() end, "open browser at upload website", true)
+mpkg.echoLink("", "Visit https://packages.mudlet.org/upload to share your package.\n", function() mpkg.openWebUploads() end, "open browser at upload website", true)
 
 end
 
