@@ -2,7 +2,6 @@
 
 mpkg = mpkg or {}
 mpkg.aliases = mpkg.aliases or {}
-mpkg.debug = mpkg.debug or false
 mpkg.maintainer = "https://github.com/mudlet/mudlet-package-repository/issues"
 mpkg.repository = "https://mudlet.github.io/mudlet-package-repository/packages"
 mpkg.website = "http://packages.mudlet.org"
@@ -280,18 +279,22 @@ function mpkg.install(args)
 
   if not mpkg.ready() then return end
 
-  if table.contains(getPackages(), args) then
-    mpkg.echo(f"<b>{args}</b> package is already installed.  Checking for updates.")
-    mpkg.upgrade(args)
-    return false
+  local installedPackages = getPackages()
+
+  for _, pkg in pairs(installedPackages) do
+    if string.lower(pkg) == string.lower(args) then
+      mpkg.echo(f"<b>{pkg}</b> package is already installed.  Checking for updates.")
+      mpkg.upgrade(pkg)
+      return false
+    end
   end
 
   local packages = mpkg.packages["packages"]
 
   for i = 1, #packages do
-    if args == packages[i]["mpackage"] then
+    if string.lower(args) == string.lower(packages[i]["mpackage"]) then
       -- check for dependencies
-      local depends = mpkg.getDependencies(args)
+      local depends = mpkg.getDependencies(packages[i]["mpackage"])
 
       if depends then
 
@@ -341,15 +344,19 @@ function mpkg.remove(args)
     return false
   end
 
-  if not table.contains(getPackages(), args) then
-    mpkg.echo(f"<b>{args}</b> package is not currently installed.")
-    return false
+  local installedPackages = getPackages()
+
+  for _, pkg in pairs(installedPackages) do
+    if string.lower(pkg) == string.lower(args) then
+      uninstallPackage(pkg)
+      mpkg.echo(f"<b>{pkg}</b> package removed.")
+      return true
+    end
   end
 
-  local success = uninstallPackage(args)
-  mpkg.echo(f"<b>{args}</b> package removed.")
+  mpkg.echo(f"<b>{args}</b> package is not currently installed.")
+  return false
 
-  return true
 end
 
 
@@ -443,7 +450,7 @@ function mpkg.search(args)
 
   if not mpkg.ready() then return end
 
-  mpkg.echo(f"Searching for <b>{args}</b> in repository.")
+  mpkg.echo(f"Searching repository for <b>{args}</b>.")
 
   local count = 0
 
@@ -455,7 +462,11 @@ function mpkg.search(args)
     if string.find(string.lower(packages[i]["mpackage"]), args, 1, true) or string.find(string.lower(packages[i]["title"]), args, 1, true) then
       mpkg.echo("")
       mpkg.echoLink("  ", f"<b>{packages[i]['mpackage']}</b> (v{packages[i]['version']}) ", function() mpkg.show(packages[i]["mpackage"], true) end, "show details", true)
-      echoLink("", "[install now]\n", function() mpkg.install(packages[i]["mpackage"]) end, "install now", true)
+      if table.contains(getPackages(), packages[i]["mpackage"]) then
+        echo("[installed]\n")
+      else
+        echoLink("", "[install now]\n", function() mpkg.install(packages[i]["mpackage"]) end, "install now", true)
+      end
       mpkg.echo(f"  {packages[i]['title']}")
       count = count + 1
     end
@@ -497,36 +508,38 @@ function mpkg.show(args, repoOnly)
     -- search locally first, then the repository if nothing was found
     packages = getPackages()
 
-    if table.contains(packages, args) then
-      local name = getPackageInfo(args, "mpackage")
-      local title = getPackageInfo(args, "title")
-      local version = getPackageInfo(args, "version")
+    for _, pkg in pairs(packages) do
+      if string.lower(args) == string.lower(pkg) then
+        local name = getPackageInfo(pkg, "mpackage")
+        local title = getPackageInfo(pkg, "title")
+        local version = getPackageInfo(pkg, "version")
 
-      if name == "" then
-        mpkg.echo("This package does not contain any further details.  It was likely installed from a XML import and not an mpackage.")
-      else
-        mpkg.echo(f"Package: <b>{name}</b>")
-        mpkg.echo(f"         {title}")
-        mpkg.echo("")
-        mpkg.echo(f"Status: <b>installed</b> (version: {version})")
-        mpkg.echo("")
-        mpkg.echo("Description:")
+        if name == "" then
+          mpkg.echo("This package does not contain any further details.  It was likely installed from a XML import and not an mpackage.")
+        else
+          mpkg.echo(f"Package: <b>{name}</b>")
+          mpkg.echo(f"         {title}")
+          mpkg.echo("")
+          mpkg.echo(f"Status: <b>installed</b> (version: {version})")
+          mpkg.echo("")
+          mpkg.echo("Description:")
 
-        local description = string.split(getPackageInfo(args, "description"), "\n")
+          local description = string.split(getPackageInfo(pkg, "description"), "\n")
 
-        for i = 1, #description do
-          mpkg.echo(description[i])
+          for i = 1, #description do
+            mpkg.echo(description[i])
+          end
         end
-      end
 
-      -- check it's not a non-versioned XML/package first
-      local installedVersion = mpkg.getInstalledVersion(args)
-      if installedVersion and (semver(installedVersion) < semver(mpkg.getRepositoryVersion(args))) then
-        mpkg.echo("")
-        mpkg.echoLink("There is also a ", "<b>newer version available.</b>\n", function() mpkg.show(args, true) end, "view details", true)
-      end
+        -- check it's not a non-versioned XML/package first
+        local installedVersion = mpkg.getInstalledVersion(pkg)
+        if installedVersion and (semver(installedVersion) < semver(mpkg.getRepositoryVersion(pkg))) then
+          mpkg.echo("")
+          mpkg.echoLink("There is a ", "<b>newer version available.</b>\n", function() mpkg.show(pkg, true) end, "view details", true)
+        end
 
-      return true
+        return true
+      end
     end
 
     mpkg.echo(f"No package matching <b>{args}</b> found locally, search the repository.")
@@ -537,7 +550,7 @@ function mpkg.show(args, repoOnly)
   packages = mpkg.packages["packages"]
 
   for i = 1, #packages do
-    if args == packages[i]["mpackage"] then
+    if string.lower(args) == string.lower(packages[i]["mpackage"]) then
       mpkg.echo(f"Package: <b>{packages[i]['mpackage']}</b> (version: {packages[i]['version']}) by {packages[i]['author']}")
       mpkg.echo(f"         {packages[i]['title']}")
       mpkg.echo("")
@@ -545,7 +558,7 @@ function mpkg.show(args, repoOnly)
       local version = getPackageInfo(args, "version")
 
       if version == "" then
-        mpkg.echoLink("Status: not installed  ", "[install now]\n", function() mpkg.install(args) end, "install now", true)
+        mpkg.echoLink("Status: not installed  ", "[install now]\n", function() mpkg.install(packages[i]["mpackage"]) end, "install now", true)
       else
         mpkg.echo(f"Status: <b>installed</b> (version: {version})")
       end
