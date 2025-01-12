@@ -22,6 +22,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "gesslar",
+                      "created": "2024-11-26T22:50:47+0000",
+                  "description": "Enable clickable links in Mudlet! That's pretty nice, right?",
+                     "filename": "Clicker.mpackage",
+                     "mpackage": "Clicker",
+                        "title": "Make URLs clickable",
+                     "uploaded": 1736696689,
+                      "version": "1.8.0"
+                },
+                {
                        "author": "Akaya, mods by Zooka",
                       "created": "2024-12-24T13:05:23+04:00",
                   "description": "### Description\n\nThis package contains a basic GUI template that serves as a basis for creating your own.  It uses modern Geyser elements such as Adjustable Containers and Geyser Buttons for a flexible layout which can be arranged and styled anyway you like.  This is an updated, modern version of Akaya's excellent original template.\n\n### Usage\n\nSimply install this package and the GUI will be displayed.  Start customising!\n\n### See Also\n\n* [Akaya's original template](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&pk_vid=09b619c5f5c4537b1735030856a9723a)",
@@ -222,5 +232,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Thu Jan  9 07:43:26 2025"
+   "updated": "Sun Jan 12 15:45:11 2025"
 }
