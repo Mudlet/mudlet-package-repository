@@ -182,14 +182,14 @@
                       "version": "1"
                 },
                 {
-                       "author": "Zooka",
-                      "created": "2025-01-08T10:31:46+0000",
-                  "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg help             -- show this help\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n  mpkg upgrade          -- upgrade a specific package\n  mpkg upgradeable      -- show packages that can be upgraded\n  mpkg debug            -- turn on debugging messages\n```\n### See Also\n\n* https://mudlet.github.io/mudlet-package-repository/\n",
+                       "author": "Mudlet Default Package",
+                      "created": "2025-01-13T08:29:28+0000",
+                  "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n```\n### See Also\n\n* https://packages.mudlet.org\n* https://mudlet.github.io/mudlet-package-repository/\n",
                      "filename": "mpkg.mpackage",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                     "uploaded": 1736332308,
-                      "version": "2.8"
+                     "uploaded": 1736756969,
+                      "version": "3.0"
                 },
                 {
                        "author": "Mudlet Default Package",
@@ -232,5 +232,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Jan 12 15:45:11 2025"
+   "updated": "Mon Jan 13 09:11:45 2025"
 }
