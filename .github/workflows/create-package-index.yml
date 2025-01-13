@@ -4,6 +4,9 @@ on:
     branches: 
     - main
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:    
+
 jobs:
   reindex-json-file:
     runs-on: ubuntu-latest
