@@ -2,9 +2,9 @@
        "package": "mpkg",
        "title": "A command line package manager for Mudlet.",
        "description": "",
-       "version": "2.8",
-       "author": "Zooka",
-       "icon": "inventory-management.png",
+       "version": "3.0",
+       "author": "Mudlet Default Package",
+       "icon": "mudlet-package-repo.ico",
        "dependencies": "",
        "outputFile": false
 }
