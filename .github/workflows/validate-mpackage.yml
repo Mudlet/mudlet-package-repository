@@ -13,6 +13,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@master
+
+    - uses: leafo/gh-actions-lua@v10
+      with:
+        luaVersion: "5.1.5"
       
     - name: Only one file per PR is allowed
       id: check-file-count
@@ -101,7 +105,7 @@ jobs:
       id: check-package-name
       run: |
         # Extract the package name from config.lua
-        PACKAGE_NAME=$(grep "mpackage =" unzipped_package/config.lua | cut -d'"' -f2)
+        PACKAGE_NAME=$(lua -e "dofile('unzipped_package/config.lua'); print(_G['mpackage'])")
         echo "Package name: $PACKAGE_NAME"
         
         # Get current PR file name
