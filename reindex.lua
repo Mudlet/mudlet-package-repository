@@ -16,12 +16,23 @@ local function getFileModTime(filepath)
     return os.time() -- fallback to current time if we can't get the file time
 end
 
+local function clearPackageVariables()
+    mpackage = nil
+    author = nil
+    title = nil 
+    description = nil
+    created = nil
+    version = nil
+    icon = nil
+end
+
 local pkg = {}
 
 print("Running creation loop...")
 
 -- loop through all .mpackage files in the directory
 for file in io.popen("ls -pa packages/*"):lines() do
+    clearPackageVariables()
     print("Found "..file)
 
     -- read config.lua from the zip file
@@ -46,13 +57,13 @@ for file in io.popen("ls -pa packages/*"):lines() do
             ["created"] = created,
             ["version"] = version,
             ["uploaded"] = getFileModTime(file),
-            ["filename"] = file:gsub("packages/", "")
+            ["filename"] = file:gsub("packages/", ""),
+            ["icon"] = icon or nil
         })
 
         f1:close()
         zfile:close()
     end
-
 end
 
 local index = {}
