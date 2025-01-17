@@ -85,20 +85,11 @@ export async function POST(request: Request) {
 
     console.log('Uploading package file...', { fileName: file.name, branchName, contentLength: fileContent.length })
 
-    const filePath = `packages/${file.name}`
-    const existingSha = await getFileSha(filePath)
-    
-    if (existingSha) {
-      console.log('Deleting old package file...')
-      await deleteFile(filePath, `Delete old package: ${file.name}`, existingSha, branchName)
-      console.log('Old package file deleted successfully')
-    }
-
     await uploadFile(
-      filePath,
+      `packages/${file.name}`,
       fileContent,
       branchName,
-      existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
+      existingPackage ? `Update package: ${file.name}` : `Add package: ${file.name}`,
     )
     
     console.log('File uploaded successfully')
@@ -108,7 +99,7 @@ export async function POST(request: Request) {
 - Title: ${metadata.title}
 - Version: ${metadata.version}
 - Author: ${metadata.author}
-- Package ${existingSha ? 'updated' : 'added'} by ${session.user?.name || 'unknown user'}
+- Package ${existingPackage ? 'updated' : 'added'} by ${session.user?.name || 'unknown user'}
 - Created: ${metadata.created}
 
 ---
@@ -117,7 +108,7 @@ ${metadata.description}`
     console.log('Creating PR...')
     const pr = await createPullRequest(
       branchName,
-      existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
+      existingPackage ? `Update package: ${file.name}` : `Add package: ${file.name}`,
       prDescription
     )    
 
