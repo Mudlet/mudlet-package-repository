@@ -35,6 +35,7 @@ export function PackagePreview({
 
   const getValidationErrorsMessage = () => {
     return Object.entries(validation.fieldErrors)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .map(([field, errors]) => errors.join(', '))
       .join(', ')
   }

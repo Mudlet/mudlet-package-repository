@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://packages.mudlet.org
+
+# Sitemaps
+Sitemap: https://packages.mudlet.org/sitemap.xml
