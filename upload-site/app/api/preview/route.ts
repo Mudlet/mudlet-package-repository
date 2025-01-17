@@ -83,6 +83,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid or incomplete config.lua' }, { status: 400 })
   }
 
+  // Extract icon if specified in metadata
+  if (metadata.icon) {
+    const iconEntry = zip.getEntry(metadata.icon)
+    if (iconEntry) {
+      const extension = metadata.icon.match(/\.[^.]+$/)?.[0] || '.png'
+      const iconData = iconEntry.getData()
+      const iconBase64 = `data:image/${extension.slice(1)};base64,${iconData.toString('base64')}`
+      metadata.icon = iconBase64
+    } else {
+      metadata.icon = null
+    }
+  }
+
   const validation = await validateMetadata(metadata)
 
   return NextResponse.json({

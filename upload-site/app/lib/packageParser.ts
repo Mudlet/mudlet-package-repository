@@ -13,7 +13,8 @@ export function parseConfigLua(content: string): PackageMetadata {
     version: extractValue('version'),
     created: extractValue('created'),
     author: extractValue('author'),
-    description: extractValue('description')
+    description: extractValue('description'),
+    icon: extractValue('icon')
   }
 }
 

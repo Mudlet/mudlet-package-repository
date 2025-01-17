@@ -1,5 +1,6 @@
 import { PackageMetadata } from '@/app/lib/types'
 import { ValidationResult } from '@/app/lib/types'
+import Image from 'next/image'
 
 interface PackagePreviewProps {
   metadata: PackageMetadata
@@ -113,6 +114,25 @@ export function PackagePreview({
             {validation.missingFields.includes('created') && 
               <span className="text-red-500">(required)</span>
             }
+          </div>
+        </div>
+
+        <div className="grid grid-cols-[120px,1fr] gap-2">
+          <div className="flex items-center">
+            <label className="font-semibold">Icon:</label>
+          </div>
+          <div className="flex items-center">
+            {metadata.icon ? (
+              <Image
+                src={metadata.icon}
+                alt="Package icon"
+                width={48}
+                height={48}
+                className="rounded"
+              />
+            ) : (
+              <p className="text-gray-500">No icon provided</p>
+            )}
           </div>
         </div>
 
