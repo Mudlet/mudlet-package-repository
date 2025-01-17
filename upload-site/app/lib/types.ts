@@ -11,4 +11,5 @@ export interface PackageMetadata {
   created: string | null;
   author: string | null;
   description: string | null;
+  icon: string | null;
 }

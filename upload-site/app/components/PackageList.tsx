@@ -3,6 +3,7 @@
 import { PackageMetadata } from '@/app/lib/types'
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import Image from 'next/image'
 
 interface PackageListProps {
   packages: PackageMetadata[];
@@ -36,21 +37,33 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
             aria-controls={`description-${pkg.mpackage}`}
             tabIndex={0}
           >
-            <span className="sr-only">
-              {expandedPackage === pkg.mpackage ? 'Click to collapse' : 'Click to expand'}
-            </span>
-            <h2 className="text-xl font-semibold mb-2">
-              <a 
-                href={`http://mudlet.github.io/mudlet-package-repository/packages/${pkg.mpackage}.mpackage`}
-                className="text-blue-600 hover:text-blue-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                onClick={(e) => e.stopPropagation()}
-                aria-label={`Download ${pkg.mpackage} package`}
-              >
-                {pkg.mpackage}
-              </a>
-            </h2>
-            <p className="text-gray-600 mb-2">by {pkg.author}, version {pkg.version}</p>
-            <p className="text-gray-800">{pkg.title}</p>
+            <div className="flex items-start gap-4">
+              {pkg.icon && (
+                <div className="flex-shrink-0">
+                  <Image
+                    src={pkg.icon}
+                    alt={`${pkg.mpackage} icon`}
+                    width={48}
+                    height={48}
+                    className="rounded"
+                  />
+                </div>
+              )}
+              <div className="flex-grow">
+                <h2 className="text-xl font-semibold mb-2">
+                  <a 
+                    href={`http://mudlet.github.io/mudlet-package-repository/packages/${pkg.mpackage}.mpackage`}
+                    className="text-blue-600 hover:text-blue-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label={`Download ${pkg.mpackage} package`}
+                  >
+                    {pkg.mpackage}
+                  </a>
+                </h2>
+                <p className="text-gray-600 mb-2">by {pkg.author}, version {pkg.version}</p>
+                <p className="text-gray-800">{pkg.title}</p>
+              </div>
+            </div>
             {expandedPackage === pkg.mpackage && (
               <div 
                 className="mt-4 pt-4 border-t border-gray-200"
