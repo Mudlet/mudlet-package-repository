@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { createBranch, uploadFile, createPullRequest, getFileSha } from '@/app/lib/github'
+import { createBranch, uploadFile, createPullRequest, getFileSha, deleteFile } from '@/app/lib/github'
 import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
 
@@ -55,12 +55,17 @@ export async function POST(request: Request) {
     const filePath = `packages/${file.name}`
     const existingSha = await getFileSha(filePath)
     
+    if (existingSha) {
+      console.log('Deleting old package file...')
+      await deleteFile(filePath, `Delete old package: ${file.name}`, existingSha, branchName)
+      console.log('Old package file deleted successfully')
+    }
+
     await uploadFile(
       filePath,
       fileContent,
       branchName,
       existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
-      existingSha ?? undefined
     )
     
     console.log('File uploaded successfully')

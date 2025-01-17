@@ -67,3 +67,13 @@ export async function createPullRequest(branch: string, title: string, body: str
   })
 }
 
+export async function deleteFile(path: string, message: string, sha: string, branch: string) {
+  return octokit.rest.repos.deleteFile({
+    owner: REPO_OWNER,
+    repo: REPO_NAME,
+    path,
+    message,
+    sha,
+    branch,
+  })
+}
