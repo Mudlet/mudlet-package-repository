@@ -126,7 +126,7 @@ jobs:
         # Check for case-insensitive duplicates
         for config in temp_check/**/config.lua; do
           if [ -f "$config" ]; then
-            OTHER_NAME=$(grep "mpackage =" "$config" | cut -d'"' -f2)
+            OTHER_NAME=$(lua -e "dofile('$config'); print(_G['mpackage'])")
             if [ "${PACKAGE_NAME,,}" = "${OTHER_NAME,,}" ]; then
               echo "Error: Package name '$PACKAGE_NAME' conflicts with existing package '$OTHER_NAME' (case-insensitive match)"
               exit 1
