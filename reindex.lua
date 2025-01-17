@@ -8,6 +8,9 @@ local json = require "JSON"
 local zip = require "zip"
 local lfs = require "lfs"
 
+-- Create icons directory if it doesn't exist
+lfs.mkdir("upload-site/public/icons")
+
 local function getFileModTime(filepath)
     local attr = lfs.attributes(filepath)
     if attr and attr.mode == "file" then
@@ -24,6 +27,29 @@ local function clearPackageVariables()
     created = nil
     version = nil
     icon = nil
+end
+
+local function extractIcon(zfile, packageName, iconPath)
+    if not iconPath then return nil end
+    
+    local iconFile, err = zfile:open(iconPath)
+    if not iconFile then return nil end
+    
+    local iconData = iconFile:read("*a")
+    iconFile:close()
+    
+    -- Get the file extension from iconPath
+    local extension = iconPath:match("^.+(%..+)$") or ".png"
+    
+    -- Save icon with package name and original extension
+    local iconFilename = "upload-site/public/icons/" .. packageName .. extension
+    local f = io.open(iconFilename, "wb")
+    if f then
+        f:write(iconData)
+        f:close()
+        return "/icons/" .. packageName .. extension
+    end
+    return nil
 end
 
 local pkg = {}
@@ -48,6 +74,12 @@ for file in io.popen("ls -pa packages/*"):lines() do
         io.close(infoFile)
         dofile("config.lua")
 
+        -- Extract icon if present
+        local iconUrl = nil
+        if icon then
+            iconUrl = extractIcon(zfile, mpackage, icon)
+        end
+
         -- insert package details in table
         table.insert(pkg, {
             ["mpackage"] = mpackage,
@@ -58,7 +90,7 @@ for file in io.popen("ls -pa packages/*"):lines() do
             ["version"] = version,
             ["uploaded"] = getFileModTime(file),
             ["filename"] = file:gsub("packages/", ""),
-            ["icon"] = icon or nil
+            ["icon"] = iconUrl
         })
 
         f1:close()
