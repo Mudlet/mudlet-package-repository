@@ -130,7 +130,7 @@ jobs:
           if [ -f "$config" ]; then
             OTHER_NAME=$(lua -e "dofile('$config'); print(_G['mpackage'])")
             OTHER_AUTHOR=$(lua -e "dofile('$config'); print(_G['author'])")
-            if [ "${PACKAGE_NAME,,}" = "${OTHER_NAME,,}" ] && [ "$PACKAGE_AUTHOR" != "$OTHER_AUTHOR" ]; then
+            if [ "${PACKAGE_NAME,,}" = "${OTHER_NAME,,}" ] && [ "${PACKAGE_AUTHOR,,}" != "${OTHER_AUTHOR,,}" ]; then
               echo "Error: Package name '$PACKAGE_NAME' by '$PACKAGE_AUTHOR' conflicts with existing package '$OTHER_NAME' by '$OTHER_AUTHOR'"
               exit 1
             fi
