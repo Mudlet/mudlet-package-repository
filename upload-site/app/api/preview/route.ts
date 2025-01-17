@@ -6,6 +6,17 @@ import { ValidationResult, PackageMetadata } from '@/app/lib/types'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
 
 async function validateMetadata(metadata: PackageMetadata): Promise<ValidationResult> {
+  const reservedNames = [
+    'all',
+    'mudlet', 
+    'mpkg',
+    'echo',
+    'run-lua-code',
+    'generic_mapper',
+    'enable-accessibility',
+    'deleteOldProfiles'
+  ]
+
   const requiredFields = [
     'mpackage',
     'title',
@@ -19,6 +30,11 @@ async function validateMetadata(metadata: PackageMetadata): Promise<ValidationRe
   const fieldErrors: Record<string, string[]> = {}
 
   if (metadata.mpackage) {
+    // Check for reserved names - case insensitive and trimmed
+    if (reservedNames.includes(metadata.mpackage.toLowerCase().trim())) {
+      fieldErrors.mpackage = ['This package name is reserved for Mudlet system packages. Please choose a different name.']
+    }
+
     const existingPackages = await fetchRepositoryPackages()
     const mpackageExists = existingPackages.some(pkg => 
       pkg.mpackage?.toLowerCase() === metadata.mpackage?.toLowerCase() &&
