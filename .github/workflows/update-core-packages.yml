@@ -51,7 +51,7 @@ jobs:
           add-paths: packages/${{ matrix.package.name }}.mpackage
           branch: update-${{ matrix.package.name }}-package
           commit-message: "(autocommit) Updated ${{ matrix.package.description }} to latest version"
-          title: "Infrastructure: Update ${{ matrix.package.description }} to latest version"
+          title: "Infrastructure: update ${{ matrix.package.description }} to latest version"
           body: |
             #### Brief overview of PR changes/additions
             🔄 An automated PR to update the ${{ matrix.package.description }} to its latest version.
