@@ -95,16 +95,6 @@
                 },
                 {
                        "author": "Pato",
-                      "created": "2025-01-01T00:00:00+0:00",
-                  "description": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.\nFeatures that include upgrades to the user interface, automation, and reporting are all included.\nIt includes a conversation window across the top as well as a character information panel in the\nbottom right next to the command window. DartMUDlet automatically counts and reports skill improves\nfor both you and your pets, and will attempt to autocorrect when a skill rolls to the next level.\n\nDartMUDlet will also block and queue up commands while you are performing interruptable actions\n(e.g. spells, books, scrolls), then release them afterwards when the action is complete.\n\nType /setup to initialize DartMUDlet once installed.\nType /help for a full list of commands.\n",
-                     "filename": "dartmudlet-1.8.1.zip",
-                     "mpackage": "DartMUDlet",
-                        "title": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.",
-                     "uploaded": 1736170420,
-                      "version": "1.8.1"
-                },
-                {
-                       "author": "Pato",
                       "created": "2025-01-15T00:00:00+0:00",
                   "description": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.\nFeatures that include upgrades to the user interface, automation, and reporting are all included.\nIt includes a conversation window across the top as well as a character information panel in the\nbottom right next to the command line. DartMUDlet automatically counts and reports skill improves\nfor both you and your pets, and will attempt to autocorrect when a skill rolls to the next level.\n\nDartMUDlet will also block and queue up commands while you are performing interruptable actions\n(e.g. spells, books, scrolls), then release them afterwards when the action is complete.\n\nType /setup to initialize DartMUDlet once installed.\nType /help for a full list of commands.\n",
                      "filename": "dartmudlet-1.8.2.zip",
@@ -244,5 +234,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sat Jan 18 07:21:39 2025"
+   "updated": "Sat Jan 18 08:20:51 2025"
 }
