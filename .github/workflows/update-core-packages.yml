@@ -11,8 +11,6 @@ jobs:
     if: ${{ github.repository_owner == 'Mudlet' }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: development
 
       - name: Download deleteOldProfiles package
         uses: carlosperate/download-file-action@v2.0.2
