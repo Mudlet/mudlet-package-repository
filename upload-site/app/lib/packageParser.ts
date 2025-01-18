@@ -3,9 +3,9 @@ import { PackageMetadata } from '@/app/lib/types'
 export function parseConfigLua(content: string): PackageMetadata {
   // Helper function to safely extract values
   const extractValue = (pattern: string): string | null => {
-    const match = content.match(new RegExp(`${pattern}\\s*=\\s*(?:\\[\\[|["'])(.*?)(?:\\]\\]|["'])`, 'ms'))
+    const match = content.match(new RegExp(`${pattern} *= *(?:\\[\\[)(.*?)(?:\\]\\])`, 'ms'))
     return match ? match[1].trim() : null
-  }  
+  }
 
   return {
     mpackage: extractValue('mpackage'),
@@ -23,8 +23,8 @@ export function parseConfigLua(content: string): PackageMetadata {
 export function hasRequiredFields(metadata: PackageMetadata): boolean {
   // You can define which fields are absolutely required
   return Boolean(
-    metadata.mpackage && 
-    metadata.title && 
+    metadata.mpackage &&
+    metadata.title &&
     metadata.version
   )
 }
