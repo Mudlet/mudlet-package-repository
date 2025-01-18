@@ -14,6 +14,11 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
   const [expandedPackage, setExpandedPackage] = useState<string | null>(null);
   const displayPackages = limit ? packages.slice(0, limit) : packages;
 
+  const getPackageCountByAuthor = (authorName: string | null) => {
+    if (!authorName || authorName === 'Mudlet Default Package') return 0;
+    return packages.filter(pkg => pkg.author === authorName).length;
+  };  
+
   const toggleExpand = (mpackage: string | null) => {
     setExpandedPackage(expandedPackage === mpackage ? null : mpackage);
   };
@@ -49,7 +54,15 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
                     {pkg.mpackage}
                   </a>
                 </h2>
-                <p className="text-gray-600 mb-2">by {pkg.author}, version {pkg.version}</p>
+                <p className="text-gray-600 mb-2">
+                  by <span
+                    className={`${getPackageCountByAuthor(pkg.author) >= 5 ? 'text-amber-500 font-semibold' : ''}`}
+                    title={getPackageCountByAuthor(pkg.author) >= 5 ? 'This author has uploaded 5+ packages' : ''}
+                  >
+                    {pkg.author}
+                  </span>,
+                  version {pkg.version}
+                </p>
                 <p className="text-gray-800">{pkg.title}</p>
               </div>
               {pkg.icon && (
@@ -76,7 +89,6 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
               </div>
             )}
           </article>
-
         ))}
       </main>
     </section>
