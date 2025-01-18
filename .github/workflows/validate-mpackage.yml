@@ -13,6 +13,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@master
+
+    - uses: leafo/gh-actions-lua@v10
+      with:
+        luaVersion: "5.1.5"
       
     - name: Only one file per PR is allowed
       id: check-file-count
@@ -97,12 +101,14 @@ jobs:
           exit 1
         fi
 
-    - name: Extract package name and check for duplicates
+    - name: Extract package name and author, check for duplicates
       id: check-package-name
       run: |
-        # Extract the package name from config.lua
-        PACKAGE_NAME=$(grep "mpackage =" unzipped_package/config.lua | cut -d'"' -f2)
+        # Extract the package name and author from config.lua
+        PACKAGE_NAME=$(lua -e "dofile('unzipped_package/config.lua'); print(_G['mpackage'])")
+        PACKAGE_AUTHOR=$(lua -e "dofile('unzipped_package/config.lua'); print(_G['author'])")
         echo "Package name: $PACKAGE_NAME"
+        echo "Package author: $PACKAGE_AUTHOR"
         
         # Get current PR file name
         CURRENT_FILE=${{ steps.check-file-count.outputs.FILE }}
@@ -119,16 +125,19 @@ jobs:
           fi
         done
         
-        # Check for case-insensitive duplicates
+        # Check for case-insensitive duplicates with different authors
         for config in temp_check/**/config.lua; do
           if [ -f "$config" ]; then
-            OTHER_NAME=$(grep "mpackage =" "$config" | cut -d'"' -f2)
-            if [ "${PACKAGE_NAME,,}" = "${OTHER_NAME,,}" ]; then
-              echo "Error: Package name '$PACKAGE_NAME' conflicts with existing package '$OTHER_NAME' (case-insensitive match)"
+            OTHER_NAME=$(lua -e "dofile('$config'); print(_G['mpackage'])")
+            OTHER_AUTHOR=$(lua -e "dofile('$config'); print(_G['author'])")
+            if [ "${PACKAGE_NAME,,}" = "${OTHER_NAME,,}" ] && [ "${PACKAGE_AUTHOR,,}" != "${OTHER_AUTHOR,,}" ]; then
+              echo "Error: Package name '$PACKAGE_NAME' by '$PACKAGE_AUTHOR' conflicts with existing package '$OTHER_NAME' by '$OTHER_AUTHOR'"
               exit 1
             fi
           fi
         done
         
-        echo "Pass: No duplicate package names found"
+        echo "Pass: No conflicting package names found"
         echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+        echo "PACKAGE_AUTHOR=$PACKAGE_AUTHOR" >> $GITHUB_OUTPUT
+

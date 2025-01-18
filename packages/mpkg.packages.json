@@ -26,6 +26,7 @@
                       "created": "2024-11-26T22:50:47+0000",
                   "description": "Enable clickable links in Mudlet! That's pretty nice, right?",
                      "filename": "Clicker.mpackage",
+                         "icon": "/icons/Clicker.png",
                      "mpackage": "Clicker",
                         "title": "Make URLs clickable",
                      "uploaded": 1736696689,
@@ -56,6 +57,7 @@
                       "created": "2022-05-19T00:28:05+0000",
                   "description": "# Busted, packaged for Windows Mudlet\n\nBusted is a robust testing framework for Lua with a lot of functionality, but it has some compiled C components and is not trivial for Windows users to install for use with their Mudlet systems. Since we use busted for testing Mudlet itself I thought it would be good to get a version repackaged which Mudlet users could install for their own use.\n## Usage\n\nThis comes with one alias, `runTests`. By default, it will look for every file in your profile directory named `*_spec.lua` and run the tests defined within. If you wish to only run tests for a specific package, you can use the package name as the argument to the alias, for instance `runTests REPLet` will run any test files in the REPLet package if installed. If you want to run a specific test file, you can use `runTests REPLet/coreTests_spec.lua` to point to the specific file.\n\n## Writing tests\n\nThere are some very good [docs](https://olivinelabs.com/busted/) available from the authors. For some practical examples, you can check out the [Mudlet busted tests](https://github.com/Mudlet/Mudlet/tree/development/src/mudlet-lua/tests)\n\n## TO-DO\n\nI have not yet included the libraries to enable asynchronous testing (libev and the copas and lua-libev luarocks) so you won't be able to ",
                      "filename": "MudletBusted.mpackage",
+                         "icon": "/icons/MudletBusted.png",
                      "mpackage": "MudletBusted",
                         "title": "The Busted testing suite, packaged for Mudlet",
                      "uploaded": 1724911580,
@@ -193,12 +195,12 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2025-01-13T08:29:28+0000",
+                      "created": "2025-01-17T16:11:04+0000",
                   "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n```\n### See Also\n\n* https://packages.mudlet.org\n* https://mudlet.github.io/mudlet-package-repository/\n",
                      "filename": "mpkg.mpackage",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                     "uploaded": 1736756969,
+                     "uploaded": 1737184347,
                       "version": "3.0"
                 },
                 {
@@ -242,5 +244,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Jan 17 17:46:45 2025"
+   "updated": "Sat Jan 18 07:12:53 2025"
 }

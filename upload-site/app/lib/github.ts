@@ -37,7 +37,6 @@ export async function getFileSha(path: string) {
       return response.data.sha
     }
     return null
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // File doesn't exist
     return null
@@ -67,3 +66,13 @@ export async function createPullRequest(branch: string, title: string, body: str
   })
 }
 
+export async function deleteFile(path: string, message: string, sha: string, branch: string) {
+  return octokit.rest.repos.deleteFile({
+    owner: REPO_OWNER,
+    repo: REPO_NAME,
+    path,
+    message,
+    sha,
+    branch,
+  })
+}

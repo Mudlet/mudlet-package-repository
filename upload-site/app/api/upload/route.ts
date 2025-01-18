@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { createBranch, uploadFile, createPullRequest, getFileSha } from '@/app/lib/github'
+import { createBranch, uploadFile, createPullRequest, getFileSha, deleteFile } from '@/app/lib/github'
 import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
+import { PackageMetadata } from '@/app/lib/types'
+
+interface PackagesJson {
+  packages: PackageMetadata[];
+  updated: string;
+}
 
 export async function POST(request: Request) {
   const session = await getServerSession()
@@ -38,6 +44,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid or incomplete config.lua' }, { status: 400 })
   }
 
+  // Read and parse existing packages
+  const packagesJson = await fetch('https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/main/packages/mpkg.packages.json')
+  const packagesData = await packagesJson.json() as PackagesJson
+
+  // Find existing package by name and author
+  const existingPackage = packagesData.packages.find(pkg => 
+    pkg.mpackage === metadata.mpackage && 
+    pkg.author === metadata.author
+  ) as PackageMetadata & { filename: string }
+
   console.log('Generating branch name...')
   const branchName = `package-upload/${file.name}-${new Date().toISOString().slice(0,19).replace(/[:.]/g, '-')}`
   console.log('Branch name:', branchName)
@@ -50,17 +66,30 @@ export async function POST(request: Request) {
     await createBranch(branchName, 'main')
     console.log('Branch created successfully')
     
+    // If found, delete the old package version
+    if (existingPackage) {
+      const oldFilePath = `packages/${existingPackage.filename}`
+      const oldFileSha = await getFileSha(oldFilePath)
+      
+      if (oldFileSha) {
+        console.log('Deleting old version of package...')
+        await deleteFile(
+          oldFilePath,
+          `Delete old version: ${existingPackage.filename}`,
+          oldFileSha,
+          branchName
+        )
+        console.log('Old version deleted successfully')
+      }
+    }
+
     console.log('Uploading package file...', { fileName: file.name, branchName, contentLength: fileContent.length })
 
-    const filePath = `packages/${file.name}`
-    const existingSha = await getFileSha(filePath)
-    
     await uploadFile(
-      filePath,
+      `packages/${file.name}`,
       fileContent,
       branchName,
-      existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
-      existingSha ?? undefined
+      existingPackage ? `Update package: ${file.name}` : `Add package: ${file.name}`,
     )
     
     console.log('File uploaded successfully')
@@ -70,7 +99,7 @@ export async function POST(request: Request) {
 - Title: ${metadata.title}
 - Version: ${metadata.version}
 - Author: ${metadata.author}
-- Package ${existingSha ? 'updated' : 'added'} by ${session.user?.name || 'unknown user'}
+- Package ${existingPackage ? 'updated' : 'added'} by ${session.user?.name || 'unknown user'}
 - Created: ${metadata.created}
 
 ---
@@ -79,7 +108,7 @@ ${metadata.description}`
     console.log('Creating PR...')
     const pr = await createPullRequest(
       branchName,
-      existingSha ? `Update package: ${file.name}` : `Add package: ${file.name}`,
+      existingPackage ? `Update package: ${file.name}` : `Add package: ${file.name}`,
       prDescription
     )    
 
