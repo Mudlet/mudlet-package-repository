@@ -5,6 +5,7 @@ import { Auth } from './components/Auth'
 import { Navigation } from './components/Navigation'
 import { SessionProvider } from './components/SessionProvider'
 import { Metadata } from 'next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,6 +40,7 @@ export default async function RootLayout({
             {children}
           </div>
         </SessionProvider>
+        <SpeedInsights/>
       </body>
     </html>
   )
