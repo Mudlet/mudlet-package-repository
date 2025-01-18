@@ -20,6 +20,8 @@ jobs:
             description: "Enable Accessibility package"
           - name: run-lua-code
             description: "Run Lua Code package"
+          - name: mudlet-lua/lua/gui-drop/gui-drop
+            description: "GUI Drop package"
     steps:
       - uses: actions/checkout@v4
 
