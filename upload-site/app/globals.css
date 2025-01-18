@@ -22,3 +22,12 @@ article h2 a {
 article h2 a:hover {
   text-decoration: underline;
 }
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
