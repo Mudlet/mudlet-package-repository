@@ -7,7 +7,7 @@ export function IntroSection() {
         <h2 className="text-2xl font-semibold mb-4">What is this?</h2>
         <p className="mb-4">
           <code>mpkg</code> is an additional package manager for <a href="https://www.mudlet.org/">Mudlet</a> which allows you to install, remove, update and search for packages in this website. 
-          Packages like game interfacess, mappers, tutorials and helpful functions, all created by Mudlet users can now be found in one place - <a href="packages">here</a>.
+          Packages like game interfaces, mappers, tutorials and helpful functions, all created by Mudlet users can now be found in one place - <a href="packages">here</a>.
         </p>
       </section>
 
@@ -35,7 +35,7 @@ export function IntroSection() {
         <ul className="list-disc pl-6 mb-4">
           <li>Get automatic updates for your package</li>
           <li>Reach users through through this website</li>
-          <li>Or thorugh the quick <code>mpkg install</code> commands</li>
+          <li>Or through the quick <code>mpkg install</code> commands</li>
           <li>Join our growing collection of Mudlet community tools</li>
         </ul>
         <p className="mb-4">
