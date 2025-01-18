@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * fri'
 
 jobs:
-  update-core-packages:
+  update:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'Mudlet' }}
     strategy:
