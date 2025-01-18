@@ -22,25 +22,26 @@ end
 local function clearPackageVariables()
     mpackage = nil
     author = nil
-    title = nil 
+    title = nil
     description = nil
     created = nil
     version = nil
     icon = nil
 end
 
-local function extractIcon(zfile, packageName, iconPath)
-    if not iconPath then return nil end
-    
+local function extractIcon(zfile, packageName, iconName)
+    if not iconName then return nil end
+
+    local iconPath = ".mudlet/Icon/" .. iconName
     local iconFile, err = zfile:open(iconPath)
     if not iconFile then return nil end
-    
+
     local iconData = iconFile:read("*a")
     iconFile:close()
-    
-    -- Get the file extension from iconPath
-    local extension = iconPath:match("^.+(%..+)$") or ".png"
-    
+
+    -- Get the file extension from iconName
+    local extension = iconName:match("^.+(%..+)$") or ".png"
+
     -- Save icon with package name and original extension
     local iconFilename = "upload-site/public/icons/" .. packageName .. extension
     local f = io.open(iconFilename, "wb")
@@ -51,6 +52,7 @@ local function extractIcon(zfile, packageName, iconPath)
     end
     return nil
 end
+
 
 local pkg = {}
 
