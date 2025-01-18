@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@auth/core": "^0.34.2",
+    "@vercel/speed-insights": "^1.1.0",
     "adm-zip": "^0.5.16",
     "next": "^15.1.5",
     "next-auth": "^4.24.11",
