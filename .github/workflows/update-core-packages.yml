@@ -9,54 +9,44 @@ jobs:
   update-core-packages:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'Mudlet' }}
+    strategy:
+      matrix:
+        package:
+          - name: deleteOldProfiles
+            description: "Delete Old Profiles package"
+          - name: echo
+            description: "Echo package"
+          - name: enable-accessibility
+            description: "Enable Accessibility package"
+          - name: run-lua-code
+            description: "Run Lua Code package"
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download deleteOldProfiles package
+      - name: Download ${{ matrix.package.name }} package
         uses: carlosperate/download-file-action@v2.0.2
         with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/deleteOldProfiles.mpackage
-          file-name: deleteOldProfiles.mpackage
+          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/${{ matrix.package.name }}.mpackage
+          file-name: ${{ matrix.package.name }}.mpackage
           location: packages/
 
-      - name: Download echo package
-        uses: carlosperate/download-file-action@v2.0.2
-        with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/echo.mpackage
-          file-name: echo.mpackage
-          location: packages/
-
-      - name: Download enable-accessibility package
-        uses: carlosperate/download-file-action@v2.0.2
-        with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/enable-accessibility.mpackage
-          file-name: enable-accessibility.mpackage
-          location: packages/
-
-      - name: Download run-lua-code package
-        uses: carlosperate/download-file-action@v2.0.2
-        with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/run-lua-code.mpackage
-          file-name: run-lua-code.mpackage
-          location: packages/
-
-      - name: Check for changes
+      - name: Check for changes in ${{ matrix.package.name }}
         id: check-changes
         run: |
-          git diff --quiet packages/ || echo "changes=true" >> $GITHUB_OUTPUT
+          git diff --quiet "packages/${{ matrix.package.name }}.mpackage" || echo "changes=true" >> $GITHUB_OUTPUT
 
-      - name: Create Pull Request
+      - name: Create Pull Request for ${{ matrix.package.name }}
         uses: peter-evans/create-pull-request@v7
         if: steps.check-changes.outputs.changes == 'true'
         with:
           token: ${{ secrets.GH_PAT_UPDATE_3RDPARTY }}
-          add-paths: packages/
-          branch: update-core-packages
-          commit-message: "(autocommit) Updated core packages to latest versions"
-          title: "Infrastructure: Update core packages to latest versions"
+          add-paths: packages/${{ matrix.package.name }}.mpackage
+          branch: update-${{ matrix.package.name }}-package
+          commit-message: "(autocommit) Updated ${{ matrix.package.description }} to latest version"
+          title: "Infrastructure: Update ${{ matrix.package.description }} to latest version"
           body: |
             #### Brief overview of PR changes/additions
-            🔄 An automated PR to update the core packages to their latest versions.
+            🔄 An automated PR to update the ${{ matrix.package.description }} to its latest version.
 
             #### Other info
             _update triggered by ${{ github.ref }} ${{ github.sha }}_
