@@ -14,7 +14,8 @@ export function parseConfigLua(content: string): PackageMetadata {
     created: extractValue('created'),
     author: extractValue('author'),
     description: extractValue('description'),
-    icon: extractValue('icon')
+    icon: extractValue('icon'),
+    filename: extractValue('filename')
   }
 }
 
