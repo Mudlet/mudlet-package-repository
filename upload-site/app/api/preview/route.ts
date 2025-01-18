@@ -76,7 +76,7 @@ export async function POST(request: Request) {
 
   if (!file.name.endsWith('.mpackage') && !file.name.endsWith('.zip')) {
     return NextResponse.json({ 
-      error: 'File must be a Mudlet valid .mpackage (or .zip)'
+      error: 'File must be a valid Mudlet .mpackage (or .zip)'
     }, { status: 400 })
   }
 
