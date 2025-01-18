@@ -37,7 +37,6 @@ export async function getFileSha(path: string) {
       return response.data.sha
     }
     return null
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // File doesn't exist
     return null
