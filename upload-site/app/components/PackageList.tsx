@@ -46,7 +46,7 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
               <div className="flex-grow">
                 <h2 className="text-xl font-semibold mb-2">
                   <a
-                    href={`http://mudlet.github.io/mudlet-package-repository/packages/${pkg.filename}`}
+                    href={`https://mudlet.github.io/mudlet-package-repository/packages/${pkg.filename}`}
                     className="text-blue-600 hover:text-blue-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     onClick={(e) => e.stopPropagation()}
                     aria-label={`Download ${pkg.mpackage} package`}
