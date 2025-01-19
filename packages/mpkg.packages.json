@@ -34,13 +34,14 @@
                 },
                 {
                        "author": "Ping",
-                      "created": "2025-01-20T00:05:07+08:00",
-                  "description": "Converts discord format emojis (e.g. :joy:) to unicode emojis. Work in progress.",
+                      "created": "2025-01-20T01:22:01+08:00",
+                  "description": "A simple trigger that captures words encapsulated in colons like :this: and turns them into unicode emojis. Uses discord naming conventions for the most part, should be easy to update on your own end. Work in progress!",
                      "filename": "Emojis.mpackage",
+                         "icon": "/icons/Emojis.png",
                      "mpackage": "Emojis",
-                        "title": "Trigger that converts and displays emojis in mudlet.",
-                     "uploaded": 1737303917,
-                      "version": "1"
+                        "title": "A trigger and script to convert text emojis into unicode emojis!",
+                     "uploaded": 1737307523,
+                      "version": "1.001"
                 },
                 {
                        "author": "Akaya, mods by Zooka",
@@ -259,5 +260,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Jan 19 17:17:19 2025"
+   "updated": "Sun Jan 19 17:26:15 2025"
 }
