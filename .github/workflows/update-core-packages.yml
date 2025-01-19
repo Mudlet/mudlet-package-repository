@@ -35,15 +35,15 @@ jobs:
           location: packages/
 
       - name: Check for changes in ${{ matrix.package.name }}
-      id: check-changes
-      run: |
-        echo "Checking for changes in packages/${{ matrix.package.name }}.mpackage..."
-        if git diff --quiet "packages/${{ matrix.package.name }}.mpackage"; then
-          echo "No changes detected in ${{ matrix.package.name }}"
-        else
-          echo "Changes detected in ${{ matrix.package.name }}"
-          echo "changes=true" >> $GITHUB_OUTPUT
-        fi
+        id: check-changes
+        run: |
+          echo "Checking for changes in packages/${{ matrix.package.name }}.mpackage..."
+          if git diff --quiet "packages/${{ matrix.package.name }}.mpackage"; then
+            echo "No changes detected in ${{ matrix.package.name }}"
+          else
+            echo "Changes detected in ${{ matrix.package.name }}"
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create Pull Request for ${{ matrix.package.name }}
         uses: peter-evans/create-pull-request@v7
