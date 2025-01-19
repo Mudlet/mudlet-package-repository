@@ -33,6 +33,16 @@
                       "version": "1.8.0"
                 },
                 {
+                       "author": "Ping",
+                      "created": "2025-01-20T00:05:07+08:00",
+                  "description": "Converts discord format emojis (e.g. :joy:) to unicode emojis. Work in progress.",
+                     "filename": "Emojis.mpackage",
+                     "mpackage": "Emojis",
+                        "title": "Trigger that converts and displays emojis in mudlet.",
+                     "uploaded": 1737303917,
+                      "version": "1"
+                },
+                {
                        "author": "Akaya, mods by Zooka",
                       "created": "2024-12-24T13:05:23+04:00",
                   "description": "### Description\n\nThis package contains a basic GUI template that serves as a basis for creating your own.  It uses modern Geyser elements such as Adjustable Containers and Geyser Buttons for a flexible layout which can be arranged and styled anyway you like.  This is an updated, modern version of Akaya's excellent original template.\n\n### Usage\n\nSimply install this package and the GUI will be displayed.  Start customising!\n\n### See Also\n\n* [Akaya's original template](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&pk_vid=09b619c5f5c4537b1735030856a9723a)",
@@ -249,5 +259,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Jan 19 16:19:25 2025"
+   "updated": "Sun Jan 19 16:27:53 2025"
 }
