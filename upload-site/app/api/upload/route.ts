@@ -55,7 +55,12 @@ export async function POST(request: Request) {
   ) as PackageMetadata & { filename: string }
 
   console.log('Generating branch name...')
-  const branchName = `package-upload/${file.name}-${new Date().toISOString().slice(0,19).replace(/[:.]/g, '-')}`
+  const timestamp = new Date().toISOString().slice(0,19).replace(/[:.]/g, '-')
+  const sanitizedName = file.name
+    .replace(/\s+/g, '-')
+    .replace(/[^a-zA-Z0-9-]/g, '')
+    .substring(0, 50)
+  const branchName = `package-upload/${sanitizedName}-${timestamp}`
   console.log('Branch name:', branchName)
   console.log('Converting file to base64...')
   const fileContent = Buffer.from(await file.arrayBuffer()).toString('base64')
