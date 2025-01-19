@@ -99,7 +99,6 @@ export async function POST(request: Request) {
 - Title: ${metadata.title}
 - Version: ${metadata.version}
 - Author: ${metadata.author}
-- Package ${existingPackage ? 'updated' : 'added'} by ${session.user?.name || 'unknown user'}
 - Created: ${metadata.created}
 
 ---
