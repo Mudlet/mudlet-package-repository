@@ -3,12 +3,8 @@ import { PackageMetadata } from '@/app/lib/types'
 export function parseConfigLua(content: string): PackageMetadata {
   // Helper function to safely extract values
   const extractValue = (pattern: string): string | null => {
-    const match = content.match(new RegExp(`${pattern} *= *(?:\\[\\[)(.*?)(?:\\]\\])`, 'ms'))
-    return match ? match[1].trim() : null
-  }
-
-  const extractCreatedDate = (): string | null => {
-    const match = content.match(new RegExp(`created *= *(?:")(.*?)(?:")`, 'ms'))
+    const match = content.match(new RegExp(`${pattern} *= *(?:\\[\\[)(.*?)(?:\\]\\])`, 'ms')) ||
+                  content.match(new RegExp(`${pattern} *= *(?:")(.*?)(?:")`, 'ms'))
     return match ? match[1].trim() : null
   }
 
@@ -16,7 +12,7 @@ export function parseConfigLua(content: string): PackageMetadata {
     mpackage: extractValue('mpackage'),
     title: extractValue('title'),
     version: extractValue('version'),
-    created: extractCreatedDate(),
+    created: extractValue('created'),
     author: extractValue('author'),
     description: extractValue('description'),
     icon: extractValue('icon'),
