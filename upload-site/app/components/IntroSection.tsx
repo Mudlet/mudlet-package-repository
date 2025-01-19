@@ -34,7 +34,7 @@ export function IntroSection() {
         </p>
         <ul className="list-disc pl-6 mb-4">
           <li>Get automatic updates for your package</li>
-          <li>Reach users through through this website</li>
+          <li>Reach users through this website</li>
           <li>Or through the quick <code>mpkg install</code> commands</li>
           <li>Join our growing collection of Mudlet community tools</li>
         </ul>
