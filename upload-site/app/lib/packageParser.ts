@@ -7,11 +7,16 @@ export function parseConfigLua(content: string): PackageMetadata {
     return match ? match[1].trim() : null
   }
 
+  const extractCreatedDate = (): string | null => {
+    const match = content.match(new RegExp(`created *= *(?:")(.*?)(?:")`, 'ms'))
+    return match ? match[1].trim() : null
+  }
+
   return {
     mpackage: extractValue('mpackage'),
     title: extractValue('title'),
     version: extractValue('version'),
-    created: extractValue('created'),
+    created: extractCreatedDate(),
     author: extractValue('author'),
     description: extractValue('description'),
     icon: extractValue('icon'),
