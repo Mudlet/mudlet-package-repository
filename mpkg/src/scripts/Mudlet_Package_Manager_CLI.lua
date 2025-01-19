@@ -417,7 +417,9 @@ function mpkg.listInstalledPackages()
     else
       mpkg.echoLink("  ", sf("<b>%-30s</b> %-20s", v, f"(v{mpkg.getInstalledVersion(v)})"), function() mpkg.show(v) end, "show details", true)
 
-      if semver(mpkg.getInstalledVersion(v)) < semver(mpkg.getRepositoryVersion(v)) then
+      local installed = mpkg.getInstalledVersion(v)
+      local repo = mpkg.getRepositoryVersion(v)
+      if installed and repo and semver(installed) < semver(repo) then
         echoLink("", "[update available]\n", function() mpkg.upgrade(v) end, "click to update package", true)
       else
         echo("\n")
