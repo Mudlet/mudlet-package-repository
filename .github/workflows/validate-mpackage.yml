@@ -38,11 +38,11 @@ jobs:
     - name: Unzip the mpackage and check config.lua exists
       id: unzip-mpackage-file
       run: |
-        FILE=${{ steps.check-file-count.outputs.FILE }}
-        echo $FILE
+        FILE="${{ steps.check-file-count.outputs.FILE }}""
+        echo "${FILE}"
         
         # unzip the mpackage
-        unzip -q -o $FILE -d unzipped_package
+        unzip -q -o "${FILE}" -d unzipped_package
         ls -al unzipped_package
 
         #only valid if it has a config.lua
@@ -56,9 +56,9 @@ jobs:
     - name: Check config.lua contains all required information
       id: check-config-lua
       run: |
-        FILE=${{ steps.check-file-count.outputs.FILE }}
+        FILE="${{ steps.check-file-count.outputs.FILE }}"
         
-        #grep for some vital details
+        # grep for some vital details
         if grep -q "mpackage =" unzipped_package/config.lua; then
           echo "Pass: has a valid mpackage name"
         else
@@ -111,17 +111,17 @@ jobs:
         echo "Package author: $PACKAGE_AUTHOR"
         
         # Get current PR file name
-        CURRENT_FILE=${{ steps.check-file-count.outputs.FILE }}
-        CURRENT_BASENAME=$(basename "$CURRENT_FILE")
+        CURRENT_FILE="${{ steps.check-file-count.outputs.FILE }}"
+        CURRENT_BASENAME=$(basename "${CURRENT_FILE}")
         
         # Create temporary directory for checking other packages
         mkdir temp_check
         
         # Extract config.lua from all other packages, excluding current one if it exists
         for package in packages/*.{mpackage,zip}; do
-          if [ "$package" != "$CURRENT_FILE" ]; then
+          if [ "$package" != "${CURRENT_FILE}" ]; then
             BASENAME=$(basename "$package")
-            unzip -q -o "$package" config.lua -d "temp_check/$BASENAME"
+            unzip -q -o "$package" config.lua -d "temp_check/${BASENAME}"
           fi
         done
         
