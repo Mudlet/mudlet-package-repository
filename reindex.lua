@@ -7,6 +7,7 @@
 local json = require "JSON"
 local zip = require "zip"
 local lfs = require "lfs"
+local yajl = require "yajl"
 
 -- Create icons directory if it doesn't exist
 lfs.mkdir("upload-site/public/icons")
@@ -53,7 +54,6 @@ local function extractIcon(zfile, packageName, iconName)
     return nil
 end
 
-
 local pkg = {}
 
 print("Running creation loop...")
@@ -97,14 +97,22 @@ for file in io.popen("ls -pa packages/*"):lines() do
 
         f1:close()
         zfile:close()
+
+        -- Write JSON file after each package
+        local index = { ["name"] = "mudlet package repository listing", ["updated"] = os.date("%c"), ["packages"] = pkg }
+        local indexFile = io.open("packages/mpkg.packages.json", "w+")
+        io.output(indexFile)
+        io.write(json:encode_pretty(index, nil, { pretty = true, align_keys = true, array_newline = true, indent = "  " }))
+        io.close(indexFile)
+
+        -- Validate JSON after each package
+        local f = io.open("packages/mpkg.packages.json", "r")
+        local content = f:read("*a")
+        f:close()
+
+        local success, result = pcall(yajl.to_value, content)
+        if not success then
+            error("Generated JSON file failed YAJL validation after adding package " .. mpackage .. ": " .. tostring(result))
+        end
     end
 end
-
-local index = {}
-
-table.insert(index, { ["name"] = "mudlet package repository listing", ["updated"] = os.date("%c"), ["packages"] = pkg } )
-
-indexFile = io.open("packages/mpkg.packages.json", "w+")
-io.output(indexFile)
-io.write(json:encode_pretty(index[1], nil, { pretty = true, align_keys = true, array_newline = true, indent = "  " }))
-io.close(indexFile)
