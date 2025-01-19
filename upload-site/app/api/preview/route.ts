@@ -97,7 +97,7 @@ export async function POST(request: Request) {
 
   // Extract icon if specified in metadata
   if (metadata.icon) {
-    const iconEntry = zip.getEntry(metadata.icon)
+    const iconEntry = zip.getEntry(`.mudlet/Icon/${metadata.icon}`)
     if (iconEntry) {
       const extension = metadata.icon.match(/\.[^.]+$/)?.[0] || '.png'
       const iconData = iconEntry.getData()
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       metadata.icon = null
     }
   }
-
+  
   const validation = await validateMetadata(metadata)
 
   return NextResponse.json({
