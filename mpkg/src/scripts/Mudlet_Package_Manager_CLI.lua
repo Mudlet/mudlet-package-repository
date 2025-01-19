@@ -377,7 +377,9 @@ function mpkg.upgrade(args)
 
   if not mpkg.ready() then return false end
 
-  if semver(mpkg.getInstalledVersion(args)) < semver(mpkg.getRepositoryVersion(args)) then
+  local installedVersion = mpkg.getInstalledVersion(args)
+  local repoVersion = mpkg.getRepositoryVersion(args)
+  if installedVersion and repoVersion and semver(installedVersion) < semver(repoVersion) then
     -- if no errors removing then install
     if mpkg.remove(args) then
       tempTimer(2, function() mpkg.install(args) end)
@@ -532,7 +534,8 @@ function mpkg.show(args, repoOnly)
 
         -- check it's not a non-versioned XML/package first
         local installedVersion = mpkg.getInstalledVersion(pkg)
-        if installedVersion and (semver(installedVersion) < semver(mpkg.getRepositoryVersion(pkg))) then
+        local repoVersion = mpkg.getRepositoryVersion(pkg)
+        if installedVersion and repoVersion and semver(installedVersion) < semver(repoVersion) then
           mpkg.echo("")
           mpkg.echoLink("There is a ", "<b>newer version available.</b>\n", function() mpkg.show(pkg, true) end, "view details", true)
         end
