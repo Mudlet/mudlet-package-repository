@@ -40,6 +40,10 @@ Contribute your mpackage using Github's "[fork and pull request](https://docs.gi
 
 Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.
 
+### New `mpkg` release
+
+To make a new mpkg release, bump the version in [mpkg/mfile](mpkg/mfile) and the rest will happen automatically.
+
 ### Report Issues ###
 
 Report any [issues here](https://github.com/Mudlet/mudlet-package-repository/issues) or find us on [Mudlet's Discord server](https://discordapp.com/invite/kuYvMQ9).
