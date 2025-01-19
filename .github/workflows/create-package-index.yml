@@ -26,15 +26,16 @@ jobs:
 
     - uses: leafo/gh-actions-luarocks@v4
   
-    - name: Install libzzip-dev
-      run: sudo apt-get install -y libzzip-dev
+    - name: Install apt dependencies
+      run: sudo apt-get install -y libzzip-dev libyajl-dev
 
     - name: Install luarocks modules
       run: |
         luarocks install json-lua
         luarocks install luazip
         luarocks install luafilesystem
-        luarocks install lua-yajl
+        luarocks install lua-yajl YAJL_LIBDIR=`find /usr -name "libyajl.so" -printf '%h\n'` YAJL_INCDIR=/usr/include
+
 
     # Fix timestamps
     - name: restore timestamps
