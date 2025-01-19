@@ -4,7 +4,7 @@
        "description": "",
        "version": "3.0",
        "author": "Mudlet Default Package",
-       "icon": "mudlet-package-repo.ico",
+       "icon": "mudlet-package-repo.png",
        "dependencies": "",
        "outputFile": false
 }
