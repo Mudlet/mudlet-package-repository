@@ -206,13 +206,13 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2024-08-24T08:28:56+02:00",
+                      "created": "2024-08-27T05:32:00+02:00",
                   "description": "# run-lua-code\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n",
                      "filename": "run-lua-code.mpackage",
                          "icon": "/icons/run-lua-code.png",
                      "mpackage": "run-lua-code",
                         "title": "Run Lua code directly from the command line.",
-                     "uploaded": 1724918844,
+                     "uploaded": 1737298564,
                       "version": "5"
                 },
                 {
@@ -249,5 +249,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Jan 19 14:44:00 2025"
+   "updated": "Sun Jan 19 14:58:09 2025"
 }
