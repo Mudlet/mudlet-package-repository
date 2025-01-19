@@ -8,7 +8,7 @@ export const Auth = () => {
   if (session) {
     return (
       <div className="flex items-center gap-4 py-4">
-        <span className="text-gray-700">Welcome, {session.user?.name}</span>
+        <span className="text-gray-700">Welcome</span>
         <button
           onClick={() => signOut()}
           className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors"
