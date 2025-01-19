@@ -64,8 +64,20 @@ export async function POST(request: Request) {
   const formData = await request.formData()
   const file = formData.get('package') as File
   
-  if (!file || (!file.name.endsWith('.mpackage') && !file.name.endsWith('.zip'))) {
-    return NextResponse.json({ error: 'Invalid file format' }, { status: 400 })
+  if (!file) {
+    return NextResponse.json({ error: 'No file provided' }, { status: 400 })
+  }
+  
+  if (file.name.endsWith('.xml')) {
+    return NextResponse.json({ 
+      error: 'XML files need to be packaged as .mpackage first. Use the Package Manager in Mudlet to create a package.'
+    }, { status: 400 })
+  }
+
+  if (!file.name.endsWith('.mpackage') && !file.name.endsWith('.zip')) {
+    return NextResponse.json({ 
+      error: 'File must be a Mudlet valid .mpackage (or .zip)'
+    }, { status: 400 })
   }
 
   const fileBuffer = Buffer.from(await file.arrayBuffer())
