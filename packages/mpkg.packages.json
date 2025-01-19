@@ -33,6 +33,17 @@
                       "version": "1.8.0"
                 },
                 {
+                       "author": "Andruid",
+                      "created": "2025-01-19T11:15:14-06:00",
+                  "description": "Highlight text with your mouse, then right-click to copy with color codes. Supports basic ANSI as well as XTERM color.\n\nThis script is specific to AE:Reboot but can serve as a basis to adapt your own using your game's unique color-coding format (some use 3-letter xterm codes, others use numbers, etc.).\n\nCredit: Adapted from LOTJ's awesome color-copy script <3",
+                     "filename": "Color copy with mouse for AE Reboot.mpackage",
+                         "icon": "/icons/Color copy with mouse for AE Reboot.png",
+                     "mpackage": "Color copy with mouse for AE Reboot",
+                        "title": "Copy text with color codes in AE Reboot format",
+                     "uploaded": 1737314622,
+                      "version": "1"
+                },
+                {
                        "author": "Ping",
                       "created": "2025-01-20T01:22:01+08:00",
                   "description": "A simple trigger that captures words encapsulated in colons like :this: and turns them into unicode emojis. Uses discord naming conventions for the most part, should be easy to update on your own end. Work in progress!",
@@ -260,5 +271,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Jan 19 19:22:03 2025"
+   "updated": "Sun Jan 19 19:24:38 2025"
 }
