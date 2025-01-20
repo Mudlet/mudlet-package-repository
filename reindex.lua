@@ -59,6 +59,7 @@ local pkg = {}
 print("Running creation loop...")
 
 -- loop through all .mpackage files in the directory
+local packagecount = 0
 for file in io.popen("ls -pa packages/*"):lines() do
     clearPackageVariables()
     print("Found "..file)
@@ -115,4 +116,7 @@ for file in io.popen("ls -pa packages/*"):lines() do
             error("Generated JSON file failed YAJL validation after adding package " .. mpackage .. ": " .. tostring(result))
         end
     end
+    packagecount = packagecount + 1
 end
+
+print("Finished processing " .. packagecount .. " packages in the repository.")
