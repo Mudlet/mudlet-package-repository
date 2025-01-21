@@ -4,7 +4,7 @@ name: Recreate web page
 on:
   # Runs on pushes targeting the default branch
   workflow_run:
-    workflows: ['Create json index']
+    workflows: ['Refresh json index']
     types: [completed]
 
   # Allows you to run this workflow manually from the Actions tab
