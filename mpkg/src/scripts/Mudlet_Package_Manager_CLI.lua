@@ -111,7 +111,11 @@ function mpkg.getInstalledVersion(args)
     return installedVersion
   end
 
-  return table.contains(mpkg.whitelist, args) and 0 or nil, "No version found."
+  if table.contains(mpkg.whitelist, args) then
+    return 0
+  else
+    return nil, "No version found."
+  end
 end
 
 
