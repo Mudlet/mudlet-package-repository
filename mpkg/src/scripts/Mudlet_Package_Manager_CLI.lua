@@ -7,6 +7,10 @@ mpkg.repository = "https://mudlet.github.io/mudlet-package-repository/packages"
 mpkg.website = "http://packages.mudlet.org"
 mpkg.websiteUploads = f"{mpkg.website}/upload"
 mpkg.filename = "mpkg.packages.json"
+-- alow updates to these non-versioned packages
+mpkg.whitelist = { "echo", "generic_mapper", "run-lua-code",
+                   "enable-accessibility", "deleteOldProfiles",
+                   "gui-drop", "StressinatorDisplayBench", "run-tests" }
 
 
 --- Entry point of script.
@@ -92,20 +96,26 @@ end
 
 
 --- Get which version of a package is installed on in Mudlet.
+-- If package does not have a version, nil is returned.  This
+-- package would be considered a local usermade package that
+-- will not be eligible for mpkg updates.
+-- If package does not have a version and is in the whitelist
+-- return 0 to allow updates (typically mudlet default packages).
 -- @param args the package name as found in getPackageInfo()
 -- @return nil and error message if not found
 -- @return string containing a version if found
 function mpkg.getInstalledVersion(args)
-
   local installedVersion = getPackageInfo(args, "version")
 
-  if installedVersion == "" then
-    return nil, "No version found."
-  else
+  if installedVersion ~= "" then
     return installedVersion
   end
 
-  return nil, "No package found."
+  if table.contains(mpkg.whitelist, args) then
+    return 0
+  else
+    return nil, "No version found."
+  end
 end
 
 
