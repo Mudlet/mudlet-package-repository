@@ -3,7 +3,7 @@
 mpkg = mpkg or {}
 mpkg.aliases = mpkg.aliases or {}
 mpkg.maintainer = "https://github.com/mudlet/mudlet-package-repository/issues"
-mpkg.repository = "https://mudlet.github.io/mudlet-package-repository/packages"
+mpkg.repository = "https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/main/packages"
 mpkg.website = "http://packages.mudlet.org"
 mpkg.websiteUploads = f"{mpkg.website}/upload"
 mpkg.filename = "mpkg.packages.json"

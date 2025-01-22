@@ -2,7 +2,7 @@
        "package": "mpkg",
        "title": "A command line package manager for Mudlet.",
        "description": "",
-       "version": "3.2",
+       "version": "3.3",
        "author": "Mudlet Default Package",
        "icon": "mudlet-package-repo.png",
        "dependencies": "",
