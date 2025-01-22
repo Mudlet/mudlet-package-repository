@@ -49,7 +49,7 @@ local function extractIcon(zfile, packageName, iconName)
     if f then
         f:write(iconData)
         f:close()
-        return "/packages/icons/" .. packageName .. extension
+        return "packages/icons/" .. packageName .. extension
     end
     return nil
 end
