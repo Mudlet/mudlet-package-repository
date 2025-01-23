@@ -68,7 +68,7 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
               {pkg.icon && (
                 <div className="flex-shrink-0">
                   <Image
-                    src={pkg.icon}
+                    src={`https://github.com/Mudlet/mudlet-package-repository/blob/refs/heads/main/${pkg.icon}`}
                     alt={`${pkg.mpackage} icon`}
                     width={48}
                     height={48}

@@ -50,4 +50,4 @@ jobs:
     - uses: stefanzweifel/git-auto-commit-action@v5        
       with:
         commit_message: Automated package index update.
-        file_pattern: 'packages/*.packages.json upload-site/public/icons/*'
+        file_pattern: 'packages/*.packages.json packages/icons/*'

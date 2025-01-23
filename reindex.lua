@@ -10,7 +10,7 @@ local lfs = require "lfs"
 local yajl = require "yajl"
 
 -- Create icons directory if it doesn't exist
-lfs.mkdir("upload-site/public/icons")
+lfs.mkdir("packages/icons")
 
 local function getFileModTime(filepath)
     local attr = lfs.attributes(filepath)
@@ -44,12 +44,12 @@ local function extractIcon(zfile, packageName, iconName)
     local extension = iconName:match("^.+(%..+)$") or ".png"
 
     -- Save icon with package name and original extension
-    local iconFilename = "upload-site/public/icons/" .. packageName .. extension
+    local iconFilename = "packages/icons/" .. packageName .. extension
     local f = io.open(iconFilename, "wb")
     if f then
         f:write(iconData)
         f:close()
-        return "/icons/" .. packageName .. extension
+        return "packages/icons/" .. packageName .. extension
     end
     return nil
 end
