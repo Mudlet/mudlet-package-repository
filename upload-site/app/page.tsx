@@ -1,6 +1,9 @@
 import { PackageList } from './components/PackageList';
 import { IntroSection } from './components/IntroSection';
+import { ProgressBar } from './components/ProgressBar';
 import { promises as fs } from 'fs';
+
+const PACKAGE_GOAL = 100;
 
 const getPackages = async () => {
   if (process.env.NODE_ENV === 'development') {
@@ -14,11 +17,20 @@ const getPackages = async () => {
 
 export default async function Home() {
   const packages = await getPackages();
+  const currentCount = packages.length;
+  const progressPercentage = Math.min((currentCount / PACKAGE_GOAL) * 100, 100);
   
   return (
     <main className="min-h-screen p-4 md:p-8 max-w-6xl mx-auto">
       <div className="mb-16">
         <IntroSection />
+      </div>
+      <div className="mb-16">
+        <ProgressBar 
+          current={currentCount}
+          goal={PACKAGE_GOAL}
+          percentage={progressPercentage}
+        />
       </div>
       <div className="border-t pt-8">
         <h2 className="text-2xl font-bold mb-8">Recent uploads</h2>
