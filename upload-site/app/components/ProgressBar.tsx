@@ -20,7 +20,7 @@ export function ProgressBar({ current, goal, percentage }: ProgressBarProps) {
   return (
     <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className="flex justify-between mb-2">
-        <span className="text-lg font-bold">Community Goal Progress</span>
+        <span className="text-lg font-bold">Community packages uploaded</span>
         <span className="text-lg font-bold">{current} / {goal}</span>
       </div>
       
