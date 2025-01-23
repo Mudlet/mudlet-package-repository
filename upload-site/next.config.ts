@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'github.com',
+        hostname: 'raw.githubusercontent.com',
         pathname: '/Mudlet/mudlet-package-repository/**',
       },
     ],
