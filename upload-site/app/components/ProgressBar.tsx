@@ -9,13 +9,15 @@ interface ProgressBarProps {
 }
 
 export function ProgressBar({ current, goal, percentage }: ProgressBarProps) {
-  const getMessage = () => {
-    if (percentage >= 100) return "🎉 Goal achieved! Thank you everyone!";
-    if (percentage >= 75) return "Almost there! Keep those packages coming!";
-    if (percentage >= 50) return "Halfway there! The community is amazing!";
-    if (percentage >= 25) return "Great progress! Let's keep going!";
-    return "Help us reach our goal of 100 packages!";
-  };
+    const getMessage = () => {
+      if (percentage >= 100) return "🎉 Goal achieved! Thank you everyone!";
+      if (percentage >= 75)
+        return "🚀 Almost there! Keep those packages coming!";
+      if (percentage >= 50)
+        return "⭐ Halfway there! The community is amazing!";
+      if (percentage >= 25) return "💫 Great progress! Let's keep going!";
+      return "🎯 Help us reach our goal of 100 packages!";
+    };
 
   return (
     <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
