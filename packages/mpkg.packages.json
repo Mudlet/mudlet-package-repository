@@ -65,6 +65,16 @@
                       "version": "1.001"
                 },
                 {
+                       "author": "Caelinus",
+                      "created": "2025-01-24T08:04:39-08:00",
+                  "description": "A simple and minimalistic UI for Erion.\n\nIntallation: Install Package as normal. Make sure to click the \"Click Here!!!\" Text upon entering game world in order to set a few important variables. UI will not fully initialize until character is loaded. You may need to close the profile once and sign back in after install if it is installed in an open game.\n\nNote: This UI package uses a custom prompt using Erion's custom prompt options in order to get the data it needs to work. Any changes to the prompt made by the user will cause the UI to stop working.",
+                     "filename": "ErionUI 1.0.mpackage",
+                     "mpackage": "ErionUI 1.0",
+                        "title": "ErionMud UI Package.",
+                     "uploaded": 1737741520,
+                      "version": "1.0"
+                },
+                {
                        "author": "Akaya, mods by Zooka",
                       "created": "2024-12-24T13:05:23+04:00",
                   "description": "### Description\n\nThis package contains a basic GUI template that serves as a basis for creating your own.  It uses modern Geyser elements such as Adjustable Containers and Geyser Buttons for a flexible layout which can be arranged and styled anyway you like.  This is an updated, modern version of Akaya's excellent original template.\n\n### Usage\n\nSimply install this package and the GUI will be displayed.  Start customising!\n\n### See Also\n\n* [Akaya's original template](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&pk_vid=09b619c5f5c4537b1735030856a9723a)",
@@ -302,5 +312,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Jan 24 14:45:02 2025"
+   "updated": "Fri Jan 24 18:01:01 2025"
 }
