@@ -107,6 +107,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Kymbahl",
+                      "created": "2025-01-24T14:22:29+0000",
+                  "description": "# ProfileWindow - A floating console to interact with your other profiles\n\n### Author: Humera\n\n### Information\nProfileWindow allows you to view and interact with your other profiles without needing to use MultiView.\nTo use, install ProfileWindow on all of your profiles that you wish to see, as well as your main profile.\nThen simply type `pwadd <profileName>` to open a floating window showing the output of that profile!\n\nExample:\nI have 2 profiles, Humera and Kryomeris. I wish Humera to be my primary profile.\nI install ProfileWindow for both profiles, then in the Humera profile I type `pwadd Kryomeris`.\n\nWhen used in conjunction with the convertToUserWindow package, these windows can be popped out from\nyour Mudlet window to be dragged anywhere you wish.\n\n### Commands (Aliases)\n`pwadd <profileName>`    - Opens a new ProfileWindow to view \n\n### Known Issues\nWhen closing a ProfileWindow, if the command line in that window has focus then clicking in the area\npreviously occupied by your floating window will show just the MiniConsole with no way to close it\nagain without a `resetProfile()`",
+                     "filename": "ProfileWindow.mpackage",
+                     "mpackage": "ProfileWindow",
+                        "title": "Profile Window",
+                     "uploaded": 1737729827,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-08-04T14:41:00+03:00",
                   "description": "### Description\n\nSearch for matching function names and open the Mudlet API from the command line.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> !api`\n\nsimply open the API webpage\n\n`> !api gotoRoom`\n\nopen the API at the function description of gotoRoom\n\n`> !api trigger`\n\n    No matching functions found.  Possible match:\n    cfeedTriggers\n    dfeedTriggers\n    disableTrigger\n    ...\n    ...",
@@ -292,5 +302,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Jan 24 14:35:21 2025"
+   "updated": "Fri Jan 24 14:45:02 2025"
 }
