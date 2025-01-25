@@ -168,6 +168,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Khazdul",
+                      "created": "2025-01-25T03:15:08+01:00",
+                  "description": "### Description\nMumeSpellTimers keeps tracks of most types of spells, buffs, maluses, charmed mobs, blinds, sancs and stored spells and displays it in an interactive window that can be toggled on or off.\n\n### Usage\n```\nCommands:\n  spells              -- toggles the window on/off\n  bli                 -- built in alias to cast blind\n```\n### Misc.\nTo keep track of which number (x. target) that has been blinded either use the built in \"bli target\" alias. Alternatively to integrate the functionality in your own settings you have to call the following function right before you cast blind (substitute target with your own target variable): \nMumeSpellTimers.attemptBlind(target)",
+                     "filename": "MumeSpellTimers.mpackage",
+                     "mpackage": "MumeSpellTimers",
+                        "title": "MumeSpellTimers - Tracking of spells, buffs, maluse and more (for MUME - Multi Users in Middle Earth)",
+                     "uploaded": 1737771764,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "Oneymus",
                       "created": "2024-06-28T14:07:07+04:00",
                   "description": "N, S, E, W, NW, NE, SW, SE, IN, OUT, UP, DOWN\nassigned to the number pad.",
@@ -479,5 +489,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sat Jan 25 02:17:12 2025"
+   "updated": "Sat Jan 25 02:23:49 2025"
 }
