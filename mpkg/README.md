@@ -15,4 +15,3 @@ Commands:
 ### See Also
 
 * https://packages.mudlet.org
-* https://mudlet.github.io/mudlet-package-repository/
