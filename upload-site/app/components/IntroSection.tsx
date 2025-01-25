@@ -15,7 +15,7 @@ export function IntroSection() {
         <h2 className="text-2xl font-semibold mb-4">Installation</h2>
         <p className="mb-4">To access this website from within Mudlet, copy/paste the following to your command line:</p>
         <pre className="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
-          <code>lua installPackage("https://mudlet.github.io/mudlet-package-repository/packages/mpkg.mpackage")</code>
+          <code>lua installPackage("https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/main/packages/mpkg.mpackage")</code>
         </pre>
       </section>
 
