@@ -22,6 +22,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Demonnic",
+                      "created": "2021-10-24T17:11:56+0000",
+                  "description": "# Walk Visualizer\n\nThis package allows you to highlight rooms based on how many times you've revisited them during your current autowalk or manual exploration.\n\nOnly been there once? It's highlighted a cool, calming green.\n\nBeen there 5 times? RED ALERT!\n\nPrimarily designed to watch the dots fill in while doing an auto walk, but also to see where it is least efficient, hence the colors getting redder the more you visit.\n\n## Requirements\n\nIt uses the `gmcp.Room.Info` event to determine it's entered a room, and the value of `gmcp.Room.Info.num` to determine which room it was. So if your game doesn't have this, you're out of luck. Should work with all IREs and any game which models its gmcp after the IRE ones.\n\n## Aliases\n\n* `awv start`\n  * starts the visualizer, clearing any previously highlighted rooms it is tracking\n* `awv stop`\n  * stops adding the highlights but does not clear them out, so you can look over them and run the report\n* `awv clear`\n  * stops the visualizer and clears all the highlights.\n* `awv report`\n  * prints a report on number of rooms visited, number of moves to do it, etc.\n\n## API\n\n* `autoWalkVis:start()`\n  * starts the visualizer, clearing any previously highlighted rooms it is tracking\n* `autoWalkVis:stop(clear?)`\n  * stops the visualizer. If argument is true, also clears all the highlights. Data is kept either way for reports.\n* `autoWalkVis:report()`\n  * prints out the stat report for this visualization session\n* `autoWalkVis:clearHighlights()`\n  * clears all the map highlights without clearing the data. Leaves the visualizer on/off state alone.\n* `autoWalkVis:resetGradientAndHighlights()`\n  * This looks over the data and resets the max level of the gradient from 5 to whatever the most times a room was visited was. Then it goes through and adjusts the highlights on all tracked rooms to use the new gradient. Useful if you have a walk which simply must revisit some rooms more than 5 times and want to change the scale for better visualization.\n",
+                     "filename": "AutoWalkVisualizer.mpackage",
+                     "mpackage": "AutoWalkVisualizer",
+                        "title": "Highlights rooms in more alarming colors the more times you revisit it.",
+                     "uploaded": 1737769918,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "bscross32",
                       "created": "2024-01-29T15:47:53-0500",
                   "description": "# ChannelHistory\n\n## Virtual buffering system for screen reader users.\n\n## Installation instructions\nIn Mudlet, type the following command:\n```\nlua uninstallPackage(\"ChannelHistory\");installPackage(\"https://github.com/ironcross32/ChannelHistory/releases/latest/download/ChannelHistory.mpackage\")\n```\n## Usage\n\nfor those who are familiar with the channel_history plugin for MUSHclient, this package behaves in much the same way, though with a more limited feature set.\n* Alt+left/Alt+right - navigate between categories in the virtual buffer\n* Alt+up/Alt+down - navigate through the messages in the selected category\n* Alt+home/Alt+end - jump to the first and last message in the selected category\n* Alt+Shift+T - Toggles hearing relative time that a given message entered the buffer\n* Alt+Shift+delete - removes the selected category along with all of its messages\n\nHolding the alt key and tapping a number from 1 to 0 on the number row will retrieve a recent message. For example, Alt+1 would retrieve the most recent message, while Alt+5 would retrieve the fifth most, and Alt+0 would retrieve the tenth most recent message. While holding alt, double tapping a number will have its message copied to the clipboard.\n\nTo add a new message to any given buffer, simply call `channel_history.add(STR category_name, STR message)`. Here's an example of a regular expression trigger:\n\n`\\[(chat|advice|events)\\] (\\w+)(.+s)`\n\nAnd, how this information is parsed and passed along to `channel_history:add()`\n\n```\nlocal where = matches[2]\nlocal message = matches[3] .. \": \" .. matches[4]\nchannel_history.add(where, message)\n```\n\n## Credits\n\nAs much of this project is a port from channel_history.xml from MushZ, thanks goes out to its authors:\n* Tyler Spivey\n* Oriol Gomez\n* Weyoun\n\nThanks also goes to Demonnic for graciously offering assistance with questions related to Muddler, which is used to package this project, and for helping with debugging some initial code. And of course, to the Mudlet team as a hole for creating a fast, powerful, and feature-rich MUD client.\n",
@@ -96,6 +106,16 @@
                 },
                 {
                        "author": "Demonnic",
+                      "created": "2024-04-14T13:54:22-0400",
+                  "description": "A helper package for reloading packages created by muddler automatically",
+                     "filename": "Muddler.mpackage",
+                     "mpackage": "Muddler",
+                        "title": "muddler helper package",
+                     "uploaded": 1737769891,
+                      "version": "1.0.2"
+                },
+                {
+                       "author": "Demonnic",
                       "created": "2022-05-19T00:28:05+0000",
                   "description": "# Busted, packaged for Windows Mudlet\n\nBusted is a robust testing framework for Lua with a lot of functionality, but it has some compiled C components and is not trivial for Windows users to install for use with their Mudlet systems. Since we use busted for testing Mudlet itself I thought it would be good to get a version repackaged which Mudlet users could install for their own use.\n## Usage\n\nThis comes with one alias, `runTests`. By default, it will look for every file in your profile directory named `*_spec.lua` and run the tests defined within. If you wish to only run tests for a specific package, you can use the package name as the argument to the alias, for instance `runTests REPLet` will run any test files in the REPLet package if installed. If you want to run a specific test file, you can use `runTests REPLet/coreTests_spec.lua` to point to the specific file.\n\n## Writing tests\n\nThere are some very good [docs](https://olivinelabs.com/busted/) available from the authors. For some practical examples, you can check out the [Mudlet busted tests](https://github.com/Mudlet/Mudlet/tree/development/src/mudlet-lua/tests)\n\n## TO-DO\n\nI have not yet included the libraries to enable asynchronous testing (libev and the copas and lua-libev luarocks) so you won't be able to ",
                      "filename": "MudletBusted.mpackage",
@@ -104,6 +124,16 @@
                         "title": "The Busted testing suite, packaged for Mudlet",
                      "uploaded": 1724911580,
                       "version": "2.0.0"
+                },
+                {
+                       "author": "Demonnic",
+                      "created": "2021-09-01T16:55:46+0000",
+                  "description": "# MudletWTTR\n\nThis is a fun and silly package I threw together for displaying weather reports in a Mudlet miniconsole.\nIt uses https://wttr.in to get the reports and then just runs it through ansi2decho to push to the miniconsole.\n\n## Commands\n\nThis is a pretty simple thing. You can check the `wttr` alias to get a list of aliases it recognizes.\n",
+                     "filename": "MudletWTTR.mpackage",
+                     "mpackage": "MudletWTTR",
+                        "title": "Get the weather from https://wttr.in in a miniconsole",
+                     "uploaded": 1737769839,
+                      "version": "1.0.0"
                 },
                 {
                        "author": "Oneymus",
@@ -127,6 +157,49 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "demonnic",
+                      "created": "2023-12-20T16:00:41+0000",
+                  "description": "# progressDisplayinator\n\n## Displays xp and gold per hour for Aetolia.\n\nProlly works with other IREs too\n\n![image](https://github.com/demonnic/ProgressDisplayinator/assets/3660/3aed41fa-07eb-4cc3-a60b-fb9ba6a9ed11)\n\n\n## Installation\n\n`lua uninstallPackage(\"ProgressDisplayinator\") installPackage(\"https://github.com/demonnic/ProgressDisplayinator/releases/latest/download/ProgressDisplayinator.mpackage\")`\n\n## Usage\n\nBrief introduction to the overall usage. Then break it down to specifics\n\n### Aliases\n\n* `show progress`\n  * pops open the display\n* `reset progress`\n  * Empties the logs and resets the start time.\n",
+                     "filename": "ProgressDisplayinator.mpackage",
+                         "icon": "packages/icons/ProgressDisplayinator.png",
+                     "mpackage": "ProgressDisplayinator",
+                        "title": "Displays xp and gold per hour for Aetolia. Prolly works with other IREs too",
+                     "uploaded": 1737769791,
+                      "version": "1.0.0"
+                },
+                {
+                       "author": "Demonnic",
+                      "created": "2022-06-28T18:42:27+0000",
+                  "description": "# REPLet - the Mudlet Lua REPL\n\nThis package replicates the functionality of the `lua` alias inside its own UserWindow\nIt comes with a single alias, `replet`, which opens the REPLet console. From there, you can execute arbitrary lua code and see the results in the console.\n\nOnce you have the console open, you can type `usage` within the console for the extra commands which REPLet comes with, in addition to executing code.\n\nBy default, adds `recho(msg)`, `rcecho(msg)` etc to allow for easy c/d/h/echoing directly to the console. Also adds rdisplay, which works like display() but prints to the REPLet console. If this covers over functions you already have and want to use in the console, use `addEchos false` in the REPLet console's command line.\n\n## Why REPLet?\n\nREPL is an acronym which stands for `Read Execute Print Loop` and is the term for interactive code runners like this. So I squashed it together with Mudlet to make REPLet.\n",
+                     "filename": "REPLet.mpackage",
+                         "icon": "packages/icons/REPLet.png",
+                     "mpackage": "REPLet",
+                        "title": "Lua REPL in a UserWindow or Adjustable.Container",
+                     "uploaded": 1737769756,
+                      "version": "1.1.1"
+                },
+                {
+                       "author": "Demonnic",
+                      "created": "2021-06-03T21:29:09+0000",
+                  "description": "# The RecogINATOR\n\nThis is honestly just a simple tool to help you manage a 'RECOGNISE' list for Lusternia.\nAs you're limited to only recognizing up to three people per r/l day, sometimes you need to be able to remember to recognize someone tomorrow when you get a slot back\n\nEnter the recogINATOR! which allows you to maintain a queue of people who need recognition\n\n## Usage\n\n`recog` shows your queue. It is clickable on the titlebar and numbers.\n\n`recog add <person> <reason>` to add someone to the queue.\n\nCheck out the alias `recog help` for full info on alias interaction.\n",
+                     "filename": "Recoginator.mpackage",
+                         "icon": "packages/icons/Recoginator.png",
+                     "mpackage": "Recoginator",
+                        "title": "The recognition maker",
+                     "uploaded": 1737769774,
+                      "version": "1.0.0"
+                },
+                {
+                       "author": "Demonnic",
+                      "created": "2022-08-09T23:52:35+0000",
+                  "description": "# Stressinator\n\nEver want to torture your Mudlet profile and see how it holds up under pressure?\n\nIf like me you answered \"Ohh, neat!\" then I threw this together after reading through the forum topic [Typical Trigger Performace](https://forums.mudlet.org/viewtopic.php?f=9&t=23089)\n\n## Installation\n\nYou can use the following command in Mudlet to install the latest version:\n\n`lua uninstallPackage(\"Stressinator\") installPackage(\"https://github.com/demonnic/Stressinator/releases/latest/download/Stressinator.mpackage\")`\n\nAfter that, you can either use the same snippet, or the supplied `stressinator update` alias\n\n## Usage\n\n* `stresstest <number of lines to run>`\n  * Run the stress test with optional number of times to process the line. Defaults to 10k if no number provided.\n* `waitno`\n  * Cancels the stresstest if you tried to start one\n* `stressinator update`\n  * Downloads and installs the latest version of the Stressinator\n",
+                     "filename": "Stressinator.mpackage",
+                     "mpackage": "Stressinator",
+                        "title": "Simple test for trigger check speeds",
+                     "uploaded": 1737769821,
+                      "version": "2.0.1"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-08-04T14:41:00+03:00",
                   "description": "### Description\n\nSearch for matching function names and open the Mudlet API from the command line.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> !api`\n\nsimply open the API webpage\n\n`> !api gotoRoom`\n\nopen the API at the function description of gotoRoom\n\n`> !api trigger`\n\n    No matching functions found.  Possible match:\n    cfeedTriggers\n    dfeedTriggers\n    disableTrigger\n    ...\n    ...",
@@ -146,6 +219,26 @@
                         "title": "Seamlessly Toggle Between Adjustable.Container and UserWindow with Double-Click",
                      "uploaded": 1737429352,
                       "version": "1"
+                },
+                {
+                       "author": "Demonnic",
+                      "created": "2024-12-28T04:18:51+0000",
+                  "description": "# copyToAda\n\n## Send the selected text as HTML to https://ada-young.com/pastebin/\nThis literally just adds a right-click menu option to send the selected text to ada-young as an html pastebin\n\n## Installation\n\nCopy and paste the following\n\n`lua installPackage(\"https://github.com/demonnic/copyToAda/releases/latest/download/copyToAda.mpackage\")`\n",
+                     "filename": "copyToAda.mpackage",
+                     "mpackage": "copyToAda",
+                        "title": "Copy selected text as HTML to https://ada-young.com/pastebin/ using https://ada-young.com/pastebin/api/v1/about ",
+                     "uploaded": 1737769687,
+                      "version": "1.0.0"
+                },
+                {
+                       "author": "Demonnic",
+                      "created": "2022-11-18T03:54:55+0000",
+                  "description": "# copyWithoutNewlines\n\n## Copy text from the main console without line breaks\n\nThis literally just adds a right-click menu option to the main and miniconsoles which allows you to copy text without the line breaks in it. Helpful for copying things after Mudlet has word wrapped them.\n\n## Installation\n\nCopy and paste the following\n\n`lua installPackage(\"https://github.com/demonnic/copyWithoutNewlines/releases/latest/download/copyWithoutNewlines.mpackage\")`\n",
+                     "filename": "copyWithoutNewlines.mpackage",
+                     "mpackage": "copyWithoutNewlines",
+                        "title": "Copy text from the main console without line breaks",
+                     "uploaded": 1737769936,
+                      "version": "1.0.0"
                 },
                 {
                        "author": "Zooka",
@@ -312,5 +405,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Fri Jan 24 18:01:01 2025"
+   "updated": "Sat Jan 25 01:53:26 2025"
 }
