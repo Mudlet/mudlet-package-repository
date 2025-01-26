@@ -38,7 +38,6 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
               }
             }}
             role="button"
-            aria-expanded={expandedPackage === pkg.mpackage}
             aria-controls={`description-${pkg.mpackage}`}
             tabIndex={0}
           >
