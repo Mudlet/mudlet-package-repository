@@ -446,14 +446,24 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2025-01-23T05:23:12+0000",
-                  "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n```\n### See Also\n\n* https://packages.mudlet.org\n* https://mudlet.github.io/mudlet-package-repository/\n",
+                      "created": "2025-01-25T12:53:45+0000",
+                  "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n```\n### See Also\n\n* https://packages.mudlet.org\n",
                      "filename": "mpkg.mpackage",
                          "icon": "packages/icons/mpkg.png",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                     "uploaded": 1737609794,
+                     "uploaded": 1737809627,
                       "version": "3.3"
+                },
+                {
+                       "author": "Armagedoom",
+                      "created": "2025-01-26T14:29:41+01:00",
+                  "description": "Helper to transform MUSH plugins or xml code into a Mudlet package",
+                     "filename": "mush_to_mudlet.mpackage",
+                     "mpackage": "mush_to_mudlet",
+                        "title": "Helper to transform MUSH plugins or xml code into a Mudlet package",
+                     "uploaded": 1737900409,
+                      "version": "1.0"
                 },
                 {
                        "author": "Mudlet Default Package",
@@ -500,5 +510,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sat Jan 25 06:29:52 2025"
+   "updated": "Sun Jan 26 14:09:33 2025"
 }
