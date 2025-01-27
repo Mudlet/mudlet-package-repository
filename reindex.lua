@@ -12,6 +12,34 @@ local yajl = require "yajl"
 -- Create icons directory if it doesn't exist
 lfs.mkdir("packages/icons")
 
+
+local function urlEncode(str)
+    local encodeChars = {
+        -- [" "] = "%20", -- spaces are commented out for better URL aesthetic
+        ["!"] = "%21",
+        ["#"] = "%23",
+        ["$"] = "%24",
+        ["%"] = "%25",
+        ["&"] = "%26",
+        ["'"] = "%27",
+        ["("] = "%28",
+        [")"] = "%29",
+        ["*"] = "%2A",
+        ["+"] = "%2B",
+        [","] = "%2C",
+        ["/"] = "%2F",
+        [":"] = "%3A",
+        [";"] = "%3B",
+        ["="] = "%3D",
+        ["?"] = "%3F",
+        ["@"] = "%40",
+        ["["] = "%5B",
+        ["]"] = "%5D"
+    }
+
+  return str:gsub("[^%w]", encodeChars)
+end
+
 local function getFileModTime(filepath)
     local attr = lfs.attributes(filepath)
     if attr and attr.mode == "file" then
@@ -43,13 +71,13 @@ local function extractIcon(zfile, packageName, iconName)
     -- Get the file extension from iconName
     local extension = iconName:match("^.+(%..+)$") or ".png"
 
-    -- Save icon with package name and original extension
-    local iconFilename = "packages/icons/" .. packageName .. extension
+    -- Save icon with URL-encoded package name and original extension
+    local iconFilename = "packages/icons/" .. urlEncode(packageName) .. extension
     local f = io.open(iconFilename, "wb")
     if f then
         f:write(iconData)
         f:close()
-        return "packages/icons/" .. packageName .. extension
+        return iconFilename
     end
     return nil
 end
