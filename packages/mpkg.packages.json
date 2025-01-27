@@ -6,7 +6,7 @@
                       "created": "2025-01-26T21:21:25+07:00",
                   "description": "Import xml, and you can do __#number thing__.\n\nFor example, _#5 hi_ will send hi five times.",
                      "filename": "#-repeat-alias.mpackage",
-                         "icon": "packages/icons/#-repeat-alias.jpg",
+                         "icon": "packages/icons/%23-repeat-alias.jpg",
                      "mpackage": "#-repeat-alias",
                         "title": "# repeat alias",
                      "uploaded": 1737944735,
@@ -532,5 +532,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Mon Jan 27 05:37:19 2025"
+   "updated": "Mon Jan 27 10:59:13 2025"
 }
