@@ -105,6 +105,8 @@ for file in io.popen("ls -pa packages/*"):lines() do
         io.close(infoFile)
         dofile("config.lua")
 
+        packagecount = packagecount + 1
+
         -- Extract icon if present
         local iconUrl = nil
         if icon then
@@ -144,7 +146,6 @@ for file in io.popen("ls -pa packages/*"):lines() do
             error("Generated JSON file failed YAJL validation after adding package " .. mpackage .. ": " .. tostring(result))
         end
     end
-    packagecount = packagecount + 1
 end
 
 print("Finished processing " .. packagecount .. " packages in the repository.")
