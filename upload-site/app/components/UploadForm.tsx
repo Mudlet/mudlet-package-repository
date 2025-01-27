@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { PackagePreview } from './PackagePreview'
 import { PackageMetadata } from '@/app/lib/types'
@@ -15,9 +15,19 @@ export function UploadForm() {
     validation: ValidationResult;
   } | null>(null)
   const [isUploading, setIsUploading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [previewRequested, setPreviewRequested] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uploadSuccess, setUploadSuccess] = useState(false)
   const [prUrl, setPrUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+    if (previewRequested && !previewData) {
+      timeout = setTimeout(() => setIsLoading(true), 250)
+    }
+    return () => clearTimeout(timeout)
+  }, [previewRequested, previewData])
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null)
@@ -26,6 +36,7 @@ export function UploadForm() {
 
     try {
       setSelectedFile(file)
+      setPreviewRequested(true)
       const formData = new FormData()
       formData.append('package', file)
 
@@ -49,6 +60,9 @@ export function UploadForm() {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to preview package')
       setSelectedFile(null)
+    } finally {
+      setPreviewRequested(false)
+      setIsLoading(false)
     }
   }
 
@@ -128,26 +142,33 @@ export function UploadForm() {
           )}</p>
         </div>      
       ) : !previewData ? (
-        <div 
-          className="border-2 border-dashed rounded-lg p-8 text-center"
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-        >
-          <input
-            type="file"
-            accept=".mpackage,.zip"
-            onChange={handleFileSelect}
-            className="hidden"
-            id="fileInput"
-            disabled={isUploading}
-          />
-          <label 
-            htmlFor="fileInput"
-            className={`cursor-pointer text-lg hover:text-blue-600 ${isUploading ? 'opacity-50' : ''}`}
+        <>
+          <div 
+            className="border-2 border-dashed rounded-lg p-8 text-center"
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
           >
-            Click to select or drag and drop package file here
-          </label>
-        </div>
+            <input
+              type="file"
+              accept=".mpackage,.zip"
+              onChange={handleFileSelect}
+              className="hidden"
+              id="fileInput"
+              disabled={isUploading}
+            />
+            <label 
+              htmlFor="fileInput"
+              className={`cursor-pointer text-lg hover:text-blue-600 ${isUploading ? 'opacity-50' : ''}`}
+            >
+              Click to select or drag and drop package file here
+            </label>
+          </div>
+          {isLoading && (
+            <div className="text-gray-600 text-center mt-4">
+              Loading preview...
+            </div>
+          )}
+        </>
       ) : (
         <PackagePreview
           metadata={previewData.metadata}
