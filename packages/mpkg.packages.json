@@ -2,6 +2,17 @@
       "name": "mudlet package repository listing",
   "packages": [
                 {
+                       "author": "Vadi",
+                      "created": "2025-01-26T21:21:25+07:00",
+                  "description": "Import xml, and you can do __#number thing__.\n\nFor example, _#5 hi_ will send hi five times.",
+                     "filename": "#-repeat-alias.mpackage",
+                         "icon": "packages/icons/#-repeat-alias.jpg",
+                     "mpackage": "#-repeat-alias",
+                        "title": "# repeat alias",
+                     "uploaded": 1737944735,
+                      "version": "1"
+                },
+                {
                        "author": "Erikka, Demonnic",
                       "created": "2024-03-15T02:21:34+0000",
                   "description": "# Achaea Chat Tabs\n\nSet of chat tabs similarly laid out to KaiUI, but using demonnic's latest version of EMCO which provides for automatic logging among other things, and not part of an all or nothing UI.\n\nBy default, the logs are kept in `getMudletHomeDir() .. \"/log/Chatbox/YYYY/MM/DD/tabname.html\"`\n\nWill start on the right side, attached to the right border. Resize, move, adjust how you see fit.\n\n## Configuration Alias\n* `act|act usage`\n  * prints a list of aliases and their usage in the main window\n* `act hide`\n  * hides the chat tabs\n* `act show`\n  * shows the chat tabs again.\n* `act save`\n  * saves the configuration\n* `act load`\n  * loads the configuration\n* `act font <new font name>`\n  * Sets the font for the chat consoles. Will not allow you to set one which does not exist.\n* `act fontSize <new font size>`\n  * Sets the font size for the chat consoles\n* `act blink <true|false>`\n  * set whether it should blink\n* `act timestamp <true|false>`\n  * set whether it should add a timestamp at the front\n* `act commandLine <true|false>`\n  * set whether it should show command lines\n* `act blankLine`\n  * set whether it should automatically add a newline to things echoed.\n* `act gaglist`\n  * lists the mobs and lines being gagged in the chat tabs.\n* `act gagmob <Lua pattern>`\n  * add a Lua pattern to check speakers against. See [this tutorial from lua-users.org](http://lua-users.org/wiki/PatternsTutorial) for more information. If the speaker matches the pattern, anything they say or emote on any channel will be gagged from the tabbed chat consoles. Does not affect the main window. Uses gmcp.Comm.Channel.Text.talker to make the determination.\n    * `act gagmob Vellis`\n      * gags any mob with \"Vellis\" in the speaker name in gmcp.\n    * `act gagmob a sick .+ child`\n      * gags `a sick human child` and `a sick tsol child` and `a sick mhun child` etc\n* `act ungagmob <Lua pattern>`\n  * Removes a lua pattern from the gagged mobs list.\n* `act gag <Lua pattern>`\n  * add a Lua pattern to check lines against. See [this tutorial from lua-users.org](http://lua-users.org/wiki/PatternsTutorial) for more information. If the content of the line matches any of the patterns then the line will be gagged from the tabbed chat consoles. Does not affect the main window.\n    * `act gag .- shouts \"I love cheese!\"`\n      * will gag anyone shouting \"I love cheese!\"\n* `act ungag <Lua pattern>`\n  * removes a lua pattern from the gagged lines list.\n* `act notify <tab name>`\n  * will send OS notifications when somethings is written to the tab specified. If a tab is not provided, will give a list of tabs that currently have notify enabled.\n    * `act notify guild`\n      * sends OS notifications whenever something comes in on the Guild tab\n* `act unnotify <tab name>`\n  * Stop sending OS notifications for a tab\n   * `act unnotify house`\n    * stop sending OS notifications when something comes in on the House tab\n* `act color <option> <color>`\n  * customize the colors of the chat window\n   * `act color usage`\n    * prints the color alias usage information\n* `act update`\n  * updates the package to the latest version\n* `act reset|act reset color`\n  * resets the chat window to defaults/resets chat colors only (remember to 'act save' after to save the defaults into the config file)\n\n## Power Users\nEMCO is a highly customizable chat script with a plethora of options to make it better/smarter/good looking that are by no means limited by only these aliases! If you want to further customize your chat box and its behavior refer to the [EMCO API](https://demonnic.github.io/mdk/current/classes/EMCO.html).\n",
@@ -402,6 +413,17 @@
                       "version": "1.2.0"
                 },
                 {
+                       "author": "Vadi",
+                      "created": "2025-01-26T21:47:45+07:00",
+                  "description": "Acts as a ctrl+f alternative/replacement, giving you what you want to find all in one place, right away.\n\n# Usage:\nDo _mfind what_ and it'll give you a list of lines where it found your text. Case-sensitive.",
+                     "filename": "find-alias.mpackage",
+                         "icon": "packages/icons/find-alias.jpg",
+                     "mpackage": "find-alias",
+                        "title": "ctrl+f alternative",
+                     "uploaded": 1737944715,
+                      "version": "1"
+                },
+                {
                        "author": "Mudlet Default Package",
                       "created": "2024-07-14T08:01:32+04:00",
                   "description": "# generic_mapper Package\n\nThis script allows for semi-automatic mapping using the included triggers.\nWhile different games can have dramatically different ways of displaying\ninformation, some effort has been put into giving the script a wide range of\npotential patterns to look for, so that it can work with minimal effort in\nmany cases.\n\ngeneric_mapper looks at a combination of room titles, descriptions and exits\nto locate and follow your character around maps you can make yourself, share\nand download for your MUD.\n\nTwo commands to get started are;\n```\n> map basics\n> map help\n```\n\nSee [this forum thread](https://forums.mudlet.org/viewtopic.php?f=13&t=6105) for further assistance.\n\nSee [this forum thread](https://forums.mudlet.org/search.php?keywords=mapping+script&terms=all&author=&sc=1&sf=titleonly&sr=topics&sk=t&sd=d&st=0&ch=400&t=0&submit=Search&pk_vid=08fcc4383ef3530916874145245184da) for more mapping scripts.\n",
@@ -457,13 +479,13 @@
                 },
                 {
                        "author": "Armagedoom",
-                      "created": "2025-01-26T14:29:41+01:00",
-                  "description": "Helper to transform MUSH plugins or xml code into a Mudlet package",
+                      "created": "2025-01-26T20:42:59+01:00",
+                  "description": "Helper to transform MUSH plugins or xml code into a Mudlet package.\n\nThe steps to transform your MUSH code to a Mudlet package are:\n\n\n* Paste the full code of your mush plugin or xml code block as value for the variable `mush_to_mudlet_code_to_transform` inside the script `INSERT_YOUR_CODE_HERE`.\n* Click on the script `DO_TRANSFORM/PACKAGE_TO_CLIPBOARD`. \n* Paste your new mudlet plugin, which will create a folder in Alias, Scripts, and triggers with the code converted from Mush.\n\nThe scripts will need manual work, but most of the alias and triggers will be automatically converted.",
                      "filename": "mush_to_mudlet.mpackage",
                      "mpackage": "mush_to_mudlet",
                         "title": "Helper to transform MUSH plugins or xml code into a Mudlet package",
-                     "uploaded": 1737900409,
-                      "version": "1.0"
+                     "uploaded": 1737944692,
+                      "version": "1.1"
                 },
                 {
                        "author": "Mudlet Default Package",
@@ -510,5 +532,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Sun Jan 26 14:09:33 2025"
+   "updated": "Mon Jan 27 02:26:45 2025"
 }
