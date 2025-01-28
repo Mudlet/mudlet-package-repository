@@ -107,6 +107,16 @@
                       "version": "1.0"
                 },
                 {
+                       "author": "Sampa",
+                      "created": "2025-01-27T15:45:55-05:00",
+                  "description": "This script will help players calculate the Fae Orb combinations for the game Medievia.  Calculations include combinations for Double Experience, Remove Storm, Locate Serpent, and Create Rainstorm.\n\nUse the \"faecalc\" command in game to view the command list.",
+                     "filename": "FaeCalc v1.00.mpackage",
+                     "mpackage": "FaeCalc v1.00",
+                        "title": "A script that calculates Fae Orb combinations for Medievia",
+                     "uploaded": 1738042529,
+                      "version": "1.00"
+                },
+                {
                        "author": "Akaya, mods by Zooka",
                       "created": "2024-12-24T13:05:23+04:00",
                   "description": "### Description\n\nThis package contains a basic GUI template that serves as a basis for creating your own.  It uses modern Geyser elements such as Adjustable Containers and Geyser Buttons for a flexible layout which can be arranged and styled anyway you like.  This is an updated, modern version of Akaya's excellent original template.\n\n### Usage\n\nSimply install this package and the GUI will be displayed.  Start customising!\n\n### See Also\n\n* [Akaya's original template](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&pk_vid=09b619c5f5c4537b1735030856a9723a)",
@@ -542,5 +552,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Tue Jan 28 05:35:13 2025"
+   "updated": "Tue Jan 28 05:37:23 2025"
 }
