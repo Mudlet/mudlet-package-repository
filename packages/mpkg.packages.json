@@ -190,6 +190,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Sampa",
+                      "created": "2025-01-27T15:07:38-05:00",
+                  "description": "This is a basic Multiplaying script for the game Medievia. It contains a Form Stat Console window to make form stats and status visible across all profiles, as well the functionality to allow the control of multiple profiles via a set of simple commands.\n\nNote: This version of MultiBot does NOT contain any combat automation.",
+                     "filename": "MultiBot Core v1.02.mpackage",
+                     "mpackage": "MultiBot Core v1.02",
+                        "title": "A basic Multiplaying script for Medievia",
+                     "uploaded": 1738042408,
+                      "version": "1.02"
+                },
+                {
                        "author": "Khazdul",
                       "created": "2025-01-25T03:15:08+01:00",
                   "description": "### Description\nMumeSpellTimers keeps tracks of most types of spells, buffs, maluses, charmed mobs, blinds, sancs and stored spells and displays it in an interactive window that can be toggled on or off.\n\n### Usage\n```\nCommands:\n  spells              -- toggles the window on/off\n  bli                 -- built in alias to cast blind\n```\n### Misc.\nTo keep track of which number (x. target) that has been blinded either use the built in \"bli target\" alias. Alternatively to integrate the functionality in your own settings you have to call the following function right before you cast blind (substitute target with your own target variable): \nMumeSpellTimers.attemptBlind(target)",
@@ -532,5 +542,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Mon Jan 27 10:59:13 2025"
+   "updated": "Tue Jan 28 05:35:13 2025"
 }
