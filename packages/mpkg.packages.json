@@ -508,6 +508,17 @@
                       "version": "1.1"
                 },
                 {
+                       "author": "Vadi",
+                      "created": "2025-01-28T19:05:36+07:00",
+                  "description": "Would you like to save the paragraph you've written to do something quickly? Now you can.\n\nDrag and drop this script into Mudlet, then hit __Ctrl+Page Up__ to save and __Ctrl+Page Down__ to load.",
+                     "filename": "roleplaything.mpackage",
+                         "icon": "packages/icons/roleplaything.jpg",
+                     "mpackage": "roleplaything",
+                        "title": "Roleplay Thing (save/load text)",
+                     "uploaded": 1738066155,
+                      "version": "1"
+                },
+                {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-27T05:32:00+02:00",
                   "description": "# run-lua-code\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n",
@@ -552,5 +563,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Tue Jan 28 10:02:31 2025"
+   "updated": "Tue Jan 28 12:11:09 2025"
 }
