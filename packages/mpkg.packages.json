@@ -252,6 +252,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "bscross32",
+                      "created": "2024-01-29T20:17:09-0500",
+                  "description": "# QuickOutput\n\n## Quick retrieval of recent output history for screen reader users.\n\nAllows reading of the 10 most recent lines of output by mapping them directly to keyboard keys.\n\n## Installation\n\nRun the following command in Mudlet:\n```\nlua uninstallPackage(\"QuickOutput\");installPackage(\"https://github.com/ironcross32/QuickOutput-for-Mudlet/releases/latest/download/QuickOutput.mpackage\")\n```\n\n## Usage\n\nHold the control key down, then tap a number from 1 to 0 on the number row. 1 is the most recent line, while 0 is the tenth most recent. Double-tapping the number of the line will cause its contents to be copied to your clipboard.\n\n### Note\nsince this package binds keys to CTRL+&lt;number&gt;, it overrides Mudlet's default behavior of jumping to a particular tab. As this package is designed to run along side [ChannelHistory](https://github.com/ironcross32/ChannelHistory), which uses Alt+&lt;number&gt; for its most recent history per category, these keybindings cannot change. Thus, for those wishing to use these two packages in tandem, while preserving the ability to jump between multiple profiles, it will be necessary to change the following option within the, \"Special Options\" tab in preferences:\n* Switch between input line and main window using:\nF6 is recommended for users who wish to retain their ability to use tab auto-completion, however, tab may be a good choice for those who do not use it.\n",
+                     "filename": "QuickOutput.mpackage",
+                     "mpackage": "QuickOutput",
+                        "title": "Quick retrieval of recent output history for screen reader users.",
+                     "uploaded": 1738159789,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2022-06-28T18:42:27+0000",
                   "description": "# REPLet - the Mudlet Lua REPL\n\nThis package replicates the functionality of the `lua` alias inside its own UserWindow\nIt comes with a single alias, `replet`, which opens the REPLet console. From there, you can execute arbitrary lua code and see the results in the console.\n\nOnce you have the console open, you can type `usage` within the console for the extra commands which REPLet comes with, in addition to executing code.\n\nBy default, adds `recho(msg)`, `rcecho(msg)` etc to allow for easy c/d/h/echoing directly to the console. Also adds rdisplay, which works like display() but prints to the REPLet console. If this covers over functions you already have and want to use in the console, use `addEchos false` in the REPLet console's command line.\n\n## Why REPLet?\n\nREPL is an acronym which stands for `Read Execute Print Loop` and is the term for interactive code runners like this. So I squashed it together with Mudlet to make REPLet.\n",
@@ -573,5 +583,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Wed Jan 29 02:26:09 2025"
+   "updated": "Wed Jan 29 14:12:33 2025"
 }
