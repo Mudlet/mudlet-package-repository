@@ -274,6 +274,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Khazdul",
+                      "created": "2025-01-28T20:15:02+01:00",
+                  "description": "### Description\n\nAdds the ability to input komplex routes in a single line of text. For example \"3e2sw\" will make you first walk 3 rooms east, 2 rooms south and 1 room west. The following will yield identical result: \"eeessw\"\n\n### Commands\n\n`speedwalk`  -- Toggles speedwalk on or off.",
+                     "filename": "SpeedWalk.mpackage",
+                     "mpackage": "SpeedWalk",
+                        "title": "Type in long routes in a single line",
+                     "uploaded": 1738117496,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2022-08-09T23:52:35+0000",
                   "description": "# Stressinator\n\nEver want to torture your Mudlet profile and see how it holds up under pressure?\n\nIf like me you answered \"Ohh, neat!\" then I threw this together after reading through the forum topic [Typical Trigger Performace](https://forums.mudlet.org/viewtopic.php?f=9&t=23089)\n\n## Installation\n\nYou can use the following command in Mudlet to install the latest version:\n\n`lua uninstallPackage(\"Stressinator\") installPackage(\"https://github.com/demonnic/Stressinator/releases/latest/download/Stressinator.mpackage\")`\n\nAfter that, you can either use the same snippet, or the supplied `stressinator update` alias\n\n## Usage\n\n* `stresstest <number of lines to run>`\n  * Run the stress test with optional number of times to process the line. Defaults to 10k if no number provided.\n* `waitno`\n  * Cancels the stresstest if you tried to start one\n* `stressinator update`\n  * Downloads and installs the latest version of the Stressinator\n",
@@ -563,5 +573,5 @@
                       "version": "2.3"
                 }
               ],
-   "updated": "Wed Jan 29 02:24:32 2025"
+   "updated": "Wed Jan 29 02:26:09 2025"
 }
