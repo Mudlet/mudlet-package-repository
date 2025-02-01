@@ -12,7 +12,16 @@ interface PackageListProps {
 
 export const PackageList = ({ packages, limit }: PackageListProps) => {
   const [expandedPackage, setExpandedPackage] = useState<string | null>(null);
-  const displayPackages = limit ? packages.slice(0, limit) : packages;
+
+  // Sort packages alphabetically by mpackage, case-insensitive
+  // This is not fixed in stone and might change in the future as we get a better understanding of how to handle this.
+  const sortedPackages = packages.slice().sort((a, b) => {
+    const aName = a.mpackage?.toLowerCase() || '';
+    const bName = b.mpackage?.toLowerCase() || '';
+    return aName.localeCompare(bName);
+  });
+
+  const displayPackages = limit ? sortedPackages.slice(0, limit) : sortedPackages;
 
   const getPackageCountByAuthor = (authorName: string | null) => {
     if (!authorName || authorName === 'Mudlet Default Package') return 0;
