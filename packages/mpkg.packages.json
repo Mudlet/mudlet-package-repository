@@ -159,6 +159,17 @@
                       "version": "2.10.0"
                 },
                 {
+                       "author": "11BelowStudio",
+                      "created": "2024-10-10T21:58:08+0000",
+                  "description": "# MUDKIP_Mud2\n\n## Multi User Dungeon Kool Informational Package (for playing MUD2 with Mudlet)\n\n**MUDKIP** is a plucky little [Mudlet](https://www.mudlet.org) package I bodged together, which adds some Kool Informational Panels that might be of use whilst one is playing *MUD2*.\n\nIt adds some gauges at the bottom to show your current stamina and magic (assuming you have any magic) at a glance, and adds a status bar across the top with the raw stats on them (along with afflictions, the dreamword, current points, etc.)\n\nThis is a plugin for Mudlet, *not a standalone MUD client!*\nPlease ensure you have Mudlet installed and are using Mudlet.\n\nAnd, again, this is *only intended to be used for MUD2!*\nThis is very unlikely to work on any other MUD, so don't try it.\n\nalso yes, we have auto-updates (very nice)\n\n## Installation and Uninstallation\n\n### Installation\n\nOpen your MUD2 profile in mudlet and enter the following command:\n\n`lua installPackage(\"https://github.com/11BelowStudio/MUDKIP_Mud2/releases/latest/download/MUDKIP_Mud2.mpackage\")`\n\n### Uninstallation\n\nOpen your MUD2 profile in mudlet and enter this command:\n\n`lua uninstallPackage(\"MUDKIP_Mud2\")`\n\n(or just use mudlet's package manager menu thing to uninstall it)\n\n## Usage\n\nThe main thing *MUDKIP* does is add the status indicators mentioned above, showing:\n\n* Your stats (stamina, magic, strength, dexterity, points)\n* Current status afflictions (if any)\n* The weather\n* Time until the next reset\n* Most recent dreamword (if known)\n\nThe only automation it currently offers is sending a `fes` every so often whilst in-game (to update the stats), and an alias for saying the dreamword (if known)\n\n**MUDKIP** unfortunately does *not* offer those bells and whistles like speedwalking, fancy maps, re-fighting, etc.\n\n### Aliases\n\n* **automatic dreamword** `dword`\n  * If the dreamword is known, this will send a `say <dreamword>` command to the game.\n    * If the dreamword is not known, MUDKIP will leave a message\n    telling you that it doesn't know what the dreamword is.\n  * `dwo` and `dwor` are also aliases for this.\n  * There's an uppercase variant which says the dreamword in uppercase instead.\n* **fixing emotes**\n  * Tired of accidentally sending `laughs`,`smiles`,`waves` etc\n    and then having the MUD2 parser complain about it?\n  * *MUDKIP_Mud2* will correct them to `laugh`, `smile`, `wave` etc, allowing you to perform those actions in peace.\n  * Many other verbs along these lines have also been fixed.\n\n### API\n\n// TODO\n\n* Everything's contained within the global `MUDKIP_Mud2` table.\n* The stats etc with the current state of your persona are\n  in the `MUDKIP_Mud2.stats` table.\n* Misc utils are in `MUDKIP_Mud2.utils`.\n* UI stuff is held in `MUDKIP_Mud2.ui`\n* Auto-update stuff is held in `MUDKIP_Mud2.updates`\n* Stuff related to the enhanced `map` command output is in `MUDKIP_Mud2.map`\n\n## Final thoughts, how to contribute, thanks, things like that\n\n*MUDKIP* is still a bit scuffed, and some of the implementation details could use a bit of cleaning up.\nIf you do want to help out, feel free to open a PR on the `develop` branch.\n\nThis package was built using [muddler](https://github.com/demonnic/muddler), in case you were wondering.\nConsider taking a look at the documentation of muddler if you wish to contribute to the development of *MUDKIP*.\n\n## CHANGELOG\n\n* **1.3.6** (`10/10/2024`)\n  * Changed the blanked-out line placeholder to be something that MUD2 genuinely cannot comprehend (I think) but hopefully won't accidentally cause mishaps to happen\n  * (theoretically) added support for being invisible\n\nSee [CHANGELOG.md](https://github.com/11BelowStudio/MUDKIP_Mud2/blob/main/CHANGELOG.md) for the full changelog.\n\n## TODO\n\n* see what people want I guess\n* get the auto-update to check the tag on the latest release on git or something like that instead of the release version.txt(?)\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23252) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "MUDKIP_Mud2.mpackage",
+                         "icon": "packages/icons/MUDKIP_Mud2.png",
+                     "mpackage": "MUDKIP_Mud2",
+                        "title": "Multi User Dungeon Kool Informational Package (for playing MUD2 with Mudlet)",
+                     "uploaded": 1738774726,
+                      "version": "1.3.6"
+                },
+                {
                        "author": "Kymbahl, Kronos",
                       "created": "2024-11-09T13:51:15+0000",
                   "description": "# MedUI - A User Interface for Medievia\n\n### Authors: Kymbahl and Kronos\n\n### Features\nMedUI is a package for the Medievia MUD which provides a more modern user experience.\nIncluded in this package is:\n1. External Map window   - This captures the in-game ASCII map and places it in its own window.\n2. Communications Window - This captures common game channels and places them in another window.\n3. Player Vitals Gauges  - Health/Mana/Breath/Movement bars that update from your prompt data.\n4. Buff Bar              - A visual indication of which buffs your player is affected by.\n5. Custom Medievia Font  - A special TrueType font designed for rendering the in-game ASCII map.\n\n### Configuration\nMost configuration options may be toggled using the 'medui' alias menu, such as:\n1. Toggle on/off the gauges display\n2. Toggle timestamps in the chat window\n3. Toggle showing the inline map (in your main display)",
@@ -304,6 +315,26 @@
                       "version": "2.0.1"
                 },
                 {
+                       "author": "takilara",
+                      "created": "2013-06-25T07:58:31+00:00",
+                  "description": "This package can consume commands from Telegram, and run them on the mud, and send messages back to Telegram\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23057) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "TelegramConnector.mpackage",
+                     "mpackage": "TelegramConnector",
+                        "title": "Telegram Connector",
+                     "uploaded": 1738774666,
+                      "version": "1"
+                },
+                {
+                       "author": "Alyven",
+                      "created": "2020-05-13T16:13:12+00:00",
+                  "description": "Adjustable TabWindows is a Mudlet software package that allows users to create tabbed windows with draggable and movable tabs across different containers. The package enables users to customize tab layouts, transfer tabs between windows, and integrate various UI elements like mappers and gauges into a flexible, modular interface. Users can create, configure, and manipulate tabs programmatically using Lua code, with additional features like saving/loading window configurations and browser-like tab interactions.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22907&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "adjustable-tabwindows.mpackage",
+                     "mpackage": "adjustable-tabwindows",
+                        "title": "Adjustable TabWindows: Flexible Tabbed Layouts",
+                     "uploaded": 1738774755,
+                      "version": "1"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-08-04T14:41:00+03:00",
                   "description": "### Description\n\nSearch for matching function names and open the Mudlet API from the command line.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> !api`\n\nsimply open the API webpage\n\n`> !api gotoRoom`\n\nopen the API at the function description of gotoRoom\n\n`> !api trigger`\n\n    No matching functions found.  Possible match:\n    cfeedTriggers\n    dfeedTriggers\n    disableTrigger\n    ...\n    ...",
@@ -353,6 +384,16 @@
                      "mpackage": "cron-daemon",
                         "title": "A cron daemon/scheduler to perform tasks at fixed times, dates or intervals.",
                      "uploaded": 1729510555,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2013-06-25T07:58:31+00:00",
+                  "description": "CSSMan is a Lua script for managing CSS stylesheets in Mudlet, allowing users to easily create, modify, and retrieve individual CSS properties without manually tracking the entire stylesheet. The package provides methods to set and get specific CSS properties, generate a complete CSS string, and simplify stylesheet management for labels and other UI elements. Users can create a new CSS tracker, modify properties like font-family or background-color, and then apply the generated stylesheet to their Mudlet interface components.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3502&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "cssman.mpackage",
+                     "mpackage": "cssman",
+                        "title": "Mudlet CSS Stylesheet Management Script",
+                     "uploaded": 1738774743,
                       "version": "1"
                 },
                 {
@@ -475,6 +516,16 @@
                       "version": "2.1.4"
                 },
                 {
+                       "author": "Akaya",
+                      "created": "2013-09-25T01:38:36+00:00",
+                  "description": "The Geyser UI Template is a flexible, customizable interface framework for creating user interfaces in Mudlet, offering pre-configured containers, gauges, icons, and labels that can be easily scripted and styled. It provides twelve icon labels, four gauges (Health, Mana, Endurance, Willpower), and multiple box containers that can be manipulated through Lua scripting with built-in CSS management capabilities. The template is designed to be adaptable across different MUD environments, allowing developers to quickly build and personalize their user interface with minimal setup.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "geyser-ui-template.mpackage",
+                     "mpackage": "geyser-ui-template",
+                        "title": "Geyser UI Template: Quick-Start Interface",
+                     "uploaded": 1738774734,
+                      "version": "1"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2022-01-11T03:23:22+0000",
                   "description": "# GREP\n\nThis alias (and the functions which support it) tries to emulate the `grep` command from *NIX systems, in that it will search your buffer for all the lines which match a pattern and display them on the screen for you.\n\nIt will autodetect how many lines can fit on your main window and paginate the results for you accordingly. This was created after someone asked me if Mudlet could do something like TinTin++'s [grep](https://tintin.mudhalla.net/manual/grep.php) command in the #help channel on the Mudlet discord. It seemed like a good idea, so I threw something together.\n\n## Things to keep in mind\n\nThe output of the `grep` alias adds to the buffer, so future uses of grep (including changing pages) will include the already printed pages at the end. This means for browsing the end of the output you should really use `-1` for the page to print from the get go, IE `grep Bob -1` to show the most recent page of lines with Bob on.\n\n## The future?\n\nI think it might be a slightly cleaner experience to have the alias assemble the output, and then display it in a Miniconsole with the wrapping turned off and the horizontal scroll bar turned on. This way the output you're paging through isn't changing because you're paging through it. But I wanted to go ahead and get this out the door.\n\n## Alias\n\n* `grep <regex pattern to search for> <optional page of the results to display>`\n  * This alias will search the main console buffer for all lines which match the pattern provided. It reads the buffer after it has been word wrapped, which means that it evaluates each line as it appears separately, rather than how it came in from the game originally.\n  * examples:\n    * `grep \\d+ gold coins`\n      * searches the buffer for any line with a number of gold coins on it and prints the outcome.\n    * `grep (?i)goblin 2`\n      * searches the buffer for goblin, ignoring case sensitivity (will match goblin or GoBLin), and print page 2 if there's more than 1 page.\n\n## Functions\n\nI use the `[=[things and stuff]=]` alternate method of string delineation for two reasons\n\n* Using `\"things and stuff\"` means you have to escape every `\\` in your regex\n* This text is included in the package's config.lua, which uses the form without the `=` sign between the brackets, and if I use that it breaks the package.\n\n### `GREP.getLines([win,]pattern)`\n\n  `pattern` is the regular expression you want to search the main buffer for\n  \n  returns a table with all of the matching lines in it, one entry per line\n  \n```lua\n  GREP.getLines([=[\\d+ gold coins]=])\n```\n\nreturns\n\n```txt\n{\n  \"There are 32 gold coins on the floor here\",\n  \"There are 72 gold coins on the floor here\",\n  \"The table has 1928 gold coins upon it\",\n}\n```\n\n### `GREP.grep(pattern, pg)`\n\nPrints out the lines matching the `pattern` to the main window, starting at `pg`. If `pg` is left off, then it defaults to 1. see getPage above for more on the page numbering.\n\n```lua\nGREP.grep([=[\\d+ gold coins]=])\n```\n\n```txt\n(grep): total hits: 5   Pg:1/1\n`echo There are 32 gold coins on the floor here\nThere are 32 gold coins on the floor here\n`echo There are 72 gold coins on the floor here\nThere are 72 gold coins on the floor here\n`echo The table has 1928 gold coins upon it\n(grep):No more pages\n```\n",
@@ -526,6 +577,36 @@
                         "title": "Helper to transform MUSH plugins or xml code into a Mudlet package",
                      "uploaded": 1737944692,
                       "version": "1.1"
+                },
+                {
+                       "author": "Avikare",
+                      "created": "2023-10-27T09:10:05+00:00",
+                  "description": "The Artists Performance Package is a lightweight software tool designed to support structured role-playing, ritual performances, dance, song, and sermon creation. It provides a flexible framework with helpful comments to assist users unfamiliar with code in implementing various performative scenarios. The package aims to simplify the technical aspects of creating and managing performance-related content.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23232&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "performance-package.mpackage",
+                     "mpackage": "performance-package",
+                        "title": "Artists Performance Text & Ritual Toolkit",
+                     "uploaded": 1738774714,
+                      "version": "1"
+                },
+                {
+                       "author": "Verose",
+                      "created": "2022-11-09T03:11:54+00:00",
+                  "description": "Verose's Harvester is a software package designed to automate plant harvesting in a game environment. It allows users to selectively enable or disable specific plant types for harvesting, automatically check rooms for harvestable plants, and provides options for auto-rifting collected items. The package includes commands to toggle harvesting settings, show current plant configurations, and reset harvesting parameters.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23174&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "plant-harvester-achaea.mpackage",
+                     "mpackage": "plant-harvester-achaea",
+                        "title": "Verose's Auto Plant Harvesting Script",
+                     "uploaded": 1738774704,
+                      "version": "1"
+                },
+                {
+                       "author": "skace",
+                      "created": "2020-10-13T15:17:55+00:00",
+                  "description": "RoDUI is a Mudlet user interface package specifically designed for the Realms of Despair MUD, offering a comprehensive UI with tabs for character score, multi-character group management, help topics, and a footer displaying character gauges, XP stats, location information, and active effects. The package provides an easy installation process through Mudlet's Package Manager and aims to modernize the player experience while maintaining the classic MUD gameplay feel. It is primarily focused on enhancing user interaction and information accessibility within the Realms of Despair game environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22970&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "realms-of-despair-ui.mpackage",
+                     "mpackage": "realms-of-despair-ui",
+                        "title": "RoDUI: Realms of Despair Mudlet Interface",
+                     "uploaded": 1738774692,
+                      "version": "1"
                 },
                 {
                        "author": "Vadi",
@@ -581,7 +662,27 @@
                         "title": "Records a speedwalk with the ability to play back, and in reverse.",
                      "uploaded": 1724911580,
                       "version": "2.3"
+                },
+                {
+                       "author": "zhenzh",
+                      "created": "2020-04-19T14:19:35+00:00",
+                  "description": "This software package provides a coroutine-based waiting mechanism in Lua that allows developers to suspend function execution for a specified time or until a specific pattern is matched. It enables modular function chaining by using wait() and wait_line() functions, which can pause execution, wait for a specific time interval, or wait for matched input patterns. The package is particularly useful for creating sequential, time-dependent, or pattern-matching script flows in Lua applications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22875&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "wait-and-wait-line.mpackage",
+                     "mpackage": "wait-and-wait-line",
+                        "title": "Wait-and-Wait-Line Coroutine Utility",
+                     "uploaded": 1738774656,
+                      "version": "1"
+                },
+                {
+                       "author": "xanthia",
+                      "created": "2022-07-08T01:33:07+00:00",
+                  "description": "XAMM is a software package designed for CoffeeMud, a multi-user dungeon (MUD) game platform, featuring integrated mapping and gauges functionality. The package allows players to connect to CoffeeMud servers and provides visual navigation and tracking tools to enhance the gaming experience. While still under development, XAMM offers several core features that improve user interaction with the CoffeeMud environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23150&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "xamm-for-coffeemud.mpackage",
+                     "mpackage": "xamm-for-coffeemud",
+                        "title": "XAMM: CoffeeMud Client v1 Public Release",
+                     "uploaded": 1738774647,
+                      "version": "1"
                 }
               ],
-   "updated": "Sat Feb  1 03:02:11 2025"
+   "updated": "Wed Feb  5 17:00:21 2025"
 }
