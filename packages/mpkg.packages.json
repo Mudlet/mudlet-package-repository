@@ -366,6 +366,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Belgarath",
+                      "created": "2017-08-26T13:23:56+00:00",
+                  "description": "Mudlet database script is a lightweight todo and event tracking tool designed for managing personal tasks and schedules within the Mudlet environment. The script allows users to create, track, and organize todo items and events with basic functionality, leveraging a calendar plugin for enhanced usability. It provides a simple interface for logging and monitoring personal tasks and upcoming events.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22439&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "calendar-todo-list.mpackage",
+                     "mpackage": "calendar-todo-list",
+                        "title": "Mudlet Event and Todo Tracking Script",
+                     "uploaded": 1738854865,
+                      "version": "1"
+                },
+                {
                        "author": "chris",
                       "created": "2011-06-17T05:47:58+00:00",
                   "description": "This software package is a map importer for Mudlet that allows users to import maps from cMud (a MUD client) into Mudlet's mapping system. The importer supports importing room data, scripts, colors, and favorites from dbm or sqlite3 formatted map files, with additional commands to help users localize themselves and manage their imported map. Users can use commands like cmud importmap to load the map, cmud colorRooms to color rooms, and cmud labelZones to add zone labels, making map management and navigation easier.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2274&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -853,6 +863,16 @@
                       "version": "1.0"
                 },
                 {
+                       "author": "Wyd",
+                      "created": "2010-05-02T08:20:09+00:00",
+                  "description": "The Simple Logger is a Mudlet logging system that allows users to log specific text lines from a MUD to files with advanced features like timestamping, file size splitting, and selective logging. It provides functions to log individual lines or entire sections of text, search through log files using regular expressions, and manage log file handles with options for performance optimization. The package includes convenient methods like Logger:Log(), Logger:LogSection(), Logger:StopLogging(), and Logger:SearchLog() to give users flexible text logging capabilities.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1424&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "simple-logger.mpackage",
+                     "mpackage": "simple-logger",
+                        "title": "Simple Mudlet Logger with Advanced Features",
+                     "uploaded": 1738854807,
+                      "version": "1"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-11-26T15:02:05+04:00",
                   "description": "### Description\n\nCreate a simple map using only directional commands.\nSupports n,s,e,w,ne,nw,se,sw,u,d.  This mapper does\nnot capture any game data so can also be used offline\nfor creating areas.\n\n### Usage\nType smap help for the help file.\n\nTo get started on a new map issue the following command: <yellow>smap new area My Area<reset> and starting moving around.\n```\n",
@@ -882,6 +902,16 @@
                      "mpackage": "stopinator",
                         "title": "stopinator",
                      "uploaded": 1738850829,
+                      "version": "1"
+                },
+                {
+                       "author": "xanthia",
+                      "created": "2019-26-04T00:00:00+00:00",
+                  "description": "This is a UI package that includes text-to-speech support for accessibility on Cities Of M'Dhoria, with graphic bars for player and enemy and a working auto-mapper (which just require some walking rules/discipline).\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22736&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tts-for-cities-of-mdhoria.zip",
+                     "mpackage": "tts-for-cities-of-mdhoria",
+                        "title": "TTS for Cities of MDhoria",
+                     "uploaded": 1738854820,
                       "version": "1"
                 },
                 {
@@ -925,5 +955,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 14:11:32 2025"
+   "updated": "Thu Feb  6 15:15:36 2025"
 }
