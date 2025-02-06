@@ -244,12 +244,12 @@
                 {
                        "author": "Stack",
                       "created": "2023-09-28T17:08:53+0000",
-                  "description": "The Procedural Realms Script [PRS] project gives Procedural Realms MUD players improved access to the advanced features of the Mudlet MUD client. By leveraging the specific \"out of band\" packets sent by Procedural Realms' server, PRS uses Mudlet's mapper to identify rooms/exits, prevent creation of duplicate rooms/areas, manage instanced areas, and accurately track your character's location on the map as you move about the realm. Additional convenience features include speedwalking/pathfinding, self-updating gauges (vitals, combat, and skills), combat buttons and targetting, communication containers, quick slot buttons/keybindings, and a user-adjustable UI layout.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23126) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "The Procedural Realms Script [PRS] project gives Procedural Realms MUD players improved access to the advanced features of the Mudlet MUD client. By leveraging the specific \"out of band\" packets sent by Procedural Realms' server, PRS uses Mudlet's mapper to identify rooms/exits, prevent creation of duplicate rooms/areas, manage instanced areas, and accurately track your character's location on the map as you move about the realm. Additional convenience features include speedwalking/pathfinding, self-updating gauges (vitals, combat, and skills), combat buttons and targetting, communication containers, quick slot buttons/keybindings, and a user-adjustable UI layout.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23126) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "PRS.mpackage",
                          "icon": "packages/icons/PRS.png",
                      "mpackage": "PRS",
                         "title": "[Mudlet Script for Procedural Realms MUD",
-                     "uploaded": 1738846731,
+                     "uploaded": 1738849335,
                       "version": "1.8.0"
                 },
                 {
@@ -348,11 +348,11 @@
                 {
                        "author": "Akaya",
                       "created": "2012-11-13T21:21:38+00:00",
-                  "description": "The Akayan Fishing UI is a software package designed to track fishing statistics in real-time, allowing players to monitor fish caught, their weights, and line distance during fishing activities. The UI supports up to three players in a fishing tournament, enabling participants to share their total fish catch and weight via a party channel with a simple button click. Additionally, the script tracks bait usage, line casting, and provides detailed information about individual and collective fishing performance.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2984&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "The Akayan Fishing UI is a software package designed to track fishing statistics in real-time, allowing players to monitor fish caught, their weights, and line distance during fishing activities. The UI supports up to three players in a fishing tournament, enabling participants to share their total fish catch and weight via a party channel with a simple button click. Additionally, the script tracks bait usage, line casting, and provides detailed information about individual and collective fishing performance.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2984&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "akayan-ui.mpackage",
                      "mpackage": "akayan-ui",
                         "title": "Akayan Fishing UI: Multiplayer Fishing Tracker",
-                     "uploaded": 1738846740,
+                     "uploaded": 1738849296,
                       "version": "1"
                 },
                 {
@@ -368,11 +368,11 @@
                 {
                        "author": "chris",
                       "created": "2011-06-17T05:47:58+00:00",
-                  "description": "This software package is a map importer for Mudlet that allows users to import maps from cMud (a MUD client) into Mudlet's mapping system. The importer supports importing room data, scripts, colors, and favorites from dbm or sqlite3 formatted map files, with additional commands to help users localize themselves and manage their imported map. Users can use commands like cmud importmap to load the map, cmud colorRooms to color rooms, and cmud labelZones to add zone labels, making map management and navigation easier.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2274&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "This software package is a map importer for Mudlet that allows users to import maps from cMud (a MUD client) into Mudlet's mapping system. The importer supports importing room data, scripts, colors, and favorites from dbm or sqlite3 formatted map files, with additional commands to help users localize themselves and manage their imported map. Users can use commands like cmud importmap to load the map, cmud colorRooms to color rooms, and cmud labelZones to add zone labels, making map management and navigation easier.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2274&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "cmud-map-importer.mpackage",
                      "mpackage": "cmud-map-importer",
                         "title": "cMud Map Importer for Mudlet",
-                     "uploaded": 1738846748,
+                     "uploaded": 1738849304,
                       "version": "1"
                 },
                 {
@@ -458,13 +458,23 @@
                       "version": "1"
                 },
                 {
+                       "author": "Symple",
+                      "created": "2020-05-20T06:00:45+00:00",
+                  "description": "This Mudlet package provides a custom speedwalking feature that allows users to create, manage, and navigate through a list of predefined locations with optional notes. Users can add, list, search, remove, and annotate speedwalking entries, with the ability to quickly travel to locations by clicking on a generated list or using specific commands. The package offers flexible search and navigation options, with clickable tooltips and customizable walking delays.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22909&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "custom-mudlet-speedwalking-package.mpackage",
+                     "mpackage": "custom-mudlet-speedwalking-package",
+                        "title": "Custom Mudlet Speedwalking Package",
+                     "uploaded": 1738849159,
+                      "version": "1"
+                },
+                {
                        "author": "Eraene",
                       "created": "2019-04-06T21:42:22+00:00",
-                  "description": "This is a dark theme package for the Mudlet software that provides a comprehensive dark mode UI with styled 3D elements across nearly all interface components. The package allows users to switch between full application and profile-specific stylesheets, offering a consistent dark visual experience with custom styling for buttons, icons, and interface widgets. It is designed to be easily installable and provides aesthetic improvements to the default Mudlet interface, with ongoing updates to support different Mudlet versions and fix minor styling issues.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22728&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "This is a dark theme package for the Mudlet software that provides a comprehensive dark mode UI with styled 3D elements across nearly all interface components. The package allows users to switch between full application and profile-specific stylesheets, offering a consistent dark visual experience with custom styling for buttons, icons, and interface widgets. It is designed to be easily installable and provides aesthetic improvements to the default Mudlet interface, with ongoing updates to support different Mudlet versions and fix minor styling issues.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22728&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "dark-theme-for-mudlet.mpackage",
                      "mpackage": "dark-theme-for-mudlet",
                         "title": "Dark Theme Mudlet UI Package",
-                     "uploaded": 1738846757,
+                     "uploaded": 1738849311,
                       "version": "1"
                 },
                 {
@@ -535,11 +545,11 @@
                 {
                        "author": "Vadi",
                       "created": "2017-04-12T08:49:20+00:00",
-                  "description": "The software is a Mudlet package that automatically translates MUD (Multi-User Dungeon) game text from another language into English using the Yandex translation service. It can be installed directly into the Mudlet application by copying and pasting a provided code snippet, which downloads and installs the translation package. While functional, the current version has limitations in text alignment and presentation when handling large volumes of text.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=19937&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "The software is a Mudlet package that automatically translates MUD (Multi-User Dungeon) game text from another language into English using the Yandex translation service. It can be installed directly into the Mudlet application by copying and pasting a provided code snippet, which downloads and installs the translation package. While functional, the current version has limitations in text alignment and presentation when handling large volumes of text.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=19937&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "dodgy-mud-translation-script.mpackage",
                      "mpackage": "dodgy-mud-translation-script",
                         "title": "MUD Text Translator via Yandex Service",
-                     "uploaded": 1738846768,
+                     "uploaded": 1738849318,
                       "version": "1"
                 },
                 {
@@ -628,6 +638,26 @@
                       "version": "1"
                 },
                 {
+                       "author": "breakone9r",
+                      "created": "2020-09-15T20:20:55+00:00",
+                  "description": "MapImporter is a Mudlet package designed to facilitate crowd-sourced mapping for MUDs that lack built-in mapping support. The tool allows users to import room data from exported files, with options to import specific rooms or update entire maps without modifying existing room configurations. Users can also update environment colors using simple commands within the Mudlet interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22960&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "import-maps-generated-by-mapexplorer.mpackage",
+                     "mpackage": "import-maps-generated-by-mapexplorer",
+                        "title": "Crowd-sourced MUD Mapping Tool for Mudlet",
+                     "uploaded": 1738849183,
+                      "version": "1"
+                },
+                {
+                       "author": "demonnic",
+                      "created": "2020-03-19T05:47:39+00:00",
+                  "description": "LuaUnit is a modified testing framework specifically adapted for Mudlet, allowing developers to run unit tests directly within the Mudlet environment. It replaces standard Lua print and io.write functions with Mudlet-compatible alternatives and removes OS exit calls to prevent accidental Mudlet closure. Users can install the package via an mpackage file or manually include the luaunit.lua file, enabling straightforward unit testing of Mudlet scripts with familiar assertion methods like 'lum.assertEquals'.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22857&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "luaunit-for-mudlet.mpackage",
+                     "mpackage": "luaunit-for-mudlet",
+                        "title": "LuaUnit for Mudlet: Lightweight Testing Kit",
+                     "uploaded": 1738849196,
+                      "version": "1"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-09-01T16:21:44+02:00",
                   "description": "### Description\n\nMaster Spam suppress lines of text for a specified number of times, allowing one to get through every now and then.\n\n### Usage\n\nInsert the lines you want to match into the masterSpam.masterSpam table, and add the number of lines you want to suppress.\n\n### See Also\n\nI make Mudlet scripts for a living.  Please support my work if you have found this package helpful!\n\n* https://buymeacoffee.com/zookaongit\n* https://github.com/ZookaOnGit\n",
@@ -662,11 +692,31 @@
                 {
                        "author": "Vadi",
                       "created": "2021-03-11T06:32:12+00:00",
-                  "description": "This software package demonstrates the usage of named patterns in trigger matching, allowing developers to use descriptive variable names instead of numerical indexes when capturing regex matches. The package provides a flexible approach to pattern matching that simplifies handling complex regular expressions, particularly when match order can vary. It enables more readable and maintainable code by allowing developers to reference captured groups by meaningful names rather than array positions.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23040&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "This software package demonstrates the usage of named patterns in trigger matching, allowing developers to use descriptive variable names instead of numerical indexes when capturing regex matches. The package provides a flexible approach to pattern matching that simplifies handling complex regular expressions, particularly when match order can vary. It enables more readable and maintainable code by allowing developers to reference captured groups by meaningful names rather than array positions.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23040&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "named-patterns-demo.mpackage",
                      "mpackage": "named-patterns-demo",
                         "title": "Named Regex Pattern Matching Demo",
-                     "uploaded": 1738846658,
+                     "uploaded": 1738849327,
+                      "version": "1"
+                },
+                {
+                       "author": "Lightbender",
+                      "created": "2020-07-24T19:45:16+00:00",
+                  "description": "Mudlet is a customizable script package for NannyMUD that provides triggers to capture game statistics like HP/SP, aliases for speedwalking and command shortcuts, and a basic Geyser interface for tracking character health across multiple characters. The module is designed to be easily installed as a Mudlet module with synchronization capabilities, allowing players to share settings and configurations across their characters.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22929&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "nannymud-starter-module.mpackage",
+                     "mpackage": "nannymud-starter-module",
+                        "title": "NannyMUD Mudlet Module: Basic Starter Kit",
+                     "uploaded": 1738849208,
+                      "version": "1"
+                },
+                {
+                       "author": "fordpinto",
+                      "created": "2020-03-12T23:18:08+00:00",
+                  "description": "MLObj is a Lua library for Mudlet that provides enhanced management of dynamic triggers and timers, offering improved garbage collection, state tracking, and searchability. It allows developers to create, enable/disable, and automatically clean up triggers and timers with more control and readability compared to native Mudlet APIs. The library supports multiple trigger types (like REGEX, PROMPT, LINE) and provides methods for tracking, searching, and managing these objects throughout their lifecycle.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22855&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "oo-wrapper-for-mudlet-trigger-objects.mpackage",
+                     "mpackage": "oo-wrapper-for-mudlet-trigger-objects",
+                        "title": "MLObj: Dynamic Triggers & Timers Management",
+                     "uploaded": 1738849227,
                       "version": "1"
                 },
                 {
@@ -755,6 +805,26 @@
                       "version": "2.3"
                 },
                 {
+                       "author": "demonnic",
+                      "created": "2023-21-03T00:00:00+00:00",
+                  "description": "It's just a really simple script which allows you to toggle a block on normal cardinal movement, plus up/down/in/out.\n\nuse function stopinator.block() to temporarily halt regular movement\nuse function stopinator.unblock() to release yourself from the stopinator's clutches\n\nIf you use the IRE mapping script you may want to issue mmp.pause(\"on\") when you block and mmp.pause(\"off\") when you unblock to also pause any speedwalking you may be doing.\n\n---\nThis package was originally shared on the [Mudlet Forums](URL) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "stopinator.mpackage",
+                     "mpackage": "stopinator",
+                        "title": "stopinator",
+                     "uploaded": 1738849240,
+                      "version": "1"
+                },
+                {
+                       "author": "atari2600tim",
+                      "created": "2021-01-27T19:27:18+00:00",
+                  "description": "This Lua script package for Mudlet provides text-to-speech functionality with simple commands to control speech output, including triggering speech for incoming lines and allowing users to manipulate volume, speed, pitch, and voice through a \"tts\" alias. Users can start, stop, pause, and resume speech, adjust audio settings, and view available commands, with the primary goal of enhancing accessibility and user interaction in text-based environments.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23015&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tts-text-to-speech-demo-by-tim.mpackage",
+                     "mpackage": "tts-text-to-speech-demo-by-tim",
+                        "title": "Simple TTS Script for Mudlet Triggers",
+                     "uploaded": 1738849257,
+                      "version": "1"
+                },
+                {
                        "author": "zhenzh",
                       "created": "2020-04-19T14:19:35+00:00",
                   "description": "This software package provides a coroutine-based waiting mechanism in Lua that allows developers to suspend function execution for a specified time or until a specific pattern is matched. It enables modular function chaining by using wait() and wait_line() functions, which can pause execution, wait for a specific time interval, or wait for matched input patterns. The package is particularly useful for creating sequential, time-dependent, or pattern-matching script flows in Lua applications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22875&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -762,6 +832,16 @@
                      "mpackage": "wait-and-wait-line",
                         "title": "Wait-and-Wait-Line Coroutine Utility",
                      "uploaded": 1738774656,
+                      "version": "1"
+                },
+                {
+                       "author": "Smurf",
+                      "created": "2020-07-25T11:33:19+00:00",
+                  "description": "Wayfinder is a Mudlet route-finding package with a flexible pathfinding function \"findWayToRoom()\" that allows complex, customizable routing based on user-defined check functions. It can perform advanced navigation tasks like finding the shortest route, locating specific locations, filtering paths based on conditional criteria, and supporting custom speedwalking. The package is designed to be fast and highly adaptable, running through large room sets quickly while enabling sophisticated routing logic.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22930&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "wayfinder-an-alternate-route-finder-package.mpackage",
+                     "mpackage": "wayfinder-an-alternate-route-finder-package",
+                        "title": "Advanced Routing Package for Mudlet",
+                     "uploaded": 1738849249,
                       "version": "1"
                 },
                 {
@@ -775,5 +855,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 13:39:07 2025"
+   "updated": "Thu Feb  6 13:45:04 2025"
 }
