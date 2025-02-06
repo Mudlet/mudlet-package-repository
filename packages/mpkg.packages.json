@@ -335,6 +335,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "cizra",
+                      "created": "2025-02-05T20:32:37+0000",
+                  "description": "# cofudlet\n\n## Mudlet client package for CoffeeMUD\n\nThis package provides a visual map (powered by GMCP room events), chat capture, and stat bars for you and groupies.\nIt's also extensible - you could hook your own event handler to the `cofudlet.onFightStart` or `cofudlet.onMaxMana` events, for example.\n\n## Installation\n\nTo install and update Cofudlet, use `mpkg`. See https://packages.mudlet.org/ for instructions.\n\n## Usage\n\n### Mapper\nRun `map help` for mapper-related commands.\n\n### Mob capture\n\nCofudlet remembers mobs you've seen. Consider them with Alt-keypad5, and attack with Keypad5 (if you don't have a keypad, you could remap the same thing to some other key).\n\nRun `mob help` to see some commands, notably `mob ls`.\n\n## Support\n\nAsk around in #mud-clients of the CoffeeMUD Discord: https://discord.gg/qNEgWxft48\n",
+                     "filename": "cofudlet.mpackage",
+                     "mpackage": "cofudlet",
+                        "title": "Mudlet package for CoffeeMUD",
+                     "uploaded": 1738818317,
+                      "version": "1.0.26"
+                },
+                {
                        "author": "Zooka",
                       "created": "2024-08-04T14:41:00+03:00",
                   "description": "### Description\n\nSearch for matching function names and open the Mudlet API from the command line.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> !api`\n\nsimply open the API webpage\n\n`> !api gotoRoom`\n\nopen the API at the function description of gotoRoom\n\n`> !api trigger`\n\n    No matching functions found.  Possible match:\n    cfeedTriggers\n    dfeedTriggers\n    disableTrigger\n    ...\n    ...",
@@ -684,5 +694,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Feb  5 19:54:45 2025"
+   "updated": "Thu Feb  6 05:06:02 2025"
 }
