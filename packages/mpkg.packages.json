@@ -599,6 +599,16 @@
                       "version": "1.1"
                 },
                 {
+                       "author": "Vadi",
+                      "created": "2021-03-11T06:32:12+00:00",
+                  "description": "This software package demonstrates the usage of named patterns in trigger matching, allowing developers to use descriptive variable names instead of numerical indexes when capturing regex matches. The package provides a flexible approach to pattern matching that simplifies handling complex regular expressions, particularly when match order can vary. It enables more readable and maintainable code by allowing developers to reference captured groups by meaningful names rather than array positions.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23040&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "named-patterns-demo.mpackage",
+                     "mpackage": "named-patterns-demo",
+                        "title": "Named Regex Pattern Matching Demo",
+                     "uploaded": 1738846658,
+                      "version": "1"
+                },
+                {
                        "author": "Avikare",
                       "created": "2023-10-27T09:10:05+00:00",
                   "description": "The Artists Performance Package is a lightweight software tool designed to support structured role-playing, ritual performances, dance, song, and sermon creation. It provides a flexible framework with helpful comments to assist users unfamiliar with code in implementing various performative scenarios. The package aims to simplify the technical aspects of creating and managing performance-related content.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23232&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -704,5 +714,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 07:58:29 2025"
+   "updated": "Thu Feb  6 12:58:33 2025"
 }
