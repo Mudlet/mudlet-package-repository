@@ -356,6 +356,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "breakone9r",
+                      "created": "2020-08-05T02:46:03+00:00",
+                  "description": "This software package is a mapping and tracking tool for a text-based game, providing HP, SP, and ST gauges along with an experience bar. It includes an interactive map feature for the Alyria game world, displaying the player's current location with an arrow, and allows for map updates through a simple command. The package offers a clean, basic interface with ongoing development and updates available on GitHub.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22943&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "basic-materia-magica-ui-and-gmcp-mapper.mpackage",
+                     "mpackage": "basic-materia-magica-ui-and-gmcp-mapper",
+                        "title": "Alyria Mapper: Basic MUD Mapping Package",
+                     "uploaded": 1738849091,
+                      "version": "1"
+                },
+                {
                        "author": "chris",
                       "created": "2011-06-17T05:47:58+00:00",
                   "description": "This software package is a map importer for Mudlet that allows users to import maps from cMud (a MUD client) into Mudlet's mapping system. The importer supports importing room data, scripts, colors, and favorites from dbm or sqlite3 formatted map files, with additional commands to help users localize themselves and manage their imported map. Users can use commands like cmud importmap to load the map, cmud colorRooms to color rooms, and cmud labelZones to add zone labels, making map management and navigation easier.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2274&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -765,5 +775,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 13:02:19 2025"
+   "updated": "Thu Feb  6 13:39:07 2025"
 }
