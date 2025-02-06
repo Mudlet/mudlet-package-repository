@@ -397,6 +397,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "demonnic",
+                      "created": "2019-06-14T19:15:09+00:00",
+                  "description": "This Lua script provides a method to generate consistent, unique colors for text based on an input string. It converts a string into a random color table by using the string's ASCII values as a seed for the random number generator, ensuring that the same input always produces the same color. The package includes functions like string.tocolor() to generate colors and colorMungeEcho() to display text in the generated color.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22752&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "convert-arbitrary-string-to-color-consistently.mpackage",
+                     "mpackage": "convert-arbitrary-string-to-color-consistently",
+                        "title": "Consistent Unique Character Name Coloring Script",
+                     "uploaded": 1738850819,
+                      "version": "1"
+                },
+                {
                        "author": "Edru2",
                       "created": "2025-01-20T23:02:49+01:00",
                   "description": "**Convert Adjustable.Container to UserWindow and back (by simply double clicking)**\n\n### Description\n\nThis Mudlet package by **Edru** enables you to toggle any Adjustable.Container into a UserWindow, and vice versa, with just a couple of clicks. Once installed, the package is active immediately. Just double-click on an Adjustable.Container to convert it into a UserWindow. To convert it back, open the UserWindow, double-click on the contained adjustable box, and then choose the position to place it back in your main interface.\n\n### Usage\n\nDrag and drop the package onto Mudlet to use it right away—no configuration needed. Perform the following actions to switch between Adjustable.Container and UserWindow:\n\n1. **Convert to UserWindow**: Double-click the Adjustable.Container.\n2. **Convert back to Adjustable.Container**: Open the UserWindow, double-click the contained adjustable box, and choose the position.\n",
@@ -575,6 +585,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "jieiku",
+                      "created": "2019-03-28T11:00:52+00:00",
+                  "description": "favMenu is a script that creates a drop-down menu of user-selected favorite rooms based on a predefined list of room IDs. When a user hovers over and clicks a room in the menu, the script automatically attempts to navigate to that room using the gotoRoom() function. Users can customize the room list by editing the script, with future potential for persistent room storage and right-click menu integration.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22726&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "favmenu.mpackage",
+                     "mpackage": "favmenu",
+                        "title": "Favorite Rooms Quick Navigation Menu",
+                     "uploaded": 1738850939,
+                      "version": "1"
+                },
+                {
                        "author": "demonnic",
                       "created": "2022-10-28T19:41:37+0000",
                   "description": "# figinator\n\n## Create ascii art out of text\n\nThe figinator is a Mudlet package designed to put the awesome power of [Figlets](http://figlet.org) right at your finger tips.\n\nExamples of all the included fonts can be font on [the Wiki](https://github.com/demonnic/figinator/wiki)\n\n## Installation\n\nThe fastest way to install the figinator is to run the following alias:\n\n`lua uninstallPackage(\"figinator\") installPackage(\"https://github.com/demonnic/figinator/releases/latest/download/figinator.mpackage\")`\n\nAfter that you can stay up to date using the `fig update` alias. (Available in 1.2+)\n\n## Usage\n\nThis is primarily meant to be used via script for your triggers and the like to present big bold text. But I've included a couple of aliases for trying it out.\n\n### Aliases\n\n* `fig fontlist`\n  * A list of the fonts included in this package and available for use\n* `fig font <fontName>`\n  * Select which figlet font to use\n* `fig demo <fontName>`\n  * Does a demo of the font in regular, kerned, and smushed.\n  * also sets future figs to be drawn in this font. It's a side effect of loading the font.\n* `fig draw <msg>`\n  * Draws `msg` in the currently selected font in the main window\n* `fig kern <msg>`\n  * Draws `msg` in the currently selected font in the main window with kerning\n* `fig smush <msg>`\n  * Draws `msg` in the currently selected font in the main window smushed\n* `fig update`\n  * downloads the latest version of the figinator and installs it.\n\n### API\n\n* `figinator.useFont(fontName)`\n  * Tells the figinator to use the specified font for the next figlet.\n* `figinator.loadOutsideFont(filename)`\n  * Allows you to load arbitrary figlet files not included with the figinator\n* `figinator.getString(msg)`\n  * Returns `msg` as a figlet in strong format, so you can echo() it where you want Puts space between the letters\n* `figinator.getKern(msg)`\n  * Like figinator.getString, but with less space between the letters\n* `figinator.getSmush(msg)`\n  * like figinator.getString, but the letters touch and share edges.\n* `figinator.demoFont(font)`\n  * Demonstrates the font in all three styles using the msg \"Fig Test\". This may take a screen to do all three.\n* `figinator.demoAll()`\n  * Demonstrates all of the fonts. This will be pretty spammy.\n* `figinator.getFancy(options)`\n  * This function does it all! Including interleaving color gradients for use with decho!\n  * options is a table of options to apply. Valid options are:\n    * msg\n      * this one is required, and is the text to make the figlet out of\n    * kern\n      * if true, will apply kerning, reducing the space between the letters\n      * defaults to false\n    * smush\n      * if true, will smush the letters closer, having them share edges where possible\n      * defaults to false\n    * gradType\n      * use either 'h' for horizontal, or 'v' for vertical. \n      * defaults to 'h'\n    * gradient\n      * the actual gradient to use. Can either be a table of gradient stops to use, or the string name of an included gradient\n      * `gradient = {{50,50,50}, {255,0,0}, {50,50,50}}`\n        * would shift from grey to red to grey\n      * `gradient = \"rainbow\"`\n        * will use the included \"rainbow\" gradient\n    * contrastColor\n      * What color to contrast the gradient with.\n      * defaults to 'black'\n      * can use named colors from cecho (such as \"black\", \"white\", \"magenta\"), decho (\"<0,0,0>\", \"<255,255,255>\"), or hecho (\"#000000\", \"#FFFFFF\")\n      * the special color \"invert\" will cause the contrast color to be the inverse of the gradient color. That is to say, if the gradient for a space has `r,g,b` of `128,255,0` then the contrast will be `127,0,255`. This is done for every space.\n    * invert\n      * When this is true then the text will be the contrastColor, and the background will be the gradient color. So if you use the rainbow gradient and the default contrastColor of \"black\" then the background colors will shift through the rainbow, and the text which makes the ascii art will be black.\n  * example:\n    * `decho(figinator.getFancy({ msg = \"Gradient1\", gradient = \"rainbow\", smush = true }))`\n      * Uses the included 'rainbow' gradient horizontally\n    * `decho(figinator.getFancy({ msg = \"Gradient2\", gradient = {{255,0,0}, {0,255,0}} }))`\n      * Will gradient from red to green horizontally\n    * `decho(figinator.getFancy({ msg = \"Gradient3\", gradType = \"v\", kern = true, gradient = {{75,0,0}, {255,0,0}} }))`\n      * Will gradient from dark red to light red, vertically.\n\n## Credit and acclaim\n\nThe figlet lua implementation is primarily the work of Nick Gammon and was taken from [his forum](https://www.gammon.com.au/forum/?id=10748&reply=6#reply6) then modified to be a lua module. And I added some convenience methods for getting strings directly instead of a table of lines.\n\nThen I took that and wrapped it in this package which includes several fonts pulled from [this git repo](https://github.com/xero/figlet-fonts) and some convenience methods for switching between the included ones easily.\n\nIn short, all the coolest parts of what this does are things other people made, I'm just trying to make them easy for Mudlet users to use =)\n",
@@ -607,6 +627,16 @@
                       "version": "2.1.4"
                 },
                 {
+                       "author": "demonnic",
+                      "created": "2019-07-10T00:20:15+00:00",
+                  "description": "The `getValueAt()` function is a flexible utility that allows retrieving variable values dynamically by passing their names as strings. It enables scriptable and automated tracking of statistics by enabling indirect access to nested variable values without directly referencing them. This approach supports creating modular UI components that can easily layer on top of existing tracking systems without modifying their underlying implementation.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22762&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "getvalueat.mpackage",
+                     "mpackage": "getvalueat",
+                        "title": "Dynamic Value Retrieval for Lua Scripting",
+                     "uploaded": 1738850919,
+                      "version": "1"
+                },
+                {
                        "author": "Akaya",
                       "created": "2013-09-25T01:38:36+00:00",
                   "description": "The Geyser UI Template is a flexible, customizable interface framework for creating user interfaces in Mudlet, offering pre-configured containers, gauges, icons, and labels that can be easily scripted and styled. It provides twelve icon labels, four gauges (Health, Mana, Endurance, Willpower), and multiple box containers that can be manipulated through Lua scripting with built-in CSS management capabilities. The template is designed to be adaptable across different MUD environments, allowing developers to quickly build and personalize their user interface with minimal setup.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -614,6 +644,16 @@
                      "mpackage": "geyser-ui-template",
                         "title": "Geyser UI Template: Quick-Start Interface",
                      "uploaded": 1738774734,
+                      "version": "1"
+                },
+                {
+                       "author": "davidwiththenicehat",
+                      "created": "2020-01-12T22:41:21+00:00",
+                  "description": "The Git Update software package is a Mudlet scripting tool designed to automate software updates from GitHub repositories. It allows developers to easily manage package updates by downloading and installing the latest release files, handling version comparisons, providing update notifications, and supporting optional beta testing channels.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22841&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "git-updater.mpackage",
+                     "mpackage": "git-updater",
+                        "title": "Mudlet Git Auto-Update: Simple GitHub Release",
+                     "uploaded": 1738850909,
                       "version": "1"
                 },
                 {
@@ -638,6 +678,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "demonnic",
+                      "created": "2019-10-04T02:05:16+00:00",
+                  "description": "i18n.lua is a Lua internationalization library that allows developers to easily manage and switch between multiple language translations for their applications. The package enables users to load translation tables for different locales and dynamically change the active language using simple functions like i18n.load() and i18n.setLocale(). With this library, developers can quickly implement multilingual support by defining translation strings and retrieving localized text with the i18n() function.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22813&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "i18n-support-for-mudlet-scripts.mpackage",
+                     "mpackage": "i18n-support-for-mudlet-scripts",
+                        "title": "Lua i18n Library for Mudlet Translations",
+                     "uploaded": 1738850895,
+                      "version": "1"
+                },
+                {
                        "author": "breakone9r",
                       "created": "2020-09-15T20:20:55+00:00",
                   "description": "MapImporter is a Mudlet package designed to facilitate crowd-sourced mapping for MUDs that lack built-in mapping support. The tool allows users to import room data from exported files, with options to import specific rooms or update entire maps without modifying existing room configurations. Users can also update environment colors using simple commands within the Mudlet interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22960&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -655,6 +705,16 @@
                      "mpackage": "luaunit-for-mudlet",
                         "title": "LuaUnit for Mudlet: Lightweight Testing Kit",
                      "uploaded": 1738849196,
+                      "version": "1"
+                },
+                {
+                       "author": "jieiku",
+                      "created": "2019-03-20T08:47:04+00:00",
+                  "description": "This Mudlet map addon script provides three key map manipulation functions: safe room deletion, shifting selected rooms up vertically, and shifting selected rooms down vertically. The script adds custom map events to Mudlet that allow users to safely remove rooms while preserving exit stubs and adjust room coordinates along the z-axis with simple commands. It extends previous map addon functionality to improve map editing capabilities within the Mudlet mapping interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22719&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "mapaddons-safe-delete.mpackage",
+                     "mpackage": "mapaddons-safe-delete",
+                        "title": "Mudlet Map Addon: Safe Delete and Z-Shift",
+                     "uploaded": 1738850884,
                       "version": "1"
                 },
                 {
@@ -740,6 +800,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Kitaya",
+                      "created": "2019-06-29T09:37:39+00:00",
+                  "description": "This software package is a simple tool for sharing Mudlet code snippets quickly between users by leveraging pastebin.com and Mudlet's installPackage functionality. Users can copy a script, paste it on pastebin.com, and then share the raw URL, which allows other users to download and install the package directly using a single command. The package streamlines code sharing for Mudlet users by providing an easy method to distribute aliases, triggers, and other scripts.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22757&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "quickly-download-packages.mpackage",
+                     "mpackage": "quickly-download-packages",
+                        "title": "Easy Code Sharing for Mudlet Packages",
+                     "uploaded": 1738850844,
+                      "version": "1"
+                },
+                {
                        "author": "skace",
                       "created": "2020-10-13T15:17:55+00:00",
                   "description": "RoDUI is a Mudlet user interface package specifically designed for the Realms of Despair MUD, offering a comprehensive UI with tabs for character score, multi-character group management, help topics, and a footer displaying character gauges, XP stats, location information, and active effects. The package provides an easy installation process through Mudlet's Package Manager and aims to modernize the player experience while maintaining the classic MUD gameplay feel. It is primarily focused on enhancing user interaction and information accessibility within the Realms of Despair game environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22970&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -807,11 +877,11 @@
                 {
                        "author": "demonnic",
                       "created": "2023-21-03T00:00:00+00:00",
-                  "description": "It's just a really simple script which allows you to toggle a block on normal cardinal movement, plus up/down/in/out.\n\nuse function stopinator.block() to temporarily halt regular movement\nuse function stopinator.unblock() to release yourself from the stopinator's clutches\n\nIf you use the IRE mapping script you may want to issue mmp.pause(\"on\") when you block and mmp.pause(\"off\") when you unblock to also pause any speedwalking you may be doing.\n\n---\nThis package was originally shared on the [Mudlet Forums](URL) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                  "description": "It's just a really simple script which allows you to toggle a block on normal cardinal movement, plus up/down/in/out.\n\nuse function stopinator.block() to temporarily halt regular movement\nuse function stopinator.unblock() to release yourself from the stopinator's clutches\n\nIf you use the IRE mapping script you may want to issue mmp.pause(\"on\") when you block and mmp.pause(\"off\") when you unblock to also pause any speedwalking you may be doing.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23029&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "stopinator.mpackage",
                      "mpackage": "stopinator",
                         "title": "stopinator",
-                     "uploaded": 1738849240,
+                     "uploaded": 1738850829,
                       "version": "1"
                 },
                 {
@@ -855,5 +925,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 13:45:04 2025"
+   "updated": "Thu Feb  6 14:11:32 2025"
 }
