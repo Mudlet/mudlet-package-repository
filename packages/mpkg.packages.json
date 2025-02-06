@@ -708,6 +708,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "ulysses",
+                      "created": "2018-03-10T10:02:23+00:00",
+                  "description": "This software package is a script for MUD (Multi-User Dungeon) environments designed to categorize and organize inventory items automatically. The script processes item lists, matches items to predefined categories using case-insensitive string matching, and outputs the sorted contents alphabetically within each category. Its primary purpose is to help players systematically organize their inventory, with a specific feature that highlights uncategorized items in an \"OTHER\" category for manual review and proper classification.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22535&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "inventory-lister.mpackage",
+                     "mpackage": "inventory-lister",
+                        "title": "CthulhuMUD Item Categorization Script",
+                     "uploaded": 1738855001,
+                      "version": "1"
+                },
+                {
                        "author": "demonnic",
                       "created": "2020-03-19T05:47:39+00:00",
                   "description": "LuaUnit is a modified testing framework specifically adapted for Mudlet, allowing developers to run unit tests directly within the Mudlet environment. It replaces standard Lua print and io.write functions with Mudlet-compatible alternatives and removes OS exit calls to prevent accidental Mudlet closure. Users can install the package via an mpackage file or manually include the luaunit.lua file, enabling straightforward unit testing of Mudlet scripts with familiar assertion methods like 'lum.assertEquals'.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22857&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -736,6 +746,26 @@
                      "mpackage": "master-spam",
                         "title": "Suppress lines of spamminess.",
                      "uploaded": 1725200902,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2017-05-04T04:55:32+00:00",
+                  "description": "A Mudlet software package that utilizes getMousePosition() to create a dynamic label that follows the mouse cursor. The package can be installed by copying and pasting a specific Lua script into Mudlet, which downloads and automatically installs the package. It serves as a demonstration of mouse tracking and dynamic label positioning within the Mudlet scripting environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=20618&sid=bf709fdf857add149b1c794daa46579e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "moving-label-demo.mpackage",
+                     "mpackage": "moving-label-demo",
+                        "title": "Mudlet Mouse Label Position Tracker",
+                     "uploaded": 1738855010,
+                      "version": "1"
+                },
+                {
+                       "author": "Dakota",
+                      "created": "2017-10-28T07:17:53+00:00",
+                  "description": "Mudlet's MP3 package is a music management system integrated directly into the Mudlet interface, allowing users to create, manage, and navigate playlists within the software. The package supports multiple audio file types, provides a GUI for easy interaction, and includes various aliases for controlling music playback. Users can install the package by importing the file, with no additional setup required beyond using the provided MP3-related commands.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22474&sid=bf709fdf857add149b1c794daa46579e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "mp3-player-playlist-manager.mpackage",
+                     "mpackage": "mp3-player-playlist-manager",
+                        "title": "Mudlet MP3 Player: Simple Music Management",
+                     "uploaded": 1738855020,
                       "version": "1"
                 },
                 {
@@ -925,6 +955,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Vadi",
+                      "created": "2011-06-01T19:03:44+00:00",
+                  "description": "This software package is a screendump script for Mudlet that allows users to quickly save their current buffer as an HTML file. The script generates improved HTML output, works faster, and provides a convenient alias to save logs with the current log name. Compatible with Mudlet 2.0-rc6 and above, users can easily import the package or individual XML files.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2249&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "updated-screendump.mpackage",
+                     "mpackage": "updated-screendump",
+                        "title": "Improved Screendump Script for Mudlet",
+                     "uploaded": 1738854984,
+                      "version": "1"
+                },
+                {
                        "author": "zhenzh",
                       "created": "2020-04-19T14:19:35+00:00",
                   "description": "This software package provides a coroutine-based waiting mechanism in Lua that allows developers to suspend function execution for a specified time or until a specific pattern is matched. It enables modular function chaining by using wait() and wait_line() functions, which can pause execution, wait for a specific time interval, or wait for matched input patterns. The package is particularly useful for creating sequential, time-dependent, or pattern-matching script flows in Lua applications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22875&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -955,5 +995,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 15:15:36 2025"
+   "updated": "Thu Feb  6 15:18:29 2025"
 }
