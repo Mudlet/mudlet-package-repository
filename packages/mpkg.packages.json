@@ -242,6 +242,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "Stack",
+                      "created": "2023-09-28T17:08:53+0000",
+                  "description": "The Procedural Realms Script [PRS] project gives Procedural Realms MUD players improved access to the advanced features of the Mudlet MUD client. By leveraging the specific \"out of band\" packets sent by Procedural Realms' server, PRS uses Mudlet's mapper to identify rooms/exits, prevent creation of duplicate rooms/areas, manage instanced areas, and accurately track your character's location on the map as you move about the realm. Additional convenience features include speedwalking/pathfinding, self-updating gauges (vitals, combat, and skills), combat buttons and targetting, communication containers, quick slot buttons/keybindings, and a user-adjustable UI layout.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23126) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "PRS.mpackage",
+                         "icon": "packages/icons/PRS.png",
+                     "mpackage": "PRS",
+                        "title": "[Mudlet Script for Procedural Realms MUD",
+                     "uploaded": 1738846731,
+                      "version": "1.8.0"
+                },
+                {
                        "author": "Kymbahl",
                       "created": "2025-01-24T14:22:29+0000",
                   "description": "# ProfileWindow - A floating console to interact with your other profiles\n\n### Author: Humera\n\n### Information\nProfileWindow allows you to view and interact with your other profiles without needing to use MultiView.\nTo use, install ProfileWindow on all of your profiles that you wish to see, as well as your main profile.\nThen simply type `pwadd <profileName>` to open a floating window showing the output of that profile!\n\nExample:\nI have 2 profiles, Humera and Kryomeris. I wish Humera to be my primary profile.\nI install ProfileWindow for both profiles, then in the Humera profile I type `pwadd Kryomeris`.\n\nWhen used in conjunction with the convertToUserWindow package, these windows can be popped out from\nyour Mudlet window to be dragged anywhere you wish.\n\n### Commands (Aliases)\n`pwadd <profileName>`    - Opens a new ProfileWindow to view \n\n### Known Issues\nWhen closing a ProfileWindow, if the command line in that window has focus then clicking in the area\npreviously occupied by your floating window will show just the MiniConsole with no way to close it\nagain without a `resetProfile()`",
@@ -335,6 +346,26 @@
                       "version": "1"
                 },
                 {
+                       "author": "Akaya",
+                      "created": "2012-11-13T21:21:38+00:00",
+                  "description": "The Akayan Fishing UI is a software package designed to track fishing statistics in real-time, allowing players to monitor fish caught, their weights, and line distance during fishing activities. The UI supports up to three players in a fishing tournament, enabling participants to share their total fish catch and weight via a party channel with a simple button click. Additionally, the script tracks bait usage, line casting, and provides detailed information about individual and collective fishing performance.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2984&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "akayan-ui.mpackage",
+                     "mpackage": "akayan-ui",
+                        "title": "Akayan Fishing UI: Multiplayer Fishing Tracker",
+                     "uploaded": 1738846740,
+                      "version": "1"
+                },
+                {
+                       "author": "chris",
+                      "created": "2011-06-17T05:47:58+00:00",
+                  "description": "This software package is a map importer for Mudlet that allows users to import maps from cMud (a MUD client) into Mudlet's mapping system. The importer supports importing room data, scripts, colors, and favorites from dbm or sqlite3 formatted map files, with additional commands to help users localize themselves and manage their imported map. Users can use commands like cmud importmap to load the map, cmud colorRooms to color rooms, and cmud labelZones to add zone labels, making map management and navigation easier.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2274&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "cmud-map-importer.mpackage",
+                     "mpackage": "cmud-map-importer",
+                        "title": "cMud Map Importer for Mudlet",
+                     "uploaded": 1738846748,
+                      "version": "1"
+                },
+                {
                        "author": "cizra",
                       "created": "2025-02-05T20:32:37+0000",
                   "description": "# cofudlet\n\n## Mudlet client package for CoffeeMUD\n\nThis package provides a visual map (powered by GMCP room events), chat capture, and stat bars for you and groupies.\nIt's also extensible - you could hook your own event handler to the `cofudlet.onFightStart` or `cofudlet.onMaxMana` events, for example.\n\n## Installation\n\nTo install and update Cofudlet, use `mpkg`. See https://packages.mudlet.org/ for instructions.\n\n## Usage\n\n### Mapper\nRun `map help` for mapper-related commands.\n\n### Mob capture\n\nCofudlet remembers mobs you've seen. Consider them with Alt-keypad5, and attack with Keypad5 (if you don't have a keypad, you could remap the same thing to some other key).\n\nRun `mob help` to see some commands, notably `mob ls`.\n\n## Support\n\nAsk around in #mud-clients of the CoffeeMUD Discord: https://discord.gg/qNEgWxft48\n",
@@ -417,6 +448,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Eraene",
+                      "created": "2019-04-06T21:42:22+00:00",
+                  "description": "This is a dark theme package for the Mudlet software that provides a comprehensive dark mode UI with styled 3D elements across nearly all interface components. The package allows users to switch between full application and profile-specific stylesheets, offering a consistent dark visual experience with custom styling for buttons, icons, and interface widgets. It is designed to be easily installable and provides aesthetic improvements to the default Mudlet interface, with ongoing updates to support different Mudlet versions and fix minor styling issues.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22728&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "dark-theme-for-mudlet.mpackage",
+                     "mpackage": "dark-theme-for-mudlet",
+                        "title": "Dark Theme Mudlet UI Package",
+                     "uploaded": 1738846757,
+                      "version": "1"
+                },
+                {
                        "author": "Pato",
                       "created": "2025-01-29T00:00:00+0:00",
                   "description": "### Description\n\nDartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.\nFeatures that include upgrades to the user interface, automation, and reporting are all included.\nIt includes a conversation window across the top as well as a character information panel in the\nbottom right next to the command line. DartMUDlet automatically counts and reports skill improves\nfor both you and your pets, and will attempt to autocorrect when a skill rolls to the next level.\n\nDartMUDlet will also block and queue up commands while you are performing interruptable actions\n(e.g. spells, books, scrolls), then release them afterwards when the action is complete.\n\n### Usage\n\nType /setup to initialize DartMUDlet once installed.\nType /help for a full list of commands.\n",
@@ -479,6 +520,16 @@
                      "mpackage": "dice",
                         "title": "Simulate dice rolls with these simple functions.",
                      "uploaded": 1724911580,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2017-04-12T08:49:20+00:00",
+                  "description": "The software is a Mudlet package that automatically translates MUD (Multi-User Dungeon) game text from another language into English using the Yandex translation service. It can be installed directly into the Mudlet application by copying and pasting a provided code snippet, which downloads and installs the translation package. While functional, the current version has limitations in text alignment and presentation when handling large volumes of text.\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=19937&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "dodgy-mud-translation-script.mpackage",
+                     "mpackage": "dodgy-mud-translation-script",
+                        "title": "MUD Text Translator via Yandex Service",
+                     "uploaded": 1738846768,
                       "version": "1"
                 },
                 {
@@ -714,5 +765,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb  6 12:58:33 2025"
+   "updated": "Thu Feb  6 13:02:19 2025"
 }
