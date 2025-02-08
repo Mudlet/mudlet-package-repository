@@ -336,6 +336,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Darmir",
+                      "created": "2011-12-04T00:14:51+00:00",
+                  "description": "The Darmir Butterfly Counter is a script for the Achaea game that allows players to track the number of butterflies they have caught. It provides simple commands to start the counting process and display the current butterfly count, making it particularly useful for new players. The script is based on a similar rat-counting utility and offers an easy way to monitor butterfly collection progress.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2589&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-butterfly-counter.mpackage",
+                     "mpackage": "achaea-butterfly-counter",
+                        "title": "Achaea Butterfly Counter: Simple Catch Tracker",
+                     "uploaded": 1739013844,
+                      "version": "1"
+                },
+                {
                        "author": "Xith",
                       "created": "2012-02-15T07:55:36+00:00",
                   "description": "This package is for blocking or removing smileys from chat or communication interfaces. It provides a single trigger mechanism to eliminate smileys while optionally maintaining a visual indicator that smileys were present. It is designed to help users manage unwanted emoji or emoticon displays in communications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2697&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -353,6 +363,16 @@
                      "mpackage": "achaea-inventory-organizer",
                         "title": "Mudlet Inventory Display Triggers",
                      "uploaded": 1739013649,
+                      "version": "1"
+                },
+                {
+                       "author": "Wyd",
+                      "created": "2010-03-25T00:15:24+00:00",
+                  "description": "MapDownloader is a Lua script for Mudlet that allows users to download and save maps from Iron Realms MUDs, specifically designed for Achaea. The script provides functions to download maps by map ID or automatically retrieve maps for the current area, with support for multiple simultaneous map downloads and the requirement of LuaSocket libraries for functionality.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1356&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-iron-realms-map-downloader.mpackage",
+                     "mpackage": "achaea-iron-realms-map-downloader",
+                        "title": "IRE Map Downloader: Automatic Map Retrieval",
+                     "uploaded": 1739013841,
                       "version": "1"
                 },
                 {
@@ -1095,5 +1115,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Feb  8 11:21:53 2025"
+   "updated": "Sat Feb  8 11:27:42 2025"
 }
