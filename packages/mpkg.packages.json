@@ -496,6 +496,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Dracunos",
+                      "created": "2012-10-19T06:23:47+00:00",
+                  "description": "UNITRAV is a Mudlet-mapper script package that enhances travel functionality, allowing users to quickly navigate between rooms using universe travel, favorited locations, and custom aliases like UNITRAV, TRAV, and TCH. The script provides clickable map interactions, a favorites system, and convenient travel commands that work with room numbers or custom shortcuts. Key features include adding/deleting favorite locations, universal travel options, and a minimalistic prompt for quick navigation.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2958&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-travel-script.mpackage",
+                     "mpackage": "achaea-travel-script",
+                        "title": "Mudlet Mapper Universe Travel Shortcuts",
+                     "uploaded": 1739017145,
+                      "version": "1"
+                },
+                {
                        "author": "Manni",
                       "created": "2011-08-04T23:18:41+00:00",
                   "description": "The Fashion Counter is a software package for tracking the number of fashions available on Vodun dolls, automatically counting and displaying remaining fashions each time a doll is wielded or a Vodun skill is used. It provides a custom prompt option with @fashions and is specifically designed for Vodun abilities, with potential adaptability for other similar skill systems.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2355&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -503,6 +513,16 @@
                      "mpackage": "achaea-vodun-fashion-counter",
                         "title": "Vodun Fashion Counter for MUD Dolls",
                      "uploaded": 1739012877,
+                      "version": "1"
+                },
+                {
+                       "author": "Wennef",
+                      "created": "2010-04-24T10:39:08+00:00",
+                  "description": "This package is a script for automatically rewearing items, capturing worn item codes and phrases from an \"info worn\" command and automatically re-equipping items when they are removed. It tracks worn equipment, provides a default pack for gold storage, and considers character balance when rewearing items, with support for both versions with and without a clothing list feature.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1411&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaean-rewear-script.mpackage",
+                     "mpackage": "achaean-rewear-script",
+                        "title": "Auto-Rewear Script",
+                     "uploaded": 1739017153,
                       "version": "1"
                 },
                 {
@@ -517,12 +537,112 @@
                 },
                 {
                        "author": "Akaya",
+                      "created": "2013-12-13T00:53:52+00:00",
+                  "description": "The Geyser script is a mini-map utility for the Achaea text-based game that tracks adjacent room exits and provides room identification numbers. It offers a simple mapping solution with potential for customization, allowing players to easily navigate and understand their current location within the game environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4263&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "akayan-geyser-scripts.mpackage",
+                     "mpackage": "akayan-geyser-scripts",
+                        "title": "Achaea MiniMap Script: Track Exits & Room IDs",
+                     "uploaded": 1739017160,
+                      "version": "1"
+                },
+                {
+                       "author": "Akaya",
+                      "created": "2013-03-11T00:20:45+00:00",
+                  "description": "The Akayan GUI Creator is a Mudlet package designed to help users easily set up a graphical user interface for MUDs, specifically optimized for Iron Realms Entertainment's Achaea. It offers a toolbar with menus to add various GUI components like chat windows, mapper widgets, status screens, and affliction trackers, with the ability to move and resize these elements. While primarily built for Achaea and requiring the Vyzor package, it provides a flexible interface creation tool for MUD players.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3329&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "akayan-gui-creator.mpackage",
+                     "mpackage": "akayan-gui-creator",
+                        "title": "Akayan GUI Creator: MUD Interface Builder",
+                     "uploaded": 1739017166,
+                      "version": "1"
+                },
+                {
+                       "author": "Akaya",
                       "created": "2012-11-13T21:21:38+00:00",
                   "description": "The Akayan Fishing UI is a software package designed to track fishing statistics in real-time, allowing players to monitor fish caught, their weights, and line distance during fishing activities. The UI supports up to three players in a fishing tournament, enabling participants to share their total fish catch and weight via a party channel with a simple button click. Additionally, the script tracks bait usage, line casting, and provides detailed information about individual and collective fishing performance.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2984&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
                      "filename": "akayan-ui.mpackage",
                      "mpackage": "akayan-ui",
                         "title": "Akayan Fishing UI: Multiplayer Fishing Tracker",
                      "uploaded": 1738849296,
+                      "version": "1"
+                },
+                {
+                       "author": "Jarrin",
+                      "created": "2011-11-07T00:33:14+00:00",
+                  "description": "The Alchemy Transmuter allows users to synthesize metals, transmute minerals, and decant or pour liquids into regular and artifact vials using simple aliases. The package provides quick commands like tsm, syn, dec, deca, pv, and pva to perform various alchemical operations without checking ingredient availability. It is designed to streamline alchemical processes within a game or simulation environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2539&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "alchemy-transmuter-for-svo-achaea.mpackage",
+                     "mpackage": "alchemy-transmuter-for-svo-achaea",
+                        "title": "Svo Alchemy Transmuter: Metals, Minerals, Liquids",
+                     "uploaded": 1739017173,
+                      "version": "1"
+                },
+                {
+                       "author": "Mosr",
+                      "created": "2011-10-10T18:14:43+00:00",
+                  "description": "Denex is a GMCP-enabled script for tracking character entrances and movements in mapped areas. The script provides an alertness notification system that identifies when specific characters enter or move through different locations. By default, the script includes a gag feature to control notification display, and it supports tracking across various directions and rooms.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2494&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "alertness-parsing-gmcp.mpackage",
+                     "mpackage": "alertness-parsing-gmcp",
+                        "title": "Player Proximity Alert: GMCP Area Notification",
+                     "uploaded": 1739017181,
+                      "version": "1"
+                },
+                {
+                       "author": "Mosr",
+                      "created": "2011-07-04T21:45:12+00:00",
+                  "description": "This Lua script is a room parsing and navigation utility for a MUD (Multi-User Dungeon) that tracks adjacent rooms and current location using GMCP (Generic Mud Communication Protocol) information. The script creates functions to parse room exits, check current location, and display room-related information with color-coded messages. It helps players understand their immediate geographical context by showing nearby rooms and current location in a clear, concise format.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2305&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "alertness-with-mudlet-mapper-and-gmcp.mpackage",
+                     "mpackage": "alertness-with-mudlet-mapper-and-gmcp",
+                        "title": "Room Navigation Assistant for MUD Mapping",
+                     "uploaded": 1739017189,
+                      "version": "1"
+                },
+                {
+                       "author": "Greg",
+                      "created": "2013-06-24T03:16:51+00:00",
+                  "description": "An ASCII-based compass script for RetroMUD, designed to help map and navigate game environments in Lua. The script provides visual directional indicators and tracking functionality for mapping MUD game spaces. It appears to be a utility tool for players or developers looking to create navigational aids within text-based multiplayer game environments.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3498&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "asciiexitcompass.mpackage",
+                     "mpackage": "asciiexitcompass",
+                        "title": "ASCII Exit Compass for RetroMUD Client",
+                     "uploaded": 1739017195,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2010-03-27T18:06:56+00:00",
+                  "description": "This Mudlet package provides a speedwalking function that allows users to quickly navigate predefined paths in a MUD game. Users can show saved paths with \"spt show\" and walk to locations using \"sptw\" with optional backward walking capability. Paths are defined in a simple script format, enabling easy creation and management of travel routes within the software.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1359&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "autowalker2.mpackage",
+                     "mpackage": "autowalker2",
+                        "title": "Lusternia Speedwalk Alias Mudlet Package",
+                     "uploaded": 1739017215,
+                      "version": "1"
+                },
+                {
+                       "author": "feenom",
+                      "created": "2011-12-04T07:32:35+00:00",
+                  "description": "The Feenom Mudlet Lua Package is a comprehensive addon for Avatar MUD that enhances gameplay through features like tabbed chat, health bars, automatic rescue mechanics, lock picking assistance, and various combat triggers. This software package provides players with advanced tools to improve their in-game performance and user interface experience within the MUD environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2592&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "avatar-mud-package.mpackage",
+                     "mpackage": "avatar-mud-package",
+                        "title": "Feenom Mudlet Package: Enhanced Avatar Mud Toolkit",
+                     "uploaded": 1739017224,
+                      "version": "1"
+                },
+                {
+                       "author": "charysis",
+                      "created": "2012-11-09T23:54:48+00:00",
+                  "description": "A scripting tool focused on archery-related functionality, allowing users to manage and configure archery equipment and settings. It provides a straightforward interface for scripting newcomers to interact with archery-related data and parameters, enabling easy attachment and modification of archery-specific configurations.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2981&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "basic-archery-for-a-newb.mpackage",
+                     "mpackage": "basic-archery-for-a-newb",
+                        "title": "Scripting for Beginners: Easy Attachment Sharing",
+                     "uploaded": 1739017250,
+                      "version": "1"
+                },
+                {
+                       "author": "Blackharp",
+                      "created": "2011-10-05T22:08:31+00:00",
+                  "description": "This software package provides customized triggers and aliases for gathering, refining, and preparing ingredients in the game Achaea. It automates processes like automatically storing gathered or refined items in a rift and simplifies commands for gathering, butchering, refining, and cooking ingredients using shorthand two-letter abbreviations. The package includes versions for both SVO and non-SVO users, with features like bulk refining and easy command shortcuts.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2485&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "basic-gathering_refining_cooking-package-achaea.mpackage",
+                     "mpackage": "basic-gathering/refining/cooking-package-achaea",
+                        "title": "Achaea Gathering & Refining Auto-Triggers",
+                     "uploaded": 1739017255,
                       "version": "1"
                 },
                 {
@@ -533,6 +653,16 @@
                      "mpackage": "basic-materia-magica-ui-and-gmcp-mapper",
                         "title": "Alyria Mapper: Basic MUD Mapping Package",
                      "uploaded": 1738849091,
+                      "version": "1"
+                },
+                {
+                       "author": "lex",
+                      "created": "2010-06-13T15:43:53+00:00",
+                  "description": "bfind is a Mudlet search alias that allows case-insensitive pattern matching within text, enabling users to search through lines with specific keywords or regex patterns. It improves upon standard text search by excluding previous search results and supporting advanced filtering like matching lines that start with a specific string. The package provides a flexible command-line search tool for Mudlet users to efficiently navigate and filter text output.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1515&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "bfind-scroll-buffer-find.mpackage",
+                     "mpackage": "bfind-scroll-buffer-find",
+                        "title": "Mudlet Bfind: Enhanced Search and Filtering Tool",
+                     "uploaded": 1739017260,
                       "version": "1"
                 },
                 {
@@ -743,6 +873,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Yetzederixx",
+                      "created": "2011-05-05T03:25:36+00:00",
+                  "description": "This software package is designed for DIKU MUD environments, offering functionality to format prompts into percent, delete them from the main feed, and echo them into a miniconsole. It includes quest time tracking code and a configurable tick timer with variable intervals, specifically tailored for Dark and Shattered Lands MUD gameplay.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2201&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "diku-prompt-handler.mpackage",
+                     "mpackage": "diku-prompt-handler",
+                        "title": "MUD Prompt Handler & Quest Time Tracker",
+                     "uploaded": 1739017275,
+                      "version": "1"
+                },
+                {
                        "author": "Vadi",
                       "created": "2017-04-12T08:49:20+00:00",
                   "description": "The software is a Mudlet package that automatically translates MUD (Multi-User Dungeon) game text from another language into English using the Yandex translation service. It can be installed directly into the Mudlet application by copying and pasting a provided code snippet, which downloads and installs the translation package. While functional, the current version has limitations in text alignment and presentation when handling large volumes of text.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=19937&sid=30811d40659218ba9f6e7f7440d2b825) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -803,6 +943,16 @@
                      "mpackage": "find-alias",
                         "title": "ctrl+f alternative",
                      "uploaded": 1737944715,
+                      "version": "1"
+                },
+                {
+                       "author": "Peregrine",
+                      "created": "2010-03-29T09:21:25+00:00",
+                  "description": "This fishing package for Achaea provides automated aliases and triggers to streamline the fishing process. It includes commands to bait hooks, cast lines in specific directions, and automatically manage line tension, hook setting, and reeling in fish. The package aims to simplify and enhance the fishing experience within the game.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1360&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "fishing.mpackage",
+                     "mpackage": "fishing",
+                        "title": "Achaea Fishing Automation Triggers & Aliases",
+                     "uploaded": 1739017267,
                       "version": "1"
                 },
                 {
@@ -1062,6 +1212,16 @@
                       "version": "5"
                 },
                 {
+                       "author": "Thandril",
+                      "created": "2012-02-18T19:22:21+00:00",
+                  "description": "This is a Mudlet mapper script designed for MUD (Multi-User Dungeon) navigation, allowing users to automatically map and track rooms while exploring, with features like creating/deleting areas, finding rooms, adding notes, and supporting room-based movement through clicking or Lua functions. The package provides aliases for map control (on/off, lock/unlock, verbose/quiet) and supports saving/loading mapping data when characters log in or out. Users can customize the script for their specific MUD by modifying room description and exit triggers.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2700&sid=654f4778bd2cdb19b5fee80867e1c315) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "shattered-isles-mapper.mpackage",
+                     "mpackage": "shattered-isles-mapper",
+                        "title": "Improved Generic Mapper: Mudlet Script v3",
+                     "uploaded": 1739017283,
+                      "version": "1"
+                },
+                {
                        "author": "Xanthia",
                       "created": "2024-08-29T13:17:18+08:00",
                   "description": "Easily play default sounds with a single command or lua code function.  List of 100 sounds currently available.",
@@ -1185,5 +1345,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Feb  8 11:33:35 2025"
+   "updated": "Sat Feb  8 12:22:27 2025"
 }
