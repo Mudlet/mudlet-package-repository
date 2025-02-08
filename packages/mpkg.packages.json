@@ -346,6 +346,26 @@
                       "version": "1"
                 },
                 {
+                       "author": "mortagona",
+                      "created": "2011-06-22T03:00:31+00:00",
+                  "description": "This package provides two Mudlet triggers that reorganize inventory display into two aligned columns for improved readability. It allows users to configure these inventory display triggers within the Mudlet gaming interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2286&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-inventory-organizer.mpackage",
+                     "mpackage": "achaea-inventory-organizer",
+                        "title": "Mudlet Inventory Display Triggers",
+                     "uploaded": 1739013649,
+                      "version": "1"
+                },
+                {
+                       "author": "Ramiel",
+                      "created": "2009-05-12T23:35:25+00:00",
+                  "description": "This package is a Mudlet script that creates a mini console window for capturing and displaying maps in MUDs (Multi-User Dungeons). The script allows users to automatically cut and paste map information into a custom-sized window positioned at the top right of the screen, with configurable resolution and background color settings.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=83&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-mapper-capture-window.mpackage",
+                     "mpackage": "achaea-mapper-capture-window",
+                        "title": "Map Capture Mini Console Utility",
+                     "uploaded": 1739013638,
+                      "version": "1"
+                },
+                {
                        "author": "Xith",
                       "created": "2011-08-24T20:00:31+00:00",
                   "description": "This package is a roulette tracking and simulation tool that allows users to monitor gambling sessions, track gold or monetary gains/losses, and potentially analyze betting strategies through a script-based interface. The package includes a visual skin and a specific feature called 'rshow' which can track spin statistics and calculate financial outcomes over a session.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2393&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1075,5 +1095,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Feb  8 11:12:58 2025"
+   "updated": "Sat Feb  8 11:21:53 2025"
 }
