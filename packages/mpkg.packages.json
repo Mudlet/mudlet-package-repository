@@ -346,6 +346,36 @@
                       "version": "1"
                 },
                 {
+                       "author": "Wyd",
+                      "created": "2010-06-12T16:44:47+00:00",
+                  "description": "CritCounter is a specialized script for the Achaea game that tracks critical hit statistics during hunting. Users can enable/disable the counter, reset statistics, and view current critical hit data by using simple commands like \"crit on/off\", \"crit reset\", and \"crit show\". The script requires manual modification of the BashingTrigger to accurately track critical hits for individual hunting attacks.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1508&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-crit-counter.mpackage",
+                     "mpackage": "achaea-crit-counter",
+                        "title": "Achaea Critical Hit Counter Script",
+                     "uploaded": 1739014091,
+                      "version": "1"
+                },
+                {
+                       "author": "naftali",
+                      "created": "2010-02-05T04:14:02+00:00",
+                  "description": "This is a Lua script for calculating experience progression between levels in a game. The script allows users to calculate the percentage of experience needed to progress from one level to another, supporting both whole and decimal levels. It can be used to create visual gauges or triggers that track a character's progress towards a specific level goal.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1274&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-experience-script.mpackage",
+                     "mpackage": "achaea-experience-script",
+                        "title": "XP Progress Tracker for MUD Leveling",
+                     "uploaded": 1739014101,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2009-11-21T01:45:59+00:00",
+                  "description": "The Achaea Fancy GUI is a Mudlet package for the Achaea online game that provides an enhanced graphical user interface with customizable map positioning and improved display features. Easily adjust settings like map location (left or right side) and mapper display. The package supports various features including manual movement tracking, multi-line exit displays, and compatibility with different mapping systems.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=981&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-fancy-gui.mpackage",
+                     "mpackage": "achaea-fancy-gui",
+                        "title": "Achaea Fancy GUI: Enhanced Mudlet Interface",
+                     "uploaded": 1739014120,
+                      "version": "1"
+                },
+                {
                        "author": "Xith",
                       "created": "2012-02-15T07:55:36+00:00",
                   "description": "This package is for blocking or removing smileys from chat or communication interfaces. It provides a single trigger mechanism to eliminate smileys while optionally maintaining a visual indicator that smileys were present. It is designed to help users manage unwanted emoji or emoticon displays in communications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2697&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -386,6 +416,36 @@
                       "version": "1"
                 },
                 {
+                       "author": "Wyd",
+                      "created": "2010-06-11T00:58:10+00:00",
+                  "description": "This software package is a script for automatically offering all corpses in a player's inventory at a shrine with a single command. Users simply import the package, configure settings in the \"Config\" script, and then use the \"offall\" command to quickly dispose of corpse items. The script streamlines the inventory management process by providing a quick, bulk offering mechanism.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1496&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-offer-all-script.mpackage",
+                     "mpackage": "achaea-offer-all-script",
+                        "title": "Corpse Offering Automation Script",
+                     "uploaded": 1739014140,
+                      "version": "1"
+                },
+                {
+                       "author": "Ricktava",
+                      "created": "2010-04-21T04:41:24+00:00",
+                  "description": "A software package designed for players of the game Achaea to track and calculate the value of rats killed. The tool allows users to count rats and view their worth through a graphical interface, with a simple command system to start and display rat-killing statistics. Version 2.0 includes improvements to the reset trigger and reporting mechanism.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1404&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-rat-counter.mpackage",
+                     "mpackage": "achaea-rat-counter",
+                        "title": "Rat Counter v2.0: Tracking Rodent Kills & Worth",
+                     "uploaded": 1739014202,
+                      "version": "1"
+                },
+                {
+                       "author": "vakuran",
+                      "created": "2010-09-24T16:52:27+00:00",
+                  "description": "A Mudlet script for tracking items and entities in a game room using GMCP (Generic MUD Communication Protocol). The script monitors room contents, displaying entered and exited items in a dynamic list, and provides clickable links to target specific items. It creates an interactive item box in the top right of the interface that updates in real-time as room contents change.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1711&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-room-tracking.mpackage",
+                     "mpackage": "achaea-room-tracking",
+                        "title": "Room Item Tracker for Mudlet",
+                     "uploaded": 1739014216,
+                      "version": "1"
+                },
+                {
                        "author": "Xith",
                       "created": "2011-08-24T20:00:31+00:00",
                   "description": "This package is a roulette tracking and simulation tool that allows users to monitor gambling sessions, track gold or monetary gains/losses, and potentially analyze betting strategies through a script-based interface. The package includes a visual skin and a specific feature called 'rshow' which can track spin statistics and calculate financial outcomes over a session.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2393&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -393,6 +453,16 @@
                      "mpackage": "achaea-roulette-counter",
                         "title": "Roulette Spin Tracking Software with Profit Logging",
                      "uploaded": 1739012855,
+                      "version": "1"
+                },
+                {
+                       "author": "eewallace",
+                      "created": "2011-02-01T02:32:47+00:00",
+                  "description": "The ShardCounter script is a Mudlet utility for Achaea that automatically counts the number of shards in a player's inventory and calculates their total weight. It provides a simple configuration option and helps players track their shard collection quickly and efficiently. The script runs through the player's inventory, tallying shards and their respective weights with minimal user intervention.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1998&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-shard-counter.mpackage",
+                     "mpackage": "achaea-shard-counter",
+                        "title": "Achaea Shard Inventory Counter Script",
+                     "uploaded": 1739014213,
                       "version": "1"
                 },
                 {
@@ -1115,5 +1185,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Feb  8 11:27:42 2025"
+   "updated": "Sat Feb  8 11:33:35 2025"
 }
