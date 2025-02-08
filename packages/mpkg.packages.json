@@ -336,6 +336,66 @@
                       "version": "1"
                 },
                 {
+                       "author": "Xith",
+                      "created": "2012-02-15T07:55:36+00:00",
+                  "description": "This package is for blocking or removing smileys from chat or communication interfaces. It provides a single trigger mechanism to eliminate smileys while optionally maintaining a visual indicator that smileys were present. It is designed to help users manage unwanted emoji or emoticon displays in communications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2697&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-gag-smileys-from-weed.mpackage",
+                     "mpackage": "achaea-gag-smileys-from-weed",
+                        "title": "Smiley Blocking Addon for RPG Chat",
+                     "uploaded": 1739012833,
+                      "version": "1"
+                },
+                {
+                       "author": "Xith",
+                      "created": "2011-08-24T20:00:31+00:00",
+                  "description": "This package is a roulette tracking and simulation tool that allows users to monitor gambling sessions, track gold or monetary gains/losses, and potentially analyze betting strategies through a script-based interface. The package includes a visual skin and a specific feature called 'rshow' which can track spin statistics and calculate financial outcomes over a session.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2393&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-roulette-counter.mpackage",
+                     "mpackage": "achaea-roulette-counter",
+                        "title": "Roulette Spin Tracking Software with Profit Logging",
+                     "uploaded": 1739012855,
+                      "version": "1"
+                },
+                {
+                       "author": "Manni",
+                      "created": "2011-09-19T01:10:08+00:00",
+                  "description": "This software package is a Mudlet script designed to collect and organize subdivision plot ownership data for a specific city. It allows users to gather information about plot owners, store their details, and generate an alphabetized table that marks city enemies with a special symbol. The script provides three aliases to create a table of city enemies, survey plot information, and retrieve comprehensive data about plot owners during the current Mudlet session.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2456&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-subdivisions-data-collecter.mpackage",
+                     "mpackage": "achaea-subdivisions-data-collecter",
+                        "title": "City Plot Ownership Tracking Script",
+                     "uploaded": 1739012886,
+                      "version": "1"
+                },
+                {
+                       "author": "Manni",
+                      "created": "2011-10-06T05:17:57+00:00",
+                  "description": "The Inkmiller is a specialized milling software for the Svo system that enables batch processing of inks with safeguards against double milling and mid-process corrections. It offers flexible command-line controls like 'imill' for specifying ink color and quantity, 'ipp' for pausing/resuming batches, and 'ired'/'iblue' for switching between material types, with clear script feedback on each action.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2486&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-svo-inkmiller.mpackage",
+                     "mpackage": "achaea-svo-inkmiller",
+                        "title": "Svo InkMiller: Flexible Batch Milling Tool",
+                     "uploaded": 1739012870,
+                      "version": "1"
+                },
+                {
+                       "author": "charysis",
+                      "created": "2011-07-14T21:58:12+00:00",
+                  "description": "This is a Lua script for automating the inscription of tarot cards in a text-based game, specifically designed for users of the Svo curing system. The script allows users to inscribe a specified number of cards of a chosen type, with features to pause and resume the inscription process, and it automatically manages system pausing and card handling to optimize the inscribing workflow.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2320&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-svo-tarot-inscribing-script.mpackage",
+                     "mpackage": "achaea-svo-tarot-inscribing-script",
+                        "title": "Automated Tarot Card Inscription Script",
+                     "uploaded": 1739012863,
+                      "version": "1"
+                },
+                {
+                       "author": "Manni",
+                      "created": "2011-08-04T23:18:41+00:00",
+                  "description": "The Fashion Counter is a software package for tracking the number of fashions available on Vodun dolls, automatically counting and displaying remaining fashions each time a doll is wielded or a Vodun skill is used. It provides a custom prompt option with @fashions and is specifically designed for Vodun abilities, with potential adaptability for other similar skill systems.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2355&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "achaea-vodun-fashion-counter.mpackage",
+                     "mpackage": "achaea-vodun-fashion-counter",
+                        "title": "Vodun Fashion Counter for MUD Dolls",
+                     "uploaded": 1739012877,
+                      "version": "1"
+                },
+                {
                        "author": "Alyven",
                       "created": "2020-05-13T16:13:12+00:00",
                   "description": "Adjustable TabWindows is a Mudlet software package that allows users to create tabbed windows with draggable and movable tabs across different containers. The package enables users to customize tab layouts, transfer tabs between windows, and integrate various UI elements like mappers and gauges into a flexible, modular interface. Users can create, configure, and manipulate tabs programmatically using Lua code, with additional features like saving/loading window configurations and browser-like tab interactions.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22907&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -373,6 +433,16 @@
                      "mpackage": "calendar-todo-list",
                         "title": "Mudlet Event and Todo Tracking Script",
                      "uploaded": 1738854865,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2010-03-06T22:17:56+00:00",
+                  "description": "This package provides a set of client-side MXP (Mud eXtension Protocol) function demonstrations, showcasing various API functions and associated commands. The package includes examples that illustrate how to implement and use different MXP triggers and interactions in a mud/text-based game environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1316&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "clientside-mxp-demo-scripts.mpackage",
+                     "mpackage": "clientside-mxp-demo-scripts",
+                        "title": "MXP Client-Side Function Demos",
+                     "uploaded": 1739012894,
                       "version": "1"
                 },
                 {
@@ -995,5 +1065,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Feb  7 22:01:10 2025"
+   "updated": "Sat Feb  8 11:09:24 2025"
 }
