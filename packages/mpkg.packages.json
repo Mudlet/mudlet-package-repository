@@ -963,6 +963,16 @@
                       "version": "1.0"
                 },
                 {
+                       "author": "hempa",
+                      "created": "2010-02-14T21:00:08+00:00",
+                  "description": "The doMath function is a Lua utility that evaluates mathematical expressions, supporting standard arithmetic operations like addition, subtraction, multiplication, division, and exponentiation. It can optionally display the calculation result or return the evaluated value, and requires the LPeg library for parsing mathematical expressions. The function allows users to perform complex math calculations with a simple, flexible syntax that mimics standard mathematical notation.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1290&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "simple-arithmetic-function.mpackage",
+                     "mpackage": "simple-arithmetic-function",
+                        "title": "Math Expression Evaluator",
+                     "uploaded": 1739013127,
+                      "version": "1"
+                },
+                {
                        "author": "Wyd",
                       "created": "2010-05-02T08:20:09+00:00",
                   "description": "The Simple Logger is a Mudlet logging system that allows users to log specific text lines from a MUD to files with advanced features like timestamping, file size splitting, and selective logging. It provides functions to log individual lines or entire sections of text, search through log files using regular expressions, and manage log file handles with options for performance optimization. The package includes convenient methods like Logger:Log(), Logger:LogSection(), Logger:StopLogging(), and Logger:SearchLog() to give users flexible text logging capabilities.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1424&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1065,5 +1075,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Feb  8 11:09:24 2025"
+   "updated": "Sat Feb  8 11:12:58 2025"
 }
