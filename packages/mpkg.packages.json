@@ -975,6 +975,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Heiko",
+                      "created": "2009-06-18T12:06:15+00:00",
+                  "description": "This software package is a MUD script that parses an enemy list and automatically highlights enemy names during gameplay. The script includes an \"update enemies\" alias that retrieves the enemy list from the game and adds those names to an internal highlighter list. Users should be cautious and avoid clicking the script item after updating to prevent trigger duplication.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=158&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "enemy-highlighter.mpackage",
+                     "mpackage": "enemy-highlighter",
+                        "title": "MUD Enemy Name Highlighter Script",
+                     "uploaded": 1739086703,
+                      "version": "1"
+                },
+                {
                        "author": "jieiku",
                       "created": "2019-03-28T11:00:52+00:00",
                   "description": "favMenu is a script that creates a drop-down menu of user-selected favorite rooms based on a predefined list of room IDs. When a user hovers over and clicks a room in the menu, the script automatically attempts to navigate to that room using the gotoRoom() function. Users can customize the room list by editing the script, with future potential for persistent room storage and right-click menu integration.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22726&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1006,6 +1016,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Vadi",
+                      "created": "2010-02-23T14:26:05+00:00",
+                  "description": "This package is a trigger for text that helps users identify the RGB color of a specific character or letter. By importing the trigger, changing the substring pattern, and saving it, users can easily extract the color information, which can then be used with functions like setFgColor or cecho for color replication.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1302&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "find-rgb-color-of-mud-text.mpackage",
+                     "mpackage": "find-rgb-color-of-mud-text",
+                        "title": "RGB Character Color Identifier Trigger",
+                     "uploaded": 1739086691,
+                      "version": "1"
+                },
+                {
                        "author": "Peregrine",
                       "created": "2010-03-29T09:21:25+00:00",
                   "description": "This fishing package for Achaea provides automated aliases and triggers to streamline the fishing process. It includes commands to bait hooks, cast lines in specific directions, and automatically manage line tension, hook setting, and reeling in fish. The package aims to simplify and enhance the fishing experience within the game.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1360&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1013,6 +1033,26 @@
                      "mpackage": "fishing",
                         "title": "Achaea Fishing Automation Triggers & Aliases",
                      "uploaded": 1739017267,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2010-01-16T02:47:13+00:00",
+                  "description": "This is a Mudlet script package designed to improve text rendering and fix display issues with ASCII backspace characters in MUD (Multi-User Dungeon) interfaces. The script specifically addresses problems with \"who\" lists and character positioning, providing a simple trigger to normalize text display and improve readability for MUD players.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1221&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "fix-backspaces-in-mud-output.mpackage",
+                     "mpackage": "fix-backspaces-in-mud-output",
+                        "title": "MUD Text Positioning Fix Trigger",
+                     "uploaded": 1739086681,
+                      "version": "1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2010-07-05T11:41:29+00:00",
+                  "description": "This package is a utility that removes tabs from MUD output, converting tab characters to spaces. It provides an XML-based attachment designed to modify text formatting in MUD interfaces. It can help improve readability in text-based online multiplayer game environments.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1570&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "fix-tabs.mpackage",
+                     "mpackage": "fix-tabs",
+                        "title": "MUD Output Space Converter Tool v1.2",
+                     "uploaded": 1739086668,
                       "version": "1"
                 },
                 {
@@ -1025,6 +1065,16 @@
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
                      "uploaded": 1724918844,
                       "version": "2.1.4"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2010-02-11T15:18:14+00:00",
+                  "description": "The getColorWildcard function allows users to retrieve strings on a line that match a specific ANSI color number, such as extracting names from a color-coded list in a text-based environment like Achaea. Originally created by Vadi and later modified by Iocun to support multiple return values, this utility provides a targeted way to extract color-coded text from a line of output.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1282&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "get-wildcards-by-color.mpackage",
+                     "mpackage": "get-wildcards-by-color",
+                        "title": "Color Name Extractor for MUD Text Parsing",
+                     "uploaded": 1739086658,
+                      "version": "1"
                 },
                 {
                        "author": "demonnic",
@@ -1054,6 +1104,16 @@
                      "mpackage": "git-updater",
                         "title": "Mudlet Git Auto-Update: Simple GitHub Release",
                      "uploaded": 1738850909,
+                      "version": "1"
+                },
+                {
+                       "author": "Phoenix",
+                      "created": "2013-04-04T04:24:12+00:00",
+                  "description": "The GMCP Item Tracker is a software package designed to track and manage items across different locations in a MUD (Multi-User Dungeon) environment, specifically optimized for Achaea. It creates comprehensive tables for room items, inventory items, and wielded items, automatically updating them through GMCP messages and providing event triggers for item additions, removals, and updates.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3356&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "gmcp-item-tracker.mpackage",
+                     "mpackage": "gmcp-item-tracker",
+                        "title": "GMCP Item Tracker for Achaea Mudlib",
+                     "uploaded": 1739086648,
                       "version": "1"
                 },
                 {
@@ -1405,5 +1465,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Feb  8 15:35:48 2025"
+   "updated": "Sun Feb  9 07:39:25 2025"
 }
