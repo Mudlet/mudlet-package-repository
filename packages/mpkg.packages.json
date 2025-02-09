@@ -686,6 +686,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Akaya",
+                      "created": "2013-04-22T22:34:06+00:00",
+                  "description": "A simple car you can move across the screen by clicking a few buttons. Thought I'd share to give a good example of how animations can be done in Vyzor.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3383&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "car-animation.mpackage",
+                     "mpackage": "car-animation",
+                        "title": "Vyzor Car Animation: Click & Drive Demo",
+                     "uploaded": 1739089229,
+                      "version": "1"
+                },
+                {
                        "author": "Vadi",
                       "created": "2010-03-08T22:38:01+00:00",
                   "description": "Mudlet package that enables automatic URL detection and web link functionality within the mud client. When imported, URLs displayed on a single line become underlined and clickable, allowing users to directly open web links by clicking them in the Mudlet interface. Requires Mudlet version 1.1.0-pre1 or higher for proper functionality.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1318&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -964,6 +974,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Mosr",
+                      "created": "2011-07-05T01:27:43+00:00",
+                  "description": "Summarize elist and vlist in Achaea with esum and vsum.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2307&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "elist-and-vlist-summary-for-achaea.mpackage",
+                     "mpackage": "elist-and-vlist-summary-for-achaea",
+                        "title": "elist and vlist summaries for Achaea",
+                     "uploaded": 1739089180,
+                      "version": "1"
+                },
+                {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-24T08:27:33+02:00",
                   "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
@@ -1126,6 +1146,16 @@
                         "title": "A utility for searching your buffers.",
                      "uploaded": 1737771148,
                       "version": "1.0.0"
+                },
+                {
+                       "author": "Greg",
+                      "created": "2013-08-07T18:22:08+00:00",
+                  "description": "Barbox is a stylesheet collection for creating gradient \"progress bars\" with various visual styles and color options. The package provides pre-configured gradient bars that can be used as visual elements or incorporated into custom gauge constructors, offering design flexibility through hexadecimal and rgba color specifications. While primarily focused on aesthetic presentation, Barbox includes techniques for controlling gradient orientation, opacity, and text formatting for visual display elements.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3561&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "guages-a-collection-of-styled-progress-bars.mpackage",
+                     "mpackage": "gauges-a-collection-of-styled-progress-bars",
+                        "title": "Stylish QT Gradient Progress Bar Collection",
+                     "uploaded": 1739089261,
+                      "version": "1"
                 },
                 {
                        "author": "Mudlet Default Package",
@@ -1400,6 +1430,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Oneymus",
+                      "created": "2011-03-17T08:01:10+00:00",
+                  "description": "QeMistry is a Lua-based Queue Manager designed for Multi-User Dungeons (MUDs) that allows users to sequence and prioritize game actions based on balance requirements. The package enables users to create a queue of actions that automatically executes commands when specific balance conditions are met, with options to maintain action order and control execution steps. It supports complex action definitions including strings, functions, and balance-dependent actions, making it a flexible tool for managing sequential game commands.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2128&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "qemistry-queue-manager.mpackage",
+                     "mpackage": "qemistry-queue-manager",
+                        "title": "QeMistry: Flexible MuD Queue Manager",
+                     "uploaded": 1739089253,
+                      "version": "1"
+                },
+                {
                        "author": "Kitaya",
                       "created": "2019-06-29T09:37:39+00:00",
                   "description": "This software package is a simple tool for sharing Mudlet code snippets quickly between users by leveraging pastebin.com and Mudlet's installPackage functionality. Users can copy a script, paste it on pastebin.com, and then share the raw URL, which allows other users to download and install the package directly using a single command. The package streamlines code sharing for Mudlet users by providing an easy method to distribute aliases, triggers, and other scripts.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22757&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1440,6 +1480,16 @@
                         "title": "Run Lua code directly from the command line.",
                      "uploaded": 1737298564,
                       "version": "5"
+                },
+                {
+                       "author": "kaeus",
+                      "created": "2010-04-24T19:25:32+00:00",
+                  "description": "This software package provides a function to save the current screen buffer as an HTML file with color formatting, allowing users to capture and preserve the visual state of their current view. Users can invoke the function either through a Lua command (logScreen) or an alias (screendump), which includes a file dialog to easily select the save location. The function processes each line character by character, which can take up to 2 minutes for large buffers, but ensures proper formatting with a monospace font.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1413&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "screendump-function.mpackage",
+                     "mpackage": "screendump-function",
+                        "title": "HTML Screen Logger for Mudlet",
+                     "uploaded": 1739089244,
+                      "version": "1"
                 },
                 {
                        "author": "Thandril",
@@ -1492,6 +1542,16 @@
                         "title": "Create simple maps using directional commands only.",
                      "uploaded": 1732619400,
                       "version": "2.1"
+                },
+                {
+                       "author": "Constin",
+                      "created": "2013-01-08T23:46:16+00:00",
+                  "description": "Exit from ship at arrival.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3205&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "simple-script-for-slothmud-ships.mpackage",
+                     "mpackage": "simple-script-for-slothmud-ships",
+                        "title": "Slothmud Ships",
+                     "uploaded": 1739089236,
+                      "version": "1"
                 },
                 {
                        "author": "demonnic (mods by Zooka)",
@@ -1575,5 +1635,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Feb  9 08:14:11 2025"
+   "updated": "Sun Feb  9 08:23:22 2025"
 }
