@@ -180,6 +180,16 @@
                       "version": "1.7.8"
                 },
                 {
+                       "author": "Valorie, updated by Elene",
+                      "created": "2025-02-09T19:23:23+08:00",
+                  "description": "Ever wanted to know the history behind the stars of the Mejevsavelnel? Compiled from an in-game book in an easy stars, read all about the tale of the constellation that caught your eye, and how the star looks like in the heavenscape!\n\nSimply start with the syntax: STARS HELP!",
+                     "filename": "Mejevsavelnel Database (Aetolia).mpackage",
+                     "mpackage": "Mejevsavelnel Database (Aetolia)",
+                        "title": "A database of the constellations in Aetolia's heavenscape. Includes a colour script so it doesn't break.",
+                     "uploaded": 1739100518,
+                      "version": "1.0"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2024-04-14T13:54:22-0400",
                   "description": "A helper package for reloading packages created by muddler automatically",
@@ -1795,5 +1805,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Feb  9 08:41:17 2025"
+   "updated": "Sun Feb  9 11:29:43 2025"
 }
