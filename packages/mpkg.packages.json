@@ -1645,6 +1645,76 @@
                       "version": "1"
                 },
                 {
+                       "author": "jippenfaddoul",
+                      "created": "2010-08-14T10:08:55+00:00",
+                  "description": "WiXXX Searcher is a script for the Tapestries furry MUD that allows users to create custom text highlighting for other players' kinks lists. Users can edit regular expressions in whitelist and blacklist triggers, which respectively highlight matching kinks in green or red.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1643&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tapestries-wixxx-sorter.mpackage",
+                     "mpackage": "tapestries-wixxx-sorter",
+                        "title": "WiXXX Searcher: Kink Highlighting Tool",
+                     "uploaded": 1739090293,
+                      "version": "1"
+                },
+                {
+                       "author": "Akaya",
+                      "created": "2013-11-22T00:37:12+00:00",
+                  "description": "This software is a map generation tool that converts text-based map layouts into graphical tile-based maps using Lua scripting. It allows users to define maps using simple character representations (such as X for walls, . for floors) and automatically renders these maps with customizable tile graphics. The system supports maps of varying sizes and can be easily integrated with game environments, providing a flexible method for creating visual map representations from text descriptions.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4218&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "text-map-tile-map.mpackage",
+                     "mpackage": "text-map-tile-map",
+                        "title": "Text Map to Tile Map Converter",
+                     "uploaded": 1739090302,
+                      "version": "1"
+                },
+                {
+                       "author": "Omit",
+                      "created": "2010-08-07T05:28:56+00:00",
+                  "description": "Provides enhanced navigation and interaction features, including automatic drawing of clickable exits, mapping of keypad keys to movement commands, and room-specific alias storage. Users can create up to 12 aliases per room, which are accessible through a graphical menu when the compass center turns red, allowing quick execution of commands with minimal clicks or keystrokes. The software offers an intuitive interface for creating and managing MUD-specific shortcuts and navigation tools.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1628&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "the-two-towers-exits-window.mpackage",
+                     "mpackage": "the-two-towers-exits-window",
+                        "title": "Two Tower Navigation",
+                     "uploaded": 1739090310,
+                      "version": "1"
+                },
+                {
+                       "author": "naftali",
+                      "created": "2010-02-27T21:51:22+00:00",
+                  "description": "This software package is a timer management system that allows users to easily start, stop, and track the duration of various events by creating named timers. It provides functions to record start and stop times, calculate statistical metrics like average, median, maximum, and minimum times for each event type, and store the collected time data for later analysis. The package is particularly useful for tracking repeating events, measuring recovery or action times, and gathering performance data in a simple, flexible manner.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1308&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "timing-framework.mpackage",
+                     "mpackage": "timing-framework",
+                        "title": "Timing Framework: Track and Analyze Event Durations",
+                     "uploaded": 1739090343,
+                      "version": "1"
+                },
+                {
+                       "author": "ella",
+                      "created": "2012-07-22T02:47:16+00:00",
+                  "description": "TLS is a package designed for tabbed chat interfaces, providing custom styling and trigger functionality. The software enables users to modify chat appearance and set specific event-driven actions within chat environments. It supports customization of chat interfaces, allowing for enhanced user interaction and visual personalization.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2868&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tls-mud-chat.mpackage",
+                     "mpackage": "tls-mud-chat",
+                        "title": "TLS Chat Script with Triggers",
+                     "uploaded": 1739090350,
+                      "version": "1"
+                },
+                {
+                       "author": "syrik",
+                      "created": "2010-10-24T03:26:53+00:00",
+                  "description": "A tracking script for monitoring and visualizing recent movement patterns, specifically using color-coded indicators to represent the recency and direction of tracked entities (such as a spider's path). It uses different colors to highlight temporal and directional information, with distinctions like cyan for recent tracks and purple for directional arrows. The script seems designed to provide a visual representation of movement or tracking data in a compact, informative format.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1767&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tracking-script.mpackage",
+                     "mpackage": "tracking-script",
+                        "title": "Spider Tracking Visualization Tool",
+                     "uploaded": 1739090359,
+                      "version": "1"
+                },
+                {
+                       "author": "Vhalkier",
+                      "created": "2012-06-30T22:39:31+00:00",
+                  "description": "The Transmutation Calculator is a software package designed to help users calculate pricing and totals using specific aliases like calcon (turn on), calcreset (reset total), and calcoff (turn off). Users can customize the calculator by changing prices within the package to suit their specific needs.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2839&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "transmutation-calculator.mpackage",
+                     "mpackage": "transmutation-calculator",
+                        "title": "Transmutation Calculator: Price Tracking Tool",
+                     "uploaded": 1739090367,
+                      "version": "1"
+                },
+                {
                        "author": "xanthia",
                       "created": "2019-26-04T00:00:00+00:00",
                   "description": "This is a UI package that includes text-to-speech support for accessibility on Cities Of M'Dhoria, with graphic bars for player and enemy and a working auto-mapper (which just require some walking rules/discipline).\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22736&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1675,6 +1745,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "ceff",
+                      "created": "2011-12-23T07:07:12+00:00",
+                  "description": "This software package is a tool for milking venoms for serpent users. It provides commands to add specific or all venoms to a milking queue, and includes a function to start the milking process. The script is designed to be used while staying on the computer and following specific rules.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2624&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "venom-milker.mpackage",
+                     "mpackage": "venom-milker",
+                        "title": "Venom Milker: Automated Serpent Venom Extraction",
+                     "uploaded": 1739090409,
+                      "version": "1"
+                },
+                {
                        "author": "zhenzh",
                       "created": "2020-04-19T14:19:35+00:00",
                   "description": "This software package provides a coroutine-based waiting mechanism in Lua that allows developers to suspend function execution for a specified time or until a specific pattern is matched. It enables modular function chaining by using wait() and wait_line() functions, which can pause execution, wait for a specific time interval, or wait for matched input patterns. The package is particularly useful for creating sequential, time-dependent, or pattern-matching script flows in Lua applications.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22875&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1695,6 +1775,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Loem",
+                      "created": "2013-09-24T01:48:52+00:00",
+                  "description": "WISR Reporter is a Mudlet package for the MUD Achaea that provides real-time tracking of room occupants, items, potion sips, and active Rites through a tabbed interface. The package requires specific skills in Vision and Devotion and automatically updates information based on character movement, Look commands, and skill usage. Users can customize the window's screen position and easily import the package through Mudlet's package importer.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4097&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "wisr-reporter.mpackage",
+                     "mpackage": "wisr-reporter",
+                        "title": "WISR Reporter: Real-Time MUD Tracking Tool",
+                     "uploaded": 1739090403,
+                      "version": "1"
+                },
+                {
                        "author": "xanthia",
                       "created": "2022-07-08T01:33:07+00:00",
                   "description": "XAMM is a software package designed for CoffeeMud, a multi-user dungeon (MUD) game platform, featuring integrated mapping and gauges functionality. The package allows players to connect to CoffeeMud servers and provides visual navigation and tracking tools to enhance the gaming experience. While still under development, XAMM offers several core features that improve user interaction with the CoffeeMud environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23150&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1705,5 +1795,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Feb  9 08:33:34 2025"
+   "updated": "Sun Feb  9 08:41:17 2025"
 }
