@@ -326,6 +326,16 @@
                       "version": "2.0.1"
                 },
                 {
+                       "author": "Demonnic",
+                      "created": "2023-12-16T06:06:25+0000",
+                  "description": "# SunderBashpathinator\n\nhttps://demonnic.github.io/gifs/SunderBashPathinator.gif\n\n## UI for browsing bashing areas and managing a bashpath in Sunder\n\nThis is for making it easier to browse the areas known by Sunder's basher. It also helps manage a custom gogo path named \"custom\" which you can run using `gogo custom`\n\n## Installation\n\nCopy and paste the following command into Mudlet to install or update the Sunder Bashpathinator\n\n`lua uninstallPackage(\"SunderBashpathinator\") installPackage(\"https://github.com/demonnic/SunderBashpathinator/releases/latest/download/SunderBashpathinator.mpackage\")`\n\n## Usage\n\n`sunder areas` will open the user window. You can click the `Area` or `Level` header to sort by either area name or level (or reversed if you click them again).\n\nClicking the number of targets or items will print just that area, and print the actual details on the targets and items.\n\nClicking the \"Area List\" button at the top left will print the full list out again.\n\nClicking the \"Custom Path\" button at the top right will display the custom gogo path and give you controls to reorder the areas in the path.\n\n### Aliases\n\n* `sunder areas`\n  * brings up the interface\n\n### API\n\n* `snd.pathinator:browser()`\n  * If you want to open the interface programmatically\n",
+                     "filename": "SunderBashpathinator.mpackage",
+                     "mpackage": "SunderBashpathinator",
+                        "title": "UI for browsing bashing areas and managing a bashpath in Sunder",
+                     "uploaded": 1739089805,
+                      "version": "1.1.0"
+                },
+                {
                        "author": "takilara",
                       "created": "2013-06-25T07:58:31+00:00",
                   "description": "This package can consume commands from Telegram, and run them on the mud, and send messages back to Telegram\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23057) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1258,6 +1268,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Vadi",
+                      "created": "2010-01-01T01:51:02+00:00",
+                  "description": "A GUI for Lusternia.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1180&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "lusternia-fancy-gui.mpackage",
+                     "mpackage": "lusternia-fancy-gui",
+                        "title": "Lusternia GUI",
+                     "uploaded": 1739089797,
+                      "version": "1"
+                },
+                {
                        "author": "lex",
                       "created": "2010-05-29T19:21:46+00:00",
                   "description": "MAG (Mudlet Aardwolf GUI) is a comprehensive software package designed to enhance the gaming experience on Aardwolf, a text-based multiplayer game. The package includes features such as detailed chat logging, quest and campaign information, a mini-map, status tracking, kill and experience statistics, and various useful aliases and triggers. It provides players with advanced tools to improve gameplay, communication, and strategic decision-making.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1471&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1554,6 +1574,26 @@
                       "version": "1"
                 },
                 {
+                       "author": "hogarius",
+                      "created": "2015-05-06T02:33:15+00:00",
+                  "description": "This Mudlet profile enables users to connect to Simutronics text-based multiplayer games using the Wizard protocol, supporting games like DragonRealms and GemStone IV. The profile provides an XML configuration that allows players to log in, select characters, and interact with the game servers, with users required to have an active Simutronics subscription. Users must follow specific setup instructions, enter their account credentials using case-sensitive aliases, and use designated game codes to connect to their preferred game.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4780&sid=654f4778bd2cdb19b5fee80867e1c315) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "simutronics-login-for-mudlet-3_0_0-delta.mpackage",
+                     "mpackage": "simutronics-login-for-mudlet-3.0.0-delta",
+                        "title": "Mudlet Profile for Simutronics Wizard Protocol",
+                     "uploaded": 1739089813,
+                      "version": "1"
+                },
+                {
+                       "author": "demonnic",
+                      "created": "2011-06-06T00:24:33+00:00",
+                  "description": "Designed for IRE MUDs that automatically tracks and updates room items and player skills using GMCP events. It creates two primary tables: demonnic.roomItems, which stores all dynamic room elements like sigils, denizens, and items with their unique identifiers, and demonnic.skills, which organizes the player's skills by type (e.g., nature, environment). The package provides real-time tracking and easy access to these game-related data structures through simple Lua table interactions.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2258&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "some-gmcp-events-for-ire-muds.mpackage",
+                     "mpackage": "some-gmcp-events-for-ire-muds",
+                        "title": "IRE MUD GMCP Room Items and Skills Tracker",
+                     "uploaded": 1739089821,
+                      "version": "1"
+                },
+                {
                        "author": "demonnic (mods by Zooka)",
                       "created": "2024-06-30T16:47:33+04:00",
                   "description": "### Description\n\nRecords a speedwalk with the ability to play back, and in reverse. Makes use of the speedwalk() function.\n\n### Usage\n```\nspeedrecord <name of speedwalk route>\n```\nThis begins the recording. When you do this, it activates an alias which consumes everything you put in the command line and adds it to the route it is recording. When done, type:\n```\nstopRecording\n```\nand it will end the recording mode and add the route to the list of routes it knows. To walk the route:\n```\nswalk <name of speedwalk route>\n```\nAnd if you want to walk it in reverse:\n```\nrwalk <name of speedwalk route to reverse>\n```\nTo see a list of saved speedwalks with clickable links;\n```\nlwalk\n```\nTo set the speedwalk delay type:\n```\ndelaywalk <number>\n```\nTo remove a speedwalk;\n```\nremovewalk <name of speedwalk route>\n```",
@@ -1572,6 +1612,36 @@
                      "mpackage": "stopinator",
                         "title": "stopinator",
                      "uploaded": 1738850829,
+                      "version": "1"
+                },
+                {
+                       "author": "Omit",
+                      "created": "2010-12-14T02:50:00+00:00",
+                  "description": "A chat and trigger system for \"Two Towers\" It includes a chat and event triggers that allows players to interact and manage communication within the game environment. The package aims to provide a more reliable method of handling chat interactions, though it may occasionally have minor issues with capturing certain types of in-game text.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1860&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tab-chat-and-bars-for-t2t.mpackage",
+                     "mpackage": "tab-chat-bars-for-t2t",
+                        "title": "Table Chat Trigger for Two Towers RPG",
+                     "uploaded": 1739089829,
+                      "version": "1"
+                },
+                {
+                       "author": "Thylacine",
+                      "created": "2009-06-23T06:07:12+00:00",
+                  "description": "TabbedChat is a Mudlet script that creates a customizable chat interface with multiple tabbed channels. Users can configure channel triggers, and dynamically switch between different chat tabs like \"All\", \"Guild\", \"City\", and \"Market\". The script allows for easy organization and separation of chat messages across different communication channels.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=171&sid=8d1a64e87d5737e0aa3c5514b402b3d5) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "tabbed-chat-script.mpackage",
+                     "mpackage": "tabbed-chat-script",
+                        "title": "Tabbed Chat Script",
+                     "uploaded": 1739089836,
+                      "version": "1"
+                },
+                {
+                       "author": "demonnic",
+                      "created": "2012-07-04T15:50:13+00:00",
+                  "description": "A Mudlet script package that provides simple command-line aliases for saving and loading Lua tables within a Mudlet profile. The package offers three main commands (t-save, t-load, t-overwrite) to interact with tables, allowing users to save tables to files, load tables from files, and manage table data with confirmation prompts. Users can save and load tables within their current profile or reference tables from other profiles using relative file paths.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2847&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "table-save-load-helper.mpackage",
+                     "mpackage": "table-save-load-helper",
+                        "title": "Table Save-Load Helper",
+                     "uploaded": 1739089859,
                       "version": "1"
                 },
                 {
@@ -1635,5 +1705,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Feb  9 08:23:22 2025"
+   "updated": "Sun Feb  9 08:33:34 2025"
 }
