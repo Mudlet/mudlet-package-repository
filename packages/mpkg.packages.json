@@ -1158,6 +1158,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Akaya",
+                      "created": "2013-02-12T22:36:44+00:00",
+                  "description": "A Lua script for Achaea that automatically creates and updates a table of room contents when the \"IH\" (Inventory Here) command is used.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3289&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "info-here-table.mpackage",
+                     "mpackage": "info-here-table",
+                        "title": "Achaea Room Contents Logger and Display Script",
+                     "uploaded": 1739088812,
+                      "version": "1"
+                },
+                {
                        "author": "ulysses",
                       "created": "2018-03-10T10:02:23+00:00",
                   "description": "This software package is a script for MUD (Multi-User Dungeon) environments designed to categorize and organize inventory items automatically. The script processes item lists, matches items to predefined categories using case-insensitive string matching, and outputs the sorted contents alphabetically within each category. Its primary purpose is to help players systematically organize their inventory, with a specific feature that highlights uncategorized items in an \"OTHER\" category for manual review and proper classification.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22535&sid=b3b9fb53db9cbda5cdc5b4b95b472eed) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1168,6 +1178,36 @@
                       "version": "1"
                 },
                 {
+                       "author": "tsuujin",
+                      "created": "2010-03-22T07:13:03+00:00",
+                  "description": "Midkemia Online and Achaea package provides a script for tracking and managing skill learning progress within these text-based online role-playing games. The software automatically captures and populates data tables related to skill acquisition, offering players a streamlined way to monitor their character's advancement and lesson requirements for skill mastery.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1346&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "ire-ab-plus.mpackage",
+                     "mpackage": "ire-ab-plus",
+                        "title": "Midkemia Online AB Tracking Script",
+                     "uploaded": 1739088795,
+                      "version": "1"
+                },
+                {
+                       "author": "Wyd",
+                      "created": "2010-04-08T09:53:09+00:00",
+                  "description": "This software package allows users to utilize maps from Iron Realms Entertainment (IRE) games within the Mudlet client, specifically designed to work with the newest version of Vadi's mapping system for Achaea. The scripts enable map display functionality, though currently limited by Mudlet's ATCP initialization constraints. Users can view and interact with IRE game maps directly in Mudlet, with potential future compatibility across all IRE games.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1380&sid=84928af0d42b4e223b12fcba497301e9) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "ire-map-display.mpackage",
+                     "mpackage": "ire-map-display",
+                        "title": "IRE Maps for Mudlet: Vadi System Support",
+                     "uploaded": 1739088786,
+                      "version": "1"
+                },
+                {
+                       "author": "Yetzederixx",
+                      "created": "2011-04-15T22:35:46+00:00",
+                  "description": "Mudlet's keypad package provides a customizable input solution for MUD gaming, enabling users to map and utilize numeric keypad functions within the Mudlet interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2163&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "keypad-keybindings.mpackage",
+                     "mpackage": "keypad-keybindings",
+                        "title": "Mudlet Keypad Configuration XML Profile",
+                     "uploaded": 1739088778,
+                      "version": "1"
+                },
+                {
                        "author": "demonnic",
                       "created": "2020-03-19T05:47:39+00:00",
                   "description": "LuaUnit is a modified testing framework specifically adapted for Mudlet, allowing developers to run unit tests directly within the Mudlet environment. It replaces standard Lua print and io.write functions with Mudlet-compatible alternatives and removes OS exit calls to prevent accidental Mudlet closure. Users can install the package via an mpackage file or manually include the luaunit.lua file, enabling straightforward unit testing of Mudlet scripts with familiar assertion methods like 'lum.assertEquals'.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22857&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1175,6 +1215,26 @@
                      "mpackage": "luaunit-for-mudlet",
                         "title": "LuaUnit for Mudlet: Lightweight Testing Kit",
                      "uploaded": 1738849196,
+                      "version": "1"
+                },
+                {
+                       "author": "demonnic",
+                      "created": "2010-02-26T17:01:57+00:00",
+                  "description": "This is an auto-learning script for Mudlet that allows users to automatically learn skills from a denizen teacher by specifying the skill, teacher, starting rank, and target rank. The script includes a \"torank\" alias to calculate required lessons and performs skill learning with specific usage constraints, such as requiring the user to be in the same room as a denizen teacher. Limitations include no lesson availability checks and specific restrictions on rank progression.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1307&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "lusternia-auto-learner.mpackage",
+                     "mpackage": "usternia-auto-learner",
+                        "title": "Mudlet Auto-Learner: Skill Progression Tool",
+                     "uploaded": 1739088803,
+                      "version": "1"
+                },
+                {
+                       "author": "lex",
+                      "created": "2010-05-29T19:21:46+00:00",
+                  "description": "MAG (Mudlet Aardwolf GUI) is a comprehensive software package designed to enhance the gaming experience on Aardwolf, a text-based multiplayer game. The package includes features such as detailed chat logging, quest and campaign information, a mini-map, status tracking, kill and experience statistics, and various useful aliases and triggers. It provides players with advanced tools to improve gameplay, communication, and strategic decision-making.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1471&sid=9e9ab92edb9715ef63adb48743a4b4bb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "mag-mudlet-aardwolf-gui.mpackage",
+                     "mpackage": "mag-mudlet-aardwolf-gui",
+                        "title": "MAG Mudlet Aardwolf Gaming Enhancement Suite",
+                     "uploaded": 1739088769,
                       "version": "1"
                 },
                 {
@@ -1196,6 +1256,36 @@
                      "mpackage": "master-spam",
                         "title": "Suppress lines of spamminess.",
                      "uploaded": 1725200902,
+                      "version": "1"
+                },
+                {
+                       "author": "LisaZeKilla",
+                      "created": "2015-04-07T05:46:28+00:00",
+                  "description": "MMGui is a Mudlet-based graphical user interface for a text-based multiplayer game, featuring a basic mapper, reagent gauges, quest timers, specialized chat windows, and combat navigation tools. The package requires Mudlet and several supporting packages to function, with a focus on personalizing triggers for specific character types. Users can initialize the interface by typing \"init\" and should expect ongoing feature improvements.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4759&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "materia-magica-gui.mpackage",
+                     "mpackage": "materia-magica-gui",
+                        "title": "Materia Magica GUI",
+                     "uploaded": 1739088759,
+                      "version": "1"
+                },
+                {
+                       "author": "Caelic",
+                      "created": "2011-11-29T18:26:20+00:00",
+                  "description": "This software package is a customized combo script for a monk character in a game, designed to automatically execute different combat combinations based on the target type. When targeting a specific type of in-game entity (denizen), the script performs a default bashing combo, and when no specific target is selected, it allows the player to choose from multiple predefined combo sequences using keypad numbers 1-9. The script is flexible and can potentially be adapted for other character classes, with ongoing plans to expand its functionality by adding more key variations and target lists.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2581&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "monk-combo-script-achaea.mpackage",
+                     "mpackage": "monk-combo-script-achaea",
+                        "title": "Monk Combo Script for Achaea",
+                     "uploaded": 1739088751,
+                      "version": "1"
+                },
+                {
+                       "author": "Acallia",
+                      "created": "2011-05-01T19:40:22+00:00",
+                  "description": "This script is for Achaea, focused on monk character combat mechanics, specifically designed to streamline character setup and limb targeting/combat preparation. The script provides custom combat functionality and quick configuration options for monk characters, originally developed by Cooper and adapted for the Mudlet environment with assistance from Iocun.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2188&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "monk-custom-tekura-combos-achaea.mpackage",
+                     "mpackage": "monk-custom-tekura-combos-achaea",
+                        "title": "Mudlet Monk Combat Script for Quick Setup",
+                     "uploaded": 1739088742,
                       "version": "1"
                 },
                 {
@@ -1230,6 +1320,16 @@
                       "version": "3.3"
                 },
                 {
+                       "author": "Denarii",
+                      "created": "2010-01-14T19:34:19+00:00",
+                  "description": "KeyboardMovement is a software package that enhances navigation in text-based games (MUDs) by providing localized keyboard movement commands. It supports multiple languages including English, German, and Spanish, allowing players to use directional and entry/exit commands in their native language. Users can easily set the locale in a script to switch between language variants, making the game interface more accessible and intuitive.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1214&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "multilingual-keyboad-movement-script.mpackage",
+                     "mpackage": "multilingual-keyboad-movement-script",
+                        "title": "Multilingual Keyboard Movement Plugin for MUDs",
+                     "uploaded": 1739088736,
+                      "version": "1"
+                },
+                {
                        "author": "Armagedoom",
                       "created": "2025-01-26T20:42:59+01:00",
                   "description": "Helper to transform MUSH plugins or xml code into a Mudlet package.\n\nThe steps to transform your MUSH code to a Mudlet package are:\n\n\n* Paste the full code of your mush plugin or xml code block as value for the variable `mush_to_mudlet_code_to_transform` inside the script `INSERT_YOUR_CODE_HERE`.\n* Click on the script `DO_TRANSFORM/PACKAGE_TO_CLIPBOARD`. \n* Paste your new mudlet plugin, which will create a folder in Alias, Scripts, and triggers with the code converted from Mush.\n\nThe scripts will need manual work, but most of the alias and triggers will be automatically converted.",
@@ -1238,6 +1338,16 @@
                         "title": "Helper to transform MUSH plugins or xml code into a Mudlet package",
                      "uploaded": 1737944692,
                       "version": "1.1"
+                },
+                {
+                       "author": "Vadi",
+                      "created": "2010-01-21T00:38:27+00:00",
+                  "description": "The Name Highlighter is a software script that quickly highlights enemy names in a game or application, currently focused on identifying city enemies with minimal performance impact. It offers commands to manage highlighting modes, toggle script functionality, and provides an API for checking enemy status. The script is designed to enhance visibility of specific names with rapid processing and minimal lag.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1235&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
+                     "filename": "name-highlighter-v3.mpackage",
+                     "mpackage": "name-highlighter-v3",
+                        "title": "City Enemy Name Highlighter Script",
+                     "uploaded": 1739088728,
+                      "version": "1"
                 },
                 {
                        "author": "Vadi",
@@ -1465,5 +1575,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Feb  9 07:39:25 2025"
+   "updated": "Sun Feb  9 08:14:11 2025"
 }
