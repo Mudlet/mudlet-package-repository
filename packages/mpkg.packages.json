@@ -1138,16 +1138,6 @@
                       "version": "1"
                 },
                 {
-                       "author": "Akaya",
-                      "created": "2013-09-25T01:38:36+00:00",
-                  "description": "The Geyser UI Template is a flexible, customizable interface framework for creating user interfaces in Mudlet, offering pre-configured containers, gauges, icons, and labels that can be easily scripted and styled. It provides twelve icon labels, four gauges (Health, Mana, Endurance, Willpower), and multiple box containers that can be manipulated through Lua scripting with built-in CSS management capabilities. The template is designed to be adaptable across different MUD environments, allowing developers to quickly build and personalize their user interface with minimal setup.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&sid=e2278befccebd9d8ba94c4455650caac) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
-                     "filename": "geyser-ui-template.mpackage",
-                     "mpackage": "geyser-ui-template",
-                        "title": "Geyser UI Template: Quick-Start Interface",
-                     "uploaded": 1738774734,
-                      "version": "1"
-                },
-                {
                        "author": "davidwiththenicehat",
                       "created": "2020-01-12T22:41:21+00:00",
                   "description": "The Git Update software package is a Mudlet scripting tool designed to automate software updates from GitHub repositories. It allows developers to easily manage package updates by downloading and installing the latest release files, handling version comparisons, providing update notifications, and supporting optional beta testing channels.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22841&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1816,5 +1806,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Feb 18 08:55:12 2025"
+   "updated": "Mon Feb 24 14:54:42 2025"
 }
