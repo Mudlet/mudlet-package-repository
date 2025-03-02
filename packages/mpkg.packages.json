@@ -129,13 +129,13 @@
                 },
                 {
                        "author": "Akaya, mods by Zooka",
-                      "created": "2024-12-24T13:05:23+04:00",
+                      "created": "2025-03-02T17:20:36+04:00",
                   "description": "### Description\n\nThis package contains a basic GUI template that serves as a basis for creating your own.  It uses modern Geyser elements such as Adjustable Containers and Geyser Buttons for a flexible layout which can be arranged and styled anyway you like.  This is an updated, modern version of Akaya's excellent original template.\n\n### Usage\n\nSimply install this package and the GUI will be displayed.  Start customising!\n\n### See Also\n\n* [Akaya's original template](https://forums.mudlet.org/viewtopic.php?f=6&t=4098&pk_vid=09b619c5f5c4537b1735030856a9723a)",
                      "filename": "GUIFlex.mpackage",
                      "mpackage": "GUIFlex",
                         "title": "A basic but modern GUI template created with Geyser.",
-                     "uploaded": 1735031443,
-                      "version": "1"
+                     "uploaded": 1740922157,
+                      "version": "1.1"
                 },
                 {
                        "author": "Elanthia Online",
@@ -1806,5 +1806,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Feb 24 14:54:42 2025"
+   "updated": "Sun Mar  2 13:31:53 2025"
 }
