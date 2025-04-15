@@ -337,6 +337,17 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Daikojun",
+                      "created": "2025-04-14T20:26:14-04:00",
+                  "description": "This keymap has groups for Numlock on or off as well as other common commands that usually get mapped to the keypad.",
+                     "filename": "Standard-Keypad-Keymap.mpackage",
+                         "icon": "packages/icons/Standard-Keypad-Keymap.png",
+                     "mpackage": "Standard-Keypad-Keymap",
+                        "title": "Standard Keypad Keymap with Numlock On-Off",
+                     "uploaded": 1744687878,
+                      "version": "1"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2022-08-09T23:52:35+0000",
                   "description": "# Stressinator\n\nEver want to torture your Mudlet profile and see how it holds up under pressure?\n\nIf like me you answered \"Ohh, neat!\" then I threw this together after reading through the forum topic [Typical Trigger Performace](https://forums.mudlet.org/viewtopic.php?f=9&t=23089)\n\n## Installation\n\nYou can use the following command in Mudlet to install the latest version:\n\n`lua uninstallPackage(\"Stressinator\") installPackage(\"https://github.com/demonnic/Stressinator/releases/latest/download/Stressinator.mpackage\")`\n\nAfter that, you can either use the same snippet, or the supplied `stressinator update` alias\n\n## Usage\n\n* `stresstest <number of lines to run>`\n  * Run the stress test with optional number of times to process the line. Defaults to 10k if no number provided.\n* `waitno`\n  * Cancels the stresstest if you tried to start one\n* `stressinator update`\n  * Downloads and installs the latest version of the Stressinator\n",
@@ -1806,5 +1817,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Apr  3 06:01:57 2025"
+   "updated": "Tue Apr 15 03:36:23 2025"
 }
