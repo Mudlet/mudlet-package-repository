@@ -12,7 +12,6 @@ interface PackageListProps {
   reverse?: boolean;
 }
 
-
 export const PackageList = ({ packages, limit, sortBy, reverse }: PackageListProps) => {
   const [expandedPackage, setExpandedPackage] = useState<string | null>(null);
 
