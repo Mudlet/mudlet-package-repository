@@ -1,25 +1,49 @@
 'use client'
 
-import { PackageMetadata } from '@/app/lib/types'
+import { UploadedPackageMetadata, UploadedPackageSortByOptions } from '@/app/lib/types'
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Image from 'next/image'
 
 interface PackageListProps {
-  packages: PackageMetadata[];
+  packages: UploadedPackageMetadata[];
   limit?: number;
+  sortBy?: UploadedPackageSortByOptions; // will sort by mpackage by default
+  reverse?: boolean;
 }
 
-export const PackageList = ({ packages, limit }: PackageListProps) => {
+
+export const PackageList = ({ packages, limit, sortBy, reverse }: PackageListProps) => {
   const [expandedPackage, setExpandedPackage] = useState<string | null>(null);
+
+  // will sort by mpackage by default.
+  const _sortBy = sortBy ? sortBy : UploadedPackageSortByOptions.mpackage;
+
+  // will not reverse the sort order by default.
+  const _reverse = reverse ? reverse : false;
 
   // Sort packages alphabetically by mpackage, case-insensitive
   // This is not fixed in stone and might change in the future as we get a better understanding of how to handle this.
-  const sortedPackages = packages.slice().sort((a, b) => {
-    const aName = a.mpackage?.toLowerCase() || '';
-    const bName = b.mpackage?.toLowerCase() || '';
-    return aName.localeCompare(bName);
-  });
+  const sortedPackages = packages.slice().sort(
+    
+    // If we're sorting by 'uploaded' - uploaded is a number (not a string), so we compare the 'uploaded' values mathematically.
+    (_sortBy == UploadedPackageSortByOptions.uploaded) 
+    ? (a1, b1) => {
+      const aUpload = a1.uploaded;
+      const bUpload = b1.uploaded;
+      return bUpload - aUpload;
+    } 
+    // otherwise, we sort them alphabetically (case-insensitive) by the appropriate field (as defined by _sortBy)
+    : (a2, b2) => {
+      const aName = a2[_sortBy]?.toLowerCase() || '';
+      const bName = b2[_sortBy]?.toLowerCase() || '';
+      return aName.localeCompare(bName);
+    }
+  );
+
+  if (_reverse){
+    sortedPackages.reverse();
+  }
 
   const displayPackages = limit ? sortedPackages.slice(0, limit) : sortedPackages;
 
