@@ -8,9 +8,10 @@ import Image from 'next/image'
 interface PackageListProps {
   packages: PackageMetadata[];
   limit?: number;
+  hideLinks?: boolean;
 }
 
-export const PackageList = ({ packages, limit }: PackageListProps) => {
+export const PackageList = ({ packages, limit, hideLinks }: PackageListProps) => {
   const [expandedPackage, setExpandedPackage] = useState<string | null>(null);
 
   // Sort packages alphabetically by mpackage, case-insensitive
@@ -31,6 +32,8 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
   const toggleExpand = (mpackage: string | null) => {
     setExpandedPackage(expandedPackage === mpackage ? null : mpackage);
   };
+
+  const _showLinks = hideLinks ? false : true;
 
   return (
     <section className="page-content" aria-label="Package listings">
@@ -84,11 +87,13 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
                       className="rounded flex-shrink-0"
                     />
                   )}
-                  <div className="content-end flex-grow-2">
-                    <p className="text-gray-600 text-right">
-                      <a href={`#pkg-${encodeURIComponent(pkg.mpackage || '')}`}>link</a>
-                    </p>
-                  </div>
+                  {_showLinks && (
+                    <div className="content-end flex-grow-2">
+                      <p className="text-gray-600 text-right">
+                        <a href={`#pkg-${encodeURIComponent(pkg.mpackage || '')}`}>link</a>
+                      </p>
+                    </div>
+                  )}
                   
               </div>
               

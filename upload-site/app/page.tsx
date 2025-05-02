@@ -34,7 +34,7 @@ export default async function Home() {
       </div>
       <div className="border-t pt-8">
         <h2 className="text-2xl font-bold mb-8">Recent uploads</h2>
-        <PackageList packages={packages} limit={5} />
+        <PackageList packages={packages} limit={5} hideLinks={true} />
       </div>
     </main>
   );
