@@ -30,3 +30,19 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.items-stretch {
+  align-items: stretch;
+}
+
+.flex-grow-2 {
+  flex-grow: 2;
+}
+
+.content-end {
+  align-content: end;
+}
+
+.text-right {
+  text-align: right;
+}

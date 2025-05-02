@@ -38,6 +38,7 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
         {displayPackages.map((pkg) => (
           <article
             key={pkg.mpackage}
+            id={`pkg-${encodeURIComponent(pkg.mpackage || '')}`}
             className="bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer p-4 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => toggleExpand(pkg.mpackage)}
             onKeyDown={(e) => {
@@ -50,7 +51,7 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
             aria-controls={`description-${pkg.mpackage}`}
             tabIndex={0}
           >
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start justify-between gap-4 items-stretch">
               <div className="flex-grow">
                 <h2 className="text-xl font-semibold mb-2">
                   <a
@@ -73,17 +74,25 @@ export const PackageList = ({ packages, limit }: PackageListProps) => {
                 </p>
                 <p className="text-gray-800">{pkg.title}</p>
               </div>
-              {pkg.icon && (
-                <div className="flex-shrink-0">
-                  <Image
-                    src={`https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/${pkg.icon}`}
-                    alt={`${pkg.mpackage} icon`}
-                    width={48}
-                    height={48}
-                    className="rounded"
-                  />
-                </div>
-              )}
+              <div className="flex-shrink-0 flex flex-col">
+                  {pkg.icon && (
+                    <Image
+                      src={`https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/${pkg.icon}`}
+                      alt={`${pkg.mpackage} icon`}
+                      width={48}
+                      height={48}
+                      className="rounded flex-shrink-0"
+                    />
+                  )}
+                  <div className="content-end flex-grow-2">
+                    <p className="text-gray-600 text-right">
+                      <a href={`#pkg-${encodeURIComponent(pkg.mpackage || '')}`}>link</a>
+                    </p>
+                  </div>
+                  
+              </div>
+              
+              
             </div>
             {expandedPackage === pkg.mpackage && (
               <div
