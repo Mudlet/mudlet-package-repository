@@ -10,9 +10,10 @@ interface PackageListProps {
   limit?: number;
   sortBy?: UploadedPackageSortByOptions; // will sort by mpackage by default
   reverse?: boolean;
+  hideLinks?: boolean;
 }
 
-export const PackageList = ({ packages, limit, sortBy, reverse }: PackageListProps) => {
+export const PackageList = ({ packages, limit, sortBy, reverse, hideLinks }: PackageListProps) => {
   const [expandedPackage, setExpandedPackage] = useState<string | null>(null);
 
   // will sort by mpackage by default.
@@ -55,12 +56,15 @@ export const PackageList = ({ packages, limit, sortBy, reverse }: PackageListPro
     setExpandedPackage(expandedPackage === mpackage ? null : mpackage);
   };
 
+  const _showLinks = hideLinks ? false : true;
+
   return (
     <section className="page-content" aria-label="Package listings">
       <main role="main">
         {displayPackages.map((pkg) => (
           <article
             key={pkg.mpackage}
+            id={`pkg-${encodeURIComponent(pkg.mpackage || '')}`}
             className="bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer p-4 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => toggleExpand(pkg.mpackage)}
             onKeyDown={(e) => {
@@ -73,7 +77,7 @@ export const PackageList = ({ packages, limit, sortBy, reverse }: PackageListPro
             aria-controls={`description-${pkg.mpackage}`}
             tabIndex={0}
           >
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start justify-between gap-4 items-stretch">
               <div className="flex-grow">
                 <h2 className="text-xl font-semibold mb-2">
                   <a
@@ -96,17 +100,27 @@ export const PackageList = ({ packages, limit, sortBy, reverse }: PackageListPro
                 </p>
                 <p className="text-gray-800">{pkg.title}</p>
               </div>
-              {pkg.icon && (
-                <div className="flex-shrink-0">
-                  <Image
-                    src={`https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/${pkg.icon}`}
-                    alt={`${pkg.mpackage} icon`}
-                    width={48}
-                    height={48}
-                    className="rounded"
-                  />
-                </div>
-              )}
+              <div className="flex-shrink-0 flex flex-col">
+                  {pkg.icon && (
+                    <Image
+                      src={`https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/${pkg.icon}`}
+                      alt={`${pkg.mpackage} icon`}
+                      width={48}
+                      height={48}
+                      className="rounded flex-shrink-0"
+                    />
+                  )}
+                  {_showLinks && (
+                    <div className="content-end flex-grow-2">
+                      <p className="text-gray-600 text-right">
+                        <a href={`#pkg-${encodeURIComponent(pkg.mpackage || '')}`}>link</a>
+                      </p>
+                    </div>
+                  )}
+                  
+              </div>
+              
+              
             </div>
             {expandedPackage === pkg.mpackage && (
               <div
