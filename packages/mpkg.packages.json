@@ -108,6 +108,16 @@
                       "version": "1.001"
                 },
                 {
+                       "author": "Daikojun",
+                      "created": "2025-05-08T11:17:53-0400",
+                  "description": "This UI was created and themed for ErionMud, an immersive medieval fantasy world since 2005.",
+                     "filename": "ErionMud-UI.mpackage",
+                     "mpackage": "ErionMud-UI",
+                        "title": "A UI for ErionMud (erionmud.com)",
+                     "uploaded": 1746723430,
+                      "version": "1.0"
+                },
+                {
                        "author": "Caelinus",
                       "created": "2025-01-24T08:04:39-08:00",
                   "description": "A simple and minimalistic UI for Erion.\n\nIntallation: Install Package as normal. Make sure to click the \"Click Here!!!\" Text upon entering game world in order to set a few important variables. UI will not fully initialize until character is loaded. You may need to close the profile once and sign back in after install if it is installed in an open game.\n\nNote: This UI package uses a custom prompt using Erion's custom prompt options in order to get the data it needs to work. Any changes to the prompt made by the user will cause the UI to stop working.",
@@ -1817,5 +1827,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun May  4 06:22:55 2025"
+   "updated": "Thu May  8 16:59:44 2025"
 }
