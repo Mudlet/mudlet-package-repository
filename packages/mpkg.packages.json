@@ -1037,14 +1037,14 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2024-08-24T08:27:33+02:00",
+                      "created": "2025-06-07T20:44:12-04:00",
                   "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
                      "filename": "enable-accessibility.mpackage",
                          "icon": "packages/icons/enable-accessibility.png",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
-                     "uploaded": 1724918844,
-                      "version": "1"
+                     "uploaded": 1749797696,
+                      "version": "2"
                 },
                 {
                        "author": "Heiko",
@@ -1827,5 +1827,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jun  5 16:41:46 2025"
+   "updated": "Fri Jun 13 06:59:09 2025"
 }
