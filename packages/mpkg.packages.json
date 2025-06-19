@@ -23,6 +23,17 @@
                       "version": "1.3.3"
                 },
                 {
+                       "author": "Caevora",
+                      "created": "2025-06-19T11:26:45-06:00",
+                  "description": "A beautiful display for tracking IRE Achaea times and moon cycles. Currently it is bound to the 'TIME' alias. But it look beautiful in a GUI container. Just install and do TIME.",
+                     "filename": "Achaean Time Tracker.mpackage",
+                         "icon": "packages/icons/Achaean Time Tracker.png",
+                     "mpackage": "Achaean Time Tracker",
+                        "title": "Achaea Time Tracker",
+                     "uploaded": 1750354388,
+                      "version": "v1.00.07"
+                },
+                {
                        "author": "tjurczyk, Delwing",
                       "created": "2025-01-24T15:25:45+01:00",
                   "description": "Arkadia script set installer.\n\nFor reference go to: https://github.com/tjurczyk/arkadia\n\nArkadia MUD: https://arkadia.rpg.pl/",
@@ -1827,5 +1838,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Jun 13 06:59:09 2025"
+   "updated": "Thu Jun 19 17:35:48 2025"
 }
