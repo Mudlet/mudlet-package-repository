@@ -23,6 +23,17 @@
                       "version": "1.3.3"
                 },
                 {
+                       "author": "Caevora (caevorasmailbox@gmail.com)",
+                      "created": "2025-06-19T15:56:31-06:00",
+                  "description": "A fully functional curing & utility system for Achaea",
+                     "filename": "Achaean System.mpackage",
+                         "icon": "packages/icons/Achaean System.png",
+                     "mpackage": "Achaean System",
+                        "title": "A fully functional system for Achaea",
+                     "uploaded": 1750411361,
+                      "version": "V_2.0.78"
+                },
+                {
                        "author": "Caevora",
                       "created": "2025-06-19T11:26:45-06:00",
                   "description": "A beautiful display for tracking IRE Achaea times and moon cycles. Currently it is bound to the 'TIME' alias. But it look beautiful in a GUI container. Just install and do TIME.",
@@ -1838,5 +1849,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jun 19 17:35:48 2025"
+   "updated": "Fri Jun 20 09:26:15 2025"
 }
