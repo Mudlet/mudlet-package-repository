@@ -274,6 +274,16 @@
                       "version": "1.02"
                 },
                 {
+                       "author": "Sampa",
+                      "created": "2025-02-06T16:05:56-05:00",
+                  "description": "This package contains a basic set of features to make multiplaying easier for the game Medievia.\n\nThese features include the ability to send global, class specific, and character specific commands to all profiles from any individual profile. It includes a form stats console to show the current stats of all form members. It includes a trade module that, when turned on, will automatically refresh MVs of form members when they get low.\n",
+                     "filename": "MultiBot Core v1.11.mpackage",
+                     "mpackage": "MultiBot Core v1.11",
+                        "title": "Features for playing multiple Medievia profiles at once",
+                     "uploaded": 1751869327,
+                      "version": "1.11"
+                },
+                {
                        "author": "Khazdul",
                       "created": "2025-05-12T01:03:56+02:00",
                   "description": "### Description\nMumeSpellTimers keeps tracks of most types of spells, buffs, maluses, charmed mobs, blinds, sancs and stored spells and displays it in an interactive window that can be toggled on or off.\n\n![Image](https://github.com/Khazdul/MumeSpellTimers/releases/latest/download/Screenshot.png)\n\n### Usage\n```\nCommands:\n  spells              -- toggles the window on/off\n  bli                 -- built in alias to cast blind\n```\n### Misc.\nTo keep track of which number (x. target) that has been blinded either use the built in \"bli target\" alias. Alternatively to integrate the functionality in your own settings you have to call the following function right before you cast blind (substitute target with your own target variable): \nMumeSpellTimers.attemptBlind(target)",
@@ -1849,5 +1859,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Jun 20 18:28:58 2025"
+   "updated": "Mon Jul  7 06:24:58 2025"
 }
