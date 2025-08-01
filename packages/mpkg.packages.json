@@ -1110,13 +1110,13 @@
                 },
                 {
                        "author": "Swift",
-                      "created": "2025-07-30T17:56:00-07:00",
-                  "description": "This is a basic interface that breaks out useful information into separate windows. Exchange spam goes on the left, useful stats on top, a mapper on the top right, and a copy of chat on the bottom right.\n\nPlease remove the generic_mapper package, as it may conflict with the fed2mapper.\n\nCurrently colors and font sizes are hardcoded. Customization is planned in a future update.\n\nThis primarily uses GMCP events to collect information, with some aliases designed to catch outgoing chat and copy it into the chat window. Exchange spam is caught entirely through triggers. T_T The mapper uses GMCP events and is always on, but has some aliases allowing basic map editing. See 'fedmap help' for more information.",
+                      "created": "2025-07-31T23:36:30-07:00",
+                  "description": "This is a basic interface that breaks out useful information into separate windows. Exchange spam goes on the left, useful stats on top, a mapper on the top right, and a copy of chat on the bottom right.\n\nPlease remove the generic_mapper package, as it may conflict with the mapper included in this package.\n\nCurrently colors and font sizes are hardcoded. Customization is planned in a future update.\n\nThis primarily uses GMCP events to collect information, with some aliases designed to catch outgoing chat and copy it into the chat window. Exchange spam is caught entirely through triggers. T_T The mapper uses GMCP events and is always on, but has some aliases allowing basic map editing. See 'fedmap help' for more information.\n\nhttps://github.com/Ohmi02/Fed2/",
                      "filename": "fed2ui.mpackage",
                      "mpackage": "federation2-community-edition",
                         "title": "basic UI and mapper for Federation 2 Community Edition",
-                     "uploaded": 1753934737,
-                      "version": "1"
+                     "uploaded": 1754064315,
+                      "version": "2"
                 },
                 {
                        "author": "demonnic",
@@ -1879,5 +1879,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jul 31 04:09:35 2025"
+   "updated": "Fri Aug  1 16:07:50 2025"
 }
