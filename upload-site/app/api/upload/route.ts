@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { del } from '@vercel/blob'
 import { createBranch, uploadFile, createPullRequest, getFileSha, deleteFile } from '@/app/lib/github'
 import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
@@ -17,19 +18,37 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  console.log('Getting form data...')
-  const formData = await request.formData()
-  console.log('Getting package file from form data...')
-  const file = formData.get('package') as File
-  console.log('File:', file)
+  console.log('Getting request data...')
+  const { blobUrl, filename } = await request.json()
+  
+  if (!blobUrl || !filename) {
+    return NextResponse.json({ error: 'Missing blob URL or filename' }, { status: 400 })
+  }
+  
   console.log('Checking file format...')
-  if (!file || (!file.name.endsWith('.mpackage') && !file.name.endsWith('.zip'))) {
+  if (!filename.endsWith('.mpackage') && !filename.endsWith('.zip')) {
     console.log('Invalid file format detected')
     return NextResponse.json({ error: 'Invalid file format' }, { status: 400 })
   }
 
-  // Extract metadata from package
-  const fileBuffer = Buffer.from(await file.arrayBuffer())
+  // Download file from blob storage
+  console.log('Downloading file from blob storage...')
+  let response;
+  let fileBuffer;
+  
+  try {
+    response = await fetch(blobUrl)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: Failed to fetch from blob storage`)
+    }
+    fileBuffer = Buffer.from(await response.arrayBuffer())
+  } catch (error) {
+    console.error('Error downloading from blob:', error)
+    return NextResponse.json({ 
+      error: 'Failed to download file from storage. Please try uploading again.' 
+    }, { status: 400 })
+  }
+  
   const zip = new AdmZip(fileBuffer)
   const configEntry = zip.getEntry('config.lua')
   
@@ -56,14 +75,14 @@ export async function POST(request: Request) {
 
   console.log('Generating branch name...')
   const timestamp = new Date().toISOString().slice(0,19).replace(/[:.]/g, '-')
-  const sanitizedName = file.name
+  const sanitizedName = filename
     .replace(/\s+/g, '-')
     .replace(/[^a-zA-Z0-9-]/g, '')
     .substring(0, 50)
   const branchName = `package-upload/${sanitizedName}-${timestamp}`
   console.log('Branch name:', branchName)
   console.log('Converting file to base64...')
-  const fileContent = Buffer.from(await file.arrayBuffer()).toString('base64')
+  const fileContent = fileBuffer.toString('base64')
   console.log('File content length:', fileContent.length)
   
   try {
@@ -88,13 +107,13 @@ export async function POST(request: Request) {
       }
     }
 
-    console.log('Uploading package file...', { fileName: file.name, branchName, contentLength: fileContent.length })
+    console.log('Uploading package file...', { fileName: filename, branchName, contentLength: fileContent.length })
 
     await uploadFile(
-      `packages/${file.name}`,
+      `packages/${filename}`,
       fileContent,
       branchName,
-      existingPackage ? `Update package: ${file.name}` : `Add package: ${file.name}`,
+      existingPackage ? `Update package: ${filename}` : `Add package: ${filename}`,
     )
     
     console.log('File uploaded successfully')
@@ -112,14 +131,34 @@ ${metadata.description}`
     console.log('Creating PR...')
     const pr = await createPullRequest(
       branchName,
-      existingPackage ? `Update package: ${file.name}` : `Add package: ${file.name}`,
+      existingPackage ? `Update package: ${filename}` : `Add package: ${filename}`,
       prDescription
     )    
 
+    console.log('Upload successful, cleaning up blob...')
+    try {
+      await del(blobUrl)
+      console.log('Blob cleanup successful')
+    } catch (cleanupError) {
+      console.warn('Failed to cleanup blob:', cleanupError)
+      // Don't fail the entire operation for cleanup errors
+    }
+    
     console.log('Returning success response...')
     return NextResponse.json({ success: true, pr: pr.data })
   } catch (error) {
     console.error('GitHub API error:', error)
-    return NextResponse.json({ error: 'Failed to create PR' }, { status: 500 })
+    
+    // Attempt cleanup on failure
+    try {
+      await del(blobUrl)
+      console.log('Blob cleanup after error successful')
+    } catch (cleanupError) {
+      console.warn('Failed to cleanup blob after error:', cleanupError)
+    }
+    
+    return NextResponse.json({ 
+      error: error instanceof Error ? error.message : 'Failed to create PR' 
+    }, { status: 500 })
   }
 }

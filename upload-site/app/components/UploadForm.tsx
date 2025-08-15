@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import { upload } from '@vercel/blob/client'
 import { PackagePreview } from './PackagePreview'
 import { PackageMetadata } from '@/app/lib/types'
 import type { ValidationResult } from '@/app/lib/types'
@@ -13,6 +14,7 @@ export function UploadForm() {
     metadata: PackageMetadata;
     filename: string;
     validation: ValidationResult;
+    blobUrl: string;
   } | null>(null)
   const [isUploading, setIsUploading] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -37,24 +39,49 @@ export function UploadForm() {
     try {
       setSelectedFile(file)
       setPreviewRequested(true)
-      const formData = new FormData()
-      formData.append('package', file)
+      
+      // Upload file to blob storage first
+      let blob;
+      try {
+        blob = await upload(file.name, file, {
+          access: 'public',
+          handleUploadUrl: '/api/blob/upload',
+        })
+      } catch (uploadError) {
+        throw new Error(uploadError instanceof Error ? uploadError.message : 'Failed to upload file to storage')
+      }
 
+      // Now call preview with blob URL
       const response = await fetch('/api/preview', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          blobUrl: blob.url,
+          filename: file.name
+        }),
       })
-      const data = await response.json()
-
+      
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to preview package')
+        let errorMessage = 'Failed to preview package'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.error || errorMessage
+        } catch {
+          errorMessage = `Server error (${response.status})`
+        }
+        throw new Error(errorMessage)
       }
+      
+      const data = await response.json()
 
       if (data.success) {
         setPreviewData({
           metadata: data.metadata,
           filename: data.filename,
-          validation: data.validation
+          validation: data.validation,
+          blobUrl: blob.url
         })
       }
     } catch (err) {
@@ -88,17 +115,20 @@ export function UploadForm() {
   }
 
   const handleConfirmUpload = async () => {
-    if (!selectedFile || !session) return
+    if (!previewData || !session) return
     setError(null)
     setIsUploading(true)
 
     try {
-      const formData = new FormData()
-      formData.append('package', selectedFile)
-
       const response = await fetch('/api/upload', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          blobUrl: previewData.blobUrl,
+          filename: previewData.filename
+        }),
       })
       const data = await response.json()
 

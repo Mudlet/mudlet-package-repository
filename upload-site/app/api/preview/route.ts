@@ -61,26 +61,32 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const formData = await request.formData()
-  const file = formData.get('package') as File
+  const { blobUrl, filename } = await request.json()
   
-  if (!file) {
-    return NextResponse.json({ error: 'No file provided' }, { status: 400 })
+  if (!blobUrl) {
+    return NextResponse.json({ error: 'No blob URL provided' }, { status: 400 })
   }
   
-  if (file.name.endsWith('.xml')) {
+  if (filename?.endsWith('.xml')) {
     return NextResponse.json({ 
       error: 'XML files need to be packaged as .mpackage first. Use the Package Manager in Mudlet to create a package.'
     }, { status: 400 })
   }
 
-  if (!file.name.endsWith('.mpackage') && !file.name.endsWith('.zip')) {
+  if (!filename?.endsWith('.mpackage') && !filename?.endsWith('.zip')) {
     return NextResponse.json({ 
       error: 'File must be a valid Mudlet .mpackage (or .zip)'
     }, { status: 400 })
   }
 
-  const fileBuffer = Buffer.from(await file.arrayBuffer())
+  // Download file from blob storage
+  const response = await fetch(blobUrl)
+  if (!response.ok) {
+    return NextResponse.json({ error: 'Failed to download file from storage' }, { status: 400 })
+  }
+  
+  const fileBuffer = Buffer.from(await response.arrayBuffer())
+  
   const zip = new AdmZip(fileBuffer)
   
   const configEntry = zip.getEntry('config.lua')
@@ -113,7 +119,8 @@ export async function POST(request: Request) {
   return NextResponse.json({
     success: true,
     metadata,
-    filename: file.name,
-    validation
+    filename,
+    validation,
+    blobUrl
   })
 }
