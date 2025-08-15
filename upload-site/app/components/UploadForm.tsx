@@ -44,11 +44,19 @@ export function UploadForm() {
         method: 'POST',
         body: formData,
       })
-      const data = await response.json()
-
+      
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to preview package')
+        let errorMessage = 'Failed to preview package'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.error || errorMessage
+        } catch {
+          errorMessage = `Server error (${response.status})`
+        }
+        throw new Error(errorMessage)
       }
+      
+      const data = await response.json()
 
       if (data.success) {
         setPreviewData({
