@@ -953,14 +953,14 @@
                 },
                 {
                        "author": "Pato",
-                      "created": "2025-02-07T00:00:00+0:00",
+                      "created": "2025-08-09T00:00:00+0:00",
                   "description": "### Description\n\nDartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable.\nFeatures that include upgrades to the user interface, automation, and reporting are all included.\nIt includes a conversation window across the top as well as a character information panel in the\nbottom right next to the command line. DartMUDlet automatically counts and reports skill improves\nfor both you and your pets, and will attempt to autocorrect when a skill rolls to the next level.\n\nDartMUDlet will also block and queue up commands while you are performing interruptable actions\n(e.g. spells, books, scrolls), then release them afterwards when the action is complete.\n\n### Usage\n\nType /setup to initialize DartMUDlet once installed.\nType /help for a full list of commands.\n",
-                     "filename": "dartmudlet-1.8.5.zip",
+                     "filename": "dartmudlet-1.11.0.zip",
                          "icon": "packages/icons/DartMUDlet.png",
                      "mpackage": "DartMUDlet",
                         "title": "DartMUDlet has many useful features to make your DartMUD experience more efficient and enjoyable (dartmud.com:2525)",
-                     "uploaded": 1738965614,
-                      "version": "1.8.5"
+                     "uploaded": 1755359089,
+                      "version": "1.11.0"
                 },
                 {
                        "author": "Rakon",
@@ -1879,5 +1879,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Aug 15 09:09:53 2025"
+   "updated": "Sat Aug 16 15:47:34 2025"
 }
