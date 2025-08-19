@@ -1332,6 +1332,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Oshumed",
+                      "created": "2025-08-19T17:41:35+02:00",
+                  "description": "Questo pacchetto introduce i comandi di profilo per la gestione di molti pg.",
+                     "filename": "logonall_v5.8.2_ClessidraMUD.mpackage",
+                     "mpackage": "logonall_v5.8.2_ClessidrMUD",
+                        "title": "Logonall per Clessidra MUD (comandi di profilo)",
+                     "uploaded": 1755619640,
+                      "version": "5.8.2"
+                },
+                {
                        "author": "demonnic",
                       "created": "2020-03-19T05:47:39+00:00",
                   "description": "LuaUnit is a modified testing framework specifically adapted for Mudlet, allowing developers to run unit tests directly within the Mudlet environment. It replaces standard Lua print and io.write functions with Mudlet-compatible alternatives and removes OS exit calls to prevent accidental Mudlet closure. Users can install the package via an mpackage file or manually include the luaunit.lua file, enabling straightforward unit testing of Mudlet scripts with familiar assertion methods like 'lum.assertEquals'.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22857&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1879,5 +1889,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Aug 16 15:47:34 2025"
+   "updated": "Tue Aug 19 16:11:07 2025"
 }
