@@ -120,14 +120,14 @@
                 },
                 {
                        "author": "Daikojun",
-                      "created": "2025-09-18T12:46:26-0400",
+                      "created": "2025-10-08T11:35:28-0400",
                   "description": "# ErionMud UI\n\nErion is an immersive medieval fantasy world since 2005 with a fun and friendly playerbase, challenging quests/missions, and an excellent class/skill system.\n\nThis [Mudlet](https://www.mudlet.org) UI was created and themed for [Erion Mud](https://www.erionmud.com).  \nBased on the original package: ErionUI 1.0 by Caelinus [(github.com/Caelinus)](https://www.github.com/Caelinus)\n\nSee [INSTALL.md](INSTALL.md) for installation details.  \nSee [BUILD.md](BUILD.md) for instructions to build your own Mudlet package.\n\n<img src=\"src/resources/images/ui-fullscreen.png\" alt=\"ErionMud UI\" width=\"800\"/>\n\nThis package was built using [Muddler](https://github.com/demonnic/muddler) and [DeMuddler](https://github.com/Edru2/DeMuddler)\n\nThis project is completely free and open source. Feel free to clone, copy, and modify as you like.\n\n## Ideas, TODOs, and Known Issues\n\n### Known Issues\n\n- Fix the \"City of\", \"Land of\" bug in the quest area regex. It doesn't always grab the whole location name.\n\n### TODOs\n\n- Make sure all chat channels are properly captured (ongoing).\n- Capture other events (Hero, Legend, etc.)\n- Add global quests details to the top container.\n- Add current debuffs to the bottom or right side of the bottom container.\n- Work on UI help files.\n\n### Ideas\n\n- Get the Mudlet mapper setup.\n- Incorporate Waypoints in custom runtos.\n- Track AutoSkill and KillSkill.\n- Add weather and moon cycles to the lower right.\n- Add a Global Quest alert for your level range.\n- Clean up the top container notifications. Maybe split the top with an HBox?\n  - This would allow for static notifications on the right and quest, etc. stuff on the left.\n- Add a spot to list all mobs in a room.\n  - Maybe move Events to the top container and use its left space as a mob list?\n",
                      "filename": "ErionMud-UI.mpackage",
                          "icon": "packages/icons/ErionMud-UI.jpg",
                      "mpackage": "ErionMud-UI",
                         "title": "A UI for ErionMud (erionmud.com)",
-                     "uploaded": 1758218128,
-                      "version": "1.2.1"
+                     "uploaded": 1759943818,
+                      "version": "v1.2.2"
                 },
                 {
                        "author": "Caelinus",
@@ -1890,5 +1890,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Sep 18 18:01:33 2025"
+   "updated": "Wed Oct  8 17:27:30 2025"
 }
