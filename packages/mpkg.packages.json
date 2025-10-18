@@ -831,13 +831,13 @@
                 },
                 {
                        "author": "cizra",
-                      "created": "2025-10-09T19:51:56+0000",
+                      "created": "2025-10-17T23:24:21+0000",
                   "description": "# cofudlet\n\n## Mudlet client package for CoffeeMUD\n\nThis package provides a visual map (powered by GMCP room events), chat capture, and stat bars for you and groupies.\nIt's also extensible - you could hook your own event handler to the `cofudlet.onFightStart` or `cofudlet.onMaxMana` events, for example.\n\n## Installation\n\nTo install and update Cofudlet, use `mpkg`. See https://packages.mudlet.org/ for instructions.\n\n## Usage\n\n### Mapper\nRun `map help` for mapper-related commands.\n\n### Mob capture\n\nCofudlet remembers mobs you've seen. Consider them with Alt-keypad5, and attack with Keypad5 (if you don't have a keypad, you could remap the same thing to some other key).\n\nRun `mob help` to see some commands, notably `mob ls`.\n\n## Support\n\nAsk around in #mud-clients of the CoffeeMUD Discord: https://discord.gg/qNEgWxft48\n",
                      "filename": "cofudlet.mpackage",
                      "mpackage": "cofudlet",
                         "title": "Mudlet package for CoffeeMUD",
-                     "uploaded": 1760051138,
-                      "version": "1.0.29"
+                     "uploaded": 1760758965,
+                      "version": "1.0.30"
                 },
                 {
                        "author": "Zooka",
@@ -1890,5 +1890,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct 10 06:51:34 2025"
+   "updated": "Sat Oct 18 03:49:57 2025"
 }
