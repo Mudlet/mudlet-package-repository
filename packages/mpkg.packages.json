@@ -178,7 +178,7 @@
                          "icon": "packages/icons/LichConnect.ico",
                      "mpackage": "LichConnect",
                         "title": "For GemStoneIV and DragonRealms",
-                     "uploaded": 1742537823,
+                     "uploaded": 1760932783,
                       "version": "2.0"
                 },
                 {
@@ -547,7 +547,7 @@
                      "filename": "achaea-roulette-counter.mpackage",
                      "mpackage": "achaea-roulette-counter",
                         "title": "Roulette Spin Tracking Software with Profit Logging",
-                     "uploaded": 1739012855,
+                     "uploaded": 1760932887,
                       "version": "1"
                 },
                 {
@@ -567,7 +567,7 @@
                      "filename": "achaea-subdivisions-data-collecter.mpackage",
                      "mpackage": "achaea-subdivisions-data-collecter",
                         "title": "City Plot Ownership Tracking Script",
-                     "uploaded": 1739012886,
+                     "uploaded": 1760932878,
                       "version": "1"
                 },
                 {
@@ -577,7 +577,7 @@
                      "filename": "achaea-svo-inkmiller.mpackage",
                      "mpackage": "achaea-svo-inkmiller",
                         "title": "Svo InkMiller: Flexible Batch Milling Tool",
-                     "uploaded": 1739012870,
+                     "uploaded": 1760932919,
                       "version": "1"
                 },
                 {
@@ -587,7 +587,7 @@
                      "filename": "achaea-svo-tarot-inscribing-script.mpackage",
                      "mpackage": "achaea-svo-tarot-inscribing-script",
                         "title": "Automated Tarot Card Inscription Script",
-                     "uploaded": 1739012863,
+                     "uploaded": 1760932909,
                       "version": "1"
                 },
                 {
@@ -607,7 +607,7 @@
                      "filename": "achaea-vodun-fashion-counter.mpackage",
                      "mpackage": "achaea-vodun-fashion-counter",
                         "title": "Vodun Fashion Counter for MUD Dolls",
-                     "uploaded": 1739012877,
+                     "uploaded": 1760932899,
                       "version": "1"
                 },
                 {
@@ -667,7 +667,7 @@
                      "filename": "alchemy-transmuter-for-svo-achaea.mpackage",
                      "mpackage": "alchemy-transmuter-for-svo-achaea",
                         "title": "Svo Alchemy Transmuter: Metals, Minerals, Liquids",
-                     "uploaded": 1739017173,
+                     "uploaded": 1760932836,
                       "version": "1"
                 },
                 {
@@ -717,7 +717,7 @@
                      "filename": "avatar-mud-package.mpackage",
                      "mpackage": "avatar-mud-package",
                         "title": "Feenom Mudlet Package: Enhanced Avatar Mud Toolkit",
-                     "uploaded": 1739017224,
+                     "uploaded": 1760932825,
                       "version": "1"
                 },
                 {
@@ -757,7 +757,7 @@
                      "filename": "bfind-scroll-buffer-find.mpackage",
                      "mpackage": "bfind-scroll-buffer-find",
                         "title": "Mudlet Bfind: Enhanced Search and Filtering Tool",
-                     "uploaded": 1739017260,
+                     "uploaded": 1760932813,
                       "version": "1"
                 },
                 {
@@ -827,7 +827,7 @@
                      "filename": "coding-minipackage.mpackage",
                      "mpackage": "coding-minipackage",
                         "title": "Lua Coding Assistant: Multi-Return Function Tools",
-                     "uploaded": 1739028786,
+                     "uploaded": 1760932804,
                       "version": "1"
                 },
                 {
@@ -1309,7 +1309,7 @@
                      "filename": "ire-map-display.mpackage",
                      "mpackage": "ire-map-display",
                         "title": "IRE Maps for Mudlet: Vadi System Support",
-                     "uploaded": 1739088786,
+                     "uploaded": 1760932793,
                       "version": "1"
                 },
                 {
@@ -1614,7 +1614,7 @@
                      "filename": "shattered-isles-mapper.mpackage",
                      "mpackage": "shattered-isles-mapper",
                         "title": "Improved Generic Mapper: Mudlet Script v3",
-                     "uploaded": 1739017283,
+                     "uploaded": 1760932775,
                       "version": "1"
                 },
                 {
@@ -1807,7 +1807,7 @@
                      "filename": "transmutation-calculator.mpackage",
                      "mpackage": "transmutation-calculator",
                         "title": "Transmutation Calculator: Price Tracking Tool",
-                     "uploaded": 1739090367,
+                     "uploaded": 1760932767,
                       "version": "1"
                 },
                 {
@@ -1837,7 +1837,7 @@
                      "filename": "updated-screendump.mpackage",
                      "mpackage": "updated-screendump",
                         "title": "Improved Screendump Script for Mudlet",
-                     "uploaded": 1738854984,
+                     "uploaded": 1760932749,
                       "version": "1"
                 },
                 {
@@ -1891,5 +1891,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Oct 18 05:13:34 2025"
+   "updated": "Mon Oct 20 04:11:52 2025"
 }
