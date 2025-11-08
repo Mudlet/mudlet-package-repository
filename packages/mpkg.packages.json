@@ -380,14 +380,14 @@
                 },
                 {
                        "author": "Adventurer1111",
-                      "created": "2025-11-07T11:15:11-08:00",
-                  "description": "🐉 Realms of the Dragon GUI for Mudlet\n---------------------------------------\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual  immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images.Whether you're a seasoned dragon-slayer or a Realms of the Dragon newbie, I hope you enjoy this package along your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n- Includes:\n- Setup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\n- Trigger list\n- Aliases\n- Scripts\n- Player sample portraits, Friend portraits and notes, NPC portraits\n\n🗂 Updates\n1.11022025 Original Publication\n1.11062025a Revised images and added 25 additional NPC images\n1.11072025 Added 5 additional friend images\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟\n![Image]($packagePath/.mudlet/description_images/ROTD_GUI_Default.png)",
+                      "created": "2025-11-07T13:01:02-08:00",
+                  "description": "🐉 Realms of the Dragon GUI for Mudlet\n---------------------------------------\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual  immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images. I hope you enjoy this package along with your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n- Includes:\n- Setup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\n- Trigger list\n- Aliases\n- Scripts\n- Player sample portraits, Friend portraits and notes, NPC portraits\n\n🗂 Updates\n1.11022025 Original Publication\n1.11062025a Revised images and added 25 additional NPC images\n1.11072025 Added 5 additional friend images\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟\n![Image]($packagePath/.mudlet/description_images/ROTD_GUI_Default.png)",
                      "filename": "ROTD_GUI.mpackage",
                          "icon": "packages/icons/ROTD_GUI.png",
                      "mpackage": "ROTD_GUI",
-                        "title": "Realms of the Dragon Graphical User Interface",
-                     "uploaded": 1762545961,
-                      "version": "1.11072025"
+                        "title": "Realms of the Dragon Graphical User Iterface",
+                     "uploaded": 1762560976,
+                      "version": "1.11072025a"
                 },
                 {
                        "author": "Demonnic",
@@ -1912,5 +1912,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Nov  7 20:13:52 2025"
+   "updated": "Sat Nov  8 00:19:13 2025"
 }
