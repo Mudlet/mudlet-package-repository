@@ -108,6 +108,17 @@
                       "version": "2.9.0"
                 },
                 {
+                       "author": "Bellimora",
+                      "created": "2025-11-17T23:36:18-05:00",
+                  "description": "This was created starting with Blizzard's GMCP mapper which I heavily modified to play nice with EOM and further refine.  Mapper is working as well as gauges for vitals and RPMode keeping some OOC channels out of the main panel. Edge of Midnight Home: https://edgeofmidnight.org/",
+                     "filename": "Edge of Midnight.mpackage",
+                         "icon": "packages/icons/Edge of Midnight.png",
+                     "mpackage": "Edge of Midnight",
+                        "title": "Support for Edge of Midnight",
+                     "uploaded": 1763440721,
+                      "version": "0.1"
+                },
+                {
                        "author": "Ping",
                       "created": "2025-06-21T01:05:41+08:00",
                   "description": "Big thank you to Virelen for getting this started! A simple trigger that captures words encapsulated in colons like :this: and turns them into unicode emojis. Uses discord naming conventions for the most part, should be easy to update on your own end. Work in progress!",
@@ -1912,5 +1923,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Nov 17 07:41:03 2025"
+   "updated": "Tue Nov 18 04:41:09 2025"
 }
