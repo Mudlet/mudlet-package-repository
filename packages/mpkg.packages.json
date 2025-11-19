@@ -109,14 +109,14 @@
                 },
                 {
                        "author": "Bellimora",
-                      "created": "2025-11-17T23:36:18-05:00",
-                  "description": "This was created starting with Blizzard's GMCP mapper which I heavily modified to play nice with EOM and further refine.  Mapper is working as well as gauges for vitals and RPMode keeping some OOC channels out of the main panel. Edge of Midnight Home: https://edgeofmidnight.org/",
+                      "created": "2025-11-18T22:53:40-05:00",
+                  "description": "This was created starting with Blizzard's GMCP mapper which I heavily modified to play nice with EOM and further refine.  This includes some basic channel filtering gauges and QoL information display. Edge of Midnight website: https://edgeofmidnight.org/",
                      "filename": "Edge of Midnight.mpackage",
                          "icon": "packages/icons/Edge of Midnight.png",
                      "mpackage": "Edge of Midnight",
                         "title": "Support for Edge of Midnight",
-                     "uploaded": 1763440721,
-                      "version": "0.1"
+                     "uploaded": 1763525871,
+                      "version": "0.2"
                 },
                 {
                        "author": "Ping",
@@ -1923,5 +1923,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Nov 18 04:41:09 2025"
+   "updated": "Wed Nov 19 04:19:52 2025"
 }
