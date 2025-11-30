@@ -109,14 +109,14 @@
                 },
                 {
                        "author": "Bellimora",
-                      "created": "2025-11-18T22:53:40-05:00",
-                  "description": "This was created starting with Blizzard's GMCP mapper which I heavily modified to play nice with EOM and further refine.  This includes some basic channel filtering gauges and QoL information display. Edge of Midnight website: https://edgeofmidnight.org/",
+                      "created": "2025-11-29T20:58:08-0500",
+                  "description": "Mudlet support for the mud Edge of Midnight.  Includes some status gauges and auto-mapper support with a lot of the mud already mapped out.",
                      "filename": "Edge of Midnight.mpackage",
                          "icon": "packages/icons/Edge of Midnight.png",
                      "mpackage": "Edge of Midnight",
                         "title": "Support for Edge of Midnight",
-                     "uploaded": 1763525871,
-                      "version": "0.2"
+                     "uploaded": 1764469064,
+                      "version": "0.4"
                 },
                 {
                        "author": "Ping",
@@ -1923,5 +1923,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Nov 21 09:35:21 2025"
+   "updated": "Sun Nov 30 02:22:32 2025"
 }
