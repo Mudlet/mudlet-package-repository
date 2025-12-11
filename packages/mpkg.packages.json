@@ -874,14 +874,14 @@
                 },
                 {
                        "author": "Zooka",
-                      "created": "2024-08-04T14:41:00+03:00",
+                      "created": "2025-12-11T11:15:21+11:00",
                   "description": "### Description\n\nSearch for matching function names and open the Mudlet API from the command line.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> !api`\n\nsimply open the API webpage\n\n`> !api gotoRoom`\n\nopen the API at the function description of gotoRoom\n\n`> !api trigger`\n\n    No matching functions found.  Possible match:\n    cfeedTriggers\n    dfeedTriggers\n    disableTrigger\n    ...\n    ...",
                      "filename": "command-line-api.mpackage",
                          "icon": "packages/icons/command-line-api.png",
                      "mpackage": "command-line-api",
                         "title": "Search and open Mudlet API webpage from the command line",
-                     "uploaded": 1724911580,
-                      "version": "1"
+                     "uploaded": 1765413052,
+                      "version": "1.1"
                 },
                 {
                        "author": "demonnic",
@@ -1923,5 +1923,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Dec  3 22:35:37 2025"
+   "updated": "Thu Dec 11 00:33:01 2025"
 }
