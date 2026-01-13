@@ -391,13 +391,13 @@
                 },
                 {
                        "author": "Adventurer1111 with Telepati Mapping",
-                      "created": "2026-01-11T11:18:01-08:00",
+                      "created": "2026-01-12T19:22:23-08:00",
                   "description": "🐉 Realms of the Dragon GUI and Telepati Maps for Mudlet\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images. I hope you enjoy this package along with your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images and any ROTDMapData.dat updates to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n\nIncludes:\nSetup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\nTrigger list\nAliases\nScripts\nPlayer sample portraits, Friend portraits and notes, NPC portraits\nROTDMapData.dat file with maps of 13000+ rooms \n\n🗂 Updates 1.11022025 Original Publication 1.11062025 Revised images and added 25 additional NPC images 1.11082025 Revised script for better NPC matching, added 5 NPC and 5 friend images 1.11112025 Script revision to aggressive status/Added 30 additional NPC images 1.11162025a Improved NPC movement/added 30 more images also with 2.12122025 update with Telepati Mapping Module added and additional NPC images. 2.3011126 updated with additional NPC images and version checking\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟",
                      "filename": "ROTD_GUI.mpackage",
                          "icon": "packages/icons/ROTD_GUI.png",
                      "mpackage": "ROTD_GUI",
-                        "title": "Realms of the Dragon Graphical User Interface and Mapping",
-                     "uploaded": 1768160339,
+                        "title": "Realms of the Dragon Graphical User Interface with Mapping",
+                     "uploaded": 1768284930,
                       "version": "2.301112026"
                 },
                 {
@@ -1923,5 +1923,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Jan 11 19:41:22 2026"
+   "updated": "Tue Jan 13 06:18:04 2026"
 }
