@@ -14,7 +14,7 @@
     "@vercel/blob": "^1.1.1",
     "@vercel/speed-insights": "^1.1.0",
     "adm-zip": "^0.5.16",
-    "next": "^15.5.9",
+    "next": "^16.1.5",
     "next-auth": "^4.24.12",
     "octokit": "^4.0.3",
     "react": "^19.0.0",
