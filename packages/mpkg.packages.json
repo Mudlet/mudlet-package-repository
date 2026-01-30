@@ -733,6 +733,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "bscross32",
+                      "created": "2026-01-30T20:37:42+0000",
+                  "description": "# auto_retype\n\n## This package allows automatic retyping of previous command with enter key or CTRL+R.\n\n### Usage\n\nThis package captures the last command you typed. When requested, either by CTRL+R, or simply hitting RETURN with nothing in the command line, this command will be re-sent. For your convenience, CTRL+SHIFT+R will toggle whether an empty command will trigger a re-send.",
+                     "filename": "auto_retype.mpackage",
+                     "mpackage": "auto_retype",
+                        "title": "This package allows automatic retyping of previous command with enter key or CTRL+R.",
+                     "uploaded": 1769805779,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "Vadi",
                       "created": "2010-03-27T18:06:56+00:00",
                   "description": "This Mudlet package provides a speedwalking function that allows users to quickly navigate predefined paths in a MUD game. Users can show saved paths with \"spt show\" and walk to locations using \"sptw\" with optional backward walking capability. Paths are defined in a simple script format, enabling easy creation and management of travel routes within the software.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1359&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1923,5 +1933,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Jan 13 06:18:04 2026"
+   "updated": "Fri Jan 30 20:47:06 2026"
 }
