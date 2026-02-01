@@ -734,13 +734,13 @@
                 },
                 {
                        "author": "bscross32",
-                      "created": "2026-01-30T20:37:42+0000",
+                      "created": "2026-02-01T15:04:52+0000",
                   "description": "# auto_retype\n\n## This package allows automatic retyping of previous command with enter key or CTRL+R.\n\n### Usage\n\nThis package captures the last command you typed. When requested, either by CTRL+R, or simply hitting RETURN with nothing in the command line, this command will be re-sent. For your convenience, CTRL+SHIFT+R will toggle whether an empty command will trigger a re-send.",
                      "filename": "auto_retype.mpackage",
                      "mpackage": "auto_retype",
                         "title": "This package allows automatic retyping of previous command with enter key or CTRL+R.",
-                     "uploaded": 1769805779,
-                      "version": "1.0.0"
+                     "uploaded": 1769958643,
+                      "version": "1.0.1"
                 },
                 {
                        "author": "Vadi",
@@ -1933,5 +1933,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Jan 30 20:47:06 2026"
+   "updated": "Sun Feb  1 15:12:48 2026"
 }
