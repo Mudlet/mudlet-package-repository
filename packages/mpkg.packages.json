@@ -97,6 +97,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "Mudzereli",
+                      "created": "2026-02-09T13:30:20-06:00",
+                  "description": "This Mudlet package automatically enhances your Dark Mists experience by adding clearer visuals, better organization, and helpful UI elements without changing how the game is played. Once installed, it passively tracks game output to provide features like status bars, chat history, mapping, and item lookups, all while keeping gameplay fully manual and text-driven. Simply connect and play as normal—the package listens to events, updates displays in real time, and gives you better situational awareness WITHOUT automation, scripting advantages, or PvP edge.",
+                     "filename": "DarkMistsCompanion.mpackage",
+                         "icon": "packages/icons/DarkMistsCompanion.PNG",
+                     "mpackage": "DarkMistsCompanion",
+                        "title": "A lightweight Mudlet package that improves clarity and awareness while preserving Dark Mists’ classic text-based gameplay.\n",
+                     "uploaded": 1770688203,
+                      "version": "1"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2023-06-19T03:37:11+0000",
                   "description": "# EMCO\n\n## Prebuilt EMCO tabbed chat package\n\nWhile there are many uses for an EMCO, the most requested one is by far tabbed chat display. This package takes the EMCO object available as part of the [MDK](https://github.com/demonnic/MDK) and builds a basic, generic chat tabs package out of it.\n\nIt's built using an adjustable container, so it can be moved, resized, etc right out of the box. There are range of aliases with the package which make adding/removing tabs and changing some of the basic themes of the EMCO easier.\n\nYou can leverage the entire [EMCO API](https://demonnic.github.io/mdk/current/classes/EMCO.html) by targeting `demonnic.chat` , as that is the actual underlying EMCO object.\n\n## Installation\n\nYou can use the following command in Mudlet to install the latest version:\n\n`lua installPackage(\"https://github.com/demonnic/EMCO/releases/latest/download/EMCOChat.mpackage\")`\n\nOnce you have it installed you can update by using the `emco update` alias.\n\n## Usage\n\n### Copying lines into your EMCO\n\nIf you want to copy a line from the game and send it to EMCO, make a trigger to match the line, and use `demonnic.chat:append(\"tabName\")` to copy the line to the EMCO. For instance, to send a line to the \"Tells\" tab, you would use\n\n```lua\ndemonnic.chat:append(\"Tells\")\n```\n\nIf you want to send lines to the EMCO in code yourself, you can use `demonnic.chat:cecho(\"OOC\", \"This is an OOC message\\n\")`. There is also decho and hecho available the same way.\n\n### Available aliases for the prebuilt EMCO package\n\n* `emco addtab <tabname>`\n  * adds a tab to your EMCO\n* `emco blankLine <true|false>`\n  * turn inserting a blank line between messages on/off\n* `emco blink <true|false>`\n  * turn blinking on/off\n* `emco color <option> <value>`\n  * used to change the colors for the active/inactive tab, and the background color for the consoles. 'emco color' with no options will print out available options\n* `emco font`\n  * set the font to use for the consoles\n* `emco fontSize`\n  * set the font size for the consoles\n* `emco gag <pattern>`\n  * add a gag pattern\n* `emco gaglist`\n  * prints out the list of gag patterns\n* `emco hide`\n  * hide the EMCO\n* `emco load`\n  * loads your config from disk\n* `emco lock`\n  * locks the EMCO in place\n* `emco notify <tabName>`\n  * turn on OS notifications for tabName\n* `emco remtab <tabname>`\n  * removes a tab from your EMCO\n* `emco save`\n  * saves your config to disk\n* `emco show`\n  * show the EMCO\n* `emco timestamp <true|false>`\n  * turn timestamps on/off\n* `emco title <new title>`\n  * Set the title at the top of the EMCO Chat window. \"Tabbed Chat\" is the default starting title.\n* `emco unlock`\n  * Unlocks the EMCO window so you can move and resize it again\n* `emco ungag <pattern>`\n  * remove a gag pattern\n* `emco unnotify <tabName>`\n  * turn off OS notifications for tabName\n* `emco update`\n  * (re)install the latest version of the package\n",
@@ -1953,5 +1964,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Feb  4 15:54:17 2026"
+   "updated": "Tue Feb 10 01:51:47 2026"
 }
