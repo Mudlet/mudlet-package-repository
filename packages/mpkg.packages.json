@@ -108,14 +108,14 @@
                 },
                 {
                        "author": "Mudzereli",
-                      "created": "2026-02-25T15:30:47-06:00",
+                      "created": "2026-02-27T06:44:58-06:00",
                   "description": "This Mudlet package automatically enhances your Dark Mists experience by adding clearer visuals, better organization, and helpful UI elements without changing how the game is played. Once installed, it passively tracks game output to provide features like status bars, chat history, mapping, and item lookups, all while keeping gameplay fully manual and text-driven. Simply connect and play as normal—the package listens to events, updates displays in real time, and gives you better situational awareness WITHOUT automation, scripting advantages, or PvP edge.",
                      "filename": "DarkMistsCompanion.mpackage",
                          "icon": "packages/icons/DarkMistsCompanion.PNG",
                      "mpackage": "DarkMistsCompanion",
                         "title": "A Mudlet package for Dark Mists (darkmists.org 2222) that improves awareness while preserving Dark Mists’ classic text-based gameplay",
-                     "uploaded": 1772133954,
-                      "version": "1.3.1"
+                     "uploaded": 1772217069,
+                      "version": "1.3.5"
                 },
                 {
                        "author": "Demonnic",
@@ -1984,5 +1984,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Feb 26 19:29:17 2026"
+   "updated": "Fri Feb 27 18:33:34 2026"
 }
