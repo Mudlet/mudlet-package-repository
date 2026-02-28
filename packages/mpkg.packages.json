@@ -3,13 +3,13 @@
   "packages": [
                 {
                        "author": "dead",
-                      "created": "2026-02-25T17:26:23-06:00",
+                      "created": "2026-02-27T19:08:15-06:00",
                   "description": "Provide affect tracking, colored tick timer and map on left side.\n\nBonus: Helps to center the main window.\n\nEdit the script to add or remove affects you want always displayed, even when down",
                      "filename": "AbandonedRealms -  Gui Add-on - Tick, affects and map.mpackage",
                      "mpackage": "AbandonedRealms -  Gui Add-on - Tick, affects and map",
                         "title": "AR Gui add-on for tick timer and affect tracking",
-                     "uploaded": 1772133983,
-                      "version": "1"
+                     "uploaded": 1772242496,
+                      "version": "1.01"
                 },
                 {
                        "author": "Erikka, Demonnic",
@@ -1984,5 +1984,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Feb 27 18:33:34 2026"
+   "updated": "Sat Feb 28 01:36:57 2026"
 }
