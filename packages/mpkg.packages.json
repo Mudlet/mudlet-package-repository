@@ -277,13 +277,13 @@
                 },
                 {
                        "author": "Kymbahl, Kronos",
-                      "created": "2024-11-09T13:51:15+0000",
-                  "description": "# MedUI - A User Interface for Medievia\n\n### Authors: Kymbahl and Kronos\n\n### Features\nMedUI is a package for the Medievia MUD which provides a more modern user experience.\nIncluded in this package is:\n1. External Map window   - This captures the in-game ASCII map and places it in its own window.\n2. Communications Window - This captures common game channels and places them in another window.\n3. Player Vitals Gauges  - Health/Mana/Breath/Movement bars that update from your prompt data.\n4. Buff Bar              - A visual indication of which buffs your player is affected by.\n5. Custom Medievia Font  - A special TrueType font designed for rendering the in-game ASCII map.\n\n### Configuration\nMost configuration options may be toggled using the 'medui' alias menu, such as:\n1. Toggle on/off the gauges display\n2. Toggle timestamps in the chat window\n3. Toggle showing the inline map (in your main display)",
+                      "created": "2026-03-12T13:19:14+0000",
+                  "description": "# MedUI - A User Interface for Medievia\n\n### Authors: Kymbahl and Kronos\n\n### Features\nMedUI is a package for the Medievia MUD which provides a more modern user experience.\nIncluded in this package is:\n1. External Map window   - This captures the in-game ASCII map and places it in its own window.\n2. Communications Window - This captures common game channels and places them in another window.\n3. Player Vitals Gauges  - Health/Mana/Breath/Movement bars that update from your prompt data.\n4. Buff Bar              - A visual indication of which buffs your player is affected by.\n5. Custom Medievia Font  - A special TrueType font designed for rendering the in-game ASCII map.\n\n### Configuration\nMost configuration options may be toggled using the 'medui' alias menu (just type medui), such as:\n1. Toggle on/off the gauges display (type: medui gauges)\n2. Toggle showing the inline map (in your main display) (type: medui inlinemap)\n3. Toggle timestamps in the chat window (type: medui timestamp)\n4. Change the map font size (type: medui mapFontSize #)\n5. Change the comm window font size (type: medui chatFontSize #)",
                      "filename": "MedUI.mpackage",
                      "mpackage": "MedUI",
                         "title": "User Interface for Medievia",
-                     "uploaded": 1731160325,
-                      "version": "1.7.8"
+                     "uploaded": 1773325189,
+                      "version": "1.9.1"
                 },
                 {
                        "author": "Valorie, updated by Elene",
@@ -2004,5 +2004,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Mar 12 06:34:41 2026"
+   "updated": "Thu Mar 12 14:22:03 2026"
 }
