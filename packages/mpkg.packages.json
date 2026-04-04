@@ -399,6 +399,16 @@
                       "version": "1.8.0"
                 },
                 {
+                       "author": "T'seeth @ ATS TrekMUSH",
+                      "created": "2026-04-04T12:38:28-06:00",
+                  "description": "Convert your clipboard to MUSHcode.  This is ported from a similar MUSHclient function.",
+                     "filename": "PasteAsMUSH.mpackage",
+                     "mpackage": "PasteAsMUSH",
+                        "title": "Convert clipboard to MUSHcode",
+                     "uploaded": 1775328451,
+                      "version": "1.0"
+                },
+                {
                        "author": "Kymbahl",
                       "created": "2025-01-24T14:22:29+0000",
                   "description": "# ProfileWindow - A floating console to interact with your other profiles\n\n### Author: Humera\n\n### Information\nProfileWindow allows you to view and interact with your other profiles without needing to use MultiView.\nTo use, install ProfileWindow on all of your profiles that you wish to see, as well as your main profile.\nThen simply type `pwadd <profileName>` to open a floating window showing the output of that profile!\n\nExample:\nI have 2 profiles, Humera and Kryomeris. I wish Humera to be my primary profile.\nI install ProfileWindow for both profiles, then in the Humera profile I type `pwadd Kryomeris`.\n\nWhen used in conjunction with the convertToUserWindow package, these windows can be popped out from\nyour Mudlet window to be dragged anywhere you wish.\n\n### Commands (Aliases)\n`pwadd <profileName>`    - Opens a new ProfileWindow to view \n\n### Known Issues\nWhen closing a ProfileWindow, if the command line in that window has focus then clicking in the area\npreviously occupied by your floating window will show just the MiniConsole with no way to close it\nagain without a `resetProfile()`",
@@ -2004,5 +2014,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Mar 23 19:25:37 2026"
+   "updated": "Sat Apr  4 18:49:57 2026"
 }
