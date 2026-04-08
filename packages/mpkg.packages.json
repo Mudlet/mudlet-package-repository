@@ -1077,6 +1077,16 @@
                       "version": "1.11.1"
                 },
                 {
+                       "author": "山本雪乃",
+                      "created": "2026-04-08T16:51:36+02:00",
+                  "description": "Opens a window when typing dd list that is easier to manage as a list while dd close closes the windoow. Contains 1 script, 2 triggers, 1 script",
+                     "filename": "ddesc_window.mpackage",
+                     "mpackage": "ddesc_window",
+                        "title": "For New Haven(H7), dd list catcher for easier use.",
+                     "uploaded": 1775665976,
+                      "version": "1"
+                },
+                {
                        "author": "Rakon",
                       "created": "2014-01-25T01:56:29+00:00",
                   "description": "This software is a plugin that allows users to quickly retrieve word definitions within a game environment by typing \"define <word>\". The plugin uses a Google-based API to fetch definitions, though the creator acknowledges potential limitations in API stability and word coverage. It is designed to help users easily look up unfamiliar words during gameplay.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4357&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2014,5 +2024,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Apr  7 09:29:10 2026"
+   "updated": "Wed Apr  8 16:35:12 2026"
 }
