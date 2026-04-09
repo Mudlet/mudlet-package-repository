@@ -86,14 +86,25 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2024-11-26T22:50:47+0000",
-                  "description": "Enable clickable links in Mudlet! That's pretty nice, right?",
+                      "created": "2026-04-09T03:47:54+0000",
+                  "description": "# Chatter\n\nGMCP Chat Package for Mudlet.\n\n## Syntax\n\n`chatter [command]`\n\n* `chatter add <channel> to <group>` - Add a channel to a group.\n* `chatter remove <channel> from <group>` - Remove a channel from a group.\n* `chatter mute <channel>` - Mute a channel.\n* `chatter unmute <channel>` - Unmute a channel.\n* `chatter list <group>` - List the channels in a group.\n* `chatter list all`- List all channels and groups.\n* `chatter toggle` - Toggle the visibility of the chatter window.\n* `chatter show` - Show the chatter window.\n* `chatter hide` - Hide the chatter window.\n* `chatter flash` - Flash the chatter window.\n* `chatter lock` - Lock the chatter window to prevent it from being changed.\n* `chatter unlock` - Unlock the chatter window.\n* `chatter minimize` - Minimize the chatter window.\n* `chatter restore` - Restore the chatter window from minimized state.\n* `chatter save` - Save the chatter window lock, visibility, and position.\n* `chatter load` - Load the last saved chatter window lock, visibility, and position.\n* `chatter size` - Set the font size for the chatter window.\n\n## Credits\n\n### Icons\n\n[Communication icons created by Vectors Market - Flaticon](https://www.flaticon.com/free-icons/communication)\n",
+                     "filename": "Chatter.mpackage",
+                         "icon": "packages/icons/Chatter.png",
+                     "mpackage": "Chatter",
+                        "title": "Manage messages on channels in a separate window using GMCP.",
+                     "uploaded": 1775713200,
+                      "version": "2.3.1"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-04-09T04:52:31+0000",
+                  "description": "# Clicker\n\nEnable clickable links in Mudlet! That's pretty nice, right?\n\n## License\n\n`clicker` is released into the public domain under the [0BSD](LICENSE.txt).\n",
                      "filename": "Clicker.mpackage",
                          "icon": "packages/icons/Clicker.png",
                      "mpackage": "Clicker",
                         "title": "Make URLs clickable",
-                     "uploaded": 1736696689,
-                      "version": "1.8.0"
+                     "uploaded": 1775713179,
+                      "version": "2.0.0"
                 },
                 {
                        "author": "Andruid",
@@ -2024,5 +2035,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Apr  8 16:35:12 2026"
+   "updated": "Thu Apr  9 05:41:14 2026"
 }
