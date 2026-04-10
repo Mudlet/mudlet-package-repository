@@ -97,13 +97,13 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-04-09T04:52:31+0000",
-                  "description": "# Clicker\n\nEnable clickable links in Mudlet! That's pretty nice, right?\n\n## License\n\n`clicker` is released into the public domain under the [0BSD](LICENSE.txt).\n",
+                      "created": "2026-04-10T05:45:56+0000",
+                  "description": "# Clicker\n\nEnable clickable links in Mudlet! That's pretty nice, right?\n\n## License\n\n`clicker` is released under the [0BSD](LICENSE.txt).\n",
                      "filename": "Clicker.mpackage",
                          "icon": "packages/icons/Clicker.png",
                      "mpackage": "Clicker",
                         "title": "Make URLs clickable",
-                     "uploaded": 1775713179,
+                     "uploaded": 1775801885,
                       "version": "2.0.0"
                 },
                 {
@@ -2035,5 +2035,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Apr  9 05:41:14 2026"
+   "updated": "Fri Apr 10 06:20:32 2026"
 }
