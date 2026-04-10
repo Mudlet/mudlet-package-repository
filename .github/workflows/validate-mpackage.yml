@@ -125,7 +125,7 @@ jobs:
       id: check-malicious-content
       run: |
         FILE="${{ steps.check-file-count.outputs.FILE }}"
-        if grep -q -R -E 'os\.exec|lfs\.rmdir|sysDataSendRequest' unzipped_package/
+        if grep -q -R -E 'os\.execute|lfs\.rmdir|sysDataSendRequest' unzipped_package/
           echo "Pass: security checks"
         else
           echo "Error: questionable functions or events used, please validate manually"
