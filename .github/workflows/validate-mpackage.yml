@@ -125,11 +125,11 @@ jobs:
       id: check-malicious-content
       run: |
         FILE="${{ steps.check-file-count.outputs.FILE }}"
-        if grep -q -R -E 'os\.execute|lfs\.rmdir|sysDataSendRequest' unzipped_package/
-          echo "Pass: security checks"
-        else
+        if grep -q -R -E 'os\.exec|lfs\.rmdir|sysDataSendRequest' unzipped_package/; then
           echo "Error: questionable functions or events used, please validate manually"
           exit 1
+        else
+          echo "Pass: security checks"
         fi
 
     - name: Extract package name and author, check for duplicates
