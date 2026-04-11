@@ -65,13 +65,13 @@
                 },
                 {
                        "author": "Niliz Ambrai",
-                      "created": "2026-04-10T22:24:03+0200",
-                  "description": "# BatMap\n\n## World map for BatMUD\nThis package provides an undockable user window in Mudlet, showing the continent map for a player's current location.\n\n## Usage\n\nCurrently, there's a BatMap/update trigger that needs BatMUD to echo commands to move the map on directional movement.\nBasically, as long as you send a `whereami` command to BatMUD whenever you want to move the map to your position, the\nmap should work fine.\n\n### Aliases\n\n* `wmap show|hide`\n  * Shows or hides the world map window.\n\n### API\n\n* `raiseEvent(\"BatMap.event.locationUpdated\", continent, x, y)`\n  * If you want to add additional ways to move/change the map, you can raise this event.\n  * The x and y are coordinates within the continent. They will not work with global coordinates.\n\n## Final thoughts, how to contribute, thanks, things like that\nThis is a preliminary release of my BatMap. Good enough already to let others try it out, but lacking a few things\nI'd like to add in the near future, such as zooming.",
+                      "created": "2026-04-10T23:34:03+0200",
+                  "description": "# BatMap\n\n## World map for BatMUD\nThis package provides an undockable user window in Mudlet, showing the continent map for a player's current location.\n\n## Usage\n\nCurrently, there's a BatMap/update trigger that needs BatMUD to echo commands to move the map on directional movement.\nBasically, as long as you send a `whereami` command to BatMUD whenever you want to move the map to your position, the\nmap should work fine.\n\n### Aliases\n\n* `wmap show|hide`\n  * Shows or hides the world map window.\n\n### API\n\n* `raiseEvent(\"BatMap.event.locationUpdated\", continent, x, y)`\n  * If you want to add additional ways to move/change the map, you can raise this event.\n  * The x and y are coordinates within the continent. They will not work with global coordinates.\n\n## Final thoughts, how to contribute, thanks, things like that\nThis is a preliminary release of my BatMap. Good enough already to let others try it out, but lacking a few things\nI'd like to add in the near future, such as zooming.\n\n## History\n\n### v1.0.1 - April 10, 2026\nTiny fix to the initial x-coordinate of the world map user window as it started at x = 100% (trying to for the user window to appear outside the main window).\n\n### v1.0.0 - April 9, 2026\nVery first release",
                      "filename": "BatMap.mpackage",
                      "mpackage": "BatMap",
                         "title": "World map for BatMUD by Niliz Ambrai",
-                     "uploaded": 1775853242,
-                      "version": "1.0.0"
+                     "uploaded": 1775885101,
+                      "version": "1.0.1"
                 },
                 {
                        "author": "Niliz Ambrai",
@@ -2055,5 +2055,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Apr 10 21:27:20 2026"
+   "updated": "Sat Apr 11 05:27:30 2026"
 }
