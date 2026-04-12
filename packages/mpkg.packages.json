@@ -515,6 +515,17 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "gesslar",
+                      "created": "2026-04-12T03:15:51+0000",
+                  "description": "# Repeater\n\nUse `Ctrl-R` on Windows or Linux, or `Cmd-R` on a Mac to repeat the last\ncommand you sent to the game.\n\n## License\n\n`repeater` is released under the [0BSD](LICENSE.txt).\n",
+                     "filename": "Repeater.mpackage",
+                         "icon": "packages/icons/Repeater.png",
+                     "mpackage": "Repeater",
+                        "title": "Repeat the last command sent to the MUD with Ctrl-R (Cmd-R).",
+                     "uploaded": 1775978432,
+                      "version": "2.0.0"
+                },
+                {
                        "author": "keneanung",
                       "created": "2026-02-04T15:49:42+0000",
                   "description": "# Sampler\n\nSampler is a Mudlet package for the game Achaea that builds a persistent database of sampling locations for the Furniture tradeskill and adds convenient commands for finding and traveling to known sample rooms.\n\n## Features\n\n- Automatically records rooms where samples are collected.\n- Lists known rooms for a material/sample query, grouped by area.\n- Optional guided travel through known rooms with auto-pause for sampling.\n- Shows sampleables in the current room after a room inventory update.\n- Enhances \"Furnishing Materials\" lists by annotating where materials are found.\n\n## Requirements\n\n- Mudlet with GMCP enabled.\n- Mapper support for travel links (uses `mmp.gotoRoom`/`mmp.gotoArea` when available).\n- Built-in `yajl` and `getNewIDManager()` (present in standard Mudlet installs).\n\n## Install\n\n1. Import the package file from [build/Sampler.mpackage](build/Sampler.mpackage).\n2. Ensure GMCP is enabled in Mudlet.\n\n## Usage\n\n### Commands\n\n- `sample` or `sample help` — show help.\n- `sample now` — queue sampling of any known sampleable in the current room.\n- `sample rooms <query>` — list known rooms for a material or sample name.\n- `sample travel start <query>` — travel through known rooms, pausing when samples are found.\n- `sample travel resume` — continue travel after sampling.\n- `sample travel cancel` — stop travel and clear the queue.\n\n### Room discovery\n\nSampler listens for sampling messages and records the current room number against the sample name. This database grows over time and is used by `sample rooms` and travel.\n\n### Travel behavior\n\n`sample travel start <query>` builds an ordered list of matching rooms, moves to each room, and pauses if a matching sample is present. Use `sample travel resume` after sampling or `sample travel cancel` to stop.\n\n### Materials list enhancement\n\nWhen a \"Furnishing Materials\" list is shown, Sampler matches each material line to known samples and prints the areas where those samples were collected.\n\n## Data storage\n\nSampler stores its database as JSON at:\n\n```\n<Mudlet home>/@PKGNAME@/sampling.config\n```\n\nThe file is saved on shutdown and updated as samples are collected.\n\n## Development\n\n- Source files live in [src](src).\n- Build metadata is in [mfile](mfile).\n- Specs are in [spec](spec).\n\n## Troubleshooting\n\n- If `sample rooms` shows no results, collect at least one sample first.\n- If travel links do nothing, ensure the Mudlet mapper is enabled and `mmp` is available.\n",
@@ -2066,5 +2077,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Apr 11 18:25:02 2026"
+   "updated": "Sun Apr 12 07:22:09 2026"
 }
