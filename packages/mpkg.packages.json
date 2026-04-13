@@ -65,13 +65,13 @@
                 },
                 {
                        "author": "Niliz Ambrai",
-                      "created": "2026-04-10T23:34:03+0200",
-                  "description": "# BatMap\n\n## World map for BatMUD\nThis package provides an undockable user window in Mudlet, showing the continent map for a player's current location.\n\n## Usage\n\nCurrently, there's a BatMap/update trigger that needs BatMUD to echo commands to move the map on directional movement.\nBasically, as long as you send a `whereami` command to BatMUD whenever you want to move the map to your position, the\nmap should work fine.\n\n### Aliases\n\n* `wmap show|hide`\n  * Shows or hides the world map window.\n\n### API\n\n* `raiseEvent(\"BatMap.event.locationUpdated\", continent, x, y)`\n  * If you want to add additional ways to move/change the map, you can raise this event.\n  * The x and y are coordinates within the continent. They will not work with global coordinates.\n\n## Final thoughts, how to contribute, thanks, things like that\nThis is a preliminary release of my BatMap. Good enough already to let others try it out, but lacking a few things\nI'd like to add in the near future, such as zooming.\n\n## History\n\n### v1.0.1 - April 10, 2026\nTiny fix to the initial x-coordinate of the world map user window as it started at x = 100% (trying to for the user window to appear outside the main window).\n\n### v1.0.0 - April 9, 2026\nVery first release",
+                      "created": "2026-04-13T20:52:48+0200",
+                  "description": "# BatMap\n\n## World map for BatMUD\nThis package provides an undockable user window in Mudlet, showing the continent map for a player's current location.\n\n## Usage\n\nCurrently, there's a BatMap/update trigger that needs BatMUD to echo commands to move the map on directional movement.\nBasically, as long as you send a `whereami` command to BatMUD whenever you want to move the map to your position, the\nmap should work fine.\n\nThere's also the option to override the command being sent to the game: create a BatConfig table and add a movementCommand item.\nFor example:\n```\nBatConfig = BatConfig or {}\nBatConfig.movementCommand = \"@sc\"\n```\nYou'll have to make sure that you capture the output of that command and raise the event as is described in the API section.\n\nOr you can disable the trigger of automatic updates with commands by configuring the movementCommand as an empty string:\n```angular2html\nBatConfig.movementCommand = \"\"\n```\nThis could be useful of you want to trigger off your prompt.\n\n### Aliases\n\n* `wmap show|hide`\n  * Shows or hides the world map window.\n\n### API\n\n* `raiseEvent(\"BatMap.event.locationUpdated\", continent, x, y)`\n  * If you want to add additional ways to move/change the map, you can raise this event.\n  * The x and y are coordinates within the continent. They will not work with global coordinates.\n\n## Final thoughts, how to contribute, thanks, things like that\nThis is a preliminary release of my BatMap. Good enough already to let others try it out, but lacking a few things\nI'd like to add in the near future, such as zooming.\n\n## History\n\n### v1.0.2 - April 10, 2026\nImprovements from review feedback and added the option to override the movement command.\n\n### v1.0.1 - April 10, 2026\nTiny fix to the initial x-coordinate of the world map user window as it started at x = 100% (trying to for the user window to appear outside the main window).\n\n### v1.0.0 - April 9, 2026\nVery first release",
                      "filename": "BatMap.mpackage",
                      "mpackage": "BatMap",
                         "title": "World map for BatMUD by Niliz Ambrai",
-                     "uploaded": 1775885101,
-                      "version": "1.0.1"
+                     "uploaded": 1776123394,
+                      "version": "1.0.2"
                 },
                 {
                        "author": "Niliz Ambrai",
@@ -147,6 +147,17 @@
                         "title": "Copy text with color codes in AE Reboot format",
                      "uploaded": 1737314622,
                       "version": "1"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-04-13T22:45:12+0000",
+                  "description": "# Copier\n\nConvenient copy functions for Mudlet.\n\nUse this feature to copy text from the game that can be useful for pasting in\nother situations. Functions are accessed after selecting text and then\nright-clicking them.\n\n## Copy collapsed\n\nSelect text that is in a say, a tell, or a channel, to copy it in a collapsed\nmanner. This is useful for removing all line feeds and indents from text and is\nready to paste.\n\nExample:\n\n```text\n   Marble pillars about five feet high each stand at mid-intervals between the\\n\ndangling cords. On each of the pillars, a crystal vase bearing a single, fresh\\n\nred rose sits. The air is slightly warmer in this room, while light seems to\\n\nshimmer iridescently from the silks on the wall.\n```\n\nResults in the following in your clipboard, ready to paste:\n\n> Marble pillars about five feet high each stand at mid-intervals between the dangling cords. On each of the pillars, a crystal vase bearing a single, fresh red rose sits. The air is slightly warmer in this room, while light seems to shimmer iridescently from the silks on the wall.\n\n## Use cases\n\nPresently, only one use case has been accommodated for. If there are others,\nwish upon the first star on the left and maybe it will manifest.\n\n## License\n\n`threshcopy` is released under the [0BSD](LICENSE.txt).\n",
+                     "filename": "Copier.mpackage",
+                         "icon": "packages/icons/Copier.png",
+                     "mpackage": "Copier",
+                        "title": "Convenient copy functions for Mudlet.",
+                     "uploaded": 1776123366,
+                      "version": "2.0.0"
                 },
                 {
                        "author": "Mudzereli",
@@ -2077,5 +2088,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Apr 13 19:35:40 2026"
+   "updated": "Mon Apr 13 23:37:48 2026"
 }
