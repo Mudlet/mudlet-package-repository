@@ -266,6 +266,17 @@
                       "version": "1.0.1"
                 },
                 {
+                       "author": "gesslar",
+                      "created": "2026-04-14T04:33:59+0000",
+                  "description": "# Highlighter\n\nSpeedwalk path highlighter for Mudlet\n\n## Description\n\nThis package allows you to highlight your speedwalk paths in a different colour\nso that you can more easily see where you are going.\n\n## Configuration\n\nIn Mudlet, type `highlight` to see the help information for this package.\n\n* `highlight set` - See your current preference settings\n* `highlight set <preference> <value>` - Set a preference to a value\n\n  Available preferences:\n  * `fade` - Enable or disable the fade effect (default: on)\n  * `step` - Set the granularity of the fade (default: 10)\n  * `delay` - Set the speed of the fade (default: 0.05)\n  * `colour` - Set the colour of the highlight (default: gold)\n\nNote that the colour must be a valid [Mudlet colour name](https://wiki.mudlet.org/images/c/c3/ShowColors.png).\n\n## Events\n\nThis package listens to the following events in order to function. You will\nneed to ensure that these events are passed along with the required arguments\n(if any).\n\n### `onMoveMap`\n\nTrigger this event when the player has moved to a new room. Highlighter uses\nthis information to know when to begin fading the previous room.\n\n#### Arguments\n\n* `current room id` - The id of the room the player has arrived in.\n\n### `sysSpeedwalkStarted`\n\nTrigger this event to indicate that the speedwalk has started. Highlighter will\nuse this notification and information provided to highlight the route.\n\n#### Arguments\n\n* `none` - No arguments are required.\n\n### `sysSpeedwalkFinished`\n\nTrigger this event when the speedwalk has finished. Highlighter will use this\nnotification to know when to fade all of the remaining highlights.\n\n#### Arguments\n\n* `none` - No arguments are required.\n\nNone\n\n### `onSpeedwalkReset`\n\nTrigger this event when the speedwalk has been reset. Highlighter will use this\nnotification immediately remove all highlights.\n\n#### Arguments\n\n* `exception` - True or false if the reset was due to an exception.\n* `reason` - The reason the speedwalk was reset.\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n* [Helper](https://github.com/gesslar/Helper)\n\n## License\n\n`highlighter` is released under the [0BSD](LICENSE.txt).\n",
+                     "filename": "Highlighter.mpackage",
+                         "icon": "packages/icons/Highlighter.png",
+                     "mpackage": "Highlighter",
+                        "title": "Roll out a nicely stylised path for speedwalking.",
+                     "uploaded": 1776166240,
+                      "version": "1.5.1"
+                },
+                {
                        "author": "Ishar MUD",
                       "created": "2026-03-12",
                   "description": "Official Mudlet package for Ishar MUD. Includes GMCP-powered auto-mapper with collision detection and vitals gauges (HP, Mana, Movement).",
@@ -2088,5 +2099,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Apr 13 23:37:48 2026"
+   "updated": "Tue Apr 14 11:32:39 2026"
 }
