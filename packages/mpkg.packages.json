@@ -599,15 +599,15 @@
                       "version": "1.1.0"
                 },
                 {
-                       "author": "Zev",
-                      "created": "2026-04-25T18:43:40-0600",
+                       "author": "Zev/Jacob Webb",
+                      "created": "2026-04-26T15:10:12-0600",
                   "description": "A Dashboard for Sunder. Still a work in progress. If you have suggestions or to report issues contatct me on discord @zev7984",
                      "filename": "Sunder_Dashboard.mpackage",
                          "icon": "packages/icons/Sunder_Dashboard.png",
                      "mpackage": "Sunder_Dashboard",
                         "title": "Sunder Dashboard",
-                     "uploaded": 1777229195,
-                      "version": "1.0.0"
+                     "uploaded": 1777243793,
+                      "version": "1.0.4"
                 },
                 {
                        "author": "takilara",
@@ -2110,5 +2110,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Apr 26 18:49:06 2026"
+   "updated": "Sun Apr 26 22:52:07 2026"
 }
