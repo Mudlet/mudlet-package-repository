@@ -599,6 +599,17 @@
                       "version": "1.1.0"
                 },
                 {
+                       "author": "Zev",
+                      "created": "2026-04-25T18:43:40-0600",
+                  "description": "A Dashboard for Sunder. Still a work in progress. If you have suggestions or to report issues contatct me on discord @zev7984",
+                     "filename": "Sunder_Dashboard.mpackage",
+                         "icon": "packages/icons/Sunder_Dashboard.png",
+                     "mpackage": "Sunder_Dashboard",
+                        "title": "Sunder Dashboard",
+                     "uploaded": 1777229195,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "takilara",
                       "created": "2013-06-25T07:58:31+00:00",
                   "description": "This package can consume commands from Telegram, and run them on the mud, and send messages back to Telegram\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23057) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2099,5 +2110,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Apr 18 04:38:18 2026"
+   "updated": "Sun Apr 26 18:49:06 2026"
 }
