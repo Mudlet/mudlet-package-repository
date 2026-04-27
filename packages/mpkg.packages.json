@@ -1319,6 +1319,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Colborn(ping65510) & jackrungh",
+                      "created": "2026-04-27",
+                  "description": "A Mudlet package for Federation 2 Community Edition that provides mapping, navigation, hauling, automated trading, factory management, and quality-of-life improvements. Frontended by an optional, customizable GUI.",
+                     "filename": "fed2-tools.mpackage",
+                     "mpackage": "fed2-tools",
+                        "title": "Federation 2 Community Edition Mudlet Tools & GUI",
+                     "uploaded": 1777265715,
+                      "version": "1.1.0"
+                },
+                {
                        "author": "Swift",
                       "created": "2025-08-01T14:03:29-07:00",
                   "description": "This is a basic interface that breaks out useful information into separate windows. Exchange spam goes on the left, useful stats on top, a mapper on the top right, and a copy of chat on the bottom right.\n\nPlease remove the generic_mapper package, as it may conflict with the mapper included in this package.\n\nCurrently colors and font sizes are hardcoded. Customization is planned in a future update.\n\nThis primarily uses GMCP events to collect information, with some aliases designed to catch outgoing chat and copy it into the chat window. Exchange spam is caught entirely through triggers. T_T The mapper uses GMCP events and is always on, but has some aliases allowing basic map editing. See 'fedmap help' for more information.\n\nhttps://github.com/Ohmi02/Fed2/",
@@ -2110,5 +2120,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Apr 26 22:52:07 2026"
+   "updated": "Mon Apr 27 04:57:19 2026"
 }
