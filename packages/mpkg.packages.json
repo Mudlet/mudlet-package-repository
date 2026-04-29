@@ -1247,6 +1247,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "MikeGGH",
+                      "created": "2026-04-29T01:27:50-04:00",
+                  "description": "The Quow maps that everyone loves for Mushclient ported to Mudlet! This is ONLY for Linux/Windows! Supports scroll to zoom, and click to speedwalk.",
+                     "filename": "discworldquowmaps.mpackage",
+                     "mpackage": "discworldquowmaps",
+                        "title": "Discworld's Quow Maps for Mudlet",
+                     "uploaded": 1777460595,
+                      "version": "1.2"
+                },
+                {
                        "author": "keneanung",
                       "created": "2026-02-04T15:46:33+0000",
                   "description": "# Mudlet DPS Tracker\n\nClass-agnostic DPS tracker for Mudlet for the MUD Achaea, built with Muddler. It parses damage lines, tracks critical hits, computes raw DPS (crit multipliers factored out), tallies damage by type, compares strategies, and persists sessions across restarts.\n\n## Structure\n\n- src/scripts/DPS: core `dps` script (auto-initializes)\n- src/aliases/DPS: control aliases (`dps start|stop|report|compare`)\n- src/triggers/DPS: regex triggers for damage (`Damage dealt: N (type)`) and critical-hit notifications\n\n\n## Usage (in Mudlet)\n\n- Start tracking: `dps start STRATNAME`\n- Stop tracking: `dps stop`\n- Help/usage: `dps` or `dps help`\n- Report one or all: `dps report [STRATNAME]`\n- Compare all strategies: `dps compare`\n- Optional: set auto session label: `dps setname STRATNAME`\n - Rename a strategy: `dps rename OLD NEW`\n - Delete a strategy: `dps delete NAME`\n \nPersistence:\n- Sessions and totals persist across restarts in your Mudlet data dir under `@PKGNAME@/dps_data.json`.\n\nNotes:\n- DPS is computed from total damage divided by elapsed seconds between start/stop.\n- Damage is parsed from lines like `Damage dealt: 1254 (psychic).` (and similar). If a type in parentheses is present, the tracker tallies per-type counts and totals.\n - Critical hits are tracked via lines like `You have scored a CRITICAL hit!` and `You have scored an OBLITERATING CRITICAL hit!`, and the next damage is classified as critical.\n - Critical types supported: CRITICAL, CRUSHING, OBLITERATING, ANNIHILATINGLY POWERFUL, WORLD-SHATTERING, PLANE-RAZING.\n - Raw DPS: we factor out crit multipliers (per Achaea wiki: 2x, 4x, 8x, 16x, 32x, 64x) to compute base damage DPS for fair strategy comparison.\n - Comparison view sorts by raw DPS and shows both raw and actual DPS.\n - Auto timing: session starts on first damage; timing pauses on balance/equilibrium regain when your bashing script isn't attacking (`keneanung.bashing.attacking == 0`), and resumes on the next damage. Session stops via `dps stop` or on logout (\"You grow still ... out of the land.\"). No Mudlet events required.\n\n## Build\n\nFrom the project root, run:\n\n```bash\nmuddler\n```\n\nResult: `build/dpstest.mpackage` and a `.output` file with metadata.\n\nFor help and details, see the Muddler wiki: https://github.com/demonnic/muddler/wiki/Usage\n\n## Testing (CI & local)\n\n- CI runs busted tests on Lua 5.1 via GitHub Actions.\n- To run locally (if you have Lua 5.1 + LuaRocks):\n\n```bash\nluarocks install busted\nbusted -v\n```\n\nTests use mocks for Mudlet APIs and a controllable clock to make timing deterministic.\n",
@@ -2120,5 +2130,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Apr 28 01:05:23 2026"
+   "updated": "Wed Apr 29 11:05:49 2026"
 }
