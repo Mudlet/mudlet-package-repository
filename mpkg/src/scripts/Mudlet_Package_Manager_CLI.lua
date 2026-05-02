@@ -26,13 +26,13 @@ function mpkg.initialise()
 
   mpkg.aliases = mpkg.aliases or {}
 
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp)( help)?$", mpkg.displayHelp))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) install(?: (.+))?$", function() mpkg.install(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) list$", mpkg.listInstalledPackages))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) remove(?: (.+))?$", function() mpkg.remove(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) show(?: (.+))?$", function() mpkg.show(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) search(?: (.+))?$", function() mpkg.search(matches[3]) end))
-  table.insert(mpkg.aliases, tempAlias("^(mpkg|mp) update$", function() mpkg.updatePackageList(false) end))
+  table.insert(mpkg.aliases, tempAlias("^mpkg( help)?$", mpkg.displayHelp))
+  table.insert(mpkg.aliases, tempAlias("^mpkg install(?: (.+))?$", function() mpkg.install(matches[3]) end))
+  table.insert(mpkg.aliases, tempAlias("^mpkg list$", mpkg.listInstalledPackages))
+  table.insert(mpkg.aliases, tempAlias("^mpkg remove(?: (.+))?$", function() mpkg.remove(matches[3]) end))
+  table.insert(mpkg.aliases, tempAlias("^mpkg show(?: (.+))?$", function() mpkg.show(matches[3]) end))
+  table.insert(mpkg.aliases, tempAlias("^mpkg search(?: (.+))?$", function() mpkg.search(matches[3]) end))
+  table.insert(mpkg.aliases, tempAlias("^mpkg update$", function() mpkg.updatePackageList(false) end))
 
   -- Setup a named timer for automatic repository listing updates every 12 hours (60s*60m*12h=43200s)
   registerNamedTimer("mpkg", "mpkg update package listing timer", 43200, function() mpkg.updatePackageList(true) end, true)
