@@ -1341,13 +1341,13 @@
                 },
                 {
                        "author": "Colborn(ping65510) & jackrungh",
-                      "created": "2026-04-30",
+                      "created": "2026-05-02",
                   "description": "A Mudlet package for Federation 2 Community Edition that provides mapping, navigation, hauling, automated trading, factory management, and quality-of-life improvements. Frontended by an optional, customizable GUI.",
                      "filename": "fed2-tools.mpackage",
                      "mpackage": "fed2-tools",
                         "title": "Federation 2 Community Edition Mudlet Tools & GUI",
-                     "uploaded": 1777591028,
-                      "version": "1.1.4"
+                     "uploaded": 1777756824,
+                      "version": "1.1.5"
                 },
                 {
                        "author": "Swift",
@@ -2141,5 +2141,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat May  2 03:40:17 2026"
+   "updated": "Sat May  2 21:21:34 2026"
 }
