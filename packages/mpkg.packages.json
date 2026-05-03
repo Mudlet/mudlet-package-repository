@@ -1346,8 +1346,8 @@
                      "filename": "fed2-tools.mpackage",
                      "mpackage": "fed2-tools",
                         "title": "Federation 2 Community Edition Mudlet Tools & GUI",
-                     "uploaded": 1777756824,
-                      "version": "1.1.5"
+                     "uploaded": 1777824009,
+                      "version": "1.1.6"
                 },
                 {
                        "author": "Swift",
@@ -2141,5 +2141,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat May  2 21:21:34 2026"
+   "updated": "Sun May  3 16:02:11 2026"
 }
