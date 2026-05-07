@@ -831,6 +831,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Nikolais",
+                      "created": "2026-05-07T00:35:05+0000",
+                  "description": "# agnosticDB\n\nStandalone name database for Mudlet + Achaea.\n\n## Quick Start\n1) Install the package in Mudlet 4.20.1 or newer.\n2) Run `adb` to confirm load and see common next steps.\n3) Run `adb refresh` (or `adb fetch <name>`).\n4) Use `adb whois <name>` or `adb stats`.\n5) Customize highlights and timing in `adb config`.\n\n## Common Commands\n- `adb`: compact jump menu.\n- `adb help`: full command reference.\n- `adb whois <name>`: show stored data (fetch if needed).\n- `adb fetch <name>` / `adb refresh`: fetch one or all online.\n- `adb quick`: fetch online list and queue new names only.\n- `adb config`: open config UI.\n- `adb highlights on|off`: toggle highlights.\n- `adb honors <name>`: capture honors.\n- `adb stats`: summary counts.",
+                     "filename": "agnosticDB.mpackage",
+                     "mpackage": "agnosticDB",
+                        "title": "agnosticDB-1.0.2 (Achaea Name Database)",
+                     "uploaded": 1778126970,
+                      "version": "1.0.2"
+                },
+                {
                        "author": "Akaya",
                       "created": "2013-12-13T00:53:52+00:00",
                   "description": "The Geyser script is a mini-map utility for the Achaea text-based game that tracks adjacent room exits and provides room identification numbers. It offers a simple mapping solution with potential for customization, allowing players to easily navigate and understand their current location within the game environment.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=4263&sid=e10434eaff93aec9299d6187daa41118) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2141,5 +2151,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed May  6 21:47:30 2026"
+   "updated": "Thu May  7 04:12:28 2026"
 }
