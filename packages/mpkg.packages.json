@@ -277,6 +277,16 @@
                       "version": "1.5.1"
                 },
                 {
+                       "author": "Icesus MUD community",
+                      "created": "2026-05-10",
+                  "description": "A dedicated Mudlet interface for Icesus, a demanding but fair MUD built around deep, earned progression. Keep vitals, experience, location, exits, enemies, casting, cooldowns, effects, channels, money, favor, and carry weight visible while the text adventure stays front and center.\n\nDesigned for Icesus GMCP support. Source: https://github.com/Icesus-mud/mudlet-package",
+                     "filename": "Icesus.mpackage",
+                     "mpackage": "Icesus",
+                        "title": "Icesus official client package",
+                     "uploaded": 1778472862,
+                      "version": "1.0.3"
+                },
+                {
                        "author": "Ishar MUD",
                       "created": "2026-03-12",
                   "description": "Official Mudlet package for Ishar MUD. Includes GMCP-powered auto-mapper with collision detection and vitals gauges (HP, Mana, Movement).",
@@ -2151,5 +2161,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun May 10 07:49:58 2026"
+   "updated": "Mon May 11 04:15:59 2026"
 }
