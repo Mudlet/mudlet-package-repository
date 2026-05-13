@@ -526,14 +526,14 @@
                 },
                 {
                        "author": "Adventurer1111 and Telepati's Mapping",
-                      "created": "2026-02-22T19:50:08-08:00",
-                  "description": "🐉 Realms of the Dragon GUI and Telepati Maps for Mudlet\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images. I hope you enjoy this package along with your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images and any ROTDMapData.dat updates to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n\nIncludes:\nSetup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\nTrigger list\nAliases\nScripts\nPlayer sample portraits, Friend portraits and notes, NPC portraits\nROTDMapData.dat file with maps of 13000+ rooms \n\n🗂 Updates \n1.11022025 Original Publication \nCurrent: 2.502222026 853 images and Telepati's map updates.\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟",
+                      "created": "2026-05-11T18:30:02-07:00",
+                  "description": "🐉 Realms of the Dragon GUI and Telepati Maps for Mudlet\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images. I hope you enjoy this package along with your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images and any ROTDMapData.dat updates to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n\nIncludes:\nSetup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\nTrigger list\nAliases\nScripts\nPlayer sample portraits, Friend portraits and notes, NPC portraits\nROTDMapData.dat file with maps of 13000+ rooms \n\n🗂 Updates \n1.11022025 Original Publication \nCurrent: 2.505112026 935 images and Telepati's map updates.\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟",
                      "filename": "ROTD_GUI.mpackage",
                          "icon": "packages/icons/ROTD_GUI.png",
                      "mpackage": "ROTD_GUI",
                         "title": "Realms of the Dragon Graphical User Interface and Mapping",
-                     "uploaded": 1771968955,
-                      "version": "2.502222026"
+                     "uploaded": 1778639910,
+                      "version": "2.505112026"
                 },
                 {
                        "author": "Demonnic",
@@ -2161,5 +2161,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue May 12 10:01:46 2026"
+   "updated": "Wed May 13 02:40:55 2026"
 }
