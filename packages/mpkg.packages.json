@@ -183,14 +183,14 @@
                 },
                 {
                        "author": "Bellimora",
-                      "created": "2025-11-30T00:12:35-0500",
+                      "created": "2026-05-13T22:36:26-04:00",
                   "description": "Mudlet support for the mud Edge of Midnight.  Includes some status gauges and auto-mapper support with a lot of the mud already mapped out.",
                      "filename": "Edge of Midnight.mpackage",
                          "icon": "packages/icons/Edge of Midnight.png",
                      "mpackage": "Edge of Midnight",
                         "title": "Support for Edge of Midnight",
-                     "uploaded": 1764479825,
-                      "version": "0.4.1"
+                     "uploaded": 1778740330,
+                      "version": "0.5"
                 },
                 {
                        "author": "Ping",
@@ -2161,5 +2161,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed May 13 02:45:08 2026"
+   "updated": "Thu May 14 06:34:05 2026"
 }
