@@ -23,14 +23,14 @@
                 },
                 {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
-                      "created": "2026-05-23T19:45:43-07:00",
+                      "created": "2026-05-24T18:43:54-07:00",
                   "description": "Achaean Curing System (Iron Realms Entertainment)",
                      "filename": "Achaean System.mpackage",
                          "icon": "packages/icons/Achaean System.png",
                      "mpackage": "Achaean System",
                         "title": "Achaean Curing System",
-                     "uploaded": 1779591137,
-                      "version": "2.0.138"
+                     "uploaded": 1779830321,
+                      "version": "2.0.141"
                 },
                 {
                        "author": "Caevora",
@@ -2162,5 +2162,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun May 24 22:59:06 2026"
+   "updated": "Tue May 26 21:20:27 2026"
 }
