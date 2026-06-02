@@ -160,6 +160,16 @@
                       "version": "2.0.0"
                 },
                 {
+                       "author": "Multiple DSL Contributors, Packaged by Zooka",
+                      "created": "2026-06-02T11:25:32+10:00",
+                  "description": "The famous PNP system for Dark, Shattered Lands.\n\nA comprehensive package for Dark, Shattered Lands.  Install and reconnect\nor run `lua dslpnp.update.update_scripts()` on the command line.\n\nPackaged up by Zooka for packages.mudlet.org as a gift to the DSL community.\nAll credits to original authors.\n\n2026-06-02: fixes some stylesheet issues and filepaths, and added all available scripts.",
+                     "filename": "DSL PNP 4.mpackage",
+                     "mpackage": "DSL PNP 4",
+                        "title": "DSL PNP 4 System",
+                     "uploaded": 1780365005,
+                      "version": "1"
+                },
+                {
                        "author": "Mudzereli",
                       "created": "2026-05-08T10:53:37-0500",
                   "description": "This Mudlet package automatically enhances your Dark Mists experience by adding clearer visuals, better organization, and helpful UI elements without changing how the game is played. Once installed, it passively tracks game output to provide features like status bars, chat history, mapping, and item lookups, all while keeping gameplay fully manual and text-driven. Simply connect and play as normal—the package listens to events, updates displays in real time, and gives you better situational awareness WITHOUT automation, scripting advantages, or PvP edge.",
@@ -2162,5 +2172,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat May 30 14:44:50 2026"
+   "updated": "Tue Jun  2 01:51:33 2026"
 }
