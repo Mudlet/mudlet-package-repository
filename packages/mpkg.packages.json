@@ -23,14 +23,14 @@
                 },
                 {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
-                      "created": "2026-06-02T03:50:55-07:00",
-                  "description": "Achaean Curing System (Iron Realms Entertainment)",
+                      "created": "2026-06-06T07:04:10-07:00",
+                  "description": "The Achaean System is a high-performance automation and data management framework built for the Achaean MUD. It is engineered to provide a seamless combat experience by handling complex data persistence, curing synchronization, and target management entirely in the background. The system features a modular, self-healing architecture that automatically provisions its own environment. It utilizes a sophisticated Deep Key Union Engine to perform intelligent updates, grafting new system features directly into your existing configuration files without ever overwriting your hard-earned personal settings or custom tweaks.\n\nThis system is designed for set it and forget it operation. Data is synchronized automatically on startup and saved during system updates. You can interact with the engine using the command json_report, which performs a comprehensive integrity audit of your current memory state against the files on disk, color-coded to instantly identify any sync mismatches or missing data. Additionally, you can use the command system_backup, which manually triggers a recursive snapshot of all active tables, including curing lists, target master lists, and hunt settings, to your dedicated backup directory.\n\nThe system includes zero-configuration persistence, as it automatically creates and maintains its own JSON storage directory and folder structure upon the first run. It offers deep key data protection, ensuring that when the system receives an update, your existing personal configuration is preserved while new functionality is merged into your files. Furthermore, it provides resilient recovery, featuring a cascading failure-recovery system that cycles from live files, to local backups, to system-wide archive snapshots if corruption is detected.\n\nFor advanced troubleshooting, manual configuration details, or to contribute to the project, please contact Caevora at:\n\ncaevorasmailbox@gmail.com",
                      "filename": "Achaean System.mpackage",
                          "icon": "packages/icons/Achaean System.png",
                      "mpackage": "Achaean System",
-                        "title": "Achaean Curing System",
-                     "uploaded": 1780401199,
-                      "version": "2.0.161"
+                        "title": "Achaean Curing System (Iron Realms Entertainment)",
+                     "uploaded": 1780784861,
+                      "version": "2.0.170"
                 },
                 {
                        "author": "Caevora",
@@ -1869,6 +1869,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Nichademus",
+                      "created": "2026-06-05T21:49:26.346109-04:00",
+                  "description": "This is a GUI interface and scripts for mapping, vitals, and group members data on Rites of Passage MUD.  Just go to package manager to install.",
+                     "filename": "rop-mudlet-v.1.4.0.mpackage",
+                     "mpackage": "rop-mudlet-candidate",
+                        "title": "Rites of Passage Mudlet Package",
+                     "uploaded": 1780784896,
+                      "version": "1.4.0"
+                },
+                {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-27T05:32:00+02:00",
                   "description": "# run-lua-code\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n",
@@ -2173,5 +2183,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Jun  5 23:50:58 2026"
+   "updated": "Sat Jun  6 22:30:38 2026"
 }
