@@ -120,6 +120,83 @@ jobs:
           exit 1
         fi
 
+    - name: Validate dependency format if present
+      if: steps.skip-if-deleted.outputs.skip != 'true'
+      id: check-dependencies
+      run: |
+        # Only validate if a dependencies field is present at all
+        if ! grep -q "dependencies" unzipped_package/config.lua; then
+          echo "Pass: no dependencies field present"
+          exit 0
+        fi
+
+        # Use Lua to parse the config and validate the dependency spec format
+        lua << 'EOF'
+        dofile('unzipped_package/config.lua')
+        local deps = _G['dependencies']
+
+        if deps == nil or deps == "" then
+          print("Pass: dependencies is empty or nil")
+          os.exit(0)
+        end
+
+        -- Validate operator characters used in constraint strings
+        local function validateSpec(spec)
+          spec = spec:match("^%s*(.-)%s*$")
+          local colonPos = spec:find(":", 1, true)
+          if not colonPos then return true end  -- plain package name, always valid
+
+          local constraintStr = spec:sub(colonPos + 1):match("^%s*(.-)%s*$")
+          if constraintStr == "latest" then return true end
+
+          for part in constraintStr:gmatch("[^,]+") do
+            part = part:match("^%s*(.-)%s*$")
+            local op, ver = part:match("^([><=!~]+)%s*(.+)$")
+            if not op or not ver then
+              return false, "Invalid constraint format: '" .. part .. "'"
+            end
+            -- Validate operator
+            local validOps = {[">="] = true, [">"] = true, ["<="] = true,
+                              ["<"] = true, ["=="] = true, ["="] = true,
+                              ["!="] = true, ["~="] = true}
+            if not validOps[op] then
+              return false, "Unknown operator: '" .. op .. "'"
+            end
+            -- Version must contain at least one dot (semver style)
+            if not ver:find("%.") then
+              return false, "Version '" .. ver .. "' does not look like a semver string"
+            end
+          end
+          return true
+        end
+
+        if type(deps) == "table" then
+          -- New array format: validate each element
+          for i, item in ipairs(deps) do
+            local ok, err = validateSpec(tostring(item))
+            if not ok then
+              io.stderr:write("Error: dependency[" .. i .. "] '" .. tostring(item) .. "': " .. err .. "\n")
+              os.exit(1)
+            end
+          end
+          print("Pass: " .. #deps .. " dependency spec(s) validated")
+        elseif type(deps) == "string" then
+          -- Legacy comma-separated string: must be plain package names (no colons)
+          for part in deps:gmatch("[^,]+") do
+            part = part:match("^%s*(.-)%s*$")
+            if part:find(":") then
+              io.stderr:write("Error: legacy string format does not support version constraints.\n")
+              io.stderr:write("Use the table/array form: dependencies = {\"" .. part .. "\"}\n")
+              os.exit(1)
+            end
+          end
+          print("Pass: legacy string dependencies format validated")
+        else
+          io.stderr:write("Error: dependencies must be a string or an array table\n")
+          os.exit(1)
+        end
+        EOF
+
     - name: Extract package name and author, check for duplicates
       if: steps.skip-if-deleted.outputs.skip != 'true'
       id: check-package-name

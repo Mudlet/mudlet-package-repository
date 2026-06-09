@@ -163,6 +163,296 @@ function mpkg.getDependencies(args)
 end
 
 
+--- Find a single package entry in the repository index by name.
+-- @param packageName the package name (case-insensitive)
+-- @return table with the package's repository data, or nil if not found
+function mpkg.findRepositoryEntry(packageName)
+  if not mpkg.ready() then return nil end
+  local packages = mpkg.packages["packages"]
+  for i = 1, #packages do
+    if string.lower(packages[i]["mpackage"]) == string.lower(packageName) then
+      return packages[i]
+    end
+  end
+  return nil
+end
+
+
+--- Parse a single dependency specification string into a structured table.
+-- Supports these formats (version operators: >= > <= < == !=):
+--   "PackageName"                  -- any installed version is acceptable
+--   "PackageName:latest"           -- always upgrade to the latest version
+--   "PackageName:>=1.0.0"          -- minimum version
+--   "PackageName:<=2.0.0"          -- maximum version (inclusive)
+--   "PackageName:>=1.0.0,<2.0.0"  -- version range
+-- Note: use the array form of the dependencies field in config.lua so that
+-- commas inside a single spec are not confused with package separators.
+-- @param spec a single dependency specification string
+-- @return table {name, constraints, wantLatest}
+function mpkg.parseDependencySpec(spec)
+  spec = (spec or ""):match("^%s*(.-)%s*$")
+
+  local colonPos = spec:find(":", 1, true)
+  if not colonPos then
+    return {name = spec, constraints = {}, wantLatest = false}
+  end
+
+  local name          = spec:sub(1, colonPos - 1):match("^%s*(.-)%s*$")
+  local constraintStr = spec:sub(colonPos + 1):match("^%s*(.-)%s*$")
+
+  if constraintStr == "latest" then
+    return {name = name, constraints = {}, wantLatest = true}
+  end
+
+  local constraints = {}
+  for part in constraintStr:gmatch("[^,]+") do
+    part = part:match("^%s*(.-)%s*$")
+    local op, ver = part:match("^([><=!~]+)%s*(.+)$")
+    if op and ver then
+      table.insert(constraints, {op = op, version = ver:match("^%s*(.-)%s*$")})
+    end
+  end
+
+  return {name = name, constraints = constraints, wantLatest = false}
+end
+
+
+--- Check whether a version string satisfies all given version constraints.
+-- @param installedVersion string version to test
+-- @param constraints table array of {op, version} tables
+-- @return true if all constraints pass
+-- @return false and the first failing constraint table if any constraint fails
+function mpkg.satisfiesConstraints(installedVersion, constraints)
+  if not constraints or #constraints == 0 then return true end
+
+  local ok, installed = pcall(semver, tostring(installedVersion))
+  if not ok then return false, {op = "?", version = tostring(installedVersion)} end
+
+  for _, c in ipairs(constraints) do
+    local ok2, required = pcall(semver, c.version)
+    if not ok2 then return false, c end
+
+    local satisfied
+    if     c.op == ">="             then satisfied = installed >= required
+    elseif c.op == ">"              then satisfied = installed >  required
+    elseif c.op == "<="             then satisfied = installed <= required
+    elseif c.op == "<"              then satisfied = installed <  required
+    elseif c.op == "==" or c.op == "="  then satisfied = installed == required
+    elseif c.op == "!=" or c.op == "~=" then satisfied = installed ~= required
+    else satisfied = false
+    end
+
+    if not satisfied then return false, c end
+  end
+
+  return true
+end
+
+
+--- Format a parsed dependency spec as a human-readable constraint string.
+-- @param spec parsed spec table from mpkg.parseDependencySpec
+-- @return string such as "(>=1.0.0, <2.0.0)", "(any version)", or "(latest)"
+function mpkg.formatDependencyConstraint(spec)
+  if spec.wantLatest then return "(latest)" end
+  if not spec.constraints or #spec.constraints == 0 then return "(any version)" end
+  local parts = {}
+  for _, c in ipairs(spec.constraints) do
+    table.insert(parts, c.op .. c.version)
+  end
+  return "(" .. table.concat(parts, ", ") .. ")"
+end
+
+
+--- Get structured dependency specs for a package from the repository index.
+-- Handles both the legacy comma-separated string format and the new array format.
+--   Legacy: "pkg1,pkg2"           -> each treated as an unversioned dependency
+--   New:    {"pkg1:>=1.0.0","pkg2"} -> each element is a full spec string
+-- @param packageName the package name as listed in the repository
+-- @return table array of parsed dependency specs (may be empty)
+-- @return nil and an error string if the package is not found or repo is not ready
+function mpkg.getDependencySpecs(packageName)
+  if not mpkg.ready() then return nil, "Repository not ready." end
+
+  local entry = mpkg.findRepositoryEntry(packageName)
+  if not entry then
+    return nil, f"Package '{packageName}' not found in repository."
+  end
+
+  local raw = entry["dependencies"]
+  if not raw or raw == "" then return {} end
+
+  -- New array format: JSON array decoded into a Lua table with integer keys
+  if type(raw) == "table" then
+    local specs = {}
+    for _, item in ipairs(raw) do
+      local spec = mpkg.parseDependencySpec(tostring(item))
+      if spec.name and spec.name ~= "" then
+        table.insert(specs, spec)
+      end
+    end
+    return specs
+  end
+
+  -- Legacy string format: plain comma-separated package names, no version constraints
+  local specs = {}
+  for part in raw:gmatch("[^,]+") do
+    part = part:match("^%s*(.-)%s*$")
+    if part ~= "" then
+      table.insert(specs, {name = part, constraints = {}, wantLatest = false})
+    end
+  end
+  return specs
+end
+
+
+--- Build a sequential install queue that satisfies a package's dependency constraints.
+-- Each dependency is compared against the currently installed version and resolved to
+-- one of: skip (already satisfied), install (missing), or upgrade (version too old).
+-- If a max-version constraint is violated by the installed package, the build fails
+-- because downgrading is not yet supported (see VERSIONING.md for the roadmap).
+-- The main package entry is always appended last so dependencies install first.
+-- @param repoEntry the repository index entry for the package to install or upgrade
+-- @param isUpgrade if true, the main package item is flagged to uninstall before install
+-- @return table array of queue items {name, filename, version, isUpgrade, reason}
+-- @return nil and an error string if a dependency cannot be satisfied
+function mpkg.buildInstallQueue(repoEntry, isUpgrade)
+  local specs, err = mpkg.getDependencySpecs(repoEntry["mpackage"])
+  if not specs then
+    return nil, err or "Could not read dependency information."
+  end
+
+  local queue = {}
+
+  for _, spec in ipairs(specs) do
+    local depEntry = mpkg.findRepositoryEntry(spec.name)
+    if not depEntry then
+      return nil, f"Dependency '{spec.name}' is not available in the repository."
+    end
+
+    -- Find if this dep is already installed (case-insensitive match)
+    local installedName = nil
+    for _, pkg in pairs(getPackages()) do
+      if string.lower(pkg) == string.lower(spec.name) then
+        installedName = pkg
+        break
+      end
+    end
+
+    if not installedName then
+      -- Missing: install it
+      table.insert(queue, {
+        name      = spec.name,
+        filename  = depEntry["filename"],
+        version   = depEntry["version"],
+        isUpgrade = false,
+        reason    = f"required dependency {mpkg.formatDependencyConstraint(spec)}"
+      })
+    else
+      local installedVer = mpkg.getInstalledVersion(installedName) or "0"
+      local repoVer      = depEntry["version"]
+
+      if spec.wantLatest then
+        if repoVer and semver(installedVer) < semver(repoVer) then
+          table.insert(queue, {
+            name      = installedName,
+            filename  = depEntry["filename"],
+            version   = repoVer,
+            isUpgrade = true,
+            reason    = "latest version required"
+          })
+        end
+
+      elseif #spec.constraints > 0 then
+        local satisfied, failedConstraint = mpkg.satisfiesConstraints(installedVer, spec.constraints)
+
+        if not satisfied then
+          if failedConstraint and (failedConstraint.op == ">=" or failedConstraint.op == ">") then
+            -- Installed version is too old: attempt upgrade
+            if repoVer and semver(installedVer) < semver(repoVer) then
+              local repoSatisfied = mpkg.satisfiesConstraints(repoVer, spec.constraints)
+              if repoSatisfied then
+                table.insert(queue, {
+                  name      = installedName,
+                  filename  = depEntry["filename"],
+                  version   = repoVer,
+                  isUpgrade = true,
+                  reason    = f"upgrade required {mpkg.formatDependencyConstraint(spec)}"
+                })
+              else
+                return nil, f"Dependency '{spec.name}': latest repository version v{repoVer} does not satisfy {mpkg.formatDependencyConstraint(spec)}."
+              end
+            else
+              return nil, f"Dependency '{spec.name}' v{installedVer} is too old and no newer version is available to satisfy {mpkg.formatDependencyConstraint(spec)}."
+            end
+          else
+            -- Installed version exceeds a maximum constraint; downgrade not supported yet
+            return nil, f"Dependency '{spec.name}' v{installedVer} exceeds {mpkg.formatDependencyConstraint(spec)}.  Downgrading is not currently supported (see VERSIONING.md)."
+          end
+        end
+        -- Constraint already satisfied: no action needed for this dep
+      end
+      -- No constraints and not wantLatest: any installed version is fine
+    end
+  end
+
+  -- Main package goes last so all deps are installed/upgraded first
+  table.insert(queue, {
+    name          = repoEntry["mpackage"],
+    filename      = repoEntry["filename"],
+    version       = repoEntry["version"],
+    isUpgrade     = isUpgrade,
+    isMainPackage = true
+  })
+
+  return queue
+end
+
+
+--- Start a sequential install queue, processing one package at a time.
+-- Each install triggers the next via mpkg.eventHandler sysInstallPackage.
+-- Upgrades (isUpgrade = true) uninstall first and continue via sysUninstallPackage.
+-- @param items table array of queue items from mpkg.buildInstallQueue
+-- @return false if a queue is already running
+function mpkg.startInstallQueue(items)
+  if mpkg.installQueue then
+    mpkg.echo("An installation is already in progress.  Please wait and try again.")
+    return false
+  end
+  mpkg.installQueue = {items = items, index = 1}
+  mpkg.processInstallQueue()
+  return true
+end
+
+
+--- Advance to and execute the next item in the active install queue.
+-- Called initially by mpkg.startInstallQueue and subsequently by the event handler.
+function mpkg.processInstallQueue()
+  local q = mpkg.installQueue
+  if not q then return end
+
+  if q.index > #q.items then
+    mpkg.installQueue = nil
+    mpkg.echo("All installations complete.")
+    return
+  end
+
+  local item   = q.items[q.index]
+  q.index      = q.index + 1
+
+  if item.isUpgrade then
+    -- Store what to install after the uninstall event fires
+    q.pendingAfterUninstall = item
+    local currentVer = mpkg.getInstalledVersion(item.name)
+    mpkg.echo(f"Removing <b>{item.name}</b> v{currentVer} before upgrading to v{item.version}...")
+    uninstallPackage(item.name)
+  else
+    local label = item.reason and f"  [{item.reason}]" or ""
+    mpkg.echo(f"Installing <b>{item.name}</b> (v{item.version}){label}...")
+    installPackage(f"{mpkg.repository}/{item.filename}")
+  end
+end
+
+
 --- Check if there are any packages that can be upgraded to a new version.
 -- Checks if the installed version of a package is less than the repository
 -- version using semantic versioning methods.
@@ -271,10 +561,12 @@ mpkg.echoLink("", "Visit https://packages.mudlet.org/upload to share your packag
 end
 
 
---- Install a new package from the repository.
+--- Install a new package from the repository, resolving dependencies automatically.
+-- If the package is already installed, checks for and applies any available update.
+-- Missing dependencies are installed first; outdated dependencies are upgraded first.
 -- @param args the package name as listed in the repository
--- @return false if there was an error
--- @return true if package was installed successfully
+-- @return false if there was an error or the package is already up-to-date
+-- @return true if installation was initiated
 function mpkg.install(args)
 
   if not args then
@@ -285,57 +577,40 @@ function mpkg.install(args)
 
   if not mpkg.ready() then return end
 
-  local installedPackages = getPackages()
-
-  for _, pkg in pairs(installedPackages) do
+  -- If already installed redirect to upgrade
+  for _, pkg in pairs(getPackages()) do
     if string.lower(pkg) == string.lower(args) then
-      mpkg.echo(f"<b>{pkg}</b> package is already installed.  Checking for updates.")
+      mpkg.echo(f"<b>{pkg}</b> is already installed.  Checking for updates.")
       mpkg.upgrade(pkg)
       return false
     end
   end
 
-  local packages = mpkg.packages["packages"]
-
-  for i = 1, #packages do
-    if string.lower(args) == string.lower(packages[i]["mpackage"]) then
-      -- check for dependencies
-      local depends = mpkg.getDependencies(packages[i]["mpackage"])
-
-      if depends then
-
-        local unmet = {}
-
-        for _, dep in pairs(depends) do
-          if not table.contains(getPackages(), dep) then
-            table.insert(unmet, dep)
-          end
-        end
-
-        -- TODO: automatic dependency resolution?
-        if not table.is_empty(unmet) then
-          mpkg.echo("This package has unmet dependencies.")
-          mpkg.echo("Please install the following packages first.")
-          mpkg.echo("")
-
-          for _, v in pairs(unmet) do
-            mpkg.echo(v)
-          end
-
-          return false
-        end
-      end
-
-      mpkg.echo(f"Installing <b>{args}</b> (v{packages[i]['version']}).")
-      installPackage(f"{mpkg.repository}/{packages[i]['filename']}")
-      return true
-
-    end
+  local repoEntry = mpkg.findRepositoryEntry(args)
+  if not repoEntry then
+    mpkg.echo(f"Unable to locate <b>{args}</b> package in repository.")
+    return false
   end
 
-  mpkg.echo(f"Unable to locate <b>{args}</b> package in repository.")
+  local queue, err = mpkg.buildInstallQueue(repoEntry, false)
+  if not queue then
+    mpkg.echo(f"Cannot install <b>{args}</b>: {err}")
+    return false
+  end
 
-  return false
+  -- Queue always ends with the main package; anything before it is a dependency action
+  local depActionCount = #queue - 1
+
+  if depActionCount == 0 then
+    mpkg.echo(f"Installing <b>{repoEntry['mpackage']}</b> (v{repoEntry['version']}).")
+    installPackage(f"{mpkg.repository}/{repoEntry['filename']}")
+  else
+    local depWord = depActionCount == 1 and "dependency" or "dependencies"
+    mpkg.echo(f"Installing <b>{repoEntry['mpackage']}</b> (v{repoEntry['version']}) — resolving {depActionCount} {depWord} first.")
+    mpkg.startInstallQueue(queue)
+  end
+
+  return true
 end
 
 --- Remove a locally installed package.
@@ -366,11 +641,12 @@ function mpkg.remove(args)
 end
 
 
---- Upgrade a locally installed package to a new repository version.
--- A convenience function which simply calls mpkg.remove and mpkg.install
+--- Upgrade a locally installed package to the latest repository version.
+-- Also resolves any dependency changes introduced by the new version: missing
+-- dependencies are installed and outdated ones are upgraded before the main package.
 -- @param args the package name as listed in the repository
--- @return false if there was an error
--- @return true if packages was successfully uninstalled/removed
+-- @return false if there was an error or the package is already up-to-date
+-- @return true if the upgrade was initiated
 function mpkg.upgrade(args)
 
   if not args then
@@ -388,15 +664,39 @@ function mpkg.upgrade(args)
   if not mpkg.ready() then return false end
 
   local installedVersion = mpkg.getInstalledVersion(args)
-  local repoVersion = mpkg.getRepositoryVersion(args)
-  if installedVersion and repoVersion and semver(installedVersion) < semver(repoVersion) then
-    -- if no errors removing then install
-    if mpkg.remove(args) then
-      tempTimer(2, function() mpkg.install(args) end)
-    end
-  else
-    mpkg.echo(f"Currently installed, <b>{args}</b> v{mpkg.getInstalledVersion(args)} is the latest version.")
+  local repoVersion      = mpkg.getRepositoryVersion(args)
+
+  if not (installedVersion and repoVersion and semver(installedVersion) < semver(repoVersion)) then
+    mpkg.echo(f"<b>{args}</b> v{installedVersion} is already the latest version.")
+    return false
   end
+
+  local repoEntry = mpkg.findRepositoryEntry(args)
+  if not repoEntry then
+    mpkg.echo(f"<b>{args}</b> not found in repository.")
+    return false
+  end
+
+  local queue, err = mpkg.buildInstallQueue(repoEntry, true)
+  if not queue then
+    mpkg.echo(f"Cannot upgrade <b>{args}</b>: {err}")
+    return false
+  end
+
+  -- depActionCount excludes the last item (the main package itself)
+  local depActionCount = #queue - 1
+
+  if depActionCount == 0 then
+    -- Simple upgrade: remove then install via event-driven queue
+    mpkg.echo(f"Upgrading <b>{args}</b> from v{installedVersion} to v{repoVersion}.")
+    mpkg.startInstallQueue(queue)
+  else
+    local depWord = depActionCount == 1 and "dependency" or "dependencies"
+    mpkg.echo(f"Upgrading <b>{args}</b> from v{installedVersion} to v{repoVersion} — also resolving {depActionCount} {depWord}.")
+    mpkg.startInstallQueue(queue)
+  end
+
+  return true
 end
 
 
@@ -574,6 +874,18 @@ function mpkg.show(args, repoOnly)
       else
         mpkg.echo(f"Status: <b>installed</b> (version: {version})")
       end
+
+      -- Show dependency constraints if this package has any
+      local depSpecs = mpkg.getDependencySpecs(packages[i]["mpackage"])
+      if depSpecs and #depSpecs > 0 then
+        mpkg.echo("")
+        local depParts = {}
+        for _, spec in ipairs(depSpecs) do
+          table.insert(depParts, f"{spec.name} {mpkg.formatDependencyConstraint(spec)}")
+        end
+        mpkg.echo(f"Dependencies: {table.concat(depParts, ', ')}")
+      end
+
       mpkg.echo("")
 
       local description = string.split(packages[i]["description"], "\n")
@@ -592,11 +904,14 @@ function mpkg.show(args, repoOnly)
 end
 
 
---- Reacts to downloading of repository files and self install/uninstall events.
--- @param event the event which called this handler; sysDownloadError, sysDownloadDone
--- @param arg all event args, including the filename associated with the download
+--- Reacts to downloading of repository files and package install/uninstall events.
+-- Also drives the sequential install queue used for dependency resolution.
+-- @param event the event name; sysDownloadError, sysDownloadDone,
+--              sysInstallPackage, or sysUninstallPackage
+-- @param ... event arguments (Mudlet also populates the global arg[] table)
 function mpkg.eventHandler(event, ...)
 
+  -- Repository listing download failed
   if event == "sysDownloadError" and string.ends(arg[2], mpkg.filename) then
     if not mpkg.silentFailures then
       mpkg.echo("Failed to download package listing.")
@@ -605,6 +920,7 @@ function mpkg.eventHandler(event, ...)
     return
   end
 
+  -- Repository listing downloaded successfully
   if event == "sysDownloadDone" and arg[1] == getMudletHomeDir() .. "/" .. mpkg.filename then
 
     if mpkg.displayUpdateMessage then
@@ -628,15 +944,41 @@ function mpkg.eventHandler(event, ...)
       mpkg.remove("mpkg")
       tempTimer(2, function() mpkg.install("mpkg") end)
     end
-  end
-
-  if event == "sysUninstallPackage" and arg[1] == "mpkg" then
-    mpkg.uninstallSelf()
     return
   end
 
-  if event == "sysInstallPackage" and arg[1] == "mpkg" then
-    mpkg.displayHelp()
+  -- Package uninstalled
+  if event == "sysUninstallPackage" then
+    if arg[1] == "mpkg" then
+      mpkg.uninstallSelf()
+      return
+    end
+
+    -- If the install queue was waiting on this uninstall, perform the queued install
+    local q = mpkg.installQueue
+    if q and q.pendingAfterUninstall and
+       string.lower(q.pendingAfterUninstall.name) == string.lower(arg[1]) then
+      local item              = q.pendingAfterUninstall
+      q.pendingAfterUninstall = nil
+      -- Brief delay to allow Mudlet to finish processing the uninstall
+      tempTimer(0.5, function()
+        mpkg.echo(f"Installing <b>{item.name}</b> (v{item.version})...")
+        installPackage(f"{mpkg.repository}/{item.filename}")
+        -- sysInstallPackage will advance the queue to the next item
+      end)
+    end
+    return
+  end
+
+  -- Package installed
+  if event == "sysInstallPackage" then
+    if arg[1] == "mpkg" then
+      mpkg.displayHelp()
+    end
+    -- Advance the install queue if one is running and not mid-uninstall-wait
+    if mpkg.installQueue and not mpkg.installQueue.pendingAfterUninstall then
+      tempTimer(0.5, function() mpkg.processInstallQueue() end)
+    end
     return
   end
 
