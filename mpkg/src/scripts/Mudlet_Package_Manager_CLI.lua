@@ -139,10 +139,13 @@ function mpkg.getRepositoryVersion(args)
 end
 
 
---- Get a table of dependencies this package requires to be installed.
+--- Get a table of dependency package names for a package.
+-- Returns only the package names, discarding any version constraints.
+-- Prefer mpkg.getDependencySpecs() for new code; this function is kept
+-- for backward compatibility with external scripts.
 -- @param args the package name as listed in the repository
 -- @return nil and error message if not found
--- @return an empty table (if no dependencies) or table containing package names if found
+-- @return an empty table (no deps) or table of package name strings
 function mpkg.getDependencies(args)
 
   if not mpkg.ready() then return end
@@ -151,11 +154,23 @@ function mpkg.getDependencies(args)
 
   for i = 1, #packages do
     if args == packages[i]["mpackage"] then
-      if packages[i]["dependencies"] then
-        return string.split(packages[i]["dependencies"], ",")
-      else
-        return {}
+      local raw = packages[i]["dependencies"]
+      if not raw or raw == "" then return {} end
+
+      -- New array format: extract the package name before any ':' constraint
+      if type(raw) == "table" then
+        local names = {}
+        for _, spec in ipairs(raw) do
+          local name = tostring(spec):match("^([^:]+)")
+          if name then
+            table.insert(names, name:match("^%s*(.-)%s*$"))
+          end
+        end
+        return names
       end
+
+      -- Legacy comma-separated string
+      return string.split(raw, ",")
     end
   end
 
@@ -426,6 +441,8 @@ end
 
 --- Advance to and execute the next item in the active install queue.
 -- Called initially by mpkg.startInstallQueue and subsequently by the event handler.
+-- Sets q.currentlyInstalling so the event handler only reacts to the expected
+-- sysInstallPackage event, ignoring installs triggered by other means.
 function mpkg.processInstallQueue()
   local q = mpkg.installQueue
   if not q then return end
@@ -440,12 +457,15 @@ function mpkg.processInstallQueue()
   q.index      = q.index + 1
 
   if item.isUpgrade then
-    -- Store what to install after the uninstall event fires
+    -- Waiting for sysUninstallPackage before we can install
     q.pendingAfterUninstall = item
+    q.currentlyInstalling   = nil
     local currentVer = mpkg.getInstalledVersion(item.name)
     mpkg.echo(f"Removing <b>{item.name}</b> v{currentVer} before upgrading to v{item.version}...")
     uninstallPackage(item.name)
   else
+    -- Record which package we expect sysInstallPackage for
+    q.currentlyInstalling = string.lower(item.name)
     local label = item.reason and f"  [{item.reason}]" or ""
     mpkg.echo(f"Installing <b>{item.name}</b> (v{item.version}){label}...")
     installPackage(f"{mpkg.repository}/{item.filename}")
@@ -491,17 +511,18 @@ end
 
 
 --- Upgrade all packages at once.
+-- Packages are upgraded one at a time in sequence; each upgrade starts after
+-- the previous one completes so they do not conflict with each other.
 -- @param silent do not show mpkg messages, system messages will continue to show
 function mpkg.performUpgradeAll(silent)
 
   if not mpkg.ready() then return end
 
-  local packages = mpkg.packages["packages"]
   local requireUpgrade = {}
 
   for _, pkg in pairs(getPackages()) do
     local installedVersion = mpkg.getInstalledVersion(pkg)
-    local repoVersion = mpkg.getRepositoryVersion(pkg)
+    local repoVersion      = mpkg.getRepositoryVersion(pkg)
 
     if repoVersion and installedVersion then
       if semver(installedVersion) < semver(repoVersion) then
@@ -510,22 +531,43 @@ function mpkg.performUpgradeAll(silent)
     end
   end
 
-  if not table.is_empty(requireUpgrade) then
-    if not silent then
-      mpkg.echo("New package upgrades available.  The following packages will be upgraded:")
-      mpkg.echo("")
-      for _, pkg in pairs(requireUpgrade) do
-        mpkg.echo(f"<b>{pkg}</b> v{mpkg.getInstalledVersion(pkg)} to v{mpkg.getRepositoryVersion(pkg)}")
-      end
-    end
-    for _, pkg in pairs(requireUpgrade) do
-      mpkg.upgrade(pkg)
-    end
-  else
+  if table.is_empty(requireUpgrade) then
     if not silent then
       mpkg.echo("No package upgrades are available.")
     end
+    return
   end
+
+  if not silent then
+    mpkg.echo("New package upgrades available.  The following packages will be upgraded:")
+    mpkg.echo("")
+    for _, pkg in pairs(requireUpgrade) do
+      mpkg.echo(f"<b>{pkg}</b> v{mpkg.getInstalledVersion(pkg)} to v{mpkg.getRepositoryVersion(pkg)}")
+    end
+  end
+
+  -- Upgrade sequentially: each call to mpkg.upgrade uses the install queue,
+  -- so we wait for the queue to clear before starting the next package.
+  local function upgradeNext(remaining)
+    if #remaining == 0 then return end
+    -- If another install is running, wait for it first
+    if mpkg.installQueue then
+      tempTimer(1, function() upgradeNext(remaining) end)
+      return
+    end
+    local pkg = table.remove(remaining, 1)
+    mpkg.upgrade(pkg)
+    local function waitForQueue()
+      if mpkg.installQueue then
+        tempTimer(1, waitForQueue)
+      else
+        upgradeNext(remaining)
+      end
+    end
+    tempTimer(1, waitForQueue)
+  end
+
+  upgradeNext(requireUpgrade)
 
 end
 
@@ -962,6 +1004,8 @@ function mpkg.eventHandler(event, ...)
       q.pendingAfterUninstall = nil
       -- Brief delay to allow Mudlet to finish processing the uninstall
       tempTimer(0.5, function()
+        -- Record which package we now expect sysInstallPackage for
+        q.currentlyInstalling = string.lower(item.name)
         mpkg.echo(f"Installing <b>{item.name}</b> (v{item.version})...")
         installPackage(f"{mpkg.repository}/{item.filename}")
         -- sysInstallPackage will advance the queue to the next item
@@ -975,8 +1019,14 @@ function mpkg.eventHandler(event, ...)
     if arg[1] == "mpkg" then
       mpkg.displayHelp()
     end
-    -- Advance the install queue if one is running and not mid-uninstall-wait
-    if mpkg.installQueue and not mpkg.installQueue.pendingAfterUninstall then
+    -- Advance the queue only when the package we were waiting for has installed.
+    -- This prevents installs triggered by other means (e.g. the GUI) from
+    -- accidentally skipping ahead in the queue.
+    local q = mpkg.installQueue
+    if q and not q.pendingAfterUninstall and
+       q.currentlyInstalling and
+       string.lower(arg[1]) == q.currentlyInstalling then
+      q.currentlyInstalling = nil
       tempTimer(0.5, function() mpkg.processInstallQueue() end)
     end
     return
