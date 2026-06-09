@@ -23,14 +23,14 @@
                 },
                 {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
-                      "created": "2026-05-09T17:17:07-07:00",
-                  "description": "Achaean Curing System (Iron Realms Entertainment)",
+                      "created": "2026-06-06T07:04:10-07:00",
+                  "description": "The Achaean System is a high-performance automation and data management framework built for the Achaean MUD. It is engineered to provide a seamless combat experience by handling complex data persistence, curing synchronization, and target management entirely in the background. The system features a modular, self-healing architecture that automatically provisions its own environment. It utilizes a sophisticated Deep Key Union Engine to perform intelligent updates, grafting new system features directly into your existing configuration files without ever overwriting your hard-earned personal settings or custom tweaks.\n\nThis system is designed for set it and forget it operation. Data is synchronized automatically on startup and saved during system updates. You can interact with the engine using the command json_report, which performs a comprehensive integrity audit of your current memory state against the files on disk, color-coded to instantly identify any sync mismatches or missing data. Additionally, you can use the command system_backup, which manually triggers a recursive snapshot of all active tables, including curing lists, target master lists, and hunt settings, to your dedicated backup directory.\n\nThe system includes zero-configuration persistence, as it automatically creates and maintains its own JSON storage directory and folder structure upon the first run. It offers deep key data protection, ensuring that when the system receives an update, your existing personal configuration is preserved while new functionality is merged into your files. Furthermore, it provides resilient recovery, featuring a cascading failure-recovery system that cycles from live files, to local backups, to system-wide archive snapshots if corruption is detected.\n\nFor advanced troubleshooting, manual configuration details, or to contribute to the project, please contact Caevora at:\n\ncaevorasmailbox@gmail.com",
                      "filename": "Achaean System.mpackage",
                          "icon": "packages/icons/Achaean System.png",
                      "mpackage": "Achaean System",
-                        "title": "Achaean Curing System",
-                     "uploaded": 1778399266,
-                      "version": "2.0.121"
+                        "title": "Achaean Curing System (Iron Realms Entertainment)",
+                     "uploaded": 1780784861,
+                      "version": "2.0.170"
                 },
                 {
                        "author": "Caevora",
@@ -160,15 +160,25 @@
                       "version": "2.0.0"
                 },
                 {
+                       "author": "Multiple DSL Contributors, Packaged by Zooka",
+                      "created": "2026-06-02T11:25:32+10:00",
+                  "description": "The famous PNP system for Dark, Shattered Lands.\n\nA comprehensive package for Dark, Shattered Lands.  Install and reconnect\nor run `lua dslpnp.update.update_scripts()` on the command line.\n\nPackaged up by Zooka for packages.mudlet.org as a gift to the DSL community.\nAll credits to original authors.\n\n2026-06-02: fixes some stylesheet issues and filepaths, and added all available scripts.",
+                     "filename": "DSL PNP 4.mpackage",
+                     "mpackage": "DSL PNP 4",
+                        "title": "DSL PNP 4 System",
+                     "uploaded": 1780365005,
+                      "version": "1"
+                },
+                {
                        "author": "Mudzereli",
-                      "created": "2026-05-08T10:53:37-0500",
+                      "created": "2026-06-05T14:16:54-0500",
                   "description": "This Mudlet package automatically enhances your Dark Mists experience by adding clearer visuals, better organization, and helpful UI elements without changing how the game is played. Once installed, it passively tracks game output to provide features like status bars, chat history, mapping, and item lookups, all while keeping gameplay fully manual and text-driven. Simply connect and play as normal—the package listens to events, updates displays in real time, and gives you better situational awareness WITHOUT automation, scripting advantages, or PvP edge.",
                      "filename": "DarkMistsCompanion.mpackage",
                          "icon": "packages/icons/DarkMistsCompanion.PNG",
                      "mpackage": "DarkMistsCompanion",
                         "title": "A Mudlet package for Dark Mists (darkmists.org 2222) that improves awareness while preserving Dark Mists’ classic text-based gameplay",
-                     "uploaded": 1778302853,
-                      "version": "1.5.3"
+                     "uploaded": 1780703293,
+                      "version": "1.5.6"
                 },
                 {
                        "author": "Demonnic",
@@ -183,14 +193,14 @@
                 },
                 {
                        "author": "Bellimora",
-                      "created": "2025-11-30T00:12:35-0500",
+                      "created": "2026-05-13T22:36:26-04:00",
                   "description": "Mudlet support for the mud Edge of Midnight.  Includes some status gauges and auto-mapper support with a lot of the mud already mapped out.",
                      "filename": "Edge of Midnight.mpackage",
                          "icon": "packages/icons/Edge of Midnight.png",
                      "mpackage": "Edge of Midnight",
                         "title": "Support for Edge of Midnight",
-                     "uploaded": 1764479825,
-                      "version": "0.4.1"
+                     "uploaded": 1778740330,
+                      "version": "0.5"
                 },
                 {
                        "author": "Ping",
@@ -289,12 +299,13 @@
                 {
                        "author": "Ishar MUD",
                       "created": "2026-03-12",
-                  "description": "Official Mudlet package for Ishar MUD. Includes GMCP-powered auto-mapper with collision detection and vitals gauges (HP, Mana, Movement).",
+                  "description": "Official Mudlet package for Ishar MUD. GMCP-powered auto-mapper with collision detection and an embedded map panel, a top identity box (name/race/class/level/gold plus the in-game clock, active global/moon events, and the current season + end date), a bottom action zone with HP/Mana/Move, combat-target, and class-resource (metamagic/edge) readouts beside a tabbed, paginated clickable skill hotbar (Spells grouped by Damage/Heal/Misc, plus Skills) with a Look-up mode, a fixed compass-rose exit pad, a Map/Who/Chat tab group, an Affects/Group tab group, an Equipment/Train tab group with condition-coloured clickable gear, a clickable online who-list (tell/follow/group), and a tabbed inventory with per-container tabs for carried and worn bags (open/close, get/put).",
                      "filename": "Ishar.mpackage",
+                         "icon": "packages/icons/Ishar.png",
                      "mpackage": "Ishar",
                         "title": "Ishar MUD",
-                     "uploaded": 1773297098,
-                      "version": "1.0.0"
+                     "uploaded": 1780365865,
+                      "version": "1.13.1"
                 },
                 {
                        "author": "Elanthia Online",
@@ -526,14 +537,14 @@
                 },
                 {
                        "author": "Adventurer1111 and Telepati's Mapping",
-                      "created": "2026-02-22T19:50:08-08:00",
-                  "description": "🐉 Realms of the Dragon GUI and Telepati Maps for Mudlet\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images. I hope you enjoy this package along with your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images and any ROTDMapData.dat updates to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n\nIncludes:\nSetup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\nTrigger list\nAliases\nScripts\nPlayer sample portraits, Friend portraits and notes, NPC portraits\nROTDMapData.dat file with maps of 13000+ rooms \n\n🗂 Updates \n1.11022025 Original Publication \nCurrent: 2.502222026 853 images and Telepati's map updates.\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟",
+                      "created": "2026-05-11T18:30:02-07:00",
+                  "description": "🐉 Realms of the Dragon GUI and Telepati Maps for Mudlet\nWelcome, Adventurer!\n\nReady to see the mud, Realms of the Dragon like never before? This GUI transforms your Mudlet experience with dynamic NPC and Friend tracking, portraits, and a layout designed for visual immersion, and fun. Whether you’re a seasoned Realms of the Dragon dragon-slayer or just setting foot in the Realms, this package makes your journey more immersive and fun with hundreds of NPC images. I hope you enjoy this package along with your journey.\n\nIMPORTANT: IF YOU ARE UPDATING THIS PACKAGE: First save a copy of your custom Avatar_Player images and custom Friends images and any ROTDMapData.dat updates to your Desktop to avoid them being over-written!!!\n\n📦 Packaging & Publishing\n\nIncludes:\nSetup guide ROTD_GUI/Readme.txt with easy instructions, customization tips and FAQ\nTrigger list\nAliases\nScripts\nPlayer sample portraits, Friend portraits and notes, NPC portraits\nROTDMapData.dat file with maps of 13000+ rooms \n\n🗂 Updates \n1.11022025 Original Publication \nCurrent: 2.505112026 935 images and Telepati's map updates.\n\n🌟 May your path be clear, your companions loyal, and your rituals ever radiant. 🌟",
                      "filename": "ROTD_GUI.mpackage",
                          "icon": "packages/icons/ROTD_GUI.png",
                      "mpackage": "ROTD_GUI",
                         "title": "Realms of the Dragon Graphical User Interface and Mapping",
-                     "uploaded": 1771968955,
-                      "version": "2.502222026"
+                     "uploaded": 1778639910,
+                      "version": "2.505112026"
                 },
                 {
                        "author": "Demonnic",
@@ -1361,13 +1372,14 @@
                 },
                 {
                        "author": "Colborn(ping65510) & jackrungh",
-                      "created": "2026-05-05",
+                      "created": "2026-05-24",
                   "description": "A Mudlet package for Federation 2 Community Edition that provides mapping, navigation, hauling, automated trading, factory management, and quality-of-life improvements. Frontended by an optional, customizable GUI.",
                      "filename": "fed2-tools.mpackage",
+                         "icon": "packages/icons/fed2-tools.png",
                      "mpackage": "fed2-tools",
                         "title": "Federation 2 Community Edition Mudlet Tools & GUI",
-                     "uploaded": 1778001415,
-                      "version": "1.1.8"
+                     "uploaded": 1779663451,
+                      "version": "1.2.3"
                 },
                 {
                        "author": "Swift",
@@ -1857,6 +1869,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Nichademus",
+                      "created": "2026-06-05T21:49:26.346109-04:00",
+                  "description": "This is a GUI interface and scripts for mapping, vitals, and group members data on Rites of Passage MUD.  Just go to package manager to install.",
+                     "filename": "rop-mudlet-v.1.4.0.mpackage",
+                     "mpackage": "rop-mudlet-candidate",
+                        "title": "Rites of Passage Mudlet Package",
+                     "uploaded": 1780784896,
+                      "version": "1.4.0"
+                },
+                {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-27T05:32:00+02:00",
                   "description": "# run-lua-code\n\nA simple package that provides a `lua` alias that allows the user to\nrun Lua code from the command line.\n\n```\n-- examples\n> lua echo(\"Lua from the command line\")  -- runs the Lua echo function displaying text on the main screen\n> lua send(\"look\")                       -- send the command 'look' to the game server\n> lua showColors()                       -- display a color palette\n```\n",
@@ -2161,5 +2183,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon May 11 04:15:59 2026"
+   "updated": "Sat Jun  6 22:30:38 2026"
 }
