@@ -264,6 +264,19 @@ function mpkg.satisfiesConstraints(installedVersion, constraints)
 end
 
 
+--- Safely parse a version value into a semver object.
+-- Wraps the semver() call in pcall so that malformed or missing versions
+-- (e.g. the integer 0 returned for whitelisted packages) do not crash the
+-- caller.  Returns nil on parse failure rather than propagating the error.
+-- @param v version string, number, or nil
+-- @return semver object, or nil if v is absent or cannot be parsed
+function mpkg.parseVersion(v)
+  if v == nil then return nil end
+  local ok, sv = pcall(semver, tostring(v))
+  return ok and sv or nil
+end
+
+
 --- Format a parsed dependency spec as a human-readable constraint string.
 -- @param spec parsed spec table from mpkg.parseDependencySpec
 -- @return string such as "(>=1.0.0, <2.0.0)", "(any version)", or "(latest)"
@@ -367,7 +380,9 @@ function mpkg.buildInstallQueue(repoEntry, isUpgrade)
       local repoVer      = depEntry["version"]
 
       if spec.wantLatest then
-        if repoVer and semver(installedVer) < semver(repoVer) then
+        local iv = mpkg.parseVersion(installedVer)
+        local rv = mpkg.parseVersion(repoVer)
+        if iv and rv and iv < rv then
           table.insert(queue, {
             name      = installedName,
             filename  = depEntry["filename"],
@@ -375,15 +390,29 @@ function mpkg.buildInstallQueue(repoEntry, isUpgrade)
             isUpgrade = true,
             reason    = "latest version required"
           })
+        elseif not iv then
+          -- Installed version is not parseable as semver; upgrade to get a clean release
+          table.insert(queue, {
+            name      = installedName,
+            filename  = depEntry["filename"],
+            version   = repoVer,
+            isUpgrade = true,
+            reason    = "latest version required (installed version unreadable)"
+          })
         end
 
       elseif #spec.constraints > 0 then
         local satisfied, failedConstraint = mpkg.satisfiesConstraints(installedVer, spec.constraints)
 
         if not satisfied then
-          if failedConstraint and (failedConstraint.op == ">=" or failedConstraint.op == ">") then
-            -- Installed version is too old: attempt upgrade
-            if repoVer and semver(installedVer) < semver(repoVer) then
+          -- >= / > : too old.  != / ~= : excluded version.  Both can be fixed by upgrading.
+          if failedConstraint and (
+              failedConstraint.op == ">=" or failedConstraint.op == ">" or
+              failedConstraint.op == "!=" or failedConstraint.op == "~="
+             ) then
+            local iv = mpkg.parseVersion(installedVer)
+            local rv = mpkg.parseVersion(repoVer)
+            if iv and rv and iv < rv then
               local repoSatisfied = mpkg.satisfiesConstraints(repoVer, spec.constraints)
               if repoSatisfied then
                 table.insert(queue, {
@@ -396,12 +425,15 @@ function mpkg.buildInstallQueue(repoEntry, isUpgrade)
               else
                 return nil, f"Dependency '{spec.name}': latest repository version v{repoVer} does not satisfy {mpkg.formatDependencyConstraint(spec)}."
               end
+            elseif not iv then
+              return nil, f"Dependency '{spec.name}': installed version could not be compared against {mpkg.formatDependencyConstraint(spec)}."
             else
-              return nil, f"Dependency '{spec.name}' v{installedVer} is too old and no newer version is available to satisfy {mpkg.formatDependencyConstraint(spec)}."
+              return nil, f"Dependency '{spec.name}' v{installedVer} does not satisfy {mpkg.formatDependencyConstraint(spec)} and no newer version is available in the repository."
             end
           else
-            -- Installed version exceeds a maximum constraint; downgrade not supported yet
-            return nil, f"Dependency '{spec.name}' v{installedVer} exceeds {mpkg.formatDependencyConstraint(spec)}.  Downgrading is not currently supported (see VERSIONING.md)."
+            -- Installed version exceeds a maximum (< / <=) or wrong exact (==) constraint;
+            -- downgrade is not supported yet — see VERSIONING.md for the roadmap.
+            return nil, f"Dependency '{spec.name}' v{installedVer} does not satisfy {mpkg.formatDependencyConstraint(spec)}.  Downgrading is not currently supported (see VERSIONING.md)."
           end
         end
         -- Constraint already satisfied: no action needed for this dep
@@ -466,6 +498,7 @@ function mpkg.processInstallQueue()
   else
     -- Record which package we expect sysInstallPackage for
     q.currentlyInstalling = string.lower(item.name)
+    q.currentFilename     = item.filename
     local label = item.reason and f"  [{item.reason}]" or ""
     mpkg.echo(f"Installing <b>{item.name}</b> (v{item.version}){label}...")
     installPackage(f"{mpkg.repository}/{item.filename}")
@@ -557,14 +590,23 @@ function mpkg.performUpgradeAll(silent)
     end
     local pkg = table.remove(remaining, 1)
     mpkg.upgrade(pkg)
-    local function waitForQueue()
+    -- Poll until the current package's queue clears, then move to the next.
+    -- retries caps at 120 (~2 minutes) so a stuck or failed queue cannot
+    -- cause an infinite polling loop.
+    local function waitForQueue(retries)
+      retries = (retries or 0) + 1
       if mpkg.installQueue then
-        tempTimer(1, waitForQueue)
+        if retries > 120 then
+          mpkg.echo(f"Upgrade of <b>{pkg}</b> timed out.  Skipping remaining packages.")
+          mpkg.installQueue = nil
+          return
+        end
+        tempTimer(1, function() waitForQueue(retries) end)
       else
         upgradeNext(remaining)
       end
     end
-    tempTimer(1, waitForQueue)
+    tempTimer(1, function() waitForQueue(0) end)
   end
 
   upgradeNext(requireUpgrade)
@@ -953,11 +995,24 @@ end
 -- @param ... event arguments (Mudlet also populates the global arg[] table)
 function mpkg.eventHandler(event, ...)
 
-  -- Repository listing download failed
-  if event == "sysDownloadError" and string.ends(arg[2], mpkg.filename) then
-    if not mpkg.silentFailures then
-      mpkg.echo("Failed to download package listing.")
-      mpkg.silentFailures = true
+  -- Download error — check which download failed
+  if event == "sysDownloadError" then
+    if string.ends(arg[2], mpkg.filename) then
+      -- Repository listing failed
+      if not mpkg.silentFailures then
+        mpkg.echo("Failed to download package listing.")
+        mpkg.silentFailures = true
+      end
+    else
+      -- Check whether the failed download belongs to our install queue.
+      -- arg[2] is the local save path; installPackage saves to a path that
+      -- ends with the original filename, so a suffix match is reliable.
+      local q = mpkg.installQueue
+      if q and q.currentFilename and
+         string.ends(string.lower(arg[2] or ""), string.lower(q.currentFilename)) then
+        mpkg.echo(f"Package download failed: {arg[1]}.  Installation queue aborted.")
+        mpkg.installQueue = nil
+      end
     end
     return
   end
@@ -1006,6 +1061,7 @@ function mpkg.eventHandler(event, ...)
       tempTimer(0.5, function()
         -- Record which package we now expect sysInstallPackage for
         q.currentlyInstalling = string.lower(item.name)
+        q.currentFilename     = item.filename
         mpkg.echo(f"Installing <b>{item.name}</b> (v{item.version})...")
         installPackage(f"{mpkg.repository}/{item.filename}")
         -- sysInstallPackage will advance the queue to the next item
