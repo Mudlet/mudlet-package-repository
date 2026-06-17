@@ -23,14 +23,14 @@
                 },
                 {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
-                      "created": "2026-06-16T23:37:25-07:00",
+                      "created": "2026-06-17T14:40:24-07:00",
                   "description": "Achaean Curing System (Iron Realms Entertainment)",
                      "filename": "Achaean System.mpackage",
                          "icon": "packages/icons/Achaean System.png",
                      "mpackage": "Achaean System",
                         "title": "Achaean Curing System",
-                     "uploaded": 1781686932,
-                      "version": "2.0.175"
+                     "uploaded": 1781732675,
+                      "version": "2.0.176"
                 },
                 {
                        "author": "Caevora",
@@ -106,6 +106,17 @@
                       "version": "1.6.3"
                 },
                 {
+                       "author": "gesslar",
+                      "created": "2026-06-17T15:27:35+0000",
+                  "description": "# Carto\n\n## Description\n\nThis is a Mudlet package that allows you to map your adventures. It relies on\nGMCP to get the room information.\n\n## GMCP Configuration\n\nTo configure the package, type `carto` in Mudlet. You will be provided with a\nlist of commands to set various options in order to get the package to work\nwith your current mud.\n\n- `carto event <event>` - Set the event that triggers the Mapper (default:\n  `gmcp.Room.Info`).\n- `carto expect_coordinates <boolean>` - Set whether to expect coordinates from\n  the GMCP event (default: `true`).\n- `carto expect_hash <boolean>` - Set whether to expect a hash or vnum from the\n  GMCP event (default: `true`).\n- `carto properties` - View the current property names we can expect from the\n  GMCP event.\n- `carto properties <properties>` - Set the property names we can expect from\n  the GMCP event.\n\n  Defaults:\n\n  - `hash` - The hash value of the room (default: `hash`).\n  - `vnum` - The vnum of the room (default: `vnum`).\n  - `area` - The area of the room (default: `area`).\n  - `name` - The name of the room (default: `name`).\n  - `environment` - The environment of the room (default: `environment`).\n  - `symbol` - The symbol of the room (default: `symbol`).\n  - `exits` - The exits of the room (default: `exits`).\n  - `coords` - The coordinates of the room (default: `coords`).\n  - `doors` - The doors of the room (default: `doors`).\n  - `type` - The type of the room (default: `type`).\n  - `subtype` - The subtype of the room (default: `subtype`).\n  - `icon` - The icon of the room (default: `icon`).\n\n## Usage\n\nIn Mudlet, type `walk` to see the help information for this package.\n\n- `walk stop` - Stop walking.\n- `walk slow` - Set walk speed to 3 seconds per step.\n- `walk fast` - Set walk speed to 0.5 seconds per step.\n- `walk speed` - See your current walk speed.\n- `walk speed <n>` - Set walk speed to `n` seconds per step.\n- `walk to <room_id>` - Walk to room `room_id`.\n- `walk remember` - Remember the current room.\n- `walk remember <position>` - Remember the current room at `position`.\n- `walk forget` - Forget the current room.\n- `walk forget <position>` - Forget the room at `position`.\n- `walk recall` - List all recall positions.\n- `walk recall <position>` - Recall to the room at `position`.\n\n## Support\n\nWhile there is no official support and this is a hobby project, you are welcome\nto report issues on the [GitHub repo](https://github.com/gesslar/Carto).\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n- [Helper](https://github.com/gesslar/Helper)\n\n## Credits\n\n[Compass icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/map)\n\n## License\n\n`carto` is released under the [0BSD](LICENSE.txt).\n",
+                     "filename": "Carto.mpackage",
+                         "icon": "packages/icons/Carto.png",
+                     "mpackage": "Carto",
+                        "title": "GMCP mapper script for Mudlet",
+                     "uploaded": 1781732630,
+                      "version": "1.2.2"
+                },
+                {
                        "author": "bscross32",
                       "created": "2024-01-29T15:47:53-0500",
                   "description": "# ChannelHistory\n\n## Virtual buffering system for screen reader users.\n\n## Installation instructions\nIn Mudlet, type the following command:\n```\nlua uninstallPackage(\"ChannelHistory\");installPackage(\"https://github.com/ironcross32/ChannelHistory/releases/latest/download/ChannelHistory.mpackage\")\n```\n## Usage\n\nfor those who are familiar with the channel_history plugin for MUSHclient, this package behaves in much the same way, though with a more limited feature set.\n* Alt+left/Alt+right - navigate between categories in the virtual buffer\n* Alt+up/Alt+down - navigate through the messages in the selected category\n* Alt+home/Alt+end - jump to the first and last message in the selected category\n* Alt+Shift+T - Toggles hearing relative time that a given message entered the buffer\n* Alt+Shift+delete - removes the selected category along with all of its messages\n\nHolding the alt key and tapping a number from 1 to 0 on the number row will retrieve a recent message. For example, Alt+1 would retrieve the most recent message, while Alt+5 would retrieve the fifth most, and Alt+0 would retrieve the tenth most recent message. While holding alt, double tapping a number will have its message copied to the clipboard.\n\nTo add a new message to any given buffer, simply call `channel_history.add(STR category_name, STR message)`. Here's an example of a regular expression trigger:\n\n`\\[(chat|advice|events)\\] (\\w+)(.+s)`\n\nAnd, how this information is parsed and passed along to `channel_history:add()`\n\n```\nlocal where = matches[2]\nlocal message = matches[3] .. \": \" .. matches[4]\nchannel_history.add(where, message)\n```\n\n## Credits\n\nAs much of this project is a port from channel_history.xml from MushZ, thanks goes out to its authors:\n* Tyler Spivey\n* Oriol Gomez\n* Weyoun\n\nThanks also goes to Demonnic for graciously offering assistance with questions related to Muddler, which is used to package this project, and for helping with debugging some initial code. And of course, to the Mudlet team as a hole for creating a fast, powerful, and feature-rich MUD client.\n",
@@ -171,14 +182,14 @@
                 },
                 {
                        "author": "Mudzereli",
-                      "created": "2026-06-05T14:16:54-0500",
+                      "created": "2026-06-12T08:00:03-0500",
                   "description": "This Mudlet package automatically enhances your Dark Mists experience by adding clearer visuals, better organization, and helpful UI elements without changing how the game is played. Once installed, it passively tracks game output to provide features like status bars, chat history, mapping, and item lookups, all while keeping gameplay fully manual and text-driven. Simply connect and play as normal—the package listens to events, updates displays in real time, and gives you better situational awareness WITHOUT automation, scripting advantages, or PvP edge.",
                      "filename": "DarkMistsCompanion.mpackage",
                          "icon": "packages/icons/DarkMistsCompanion.PNG",
                      "mpackage": "DarkMistsCompanion",
                         "title": "A Mudlet package for Dark Mists (darkmists.org 2222) that improves awareness while preserving Dark Mists’ classic text-based gameplay",
-                     "uploaded": 1780703293,
-                      "version": "1.5.6"
+                     "uploaded": 1781732603,
+                      "version": "1.5.7"
                 },
                 {
                        "author": "Demonnic",
@@ -233,6 +244,17 @@
                         "title": "ErionMud UI Package.",
                      "uploaded": 1737741520,
                       "version": "1.0"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-06-17T15:18:33+0000",
+                  "description": "# Explorer\n\nDeveloper's Automapping tool for Mudlet\n\n## Description\n\nThis package is intended for use by developers who are looking to automatically\nexplore their game world. It is not intended for use by players, as it will\nautomatically move your character around the game world, and as well, it\nmay contravene the rules of your game.\n\n## Configuration\n\nIn Mudlet, type `explore` to see the help information for this package.\n\n* `explore start` - Start exploring\n* `explore stop` - Stop exploring\n* `explore set` - See your current preference settings\n* `explore set <preference> <value>` - Set a preference to a value\n\n  Available preferences:\n  * `shuffle` - Set the maximum number of steps to take before selecting a\n     random exit stub to explore (default: 0). If set to 0, Explorer will not\n     shuffle.\n  * `zoom` - Set the zoom level of the map during exploration (default:\n    10)\n\n## Events\n\n### Listening\n\nThis package listens to the following events in order to function. You will\nneed to ensure that these events are passed along with the required arguments\n(if any).\n\n#### `onMoveMap`\n\nTrigger this event when the player has moved to a new room. Explorer sets a\ntimer to check if the player has moved to a new room. When this event is\ntriggered, it confirms that the player has moved to a new room and will then\nproceed to explore a new room.\n\n##### Arguments\n\n* `current room id` - The id of the room the player has arrived in.\n\n#### `sysSpeedwalkFinished`\n\nTrigger this event when the speedwalk system has finished. The package listens\nfor this event to understand that speedwalking has completed and that it can\nnow schedule other activities.\n\n##### Arguments\n\nNone\n\n### Raising\n\nThe following events are raised by this package:\n\n#### `onExplorationStarted`\n\nThis event is raised when exploration has begun.\n\n##### Arguments\n\nNone\n\n#### `onExplorationStopped`\n\nThis event is raised when exploration has stopped.\n\n##### Arguments\n\n* `canceled` - Boolean indicating if the exploration was canceled.\n* `silent` - Boolean indicating that no messages should be printed.\n\n#### `onDetermineNextRoom`\n\nThis event is raised when the next room to explore is being determined.\n\n##### Arguments\n\n* `room_id` - The id of the room the player is currently in.\n* `area_id` - The id of the area the player is currently in.\n\n#### `onNextRoomDetermined`\n\nThis event is raised when the next room to explore has been determined.\n\n##### Arguments\n\n* `room_id` - The id of the next room to explore.\n* `area_id` - The id of the area the next room to explore is in.\n\n#### `onExploreDirection`\n\nThis event is raised when the explorer is about to explore a new direction. It\nfollows after `onNextRoomDetermined`, if the next room to explore is in the\nsame area and is adjacent to the current room.\n\n##### Arguments\n\n* `room_id` - The id of the room the explorer is currently in.\n* `direction` - The direction the explorer is about to explore.\n* `stub` - The exit stub of the room the explorer is about to explore.\n\n#### `onDirectionExplored`\n\nThis event is raised when the player has moved into a new room following a\ndirection exploration.\n\n##### Arguments\n\n* `room_id` - The id of the room the explorer has arrived in.\n* `direction` - The direction that was explored.\n\n#### `onStubIgnored`\n\nThis event is raised when an exit stub is ignored.\n\n##### Arguments\n\n* `room_id` - The id of the room the stub is in.\n* `stub` - The stub that was ignored.\n* `direction` - The direction of the stub that was ignored.\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n* [Helper](https://github.com/gesslar/Helper)\n\n### Support\n\nWhile there is no official support and this is a hobby project, you are welcome\nto report issues on the [GitHub repo](https://github.com/gesslar/Explorer).\n\n## License\n\n`explorer` is released under the [0BSD](LICENSE.txt).\n\n## Credits\n\n[Compass icons created by Dimitry Miroliubov - Flaticon](https://www.flaticon.com/free-icons/compass)\n",
+                     "filename": "Explorer.mpackage",
+                         "icon": "packages/icons/Explorer.png",
+                     "mpackage": "Explorer",
+                        "title": "Developer Automapping tool for Mudlet",
+                     "uploaded": 1781732659,
+                      "version": "1.2.3"
                 },
                 {
                        "author": "Sampa",
@@ -2193,5 +2215,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Jun 17 09:52:06 2026"
+   "updated": "Wed Jun 17 21:45:58 2026"
 }
