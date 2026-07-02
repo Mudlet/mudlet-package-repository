@@ -321,13 +321,13 @@
                 {
                        "author": "Ishar MUD",
                       "created": "2026-03-12",
-                  "description": "Official Mudlet package for Ishar MUD. GMCP-powered auto-mapper with collision detection and an embedded map panel, a top identity box (name/race/class/level/gold plus the in-game clock, active global/moon events, and the current season + end date), a bottom action zone with HP/Mana/Move, combat-target, and class-resource (metamagic/edge) readouts beside a tabbed, paginated clickable skill hotbar (Spells grouped by Damage/Heal/Misc, plus Skills) with a Look-up mode, a fixed compass-rose exit pad, a Map/Who/Chat tab group, an Affects/Group tab group, an Equipment/Train tab group with condition-coloured clickable gear, a clickable online who-list (tell/follow/group), and a tabbed inventory with per-container tabs for carried and worn bags (open/close, get/put).",
+                  "description": "Official Mudlet package for Ishar MUD. GMCP-powered auto-mapper with collision detection and an embedded map panel, a top identity box (name/race/class/level/gold plus the in-game clock, active global/moon events, and the current season + end date), a bottom action zone with HP/Mana/Move, combat-target, and class-resource (metamagic/edge) readouts beside a tabbed, paginated clickable skill hotbar (Spells grouped by Damage/Heal/Misc, plus Skills) with a Look-up mode, a fixed compass-rose exit pad, a Map/Who/Chat tab group, an Affects/Group tab group, an Equipment/Train tab group with condition-coloured clickable gear, a clickable online who-list (tell/follow/group), and a tabbed inventory with per-container tabs for carried and worn bags (open/close, get/put). Layout and visibility are player-configurable from a clickable in-client settings panel (type 'ui') or text commands: hide any panel (including the skill bar), swap the equipment/inventory and game columns between the left and right edges, and the choices persist across sessions.",
                      "filename": "Ishar.mpackage",
                          "icon": "packages/icons/Ishar.png",
                      "mpackage": "Ishar",
                         "title": "Ishar MUD",
-                     "uploaded": 1780365865,
-                      "version": "1.13.1"
+                     "uploaded": 1783020775,
+                      "version": "1.15.0"
                 },
                 {
                        "author": "Elanthia Online",
@@ -2215,5 +2215,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jul  2 15:42:21 2026"
+   "updated": "Thu Jul  2 19:35:03 2026"
 }
