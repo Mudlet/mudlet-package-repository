@@ -96,14 +96,14 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-04-11T18:03:58+0000",
-                  "description": "# Caffeine\n\nSend a keepalive message every ~150,000,000,000,000 picoseconds.\n\nFor the nerds out there, the keepalive is just sending `IAC NOP`.\n\n## What it does\n\nCaffeine helps keep your MUD session from being dropped while you're idle.\nEvery couple of minutes it quietly pokes the connection so your router,\nfirewall, or the MUD itself doesn't decide you've wandered off and cut\nyou loose. Nothing is printed, nothing is sent in-game — you won't see\na thing.\n\n## Usage\n\n| Alias           | What it does                                       |\n| --------------- | -------------------------------------------------- |\n| `/caffeine`     | Show how often the keepalive is being sent.        |\n| `/caffeine <N>` | Send the keepalive every `N` seconds (minimum 60). |\n\nThe default is every **150 seconds** (2.5 minutes), which is frequent\nenough to beat most idle timeouts. Your setting is remembered between\nMudlet sessions.\n\n## License\n\n`caffeine` is released under the [0BSD](LICENSE.txt).\n\n---\n\nCurious how it works under the hood? See [IMPLEMENTATION.md](IMPLEMENTATION.md).\n",
+                      "created": "2026-06-26T04:17:51+0000",
+                  "description": "# Caffeine\n\nSend a keepalive message every ~150,000,000,000,000 picoseconds.\n\nFor the nerds out there, the keepalive is just sending `IAC NOP`.\n\n## What it does\n\nCaffeine helps keep your MUD session from being dropped while you're idle.\nEvery couple of minutes it quietly pokes the connection so your router,\nfirewall, or the MUD itself doesn't decide you've wandered off and cut\nyou loose. Nothing is printed, nothing is sent in-game — you won't see\na thing.\n\n## Usage\n\n| Alias           | What it does                                       |\n| --------------- | -------------------------------------------------- |\n| `/caffeine`     | Show how often the keepalive is being sent.        |\n| `/caffeine <N>` | Send the keepalive every `N` seconds (minimum 60). |\n\nThe default is every **150 seconds** (2.5 minutes), which is frequent\nenough to beat most idle timeouts. Your setting is remembered between\nMudlet sessions.\n\n## License\n\n`caffeine` is released under the [0BSD](LICENSE.txt).\n",
                      "filename": "Caffeine.mpackage",
                          "icon": "packages/icons/Caffeine.png",
                      "mpackage": "Caffeine",
                         "title": "A keepalive pinger thinger.",
-                     "uploaded": 1775931837,
-                      "version": "1.6.3"
+                     "uploaded": 1783032663,
+                      "version": "1.7.0"
                 },
                 {
                        "author": "gesslar",
@@ -411,6 +411,17 @@
                         "title": "muddler helper package",
                      "uploaded": 1737769891,
                       "version": "1.0.2"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-06-26T00:27:56+0000",
+                  "description": "# Muddy (the Mudlet package)\n\nThis is the in-Mudlet companion to the [**muddy**](https://github.com/gesslar/muddy)\nCLI. The CLI builds your `.mpackage`; this package _hot-reloads_ it into a\nrunning Mudlet so you don't have to keep right-clicking → uninstall → reinstall\nlike an animal.\n\nInstall `Muddy.mpackage` in Mudlet and you get a global `Muddy` table. That's\nthe whole public surface. You wire it up from a **helper package** — a little\nscript of your own that tells Muddy which projects to watch.\n\n## The gist\n\n1. Run the CLI in watch mode: `muddy . --watch`. It rebuilds whenever you save.\n2. A `Muddy` watcher in Mudlet notices the rebuild and reinstalls the package\n   for you. Your edits are live.\n\nThat's it. The watcher just needs to know your **project root** — the folder\nyou run `muddy` from — and it figures out the rest.\n\n## Quick start\n\nA helper is just a script that points Muddy at your projects. Drop this in a\nMudlet script and you're off:\n\n```lua\nlocal base = \"/home/you/projects/\"\n\nMyHelper = MyHelper or {\n  projects = {\"MyPackage\", \"AnotherThing\", \"ThirdProject\"},\n  watchers = {},\n}\n\nfunction MyHelper:setup()\n  if not Muddy then return end -- the Muddy package isn't installed yet\n\n  for _, name in ipairs(self.projects) do\n    if not self.watchers[name] then\n      self.watchers[name] = Muddy:new({\n        path  = base .. name, -- project root you run `muddy` from\n        watch = true,\n      })\n      debugc(\"Watching \" .. name)\n    end\n  end\nend\n\nMyHelper:setup()\n```\n\nEdit a file in any of those projects, let the CLI rebuild, and it reinstalls in\nMudlet. Add or remove projects by editing the list. Done.\n\n> **Order matters.** Your helper has to sit _below_ the Muddy package in\n> Mudlet's Scripts editor. Scripts run top to bottom, so if your helper is\n> above Muddy, the global `Muddy` doesn't exist yet when it runs (the\n> `if not Muddy then return end` guard just bails). Drag it underneath.\n\nWatching a single project? You don't even need the loop:\n\n```lua\nMuddy:new({path = \"/home/you/projects/MyPackage\", watch = true})\n```\n\n## The `Muddy:new()` options\n\n| field         | what it does                                             |\n| ------------- | -------------------------------------------------------- |\n| `path`        | Project root you run `muddy` from. Required.             |\n| `watch`       | `true` to start watching right away.                     |\n| `preremove`   | Runs before the old package is uninstalled.              |\n| `postremove`  | Runs after uninstall, before the new install.            |\n| `preinstall`  | Runs right before the new package installs.              |\n| `postinstall` | Runs after the new package installs.                     |\n\nThe four hooks are optional and each can be a function or a string of Lua. Got\nan instance? `watcher:stop()` and `watcher:start()` pause and resume it.\n\n## Cleaning up after yourself\n\nReinstalling a package doesn't clear out Lua state it left in `package.loaded`.\nIf your packages `require()` their own modules, the stale copies hang around\nand the fresh install runs on top of the old cached code.\n\nThe fix is a `postremove` hook that uncaches anything matching the package name:\n\n```lua\nfunction MyHelper:killCache(pkg)\n  for name in pairs(package.loaded) do\n    if name:find(pkg) then\n      package.loaded[name] = nil\n      debugc(\"Uncached \" .. name)\n    end\n  end\nend\n\n-- pass it as a string hook so it can name the package being reloaded\nMuddy:new({\n  path       = base .. name,\n  watch      = true,\n  postremove = (\"MyHelper:killCache(%q)\"):format(name),\n})\n```\n\n## How extra do you want to get\n\nThe quick start is deliberately bare. A \"real\" helper grows the obvious extras:\nan `active` flag per project so you can park ones you're not touching, fancier\ncache-killing, a little reload-the-helper-itself dance after you edit the list.\n\n## License\n\nUnlike muddy, the Muddy companion package is licensed as MIT because it derives\nchunks from muddler's mpackage.\n",
+                     "filename": "Muddy.mpackage",
+                         "icon": "packages/icons/Muddy.png",
+                     "mpackage": "Muddy",
+                        "title": "Companion package for muddy.",
+                     "uploaded": 1783032641,
+                      "version": "1.1.2"
                 },
                 {
                        "author": "Zakattack",
@@ -1062,6 +1073,17 @@
                         "title": "Vyzor Car Animation: Click & Drive Demo",
                      "uploaded": 1739089229,
                       "version": "1"
+                },
+                {
+                       "author": "MTSowbug",
+                      "created": "2021-06-26T23:11:48-05:00",
+                  "description": "For details on customizing the client, type 'help mudlet' in-game.\n\n\n\n***Useful Keyboard Shorcuts***\n\nF2: toggles the upper-right panel from a world map, to a local map, to a combat console.\n\nF3: toggles automatic resizing of fonts\n\nF4: refreshes the interface (useful if there's a display glitch)\n\nF5: toggles sound effects",
+                     "filename": "cleftofdimensions.mpackage",
+                         "icon": "packages/icons/cleftofdimensions.png",
+                     "mpackage": "cleftofdimensions",
+                        "title": "Cleft of Dimensions Official Mudlet Package",
+                     "uploaded": 1783032654,
+                      "version": "16"
                 },
                 {
                        "author": "Vadi",
@@ -2215,5 +2237,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jul  2 22:50:03 2026"
+   "updated": "Thu Jul  2 22:53:19 2026"
 }
