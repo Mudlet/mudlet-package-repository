@@ -326,8 +326,8 @@
                          "icon": "packages/icons/Ishar.png",
                      "mpackage": "Ishar",
                         "title": "Ishar MUD",
-                     "uploaded": 1783020775,
-                      "version": "1.15.0"
+                     "uploaded": 1783147520,
+                      "version": "1.16.0"
                 },
                 {
                        "author": "Elanthia Online",
@@ -2237,5 +2237,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Jul  3 14:20:01 2026"
+   "updated": "Sat Jul  4 06:46:46 2026"
 }
