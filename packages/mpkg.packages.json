@@ -486,13 +486,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-07-13T18:02:57+0000",
+                      "created": "2026-07-17T16:08:45+0000",
                   "description": "A game-agnostic tiling window manager for Mudlet. Inspired by tmux: panes, splits, workspaces, a way to register and insert custom content, helpful UI widgets, and registered actions for common tasks.",
                      "filename": "Muxlet.mpackage",
                      "mpackage": "Muxlet",
                         "title": "Muxlet",
-                     "uploaded": 1783966261,
-                      "version": "2.1.0"
+                     "uploaded": 1784311388,
+                      "version": "2.2.0"
                 },
                 {
                        "author": "Cherry",
@@ -1425,15 +1425,14 @@
                       "version": "1"
                 },
                 {
-                       "author": "Colborn(ping65510) & jackrungh",
-                      "created": "2026-05-24",
-                  "description": "A Mudlet package for Federation 2 Community Edition that provides mapping, navigation, hauling, automated trading, factory management, and quality-of-life improvements. Frontended by an optional, customizable GUI.",
+                       "author": "tmtocloud",
+                      "created": "2026-07-17T16:32:53+0000",
+                  "description": "Federation 2 Tools — Mudlet package for Federation 2 Community Edition.",
                      "filename": "fed2-tools.mpackage",
-                         "icon": "packages/icons/fed2-tools.png",
                      "mpackage": "fed2-tools",
-                        "title": "Federation 2 Community Edition Mudlet Tools & GUI",
-                     "uploaded": 1779663451,
-                      "version": "1.2.3"
+                        "title": "fed2-tools",
+                     "uploaded": 1784311433,
+                      "version": "2.0.0"
                 },
                 {
                        "author": "Swift",
@@ -2237,5 +2236,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Jul 13 18:12:50 2026"
+   "updated": "Fri Jul 17 18:05:37 2026"
 }
