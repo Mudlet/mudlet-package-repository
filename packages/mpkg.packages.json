@@ -44,6 +44,17 @@
                       "version": "v1.00.07"
                 },
                 {
+                       "author": "Zivilyn Skol aka Dave on Ansalon.net",
+                      "created": "2026-07-17T13:28:54-07:00",
+                  "description": "Ansalon Mudlet Mapper 1.0.3\nDescription\nThis package captures Ansalon's automapper output and displays it in a separate, movable Mudlet window while removing the map from the main game output.\nThe package watches for Ansalon's <STARTMAP> and <ENDMAP> tags, captures everything between them, preserves ANSI colors, and sends the map to its own dedicated window using Mudlet's Geyser framework.\nFeatures include:\nSeparate draggable map window\nANSI color preservation\nAutomatic gagging of map output in the main game window\nAdjustable font size with on-screen +/- controls\nPersistent font size preference between sessions\nCross-platform font support (Mac, Windows, and Linux)\nLightweight implementation requiring no external dependencies\nImportant: Ansalon's automapper data must be enabled for this package to function.\nUse the in-game command:\ntoggle\nand ensure Automapper Data is set to SHOW.\nUsage\nOnce installed, no additional commands are required.\nWhen Automapper Data is enabled, maps will automatically appear in the Ansalon Map window.\nEnable automapper data\n> toggle\nNavigate to:\nAutomapper Data: SHOW\n\nAdjust map font size\nClick the + button in the upper-right corner of the map window to increase the font size.\nClick the - button in the upper-right corner of the map window to decrease the font size.\nYour selected font size is automatically saved and restored the next time Mudlet starts.\nExample\n<STARTMAP>\n+------------------------+\n| New Sea          16539 |\n|                        |\n|      ...map data...    |\n+------------------------+\n<ENDMAP>\n\nThe map will be removed from the main game window and displayed in the dedicated Ansalon Map window instead.\nVersion History\nVersion 1.0.1\nDisabled map capture trigger when not actively capturing map data\nAdded persistent font size preferences\nAdded automatic cross-platform font detection\nFixed first-run settings file creation issue\nGeneral code cleanup and performance improvements\nVersion 1.0.0\nInitial release\nSeparate map window using Geyser.UserWindow\nANSI color preservation\nAdjustable font size controls\nAutomatic map gagging in main output\nSee Also\nAnsalon Dragonlance MUD\nMudlet Client\nGeyser GUI Framework\nhttps://wiki.mudlet.org/w/Manual:Best_Practices#Package_and_Module_best_practices\nhttps://wiki.mudlet.org",
+                     "filename": "Ansalon_Mudlet_Mapper_1.0.4.mpackage",
+                         "icon": "packages/icons/Ansalon_Mudlet_Mapper_1.0.4.png",
+                     "mpackage": "Ansalon_Mudlet_Mapper_1.0.4",
+                        "title": "Mudlet Mapper window for Ansalon MUD",
+                     "uploaded": 1784347992,
+                      "version": "1.0.4"
+                },
+                {
                        "author": "tjurczyk, Delwing",
                       "created": "2025-01-24T15:25:45+01:00",
                   "description": "Arkadia script set installer.\n\nFor reference go to: https://github.com/tjurczyk/arkadia\n\nArkadia MUD: https://arkadia.rpg.pl/",
@@ -2236,5 +2247,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Jul 17 18:05:37 2026"
+   "updated": "Sat Jul 18 04:16:53 2026"
 }
