@@ -14,23 +14,29 @@ jobs:
         package:
           - name: deleteOldProfiles
             description: "Delete Old Profiles package"
+            path: src/deleteOldProfiles.mpackage
           - name: echo
             description: "Echo package"
+            path: src/echo.mpackage
           - name: enable-accessibility
             description: "Enable Accessibility package"
+            path: src/enable-accessibility.mpackage
           - name: run-lua-code
             description: "Run Lua Code package"
+            path: src/run-lua-code.mpackage
           - name: generic_mapper
             description: "Generic Mapper package"
+            path: src/mudlet-lua/lua/generic-mapper/generic_mapper.mpackage
           # - name: gui-drop
           #   description: "GUI Drop package"
+          #   path: src/mudlet-lua/lua/gui-drop/gui-drop.mpackage
     steps:
       - uses: actions/checkout@v4
 
       - name: Download ${{ matrix.package.name }} package
         uses: carlosperate/download-file-action@v2.0.2
         with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/${{ matrix.package.name }}.mpackage
+          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/${{ matrix.package.path }}
           file-name: ${{ matrix.package.name }}.mpackage
           location: packages/
 
