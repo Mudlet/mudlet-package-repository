@@ -56,6 +56,7 @@ local function clearPackageVariables()
     created = nil
     version = nil
     icon = nil
+    dependencies = nil
 end
 
 local function extractIcon(zfile, packageName, iconName)
@@ -113,6 +114,18 @@ for file in io.popen("ls -pa packages/*"):lines() do
             iconUrl = extractIcon(zfile, mpackage, icon)
         end
 
+        -- Normalise the dependencies value so the JSON encoder always produces a
+        -- consistent type.  A Lua table (array) becomes a JSON array; a string
+        -- stays a string; nil or empty string becomes an empty string.
+        local normDeps
+        if type(dependencies) == "table" then
+            normDeps = dependencies          -- encode as JSON array
+        elseif type(dependencies) == "string" and dependencies ~= "" then
+            normDeps = dependencies          -- legacy comma-separated string
+        else
+            normDeps = ""                    -- no dependencies declared
+        end
+
         -- insert package details in table
         table.insert(pkg, {
             ["mpackage"] = mpackage,
@@ -123,7 +136,8 @@ for file in io.popen("ls -pa packages/*"):lines() do
             ["version"] = version,
             ["uploaded"] = getFileModTime(file),
             ["filename"] = file:gsub("packages/", ""),
-            ["icon"] = iconUrl
+            ["icon"] = iconUrl,
+            ["dependencies"] = normDeps
         })
 
         f1:close()
