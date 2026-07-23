@@ -5,11 +5,13 @@ name: Auto-merge package PRs
 #   1. the "Validate mpackage file" workflow has succeeded, and
 #   2. the Greptile bot has reviewed the current commit with no outstanding feedback.
 #
-# Contributors submit from forks, so this workflow deliberately runs on events that
-# execute in the base-repo context with a write token (workflow_run, issue_comment,
-# review events). It only calls the GitHub API and NEVER checks out or runs PR-head
-# code. Validation CI and Greptile finish asynchronously, so the workflow re-evaluates
-# the full gate on every relevant event and merges only when every condition is met.
+# Contributors submit either from forks or from branches pushed into this repo by the
+# package website (mudlet-machine-account). This workflow deliberately runs on events
+# that execute in the base-repo context with a write token (workflow_run, issue_comment,
+# review events) so it works for fork PRs too. It only calls the GitHub API and NEVER
+# checks out or runs PR-head code. Validation CI and Greptile finish asynchronously, so
+# the workflow re-evaluates the full gate on every relevant event and merges only when
+# every condition is met.
 
 on:
   workflow_run:
@@ -50,147 +52,163 @@ jobs:
             // Name of the validation check run (job id in validate-mpackage.yml).
             // Update this if that job is renamed.
             const VALIDATION_CHECK_NAME = 'check-mpackage-contents';
+            // This workflow's own job name; its check runs must be ignored when scanning
+            // for failures, otherwise a transient error in one auto-merge run would show
+            // up as a failed check and permanently block the PR from ever merging.
+            const SELF_CHECK_NAME = 'auto-merge';
             const GREPTILE_LOGIN = 'greptile-apps[bot]';
             const PACKAGE_FILE_RE = /^packages\/[^/]+\.(mpackage|zip)$/;
 
             const skip = (msg) => { core.notice(`auto-merge: skip — ${msg}`); };
 
-            // ---- 1. Resolve PR number from the triggering event ----------------
-            let prNumber;
-            const eventName = context.eventName;
-            if (eventName === 'workflow_run') {
-              const run = context.payload.workflow_run;
-              if (run.conclusion !== 'success') return skip(`validation run concluded '${run.conclusion}'`);
-              // workflow_run.pull_requests is empty for fork PRs; resolve via head sha.
-              const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                owner, repo, commit_sha: run.head_sha,
+            try {
+              // ---- 1. Resolve PR number from the triggering event ----------------
+              let prNumber;
+              const eventName = context.eventName;
+              if (eventName === 'workflow_run') {
+                const run = context.payload.workflow_run;
+                if (run.conclusion !== 'success') return skip(`validation run concluded '${run.conclusion}'`);
+                // workflow_run.pull_requests is empty for fork PRs; resolve via head sha.
+                const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  owner, repo, commit_sha: run.head_sha,
+                });
+                const open = prs.find(p => p.state === 'open');
+                if (!open) return skip(`no open PR associated with ${run.head_sha}`);
+                prNumber = open.number;
+              } else if (eventName === 'issue_comment') {
+                if (!context.payload.issue.pull_request) return skip('comment is not on a PR');
+                prNumber = context.payload.issue.number;
+              } else if (eventName === 'pull_request_review') {
+                prNumber = context.payload.pull_request.number;
+              } else {
+                return skip(`unhandled event '${eventName}'`);
+              }
+
+              // ---- Fetch fresh PR state (avoids stale event payloads / TOCTOU) ----
+              const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
+              const headSha = pr.head.sha;
+              core.info(`Evaluating PR #${prNumber} @ ${headSha} (event: ${eventName})`);
+
+              // ---- 2. Basic gate ------------------------------------------------
+              if (pr.state !== 'open') return skip('PR is not open');
+              if (pr.draft) return skip('PR is a draft');
+              if (pr.base.ref !== 'main') return skip(`base is '${pr.base.ref}', not main`);
+              if (pr.mergeable === false) return skip('PR is not mergeable (conflicts)');
+
+              // ---- 3. File-scope gate (security-critical) -----------------------
+              const files = await github.paginate(github.rest.pulls.listFiles, {
+                owner, repo, pull_number: prNumber, per_page: 100,
               });
-              const open = prs.find(p => p.state === 'open');
-              if (!open) return skip(`no open PR associated with ${run.head_sha}`);
-              prNumber = open.number;
-            } else if (eventName === 'issue_comment') {
-              if (!context.payload.issue.pull_request) return skip('comment is not on a PR');
-              prNumber = context.payload.issue.number;
-            } else if (eventName === 'pull_request_review') {
-              prNumber = context.payload.pull_request.number;
-            } else {
-              return skip(`unhandled event '${eventName}'`);
-            }
-
-            // ---- Fetch fresh PR state (avoids stale event payloads / TOCTOU) ----
-            const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
-            const headSha = pr.head.sha;
-            core.info(`Evaluating PR #${prNumber} @ ${headSha} (event: ${eventName})`);
-
-            // ---- 2. Basic gate --------------------------------------------------
-            if (pr.state !== 'open') return skip('PR is not open');
-            if (pr.draft) return skip('PR is a draft');
-            if (pr.base.ref !== 'main') return skip(`base is '${pr.base.ref}', not main`);
-            if (pr.mergeable === false) return skip('PR is not mergeable (conflicts)');
-
-            // ---- 3. File-scope gate (security-critical) -------------------------
-            const files = await github.paginate(github.rest.pulls.listFiles, {
-              owner, repo, pull_number: prNumber, per_page: 100,
-            });
-            if (files.length === 0) return skip('PR changes no files');
-            for (const f of files) {
-              if (!PACKAGE_FILE_RE.test(f.filename)) {
-                return skip(`file outside package scope: ${f.filename}`);
+              if (files.length === 0) return skip('PR changes no files');
+              for (const f of files) {
+                if (!PACKAGE_FILE_RE.test(f.filename)) {
+                  return skip(`file outside package scope: ${f.filename}`);
+                }
+                if (f.status !== 'added' && f.status !== 'modified') {
+                  return skip(`file '${f.filename}' has status '${f.status}' (only added/modified allowed)`);
+                }
               }
-              if (f.status !== 'added' && f.status !== 'modified') {
-                return skip(`file '${f.filename}' has status '${f.status}' (only added/modified allowed)`);
+
+              // ---- 4. Validation gate -------------------------------------------
+              // Ignore this workflow's own check runs (see SELF_CHECK_NAME above).
+              const checks = (await github.paginate(github.rest.checks.listForRef, {
+                owner, repo, ref: headSha, per_page: 100,
+              })).filter(c => c.name !== SELF_CHECK_NAME);
+              const badConclusions = new Set(['failure', 'timed_out', 'cancelled', 'action_required', 'stale']);
+              const failed = checks.find(c => c.conclusion && badConclusions.has(c.conclusion));
+              if (failed) return skip(`check '${failed.name}' concluded '${failed.conclusion}'`);
+              const validation = checks.find(c => c.name === VALIDATION_CHECK_NAME);
+              if (!validation) return skip(`validation check '${VALIDATION_CHECK_NAME}' not found yet`);
+              if (validation.status !== 'completed') return skip(`validation check still '${validation.status}'`);
+              if (validation.conclusion !== 'success') return skip(`validation check concluded '${validation.conclusion}'`);
+
+              // ---- 5. Greptile gate ("no outstanding feedback") -----------------
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner, repo, issue_number: prNumber, per_page: 100,
+              });
+              const greptileComments = comments.filter(c => c.user && c.user.login === GREPTILE_LOGIN);
+              if (greptileComments.length === 0) return skip('Greptile has not reviewed yet');
+
+              // Latest Greptile comment must reference the current head commit, so we
+              // never merge on a stale review from before the most recent push.
+              const latest = greptileComments[greptileComments.length - 1];
+              const shaMatch = latest.body.match(/\/commit\/([0-9a-f]{40})/);
+              if (!shaMatch) return skip('cannot determine Greptile last-reviewed commit');
+              if (shaMatch[1] !== headSha) {
+                return skip(`Greptile reviewed ${shaMatch[1].slice(0, 7)}, head is ${headSha.slice(0, 7)}`);
               }
-            }
 
-            // ---- 4. Validation gate --------------------------------------------
-            const checks = await github.paginate(github.rest.checks.listForRef, {
-              owner, repo, ref: headSha, per_page: 100,
-            });
-            const badConclusions = new Set(['failure', 'timed_out', 'cancelled', 'action_required', 'stale']);
-            const failed = checks.find(c => c.conclusion && badConclusions.has(c.conclusion));
-            if (failed) return skip(`check '${failed.name}' concluded '${failed.conclusion}'`);
-            const validation = checks.find(c => c.name === VALIDATION_CHECK_NAME);
-            if (!validation) return skip(`validation check '${VALIDATION_CHECK_NAME}' not found yet`);
-            if (validation.status !== 'completed') return skip(`validation check still '${validation.status}'`);
-            if (validation.conclusion !== 'success') return skip(`validation check concluded '${validation.conclusion}'`);
+              // Outstanding feedback if Greptile listed issues for the current head
+              // (binary packages: findings arrive as a "Comments Outside Diff" block).
+              if (greptileComments.some(c =>
+                    c.body.includes('/commit/' + headSha) &&
+                    c.body.includes('<!-- greptile_failed_comments -->'))) {
+                return skip('Greptile has outstanding feedback (failed_comments)');
+              }
 
-            // ---- 5. Greptile gate ("no outstanding feedback") ------------------
-            const comments = await github.paginate(github.rest.issues.listComments, {
-              owner, repo, issue_number: prNumber, per_page: 100,
-            });
-            const greptileComments = comments.filter(c => c.user && c.user.login === GREPTILE_LOGIN);
-            if (greptileComments.length === 0) return skip('Greptile has not reviewed yet');
-
-            // Latest Greptile comment must reference the current head commit.
-            const latest = greptileComments[greptileComments.length - 1];
-            const shaMatch = latest.body.match(/\/commit\/([0-9a-f]{40})/);
-            if (!shaMatch) return skip('cannot determine Greptile last-reviewed commit');
-            if (shaMatch[1] !== headSha) {
-              return skip(`Greptile reviewed ${shaMatch[1].slice(0, 7)}, head is ${headSha.slice(0, 7)}`);
-            }
-
-            // Outstanding feedback if Greptile listed issues for the current head.
-            if (greptileComments.some(c =>
-                  c.body.includes('/commit/' + headSha) &&
-                  c.body.includes('<!-- greptile_failed_comments -->'))) {
-              return skip('Greptile has outstanding feedback (failed_comments)');
-            }
-
-            // Outstanding feedback if any Greptile inline review thread is unresolved.
-            const threadQuery = `query($owner:String!,$repo:String!,$pr:Int!,$cursor:String){
-              repository(owner:$owner,name:$repo){
-                pullRequest(number:$pr){
-                  reviewThreads(first:100,after:$cursor){
-                    nodes{ isResolved comments(first:1){ nodes{ author{ login } } } }
-                    pageInfo{ hasNextPage endCursor }
+              // Outstanding feedback if any Greptile inline review thread is unresolved
+              // (text files: findings arrive as inline review threads).
+              const threadQuery = `query($owner:String!,$repo:String!,$pr:Int!,$cursor:String){
+                repository(owner:$owner,name:$repo){
+                  pullRequest(number:$pr){
+                    reviewThreads(first:100,after:$cursor){
+                      nodes{ isResolved comments(first:1){ nodes{ author{ login } } } }
+                      pageInfo{ hasNextPage endCursor }
+                    }
                   }
                 }
-              }
-            }`;
-            let cursor = null;
-            do {
-              const res = await github.graphql(threadQuery, { owner, repo, pr: prNumber, cursor });
-              const tr = res.repository.pullRequest.reviewThreads;
-              for (const t of tr.nodes) {
-                const author = t.comments.nodes[0] && t.comments.nodes[0].author && t.comments.nodes[0].author.login;
-                // GraphQL bot actors may drop the "[bot]" suffix that REST uses.
-                if (!t.isResolved && author && author.replace(/\[bot\]$/, '') === 'greptile-apps') {
-                  return skip('Greptile has an unresolved review thread');
+              }`;
+              let cursor = null;
+              do {
+                const res = await github.graphql(threadQuery, { owner, repo, pr: prNumber, cursor });
+                const tr = res.repository.pullRequest.reviewThreads;
+                for (const t of tr.nodes) {
+                  const author = t.comments.nodes[0] && t.comments.nodes[0].author && t.comments.nodes[0].author.login;
+                  // GraphQL bot actors may drop the "[bot]" suffix that REST uses.
+                  if (!t.isResolved && author && author.replace(/\[bot\]$/, '') === 'greptile-apps') {
+                    return skip('Greptile has an unresolved review thread');
+                  }
+                }
+                cursor = tr.pageInfo.hasNextPage ? tr.pageInfo.endCursor : null;
+              } while (cursor);
+
+              // ---- 6. Approve ---------------------------------------------------
+              const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number: prNumber });
+              const alreadyApproved = reviews.some(r =>
+                r.user && r.user.login === 'github-actions[bot]' && r.state === 'APPROVED');
+              if (!alreadyApproved) {
+                try {
+                  await github.rest.pulls.createReview({
+                    owner, repo, pull_number: prNumber,
+                    event: 'APPROVE',
+                    body: 'Auto-approved: validation passed and no outstanding Greptile feedback.',
+                  });
+                  core.info('Submitted approving review.');
+                } catch (e) {
+                  core.warning(`Could not submit approval (continuing to merge): ${e.message}`);
                 }
               }
-              cursor = tr.pageInfo.hasNextPage ? tr.pageInfo.endCursor : null;
-            } while (cursor);
 
-            // ---- 6. Approve -----------------------------------------------------
-            const { data: reviews } = await github.rest.pulls.listReviews({ owner, repo, pull_number: prNumber });
-            const alreadyApproved = reviews.some(r =>
-              r.user && r.user.login === 'github-actions[bot]' && r.state === 'APPROVED');
-            if (!alreadyApproved) {
+              // ---- 7. Merge (squash) --------------------------------------------
+              // Bind the merge to the exact SHA that passed every gate above. If the PR
+              // head moved (a push after evaluation), GitHub rejects the merge with 409,
+              // which we catch below — preventing unvalidated content from landing on main.
+              // A later event on the new head re-runs the full gate.
               try {
-                await github.rest.pulls.createReview({
+                await github.rest.pulls.merge({
                   owner, repo, pull_number: prNumber,
-                  event: 'APPROVE',
-                  body: 'Auto-approved: validation passed and no outstanding Greptile feedback.',
+                  sha: headSha,
+                  merge_method: 'squash',
+                  commit_title: `${pr.title} (#${prNumber})`,
                 });
-                core.info('Submitted approving review.');
+                core.notice(`auto-merge: merged PR #${prNumber}`);
               } catch (e) {
-                core.warning(`Could not submit approval (continuing to merge): ${e.message}`);
+                // Branch protection, a moved head (409), or merge conflicts land here.
+                // Leave the PR for a maintainer rather than failing the run.
+                core.warning(`Merge not completed for PR #${prNumber}: ${e.message}`);
               }
-            }
-
-            // ---- 7. Merge (squash) ---------------------------------------------
-            // Bind the merge to the exact SHA that passed every gate above. If the PR
-            // head moved (a push after evaluation), GitHub rejects the merge with 409,
-            // which we catch below — preventing unvalidated content from landing on main.
-            // A later event on the new head re-runs the full gate.
-            try {
-              await github.rest.pulls.merge({
-                owner, repo, pull_number: prNumber,
-                sha: headSha,
-                merge_method: 'squash',
-                commit_title: `${pr.title} (#${prNumber})`,
-              });
-              core.notice(`auto-merge: merged PR #${prNumber}`);
             } catch (e) {
-              core.warning(`Merge failed for PR #${prNumber}: ${e.message}`);
+              // Any unexpected (often transient) API error: log and let a later event
+              // retry, rather than failing the check run.
+              core.warning(`auto-merge: unexpected error — ${e.message}`);
             }
