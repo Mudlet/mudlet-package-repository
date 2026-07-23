@@ -1426,6 +1426,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "tmtocloud",
+                      "created": "2026-07-23T18:13:11+0000",
+                  "description": "F2CE-Tools — Mudlet package for Federation 2 Community Edition.",
+                     "filename": "f2ce-tools.mpackage",
+                     "mpackage": "f2ce-tools",
+                        "title": "f2ce-tools",
+                     "uploaded": 1784833940,
+                      "version": "3.0.0"
+                },
+                {
                        "author": "jieiku",
                       "created": "2019-03-28T11:00:52+00:00",
                   "description": "favMenu is a script that creates a drop-down menu of user-selected favorite rooms based on a predefined list of room IDs. When a user hovers over and clicks a room in the menu, the script automatically attempts to navigate to that room using the gotoRoom() function. Users can customize the room list by editing the script, with future potential for persistent room storage and right-click menu integration.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22726&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1434,16 +1444,6 @@
                         "title": "Favorite Rooms Quick Navigation Menu",
                      "uploaded": 1738850939,
                       "version": "1"
-                },
-                {
-                       "author": "tmtocloud",
-                      "created": "2026-07-17T16:32:53+0000",
-                  "description": "Federation 2 Tools — Mudlet package for Federation 2 Community Edition.",
-                     "filename": "fed2-tools.mpackage",
-                     "mpackage": "fed2-tools",
-                        "title": "fed2-tools",
-                     "uploaded": 1784311433,
-                      "version": "2.0.0"
                 },
                 {
                        "author": "Swift",
@@ -2247,5 +2247,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jul 23 17:35:29 2026"
+   "updated": "Thu Jul 23 19:15:23 2026"
 }
