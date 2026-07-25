@@ -414,6 +414,17 @@
                       "version": "1.0"
                 },
                 {
+                       "author": "Excelsior",
+                      "created": "2026-07-20T20:39:33-04:00",
+                  "description": "### Description\nMoral Decay is a text-based multi-user dungeon — a world shaped by thousands of decisions made by players and wizards over years of continuous play. No two sessions are alike.\n\nVenture through treacherous landscapes, engage in brutal combat, and uncover lore buried in the bones of forgotten ages. Ally with others or carve a solitary path through the dark.\n\nThe world does not pause for you. Events unfold, factions shift, and the strong prey on the weak. Your choices leave marks that others will find long after you've moved on.\n\nMoral Decay offers skill-driven combat, a player-run economy with multiple commercial guild types, and a death that doesn't destroy you.\n\n### See Also\nhttps://www.playdecay.com",
+                     "filename": "MoralDecay-GUI.mpackage",
+                         "icon": "packages/icons/MoralDecay-GUI.jpg",
+                     "mpackage": "MoralDecay-GUI",
+                        "title": "Moral Decay MUD GUI — Customized Mapping, Comms Channels, Stats Panel and Enemy Panel!",
+                     "uploaded": 1785006479,
+                      "version": "1.0.6"
+                },
+                {
                        "author": "Demonnic",
                       "created": "2024-04-14T13:54:22-0400",
                   "description": "A helper package for reloading packages created by muddler automatically",
@@ -2247,5 +2258,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Jul 23 19:15:23 2026"
+   "updated": "Sat Jul 25 19:48:13 2026"
 }
