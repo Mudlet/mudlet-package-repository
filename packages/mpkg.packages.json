@@ -559,6 +559,16 @@
                       "version": "1.0"
                 },
                 {
+                       "author": "Narwhal",
+                      "created": "2026-07-16T15:00:00+0000",
+                  "description": "### Petria Mapper\n\nCartografo **automatico** para [Petria MUD](http://www.petriamud.com) (ROM 2.4, en espanol).\nNo trae el mundo dibujado: **el mapa se construye solo mientras TU andas** (GMCP Room.Info),\nsala a sala, con tus propios pasos. Explorar sigue siendo cosa tuya.\n\n**Comandos** (escribe `mapayuda` para la ayuda completa):\n- **doble click en una sala del mapa** = viajar hasta ella (puertas, vetos y desvios incluidos).\n- `mapa ir <vnum>` — viaja andando a cualquier sala que ya hayas visitado.\n- `mapa donde` — que sala es esta (vnum y area).\n- **Doble click** en una sala del mapa — viajar a ella (mismo walker: puertas, vetos, pausas).\n- `mapa pendientes` — que te queda por explorar: salidas vistas y nunca cruzadas del area.\n- `mapa buscar <texto>` — encuentra salas por nombre entre lo que has explorado; `mapa buscar ir <n>` viaja.\n- `mapa marca <nombre>` / `mapa a <nombre>` — favoritos: bautiza salas y vuelve a ellas por nombre.\n- `mapa cofradias <tu clase>` — veta de una tacada los vestibulos de las cofradias ajenas.\n- `mapa vetadas` / `mapa vetar <vnum> <dir>` / `mapa liberar <vnum> <dir>` — salidas vetadas\n  (cofradias de otras clases, zonas prohibidas): las rutas las esquivan.\n\n**Sabe apanarselas**: abre puertas cerradas en ruta, esquiva salidas sin permiso (y las veta\npara la proxima), recalcula si algo te desvia (oscuridad, empujones) y pausa el paseo si\nentras en combate, reanudando al acabar.\n\n**Requisitos**: Mudlet 4.10+ con el mapper activado. Petria emite GMCP de serie: no hay que\nconfigurar nada. Compatible con castellano del servidor (norte/sur/este/oeste/arriba/abajo).\n\n---\n\n*Automatic GMCP mapper for Petria MUD (Spanish ROM 2.4). The map draws itself as you walk;\n`mapa ir <vnum>` walks you back to any visited room. Handles closed doors, forbidden exits\n(vetoes them), deviations and combat pauses.*\n",
+                     "filename": "PetriaMapper.mpackage",
+                     "mpackage": "PetriaMapper",
+                        "title": "Mapa automatico para Petria MUD (game.petriamud.com:6600) - cartografo GMCP + viaje por ruta.",
+                     "uploaded": 1785094486,
+                      "version": "2.19"
+                },
+                {
                        "author": "Kymbahl",
                       "created": "2025-01-24T14:22:29+0000",
                   "description": "# ProfileWindow - A floating console to interact with your other profiles\n\n### Author: Humera\n\n### Information\nProfileWindow allows you to view and interact with your other profiles without needing to use MultiView.\nTo use, install ProfileWindow on all of your profiles that you wish to see, as well as your main profile.\nThen simply type `pwadd <profileName>` to open a floating window showing the output of that profile!\n\nExample:\nI have 2 profiles, Humera and Kryomeris. I wish Humera to be my primary profile.\nI install ProfileWindow for both profiles, then in the Humera profile I type `pwadd Kryomeris`.\n\nWhen used in conjunction with the convertToUserWindow package, these windows can be popped out from\nyour Mudlet window to be dragged anywhere you wish.\n\n### Commands (Aliases)\n`pwadd <profileName>`    - Opens a new ProfileWindow to view \n\n### Known Issues\nWhen closing a ProfileWindow, if the command line in that window has focus then clicking in the area\npreviously occupied by your floating window will show just the MiniConsole with no way to close it\nagain without a `resetProfile()`",
@@ -2258,5 +2268,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Jul 26 16:01:21 2026"
+   "updated": "Sun Jul 26 19:38:05 2026"
 }
