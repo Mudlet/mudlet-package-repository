@@ -508,13 +508,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-07-23T17:21:53+0000",
+                      "created": "2026-07-27T00:35:13+0000",
                   "description": "A game-agnostic tiling window manager for Mudlet. Inspired by tmux: panes, splits, workspaces, a way to register and insert custom content, helpful UI widgets, and registered actions for common tasks.",
                      "filename": "Muxlet.mpackage",
                      "mpackage": "Muxlet",
                         "title": "Muxlet",
-                     "uploaded": 1784828006,
-                      "version": "2.2.4"
+                     "uploaded": 1785135121,
+                      "version": "2.2.7"
                 },
                 {
                        "author": "Cherry",
@@ -560,13 +560,13 @@
                 },
                 {
                        "author": "Narwhal",
-                      "created": "2026-07-16T15:00:00+0000",
-                  "description": "### Petria Mapper\n\nCartografo **automatico** para [Petria MUD](http://www.petriamud.com) (ROM 2.4, en espanol).\nNo trae el mundo dibujado: **el mapa se construye solo mientras TU andas** (GMCP Room.Info),\nsala a sala, con tus propios pasos. Explorar sigue siendo cosa tuya.\n\n**Comandos** (escribe `mapayuda` para la ayuda completa):\n- **doble click en una sala del mapa** = viajar hasta ella (puertas, vetos y desvios incluidos).\n- `mapa ir <vnum>` — viaja andando a cualquier sala que ya hayas visitado.\n- `mapa donde` — que sala es esta (vnum y area).\n- **Doble click** en una sala del mapa — viajar a ella (mismo walker: puertas, vetos, pausas).\n- `mapa pendientes` — que te queda por explorar: salidas vistas y nunca cruzadas del area.\n- `mapa buscar <texto>` — encuentra salas por nombre entre lo que has explorado; `mapa buscar ir <n>` viaja.\n- `mapa marca <nombre>` / `mapa a <nombre>` — favoritos: bautiza salas y vuelve a ellas por nombre.\n- `mapa cofradias <tu clase>` — veta de una tacada los vestibulos de las cofradias ajenas.\n- `mapa vetadas` / `mapa vetar <vnum> <dir>` / `mapa liberar <vnum> <dir>` — salidas vetadas\n  (cofradias de otras clases, zonas prohibidas): las rutas las esquivan.\n\n**Sabe apanarselas**: abre puertas cerradas en ruta, esquiva salidas sin permiso (y las veta\npara la proxima), recalcula si algo te desvia (oscuridad, empujones) y pausa el paseo si\nentras en combate, reanudando al acabar.\n\n**Requisitos**: Mudlet 4.10+ con el mapper activado. Petria emite GMCP de serie: no hay que\nconfigurar nada. Compatible con castellano del servidor (norte/sur/este/oeste/arriba/abajo).\n\n---\n\n*Automatic GMCP mapper for Petria MUD (Spanish ROM 2.4). The map draws itself as you walk;\n`mapa ir <vnum>` walks you back to any visited room. Handles closed doors, forbidden exits\n(vetoes them), deviations and combat pauses.*\n",
+                      "created": "2026-07-26T21:00:00+0000",
+                  "description": "### Petria Mapper\n\nCartografo **automatico** para [Petria MUD](http://www.petriamud.com) (ROM 2.4, en espanol).\nNo trae el mundo dibujado: **el mapa se construye solo mientras TU andas** (GMCP Room.Info),\nsala a sala, con tus propios pasos. Explorar sigue siendo cosa tuya.\n\n**Comandos** (escribe `mapayuda` para la ayuda completa):\n- **doble click en una sala del mapa** = viajar hasta ella (puertas, vetos y desvios incluidos).\n- `mapa ir <vnum>` — viaja andando a cualquier sala que ya hayas visitado.\n- `mapa donde` — que sala es esta (vnum y area).\n- `mapa pendientes` — que te queda por explorar: salidas vistas y nunca cruzadas del area.\n- `mapa buscar <texto>` — encuentra salas por nombre entre lo que has explorado; `mapa buscar ir <n>` viaja.\n- `mapa marca <nombre>` / `mapa a <nombre>` — favoritos: bautiza salas y vuelve a ellas por nombre.\n- `mapa cofradias <tu clase>` — veta de una tacada los vestibulos de las cofradias ajenas.\n- `mapa vetadas` / `mapa vetar <vnum> <dir>` / `mapa liberar <vnum> <dir>` — salidas vetadas\n  (cofradias de otras clases, zonas prohibidas): las rutas las esquivan.\n\n**Sabe apanarselas**: abre puertas cerradas en ruta, esquiva salidas sin permiso (y las veta\npara la proxima), recalcula si algo te desvia (oscuridad, empujones) y pausa el paseo si\nentras en combate, reanudando al acabar.\n\n**Requisitos**: Mudlet 4.10+ con el mapper activado. Petria emite GMCP de serie: no hay que\nconfigurar nada. Compatible con castellano del servidor (norte/sur/este/oeste/arriba/abajo).\n\n---\n\n*Automatic GMCP mapper for Petria MUD (Spanish ROM 2.4). The map draws itself as you walk;\n`mapa ir <vnum>` walks you back to any visited room. Handles closed doors, forbidden exits\n(vetoes them), deviations and combat pauses.*\n",
                      "filename": "PetriaMapper.mpackage",
                      "mpackage": "PetriaMapper",
                         "title": "Mapa automatico para Petria MUD (game.petriamud.com:6600) - cartografo GMCP + viaje por ruta.",
-                     "uploaded": 1785094486,
-                      "version": "2.19"
+                     "uploaded": 1785135091,
+                      "version": "2.21"
                 },
                 {
                        "author": "Kymbahl",
@@ -1448,13 +1448,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-07-23T18:13:11+0000",
+                      "created": "2026-07-27T00:41:28+0000",
                   "description": "F2CE-Tools — Mudlet package for Federation 2 Community Edition.",
                      "filename": "f2ce-tools.mpackage",
                      "mpackage": "f2ce-tools",
                         "title": "f2ce-tools",
-                     "uploaded": 1784833940,
-                      "version": "3.0.0"
+                     "uploaded": 1785135141,
+                      "version": "3.1.0"
                 },
                 {
                        "author": "jieiku",
@@ -2006,6 +2006,17 @@
                       "version": "1.0"
                 },
                 {
+                       "author": "evenel",
+                      "created": "2026-07-26T20:05:44-07:00",
+                  "description": "(recommended)\n\nThis package description is shown in the package manager.  The editor supports Commonmark markdown.  Follow the description below for a thorough example of what to include in your package description.\n\n### Description\n\nA full description of what this package achieves. If the package is game specific then mention that here.  Specify if the package has autoupdating or, if not, add a link in the See Also section below to the code repository.\n\n### Usage\n\nIf this package uses aliases, show a few examples and expected output.\n\n`> alias_1`\n\n    output of alias_1  -- indent by four spaces\n    more output        -- for code blocks\n\nIf this package is a GUI implementation consider adding screenshots by directly dragging and dropping images into this editor.\n\n### See Also\n\nFurther reading material. e.g. a link to the Mudlet wiki, forums, Github package repository or webpage.\n\n* https://wiki.mudlet.org/w/Manual:Best_Practices#Package_and_Module_best_practices\n* [Link 2 might be a webpage](https://example.org)",
+                     "filename": "silmaril.mpackage",
+                         "icon": "packages/icons/silmaril.png",
+                     "mpackage": "silmaril",
+                        "title": "impostazioni per giocare a silmaril usando mudlet",
+                     "uploaded": 1785135172,
+                      "version": "1"
+                },
+                {
                        "author": "hempa",
                       "created": "2010-02-14T21:00:08+00:00",
                   "description": "The doMath function is a Lua utility that evaluates mathematical expressions, supporting standard arithmetic operations like addition, subtraction, multiplication, division, and exponentiation. It can optionally display the calculation result or return the evaluated value, and requires the LPeg library for parsing mathematical expressions. The function allows users to perform complex math calculations with a simple, flexible syntax that mimics standard mathematical notation.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=1290&sid=950767665245f83dd17b6778919deaa7) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2268,5 +2279,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Jul 26 19:38:05 2026"
+   "updated": "Mon Jul 27 06:55:34 2026"
 }
