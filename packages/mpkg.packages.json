@@ -997,6 +997,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "Starlord",
+                      "created": "2026-07-29T00:00:00+00:00",
+                  "description": "# Aligned Copy\n\nPrior to Mudlet's fix for a copy/paste bug, copying a multi-line selection\nthat started in the middle of a line would pad the first copied line with\nleading spaces to preserve its original column position. Some players relied\non that behaviour (e.g. for copying aligned ASCII maps or tables), so this\npackage restores it as an **opt-in** right-click menu entry, separate from\nthe default \"Copy\".\n\n## Usage\n\nSelect text in the main console, right-click, and choose **Copy (aligned)**\ninstead of **Copy**. The clipboard will contain the selection with the first\nline padded with spaces to match its starting column, exactly like Mudlet\nused to do by default.\n",
+                     "filename": "aligned-copy.mpackage",
+                         "icon": "packages/icons/aligned-copy.png",
+                     "mpackage": "aligned-copy",
+                        "title": "Adds back Mudlet's old column-aligned Copy behaviour as a right-click option.",
+                     "uploaded": 1785336313,
+                      "version": "1"
+                },
+                {
                        "author": "Greg",
                       "created": "2013-06-24T03:16:51+00:00",
                   "description": "An ASCII-based compass script for RetroMUD, designed to help map and navigate game environments in Lua. The script provides visual directional indicators and tracking functionality for mapping MUD game spaces. It appears to be a utility tool for players or developers looking to create navigational aids within text-based multiplayer game environments.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3498&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2279,5 +2290,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Jul 28 17:04:07 2026"
+   "updated": "Wed Jul 29 14:48:00 2026"
 }
