@@ -14,25 +14,25 @@ jobs:
         package:
           - name: deleteOldProfiles
             description: "Delete Old Profiles package"
-            path: src/deleteOldProfiles.mpackage
+            path: src/packages/deleteOldProfiles/deleteOldProfiles.mpackage
           - name: echo
             description: "Echo package"
-            path: src/echo.mpackage
+            path: src/packages/echo/echo.mpackage
           - name: enable-accessibility
             description: "Enable Accessibility package"
-            path: src/enable-accessibility.mpackage
+            path: src/packages/enable-accessibility/enable-accessibility.mpackage
           - name: run-lua-code
             description: "Run Lua Code package"
-            path: src/run-lua-code.mpackage
+            path: src/packages/run-lua-code/run-lua-code.mpackage
           - name: generic_mapper
             description: "Generic Mapper package"
-            path: src/mudlet-lua/lua/generic-mapper/generic_mapper.mpackage
+            path: src/packages/generic_mapper/generic_mapper.mpackage
           - name: mudlet-base-ui
             description: "Mudlet base UI package"
-            path: src/mudlet-lua/lua/base-ui/mudlet-base-ui.mpackage
+            path: src/packages/mudlet-base-ui/mudlet-base-ui.mpackage
           # - name: gui-drop
           #   description: "GUI Drop package"
-          #   path: src/mudlet-lua/lua/gui-drop/gui-drop.mpackage
+          #   path: src/packages/gui-drop/gui-drop.mpackage
     steps:
       - uses: actions/checkout@v4
 
