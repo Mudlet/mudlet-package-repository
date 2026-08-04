@@ -27,6 +27,9 @@ jobs:
           - name: generic_mapper
             description: "Generic Mapper package"
             path: src/mudlet-lua/lua/generic-mapper/generic_mapper.mpackage
+          - name: mudlet-base-ui
+            description: "Mudlet base UI package"
+            path: src/mudlet-lua/lua/base-ui/mudlet-base-ui.mpackage
           # - name: gui-drop
           #   description: "GUI Drop package"
           #   path: src/mudlet-lua/lua/gui-drop/gui-drop.mpackage
