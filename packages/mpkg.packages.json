@@ -1246,8 +1246,8 @@
                          "icon": "packages/icons/cron-daemon.png",
                      "mpackage": "cron-daemon",
                         "title": "A cron daemon/scheduler to perform tasks at fixed times, dates or intervals.",
-                     "uploaded": 1729510555,
-                      "version": "1"
+                     "uploaded": 1786600519,
+                      "version": "2"
                 },
                 {
                        "author": "Vadi",
@@ -2300,5 +2300,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Aug 12 06:32:07 2026"
+   "updated": "Thu Aug 13 06:09:04 2026"
 }
