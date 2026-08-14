@@ -2166,8 +2166,8 @@
                      "filename": "text-map-tile-map.mpackage",
                      "mpackage": "text-map-tile-map",
                         "title": "Text Map to Tile Map Converter",
-                     "uploaded": 1739090302,
-                      "version": "1"
+                     "uploaded": 1786735107,
+                      "version": "1.1"
                 },
                 {
                        "author": "Omit",
@@ -2300,5 +2300,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Aug 13 06:09:04 2026"
+   "updated": "Fri Aug 14 19:20:55 2026"
 }
