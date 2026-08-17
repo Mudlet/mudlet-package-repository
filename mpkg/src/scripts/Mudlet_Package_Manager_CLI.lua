@@ -409,6 +409,8 @@ function mpkg.updatePackageList(silent)
     mpkg.echo("Updating package listing from repository.")
     mpkg.displayUpdateMessage = true
     mpkg.silentFailures = nil
+  else
+    mpkg.silentFailures = true
   end
 end
 
