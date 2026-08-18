@@ -408,7 +408,7 @@ function mpkg.updatePackageList(silent)
   if not silent then
     mpkg.echo("Updating package listing from repository.")
     mpkg.displayUpdateMessage = true
-    mpkg.silentFailures = nil
+    mpkg.reportDownloadFailure = true
   end
 end
 
@@ -598,14 +598,16 @@ end
 function mpkg.eventHandler(event, ...)
 
   if event == "sysDownloadError" and string.ends(arg[2], mpkg.filename) then
-    if not mpkg.silentFailures then
+    if mpkg.reportDownloadFailure then
       mpkg.echo("Failed to download package listing.")
-      mpkg.silentFailures = true
+      mpkg.reportDownloadFailure = nil
     end
     return
   end
 
   if event == "sysDownloadDone" and arg[1] == getMudletHomeDir() .. "/" .. mpkg.filename then
+
+    mpkg.reportDownloadFailure = nil
 
     if mpkg.displayUpdateMessage then
       mpkg.echo("Package listing downloaded.")
