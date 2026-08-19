@@ -2,47 +2,194 @@
 @tailwind components;
 @tailwind utilities;
 
-.page-content {
-  max-width: 800px;
-  margin: 0 auto;
+/*
+ * Semantic colour tokens. Every component styles itself with these
+ * (bg-surface, text-muted, border-border ...) rather than with literal
+ * palette colours, so dark mode is a matter of swapping the values below.
+ *
+ * Values are space-separated RGB channels so Tailwind's <alpha-value>
+ * placeholder keeps working: bg-accent/10, border-border/60, ...
+ */
+@layer base {
+  :root {
+    --background: 246 247 250;
+    --surface: 255 255 255;
+    --surface-muted: 241 243 247;
+    --border: 224 228 235;
+    --foreground: 20 24 31;
+    --muted: 92 102 118;
+    --accent: 37 99 235;
+    --accent-hover: 29 78 216;
+    --accent-contrast: 255 255 255;
+    --success: 22 163 74;
+    --danger: 220 38 38;
+    --warning: 217 119 6;
+
+    --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+    --shadow-card-hover: 0 4px 6px -2px rgb(16 24 40 / 0.05), 0 12px 16px -4px rgb(16 24 40 / 0.1);
+
+    /* Content-type icons (see components/icons.tsx). */
+    --icon-trigger: 217 119 6;
+    --icon-alias: 37 99 235;
+    --icon-script: 124 58 237;
+    --icon-timer: 13 148 136;
+    --icon-key: 71 85 105;
+    --icon-button: 219 39 119;
+    --icon-folder: 202 138 4;
+    --icon-image: 5 150 105;
+    --icon-file: 100 116 139;
+
+    /* Syntax highlighting (highlight.js token classes, see .hljs-view below). */
+    --syn-keyword: #8250df;
+    --syn-string: #0a7d32;
+    --syn-number: #0550ae;
+    --syn-comment: #6e7781;
+    --syn-function: #953800;
+    --syn-attr: #0550ae;
+    --syn-tag: #116329;
+  }
+
+  .dark {
+    --background: 13 16 22;
+    --surface: 23 27 35;
+    --surface-muted: 30 35 45;
+    --border: 42 48 60;
+    --foreground: 229 232 238;
+    --muted: 151 161 177;
+    --accent: 96 165 250;
+    --accent-hover: 147 197 253;
+    --accent-contrast: 12 16 23;
+    --success: 74 222 128;
+    --danger: 248 113 113;
+    --warning: 251 191 36;
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 3px rgb(0 0 0 / 0.25);
+    --shadow-card-hover: 0 4px 6px -2px rgb(0 0 0 / 0.35), 0 12px 16px -4px rgb(0 0 0 / 0.45);
+
+    --icon-trigger: 251 191 36;
+    --icon-alias: 96 165 250;
+    --icon-script: 167 139 250;
+    --icon-timer: 45 212 191;
+    --icon-key: 148 163 184;
+    --icon-button: 244 114 182;
+    --icon-folder: 250 204 21;
+    --icon-image: 52 211 153;
+    --icon-file: 148 163 184;
+
+    --syn-keyword: #d2a8ff;
+    --syn-string: #7ee787;
+    --syn-number: #79c0ff;
+    --syn-comment: #8b949e;
+    --syn-function: #ffa657;
+    --syn-attr: #79c0ff;
+    --syn-tag: #7ee787;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent) / 0.25);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+  }
 }
 
-article {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-surface shadow-card;
+  }
+
+  .card-interactive {
+    @apply card transition-shadow duration-200 hover:shadow-card-hover;
+  }
+
+  /*
+   * Package descriptions are author-written markdown that often starts with its
+   * own H1, which would otherwise outshout the page title - so headings inside
+   * a description are stepped down a level.
+   */
+  .prose-package {
+    @apply prose prose-sm max-w-none dark:prose-invert prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-sm;
+  }
+
+  /* Inline `code` inside prose and body copy. */
+  .code-chip {
+    @apply rounded-md bg-surface-muted px-1.5 py-0.5 font-mono text-[0.9em] text-foreground;
+  }
 }
 
-article h2 a {
-  color: #0066cc;
-  text-decoration: none;
+/*
+ * highlight.js theme, mapped onto the theme tokens above so highlighted code
+ * follows light/dark like everything else.
+ */
+.hljs-view code {
+  color: rgb(var(--foreground));
 }
 
-article h2 a:hover {
-  text-decoration: underline;
+.hljs-view .hljs-comment,
+.hljs-view .hljs-quote {
+  color: var(--syn-comment);
+  font-style: italic;
 }
 
-a {
-  color: #0066cc;
-  text-decoration: none;
+.hljs-view .hljs-keyword,
+.hljs-view .hljs-literal,
+.hljs-view .hljs-selector-tag,
+.hljs-view .hljs-doctag {
+  color: var(--syn-keyword);
 }
 
-a:hover {
-  text-decoration: underline;
+.hljs-view .hljs-string,
+.hljs-view .hljs-regexp,
+.hljs-view .hljs-addition {
+  color: var(--syn-string);
 }
 
-.items-stretch {
-  align-items: stretch;
+.hljs-view .hljs-number,
+.hljs-view .hljs-symbol,
+.hljs-view .hljs-bullet {
+  color: var(--syn-number);
 }
 
-.flex-grow-2 {
-  flex-grow: 2;
+.hljs-view .hljs-title,
+.hljs-view .hljs-title.function_,
+.hljs-view .hljs-built_in,
+.hljs-view .hljs-section {
+  color: var(--syn-function);
 }
 
-.content-end {
-  align-content: end;
+.hljs-view .hljs-attr,
+.hljs-view .hljs-attribute,
+.hljs-view .hljs-variable,
+.hljs-view .hljs-property,
+.hljs-view .hljs-params {
+  color: var(--syn-attr);
 }
 
-.text-right {
-  text-align: right;
+.hljs-view .hljs-tag,
+.hljs-view .hljs-name,
+.hljs-view .hljs-selector-id,
+.hljs-view .hljs-selector-class {
+  color: var(--syn-tag);
+}
+
+.hljs-view .hljs-meta,
+.hljs-view .hljs-deletion {
+  color: var(--syn-comment);
+}
+
+.hljs-view .hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-view .hljs-strong {
+  font-weight: 600;
 }

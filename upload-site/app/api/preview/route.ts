@@ -4,6 +4,7 @@ import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
 import { ValidationResult, PackageMetadata } from '@/app/lib/types'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
+import { parsePackageContents } from '@/app/lib/packageContents'
 
 async function validateMetadata(metadata: PackageMetadata): Promise<ValidationResult> {
   const reservedNames = [
@@ -116,11 +117,21 @@ export async function POST(request: Request) {
   
   const validation = await validateMetadata(metadata)
 
+  // Same archive, same parser as the public package pages, so an uploader sees
+  // exactly what visitors will see before the pull request is opened.
+  let contents = null
+  try {
+    contents = parsePackageContents(fileBuffer, { inlineScripts: true })
+  } catch {
+    // A contents listing is a bonus; never block an upload over it.
+  }
+
   return NextResponse.json({
     success: true,
     metadata,
     filename,
     validation,
+    contents,
     blobUrl
   })
 }

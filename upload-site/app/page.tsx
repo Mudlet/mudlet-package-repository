@@ -1,42 +1,84 @@
-import { PackageList } from './components/PackageList';
-import { IntroSection } from './components/IntroSection';
-import { ProgressBar } from './components/ProgressBar';
-import { UploadedPackageSortByOptions } from './lib/types';
-import { promises as fs } from 'fs';
+import Link from 'next/link'
+import { PackageCard } from './components/PackageCard'
+import { IntroSection } from './components/IntroSection'
+import { ProgressBar } from './components/ProgressBar'
+import { CopyableCommand } from './components/CopyableCommand'
+import { fetchRepositoryPackages } from './lib/packages'
 
-const PACKAGE_GOAL = 100;
-
-const getPackages = async () => {
-  if (process.env.NODE_ENV === 'development') {
-    const jsonData = await fs.readFile('../packages/mpkg.packages.json', 'utf8');
-    return JSON.parse(jsonData).packages;
-  }
-  const response = await fetch('https://raw.githubusercontent.com/Mudlet/mudlet-package-repository/refs/heads/main/packages/mpkg.packages.json');
-  const data = await response.json();
-  return data.packages;
-};
+/** The next round number to aim for, so the bar keeps meaning as the repo grows. */
+const nextMilestone = (count: number) => Math.max(50, Math.ceil((count + 1) / 50) * 50)
 
 export default async function Home() {
-  const packages = await getPackages();
-  const currentCount = packages.length;
-  const progressPercentage = Math.min((currentCount / PACKAGE_GOAL) * 100, 100);
-  
+  const packages = await fetchRepositoryPackages()
+  const authors = new Set(packages.map((pkg) => pkg.author).filter(Boolean)).size
+  const goal = nextMilestone(packages.length)
+
+  const recent = packages
+    .slice()
+    .sort((a, b) => b.uploaded - a.uploaded)
+    .slice(0, 6)
+
   return (
-    <main className="min-h-screen p-4 md:p-8 max-w-6xl mx-auto">
-      <div className="mb-16">
-        <IntroSection />
-      </div>
-      <div className="mb-16">
-        <ProgressBar 
-          current={currentCount}
-          goal={PACKAGE_GOAL}
-          percentage={progressPercentage}
+    <main className="py-10">
+      <section className="max-w-3xl">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Mudlet packages</h1>
+        <p className="mt-4 text-lg text-muted">
+          Game interfaces, mappers, tutorials and helper scripts for{' '}
+          <a href="https://www.mudlet.org/" className="text-accent hover:text-accent-hover">
+            Mudlet
+          </a>
+          , made by the community. Install them from inside Mudlet with <code className="code-chip">mpkg</code>,
+          or download them here.
+        </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/packages"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-contrast transition-colors hover:bg-accent-hover"
+          >
+            Browse {packages.length} packages
+          </Link>
+          <Link
+            href="/upload"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-muted"
+          >
+            Upload your package
+          </Link>
+        </div>
+
+      </section>
+
+      {/* Full page width: the install line is long, so it should not need to scroll. */}
+      <div className="mt-8">
+        <CopyableCommand
+          label="Get mpkg (paste into Mudlet's command line)"
+          command={'lua installPackage("https://github.com/Mudlet/mudlet-package-repository/raw/refs/heads/main/packages/mpkg.mpackage")'}
         />
       </div>
-      <div className="border-t pt-8">
-        <h2 className="text-2xl font-bold mb-8">Recent uploads</h2>
-        <PackageList packages={packages} limit={5} sortBy={UploadedPackageSortByOptions.uploaded} hideLinks={true} />
-      </div>
+
+      <section className="mt-12">
+        <IntroSection />
+      </section>
+
+      <section className="mt-12">
+        <div className="mb-4 flex items-baseline justify-between gap-4">
+          <h2 className="text-2xl font-bold tracking-tight">Recent uploads</h2>
+          <Link href="/packages" className="text-sm text-accent hover:text-accent-hover">
+            See all
+          </Link>
+        </div>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {recent.map((pkg) => (
+            <li key={pkg.filename ?? pkg.mpackage}>
+              <PackageCard pkg={pkg} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-12">
+        <ProgressBar current={packages.length} goal={goal} authors={authors} />
+      </section>
     </main>
-  );
+  )
 }

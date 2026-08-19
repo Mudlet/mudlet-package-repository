@@ -1,43 +1,51 @@
 'use client'
 
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 interface ProgressBarProps {
-  current: number;
-  goal: number;
-  percentage: number;
+  current: number
+  goal: number
+  authors: number
 }
 
-export function ProgressBar({ current, goal, percentage }: ProgressBarProps) {
-    const getMessage = () => {
-      if (percentage >= 100) return "🎉 Goal achieved! Thank you everyone!";
-      if (percentage >= 75)
-        return "🚀 Almost there! Keep those packages coming!";
-      if (percentage >= 50)
-        return "⭐ Halfway there! The community is amazing!";
-      if (percentage >= 25) return "💫 Great progress! Let's keep going!";
-      return "🎯 Help us reach our goal of 100 packages!";
-    };
+export function ProgressBar({ current, goal, authors }: ProgressBarProps) {
+  const percentage = Math.min((current / goal) * 100, 100)
+  const remaining = Math.max(goal - current, 0)
+
+  const message =
+    remaining === 0
+      ? '🎉 Milestone reached — thank you everyone!'
+      : remaining <= 5
+        ? `🚀 Only ${remaining} to go until ${goal} packages!`
+        : `⭐ ${remaining} more packages to reach ${goal}.`
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="flex justify-between mb-2">
-        <span className="text-lg font-bold">Community packages uploaded</span>
-        <span className="text-lg font-bold">{current} / {goal}</span>
+    <div className="card p-6">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="text-lg font-semibold">Community packages</h2>
+        <p className="text-sm text-muted">
+          <span className="font-semibold text-foreground">{current}</span> packages from{' '}
+          <span className="font-semibold text-foreground">{authors}</span> authors
+        </p>
       </div>
-      
-      <div className="h-6 bg-gray-200 rounded-full overflow-hidden">
-        <motion.div 
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-600"
+
+      <div
+        className="mt-4 h-3 overflow-hidden rounded-full bg-surface-muted"
+        role="progressbar"
+        aria-valuenow={current}
+        aria-valuemin={0}
+        aria-valuemax={goal}
+        aria-label={`${current} of ${goal} packages`}
+      >
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-accent to-accent-hover"
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         />
       </div>
-      
-      <p className="mt-3 text-center text-lg font-medium text-gray-700">
-        {getMessage()}
-      </p>
+
+      <p className="mt-3 text-sm text-muted">{message}</p>
     </div>
-  );
+  )
 }
