@@ -30,7 +30,9 @@ export async function GET(
 
   let entry
   try {
-    entry = await readPackageEntry(pkg.filename, path)
+    // The cap goes in rather than being applied to the result, so an oversized
+    // entry is never decompressed just to be rejected afterwards.
+    entry = await readPackageEntry(pkg.filename, path, MAX_PREVIEW_BYTES)
   } catch {
     return NextResponse.json({ error: 'Could not read the package' }, { status: 502 })
   }
@@ -39,7 +41,7 @@ export async function GET(
     return NextResponse.json({ error: 'No such file in this package' }, { status: 404 })
   }
 
-  if (entry.size > MAX_PREVIEW_BYTES) {
+  if (!entry.data) {
     return NextResponse.json({ error: 'File is too large to preview' }, { status: 413 })
   }
 

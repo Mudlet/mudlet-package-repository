@@ -4,6 +4,7 @@ import { del } from '@vercel/blob'
 import { createBranch, uploadFile, createPullRequest, getFileSha, deleteFile } from '@/app/lib/github'
 import AdmZip from 'adm-zip'
 import { parseConfigLua } from '@/app/lib/packageParser'
+import { MAX_METADATA_BYTES, readEntryWithin } from '@/app/lib/packageArchive'
 import { PackageMetadata } from '@/app/lib/types'
 
 interface PackagesJson {
@@ -56,7 +57,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Missing config.lua' }, { status: 400 })
   }
 
-  const configContent = configEntry.getData().toString('utf8')
+  const config = readEntryWithin(configEntry, MAX_METADATA_BYTES)
+  if (!config) {
+    return NextResponse.json({ error: 'config.lua is too large to be a Mudlet package config' }, { status: 400 })
+  }
+
+  const configContent = config.toString('utf8')
   const metadata = parseConfigLua(configContent)
 
   if (!metadata) {

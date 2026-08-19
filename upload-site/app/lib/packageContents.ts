@@ -11,6 +11,13 @@ import { describeKeyCombination } from './qtKeys'
 
 /** Archives bigger than this are listed but not parsed - see fetchPackageArchive. */
 const MAX_PARSE_BYTES = 50 * 1024 * 1024
+/**
+ * Cap on the *uncompressed* package XML. The archive being small says nothing
+ * about the cost of expanding one entry - deflate reaches ratios in the
+ * thousands - so this is what stops a small upload from turning into gigabytes
+ * of string and parse tree. The largest real package unpacks to about 10 MB.
+ */
+const MAX_XML_BYTES = 16 * 1024 * 1024
 /** Per-item Lua source cap, so one giant script cannot bloat a page. */
 const MAX_SCRIPT_CHARS = 20_000
 /** Overall Lua budget across the whole package. */
@@ -50,6 +57,19 @@ const parser = new XMLParser({
   parseAttributeValue: false,
   isArray: (name) => ARRAY_TAGS.has(name),
 })
+
+/** The package XML sits at the archive root and is the only .xml there. */
+const findXmlEntry = (zip: AdmZip) =>
+  zip.getEntries().find((entry) => !entry.isDirectory && /^[^/]+\.xml$/i.test(entry.entryName)) ??
+  null
+
+/**
+ * The XML source, or null if unpacking it would blow the budget. The zip header
+ * carries the uncompressed size, so this decides before getData() expands
+ * anything - see MAX_XML_BYTES.
+ */
+const readXmlSource = (entry: AdmZip.IZipEntry): string | null =>
+  entry.header.size > MAX_XML_BYTES ? null : entry.getData().toString('utf8')
 
 const emptyCounts = (): Record<PackageEntityKind, number> => ({
   [PackageEntityKind.trigger]: 0,
@@ -258,16 +278,19 @@ export function parsePackageContents(
     contents.note = `Only the first ${MAX_FILES} of ${entries.length} files are listed.`
   }
 
-  // The package XML sits at the archive root and is the only .xml there.
-  const xmlEntry = entries.find(
-    (entry) => !entry.isDirectory && /^[^/]+\.xml$/i.test(entry.entryName)
-  )
+  const xmlEntry = findXmlEntry(zip)
   if (!xmlEntry) return contents
   contents.xmlPath = xmlEntry.entryName
 
+  const xmlSource = readXmlSource(xmlEntry)
+  if (xmlSource === null) {
+    contents.note = 'The package XML is too large to read here, so only its files are listed.'
+    return contents
+  }
+
   let root: Record<string, unknown>
   try {
-    const parsed = parser.parse(xmlEntry.getData().toString('utf8'))
+    const parsed = parser.parse(xmlSource)
     root = (parsed?.MudletPackage ?? {}) as Record<string, unknown>
   } catch {
     contents.note = 'The package XML could not be parsed, so only its files are listed.'
@@ -363,14 +386,15 @@ export function extractEntityScript(
     return null
   }
 
-  const xmlEntry = zip
-    .getEntries()
-    .find((entry) => !entry.isDirectory && /^[^/]+\.xml$/i.test(entry.entryName))
+  const xmlEntry = findXmlEntry(zip)
   if (!xmlEntry) return null
+
+  const xmlSource = readXmlSource(xmlEntry)
+  if (xmlSource === null) return null
 
   let node: Record<string, unknown>
   try {
-    const parsed = parser.parse(xmlEntry.getData().toString('utf8'))
+    const parsed = parser.parse(xmlSource)
     const container = parsed?.MudletPackage?.[config.container]
     if (!container || typeof container !== 'object') return null
     node = container as Record<string, unknown>

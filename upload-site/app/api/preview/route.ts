@@ -5,6 +5,7 @@ import { parseConfigLua } from '@/app/lib/packageParser'
 import { ValidationResult, PackageMetadata } from '@/app/lib/types'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
 import { parsePackageContents } from '@/app/lib/packageContents'
+import { MAX_METADATA_BYTES, readEntryWithin } from '@/app/lib/packageArchive'
 
 async function validateMetadata(metadata: PackageMetadata): Promise<ValidationResult> {
   const reservedNames = [
@@ -95,7 +96,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Missing config.lua. Is this a valid Mudlet package?' }, { status: 400 })
   }
 
-  const configContent = configEntry.getData().toString('utf8')
+  const config = readEntryWithin(configEntry, MAX_METADATA_BYTES)
+  if (!config) {
+    return NextResponse.json({ error: 'config.lua is too large to be a Mudlet package config' }, { status: 400 })
+  }
+
+  const configContent = config.toString('utf8')
   const metadata = parseConfigLua(configContent)
   
   if (!metadata) {
@@ -105,11 +111,12 @@ export async function POST(request: Request) {
   // Extract icon if specified in metadata
   if (metadata.icon) {
     const iconEntry = zip.getEntry(`.mudlet/Icon/${metadata.icon}`)
-    if (iconEntry) {
+    // An icon over the budget is dropped rather than inlined - it is going into
+    // a data: URI, so an oversized one is not worth expanding either.
+    const iconData = readEntryWithin(iconEntry, MAX_METADATA_BYTES)
+    if (iconData) {
       const extension = metadata.icon.match(/\.[^.]+$/)?.[0] || '.png'
-      const iconData = iconEntry.getData()
-      const iconBase64 = `data:image/${extension.slice(1)};base64,${iconData.toString('base64')}`
-      metadata.icon = iconBase64
+      metadata.icon = `data:image/${extension.slice(1)};base64,${iconData.toString('base64')}`
     } else {
       metadata.icon = null
     }
