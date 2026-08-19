@@ -497,11 +497,11 @@ export const PackageExplorer = ({ contents, slug }: PackageExplorerProps) => {
   )
 
   const [selection, setSelection] = useState<Selection | null>(null)
-  // Small packages open fully; big ones would be unreadable expanded.
+  // How a package lays its files out is part of what a reader came to see, so
+  // folders start open however many there are - collapsing is the deliberate act.
   const [expanded, setExpanded] = useState<Set<string>>(() => {
     const initial = new Set<string>()
     const files = contents.files.filter((file) => !file.isDirectory)
-    if (files.length > 60) return initial
     for (const file of files) {
       let path = file.path
       let slash = path.lastIndexOf('/')
