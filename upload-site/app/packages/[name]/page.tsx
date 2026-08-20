@@ -3,15 +3,46 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import type { Metadata } from 'next'
-import { fetchPackageBySlug } from '@/app/lib/packages'
+import {
+  fetchPackageBySlug,
+  fetchRepositoryPackages,
+  readsFromCheckout,
+} from '@/app/lib/packages'
 import { getArchiveBuffer } from '@/app/lib/packageArchive'
 import { parsePackageContents } from '@/app/lib/packageContents'
 import { PackageExplorer } from '@/app/components/PackageExplorer'
 import { InstallCommands } from '@/app/components/InstallCommands'
 import { DragToInstall } from '@/app/components/DragToInstall'
-import { formatDate, packageDownloadUrl, packageIconUrl } from '@/app/lib/urls'
+import { formatDate, packageDownloadUrl, packageIconUrl, packageSlug } from '@/app/lib/urls'
 
 type PageProps = { params: Promise<{ name: string }> }
+
+/**
+ * What a package contains changes only when a new version of it is merged, and
+ * a merge redeploys the site - so these pages are built once per deploy rather
+ * than inheriting the index fetch's ten-minute window, which had the first
+ * visitor of every window paying for a whole archive download and unpack.
+ */
+export const revalidate = 86400
+
+/**
+ * Prerendering a package page means unpacking its archive, which is only
+ * affordable with the archives on disk; over the network it would be a hundred
+ * megabytes of build-time downloads, so without the checkout the pages stay
+ * on-demand exactly as before. Either way dynamicParams keeps a slug that was
+ * not prerendered - one added to the index after this build - rendering live.
+ */
+export async function generateStaticParams() {
+  if (!readsFromCheckout) return []
+
+  const packages = await fetchRepositoryPackages()
+  const slugs = new Set(
+    packages.filter((pkg) => pkg.filename).map((pkg) => packageSlug(pkg.mpackage))
+  )
+  slugs.delete('')
+
+  return [...slugs].map((name) => ({ name }))
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { name } = await params

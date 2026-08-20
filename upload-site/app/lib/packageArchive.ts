@@ -1,5 +1,5 @@
 import AdmZip from 'adm-zip'
-import { fetchPackageArchive } from './packages'
+import { fetchPackageArchive, readsFromCheckout } from './packages'
 
 /**
  * Reading one file out of a package means having the whole archive, and the
@@ -29,6 +29,11 @@ function forget(filename: string, entry: CacheEntry) {
 }
 
 export async function getArchiveBuffer(filename: string): Promise<Buffer> {
+  // Off the checkout an archive costs a local read, and the caller is usually
+  // the build prerendering all 200-odd package pages in turn - so retaining up
+  // to 96 MB of them buys nothing and only pressures the build worker.
+  if (readsFromCheckout) return fetchPackageArchive(filename)
+
   const cached = cache.get(filename)
   if (cached) {
     if (Date.now() - cached.storedAt < MAX_CACHE_AGE_MS) {

@@ -6,6 +6,9 @@ export const metadata = {
   description: 'Browse every package available for the Mudlet MUD client',
 }
 
+/** Same reasoning as the home page: the checkout read carries no window. */
+export const revalidate = 600
+
 export default async function PackagesPage() {
   const packages = await fetchRepositoryPackages()
 
