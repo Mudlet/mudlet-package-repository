@@ -29,7 +29,11 @@ function getPathsFromDir(dir) {
 function readPackageIndex() {
   try {
     const indexPath = path.join(process.cwd(), '..', 'packages', 'mpkg.packages.json')
-    return JSON.parse(fs.readFileSync(indexPath, 'utf8')).packages
+    const { packages } = JSON.parse(fs.readFileSync(indexPath, 'utf8'))
+    // An index that parses but carries no array is as unusable as one that
+    // does not parse, and the callers below map over this - returning
+    // `.packages` bare would throw past the try rather than fall back to it.
+    return Array.isArray(packages) ? packages : []
   } catch {
     return []
   }

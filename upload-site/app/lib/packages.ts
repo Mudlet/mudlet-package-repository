@@ -29,7 +29,13 @@ export async function fetchRepositoryPackages(): Promise<UploadedPackageMetadata
         path.join(localPackagesDir, 'mpkg.packages.json'),
         'utf8'
       )
-      return JSON.parse(jsonData).packages
+      const { packages } = JSON.parse(jsonData)
+      // An index that parses but is not shaped like one is a reason to go and
+      // ask for the published copy, not a reason to build a site with no
+      // packages in it. Every caller treats this as an array, so a bare
+      // `.packages` here would hand them undefined and surface as a TypeError
+      // somewhere far less obvious - generateStaticParams, say.
+      if (Array.isArray(packages)) return packages
     } catch {
       // A checkout without a generated index still gets a working site.
     }
@@ -39,7 +45,13 @@ export async function fetchRepositoryPackages(): Promise<UploadedPackageMetadata
   if (!response.ok) {
     throw new Error(`Could not load the package index (HTTP ${response.status})`)
   }
+  // Read through rather than destructured: a body of literal `null` parses
+  // fine and would throw on the destructure, ahead of the check meant to
+  // describe exactly that.
   const data = await response.json()
+  if (!Array.isArray(data?.packages)) {
+    throw new Error('The package index carries no packages array')
+  }
   return data.packages
 }
 
