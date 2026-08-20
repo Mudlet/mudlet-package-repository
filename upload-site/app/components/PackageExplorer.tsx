@@ -399,6 +399,54 @@ const EntityViewer = ({ entity, scriptUrl }: { entity: PackageEntity; scriptUrl?
   )
 }
 
+/**
+ * A package that plays sounds is one you want to hear before installing, so
+ * they play in place rather than only downloading. Not everything a package
+ * ships can be decoded by a browser - the older sound packs carry ADPCM .wav -
+ * and the file route turns down anything over its preview cap, so a failed
+ * load falls back to the same download line the binary case offers. Mounted
+ * under a key of the url, so selecting another sound starts from scratch.
+ */
+const AudioPreview = ({ url }: { url: string }) => {
+  const [failed, setFailed] = useState(false)
+
+  if (failed) {
+    return (
+      <div className="p-4 text-sm text-muted">
+        <p>This sound could not be played here.</p>
+        <a href={url} className="mt-2 inline-block text-accent hover:text-accent-hover">
+          Download it instead →
+        </a>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-6 bg-surface-muted p-6">
+      <svg
+        className="h-16 w-16 text-icon-audio opacity-40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M11 5 6.5 9H3v6h3.5L11 19z" />
+        <path d="M15 9.5a3.5 3.5 0 0 1 0 5M17.8 6.5a7.5 7.5 0 0 1 0 11" />
+      </svg>
+      <audio
+        controls
+        preload="metadata"
+        src={url}
+        onError={() => setFailed(true)}
+        className="w-full max-w-sm"
+      />
+    </div>
+  )
+}
+
 const FileViewer = ({ file, url }: { file: PackageFileEntry; url: string }) => {
   const kind = previewKind(file.path)
   const [text, setText] = useState<string | null>(null)
@@ -455,6 +503,8 @@ const FileViewer = ({ file, url }: { file: PackageFileEntry; url: string }) => {
           />
         </div>
       )}
+
+      {kind === 'audio' && <AudioPreview key={url} url={url} />}
 
       {kind === 'text' &&
         (error ? (

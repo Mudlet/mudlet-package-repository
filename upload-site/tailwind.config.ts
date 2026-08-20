@@ -35,6 +35,7 @@ export default {
           button: token('icon-button'),
           folder: token('icon-folder'),
           image: token('icon-image'),
+          audio: token('icon-audio'),
           file: token('icon-file'),
         },
         success: token("success"),
