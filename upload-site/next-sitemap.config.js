@@ -21,6 +21,25 @@ function getPathsFromDir(dir) {
   return paths
 }
 
+/**
+ * Per-package detail pages live under the dynamic [name] route, which the
+ * directory walk above deliberately skips, so list them from the package index.
+ * Must stay in step with packageSlug() in app/lib/urls.ts.
+ */
+function getPackagePaths() {
+  try {
+    const indexPath = path.join(process.cwd(), '..', 'packages', 'mpkg.packages.json')
+    const { packages } = JSON.parse(fs.readFileSync(indexPath, 'utf8'))
+    return packages
+      .map(pkg => (pkg.mpackage || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''))
+      .filter(Boolean)
+      .map(slug => `/packages/${slug}`)
+  } catch {
+    // Sitemap generation must not fail a build if the index is unavailable.
+    return []
+  }
+}
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://packages.mudlet.org',
@@ -28,8 +47,8 @@ module.exports = {
   outDir: './public',
   additionalPaths: async (config) => {
     const appDir = path.join(process.cwd(), 'app')
-    const paths = ['/', ...getPathsFromDir(appDir)]
-    
+    const paths = ['/', ...getPathsFromDir(appDir), ...getPackagePaths()]
+
     return paths.map(path => ({
       loc: path,
       lastmod: new Date().toISOString()

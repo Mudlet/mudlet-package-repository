@@ -6,19 +6,24 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint app",
     "postbuild": "next-sitemap"
   },
   "dependencies": {
-    "@auth/core": "^0.41.3",
     "@vercel/blob": "^2.0.1",
     "@vercel/speed-insights": "^1.1.0",
     "adm-zip": "^0.6.0",
+    "fast-xml-parser": "^5.2.5",
+    "framer-motion": "^12.0.3",
+    "highlight.js": "^11.12.0",
     "next": "^16.3.0",
     "next-auth": "^4.24.15",
+    "next-sitemap": "^4.2.3",
+    "next-themes": "^0.4.6",
     "octokit": "^4.0.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^9.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -29,10 +34,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.3",
-    "framer-motion": "^12.0.3",
-    "next-sitemap": "^4.2.3",
     "postcss": "^8",
-    "react-markdown": "^9.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

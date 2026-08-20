@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import { upload } from '@vercel/blob/client'
 import { PackagePreview } from './PackagePreview'
 import { PackageMetadata } from '@/app/lib/types'
-import type { ValidationResult } from '@/app/lib/types'
+import type { PackageContents, ValidationResult } from '@/app/lib/types'
 
 export function UploadForm() {
   const { data: session } = useSession()
@@ -14,6 +14,7 @@ export function UploadForm() {
     metadata: PackageMetadata;
     filename: string;
     validation: ValidationResult;
+    contents: PackageContents | null;
     blobUrl: string;
   } | null>(null)
   const [isUploading, setIsUploading] = useState(false)
@@ -81,6 +82,7 @@ export function UploadForm() {
           metadata: data.metadata,
           filename: data.filename,
           validation: data.validation,
+          contents: data.contents ?? null,
           blobUrl: blob.url
         })
       }
@@ -147,34 +149,36 @@ export function UploadForm() {
 
   if (!session) {
     return (
-      <div className="max-w-2xl mx-auto p-4">
-        <div className="text-center py-8">
-          <p className="text-gray-600 text-lg">Please sign in to upload packages</p>
-        </div>
+      <div className="card p-10 text-center">
+        <p className="font-medium">Sign in to upload a package</p>
+        <p className="mt-1 text-sm text-muted">
+          Uploads open a pull request against the package repository, so we need to know who you are.
+        </p>
       </div>
     )
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div>
       {error && (
-        <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-4 rounded-lg border border-danger/40 bg-danger/10 p-4 text-sm text-danger">
           {error}
         </div>
       )}
 
       {uploadSuccess ? (
-        <div className="p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-          <p>✓ Package received! {prUrl && (
-            <a href={prUrl} rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
+        <div className="rounded-lg border border-success/40 bg-success/10 p-4 text-sm text-success">
+          ✓ Package received!{' '}
+          {prUrl && (
+            <a href={prUrl} rel="noopener noreferrer" className="underline">
               Track your submission →
             </a>
-          )}</p>
-        </div>      
+          )}
+        </div>
       ) : !previewData ? (
         <>
-          <div 
-            className="border-2 border-dashed rounded-lg p-8 text-center"
+          <div
+            className="card border-2 border-dashed p-10 text-center"
             onDragOver={handleDragOver}
             onDrop={handleDrop}
           >
@@ -186,24 +190,22 @@ export function UploadForm() {
               id="fileInput"
               disabled={isUploading}
             />
-            <label 
+            <label
               htmlFor="fileInput"
-              className={`cursor-pointer text-lg hover:text-blue-600 ${isUploading ? 'opacity-50' : ''}`}
+              className={`cursor-pointer font-medium text-accent hover:text-accent-hover ${isUploading ? 'opacity-50' : ''}`}
             >
-              Click to select or drag and drop package file here
+              Choose a .mpackage file
             </label>
+            <p className="mt-1 text-sm text-muted">or drag and drop it here</p>
           </div>
-          {isLoading && (
-            <div className="text-gray-600 text-center mt-4">
-              Loading preview...
-            </div>
-          )}
+          {isLoading && <p className="mt-4 text-center text-sm text-muted">Reading package…</p>}
         </>
       ) : (
         <PackagePreview
           metadata={previewData.metadata}
           filename={previewData.filename}
           validation={previewData.validation}
+          contents={previewData.contents}
           onConfirm={handleConfirmUpload}
           onCancel={() => {
             setPreviewData(null)

@@ -27,6 +27,69 @@ export interface UploadedPackageMetadata extends PackageMetadata {
 }
 
 
+/** The kinds of item a Mudlet package XML can define. */
+export enum PackageEntityKind {
+  trigger = 'trigger',
+  alias = 'alias',
+  script = 'script',
+  timer = 'timer',
+  key = 'key',
+  button = 'button',
+}
+
+/**
+ * One item from the package XML - a trigger, alias, script and so on.
+ * Folders nest, so this is a tree: a folder carries `children` and no script.
+ */
+/** One labelled field of an item, e.g. a trigger pattern or a handled event. */
+export interface PackageEntityFact {
+  label: string;
+  value: string;
+  /** Patterns and events read as code; prose labels like a button position do not. */
+  mono?: boolean;
+}
+
+export interface PackageEntity {
+  /** Stable path through the tree ("alias/0/2"), used to fetch the script. */
+  id: string;
+  kind: PackageEntityKind;
+  name: string;
+  isActive: boolean;
+  isFolder: boolean;
+  /** Pattern, key combination, timer interval ... whatever identifies the item. */
+  detail: string | null;
+  /** The fields worth showing for this kind of item: patterns, events, timing. */
+  facts: PackageEntityFact[];
+  /** Game command the item sends, for items that send one instead of running Lua. */
+  command: string | null;
+  hasScript: boolean;
+  /**
+   * Lua source, present only when the contents were parsed with inlineScripts
+   * (the upload preview). Package pages fetch scripts on demand instead, so a
+   * large package is not shipped to the browser in full.
+   */
+  script: string | null;
+  scriptTruncated: boolean;
+  children: PackageEntity[];
+}
+
+export interface PackageFileEntry {
+  path: string;
+  size: number;
+  isDirectory: boolean;
+}
+
+/** What we can tell a visitor about the inside of an .mpackage. */
+export interface PackageContents {
+  files: PackageFileEntry[];
+  entities: PackageEntity[];
+  counts: Record<PackageEntityKind, number>;
+  xmlPath: string | null;
+  totalUncompressedSize: number;
+  /** Set when the archive was too large or the XML could not be parsed. */
+  note: string | null;
+}
+
 /**
  * Enum for the known fields in the UploadedPackageMetadata interface
  * intended to allow the uploaded packages to be sorted by those fields
