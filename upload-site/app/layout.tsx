@@ -1,6 +1,5 @@
 import './globals.css'
 import { Inter, JetBrains_Mono } from 'next/font/google'
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { Auth } from './components/Auth'
 import { Navigation } from './components/Navigation'
@@ -24,18 +23,22 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function RootLayout({
+/**
+ * Nothing here reads the session on the server. Doing so - it used to call
+ * getServerSession() for the SessionProvider's initial value - reads cookies,
+ * and a root layout that reads cookies makes every route in the app dynamic,
+ * which is what kept package pages from prerendering at all.
+ */
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession()
-
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans">
         <ThemeProvider>
-          <SessionProvider session={session}>
+          <SessionProvider>
             <header className="sticky top-0 z-40 border-b border-border bg-surface/85 backdrop-blur">
               <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5">
                 <div className="flex items-center gap-2 sm:gap-6">

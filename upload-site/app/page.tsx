@@ -5,6 +5,12 @@ import { ProgressBar } from './components/ProgressBar'
 import { CopyableCommand } from './components/CopyableCommand'
 import { fetchRepositoryPackages } from './lib/packages'
 
+/**
+ * The index used to carry this window on its own fetch; read off the checkout
+ * there is no fetch to carry it, so the page says how fresh it wants to be.
+ */
+export const revalidate = 600
+
 /** The next round number to aim for, so the bar keeps meaning as the repo grows. */
 const nextMilestone = (count: number) => Math.max(50, Math.ceil((count + 1) / 50) * 50)
 

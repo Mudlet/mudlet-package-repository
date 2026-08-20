@@ -1,18 +1,38 @@
-import { promises as fs } from 'fs'
+import { existsSync, promises as fs } from 'fs'
 import path from 'path'
 import { UploadedPackageMetadata } from './types'
 import { RAW_BASE, packageDownloadUrl, packageSlug } from './urls'
 
 const INDEX_URL = `${RAW_BASE}/packages/mpkg.packages.json`
 
-/** In dev the repository checkout sits one level up, so read it straight off disk. */
-const isDev = process.env.NODE_ENV === 'development'
-const localRepoPath = (...parts: string[]) => path.join(process.cwd(), '..', ...parts)
+/**
+ * The site is deployed out of the package repository itself, so the index and
+ * the archives sit one directory up from the Next.js root - during the Vercel
+ * build just as much as in dev. Reading them off disk is what lets package
+ * pages prerender (see generateStaticParams in app/packages/[name]/page.tsx),
+ * and it also stops a deploy triggered by a package merge from building
+ * against a CDN-stale copy of the index.
+ *
+ * The checkout is not traced into the serverless output - it is over 100 MB of
+ * archives - so at request time this directory is absent and every read below
+ * falls back to the network on its own.
+ */
+const localPackagesDir = path.join(process.cwd(), '..', 'packages')
+
+/** Whether this process can see the repository checkout. Build time: yes. */
+export const readsFromCheckout = existsSync(localPackagesDir)
 
 export async function fetchRepositoryPackages(): Promise<UploadedPackageMetadata[]> {
-  if (isDev) {
-    const jsonData = await fs.readFile(localRepoPath('packages', 'mpkg.packages.json'), 'utf8')
-    return JSON.parse(jsonData).packages
+  if (readsFromCheckout) {
+    try {
+      const jsonData = await fs.readFile(
+        path.join(localPackagesDir, 'mpkg.packages.json'),
+        'utf8'
+      )
+      return JSON.parse(jsonData).packages
+    } catch {
+      // A checkout without a generated index still gets a working site.
+    }
   }
 
   const response = await fetch(INDEX_URL, { next: { revalidate: 600 } })
@@ -28,10 +48,18 @@ export async function fetchPackageBySlug(slug: string): Promise<UploadedPackageM
   return packages.find((pkg) => packageSlug(pkg.mpackage) === slug) ?? null
 }
 
-/** Download the .mpackage archive itself so its contents can be listed. */
+/** Read the .mpackage archive itself so its contents can be listed. */
 export async function fetchPackageArchive(filename: string): Promise<Buffer> {
-  if (isDev) {
-    return fs.readFile(localRepoPath('packages', filename))
+  if (readsFromCheckout) {
+    try {
+      // The index is repository-controlled, but packageDownloadUrl already
+      // treats this value as a flat filename (encodeURIComponent escapes any
+      // slash), so it must not address anything outside the directory here
+      // either.
+      return await fs.readFile(path.join(localPackagesDir, path.basename(filename)))
+    } catch {
+      // The index can name an archive a stale checkout does not have yet.
+    }
   }
 
   // Archives run to tens of megabytes, past the data cache entry limit, so most
