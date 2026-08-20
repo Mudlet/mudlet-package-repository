@@ -45,11 +45,14 @@ export async function fetchRepositoryPackages(): Promise<UploadedPackageMetadata
   if (!response.ok) {
     throw new Error(`Could not load the package index (HTTP ${response.status})`)
   }
-  const { packages } = await response.json()
-  if (!Array.isArray(packages)) {
+  // Read through rather than destructured: a body of literal `null` parses
+  // fine and would throw on the destructure, ahead of the check meant to
+  // describe exactly that.
+  const data = await response.json()
+  if (!Array.isArray(data?.packages)) {
     throw new Error('The package index carries no packages array')
   }
-  return packages
+  return data.packages
 }
 
 export async function fetchPackageBySlug(slug: string): Promise<UploadedPackageMetadata | null> {
