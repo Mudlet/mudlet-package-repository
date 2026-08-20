@@ -1458,13 +1458,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-07-28T16:18:04+0000",
+                      "created": "2026-08-18T18:51:12+0000",
                   "description": "F2CE-Tools — Mudlet package for Federation 2 Community Edition.",
                      "filename": "f2ce-tools.mpackage",
                      "mpackage": "f2ce-tools",
                         "title": "f2ce-tools",
-                     "uploaded": 1785258092,
-                      "version": "3.2.0"
+                     "uploaded": 1787079304,
+                      "version": "3.2.5"
                 },
                 {
                        "author": "jieiku",
@@ -1822,14 +1822,14 @@
                 },
                 {
                        "author": "Mudlet Default Package",
-                      "created": "2026-05-05T17:18:58+0000",
+                      "created": "2026-08-18T06:17:23+0000",
                   "description": "### Description\nmpkg is a command line interface for managing packages used in Mudlet. You can install, remove, search the repository and update packages using this interface.\n\n### Usage\n\n```\nCommands:\n  mpkg install          -- install a new package\n  mpkg list             -- list all installed packages  \n  mpkg remove           -- remove an existing package\n  mpkg search           -- search for a package via name and description\n  mpkg show             -- show detailed information about a package\n  mpkg update           -- update your package listing\n```\n### See Also\n\n* https://packages.mudlet.org\n",
                      "filename": "mpkg.mpackage",
                          "icon": "packages/icons/mpkg.png",
                      "mpackage": "mpkg",
                         "title": "A command line package manager for Mudlet.",
-                     "uploaded": 1778001541,
-                      "version": "3.4"
+                     "uploaded": 1787033845,
+                      "version": "3.5"
                 },
                 {
                        "author": "Mudlet Makers",
@@ -2300,5 +2300,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Aug 14 19:20:55 2026"
+   "updated": "Thu Aug 20 10:55:16 2026"
 }
