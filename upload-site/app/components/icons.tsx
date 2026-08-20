@@ -96,6 +96,13 @@ const IMAGE_ICON = (
   </>
 )
 
+const AUDIO_ICON = (
+  <>
+    <path d="M11 5 6.5 9H3v6h3.5L11 19z" />
+    <path d="M15 9.5a3.5 3.5 0 0 1 0 5M17.8 6.5a7.5 7.5 0 0 1 0 11" />
+  </>
+)
+
 const CODE_ICON = (
   <>
     <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
@@ -122,6 +129,7 @@ export const FileIcon = ({ path }: { path: string }) => {
   const kind = previewKind(path)
 
   if (kind === 'image') return <Svg className="text-icon-image">{IMAGE_ICON}</Svg>
+  if (kind === 'audio') return <Svg className="text-icon-audio">{AUDIO_ICON}</Svg>
   if (kind === 'binary') return <Svg className="text-icon-file">{BINARY_ICON}</Svg>
 
   const extension = fileExtension(path)

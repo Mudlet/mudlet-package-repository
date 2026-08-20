@@ -37,6 +37,7 @@
     --icon-button: 219 39 119;
     --icon-folder: 202 138 4;
     --icon-image: 5 150 105;
+    --icon-audio: 202 84 15;
     --icon-file: 100 116 139;
 
     /* Syntax highlighting (highlight.js token classes, see .hljs-view below). */
@@ -74,6 +75,7 @@
     --icon-button: 244 114 182;
     --icon-folder: 250 204 21;
     --icon-image: 52 211 153;
+    --icon-audio: 251 146 60;
     --icon-file: 148 163 184;
 
     --syn-keyword: #d2a8ff;
