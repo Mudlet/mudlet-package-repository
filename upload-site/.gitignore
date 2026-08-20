@@ -40,3 +40,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# next-sitemap output (postbuild). Only the numbered file is ignored: it holds
+# the URLs and tracks the package index, so committing it churns 200-odd lines
+# whenever anyone runs a build. Its siblings are generated too but derive purely
+# from this config rather than from the index - sitemap.xml just names this
+# file, robots.txt just points at sitemap.xml - so both reproduce byte for byte
+# and stay committed, leaving crawlers something to follow even from a build
+# that skips postbuild.
+/public/sitemap-*.xml
