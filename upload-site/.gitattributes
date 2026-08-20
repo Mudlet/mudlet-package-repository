@@ -1,0 +1,7 @@
+# next-sitemap writes LF regardless of platform, and these two are committed
+# (see .gitignore). Without this a build on a checkout with core.autocrlf=true
+# leaves them permanently "modified" in git status - identical in content, off
+# by line ending - which is exactly the noise keeping them tracked is meant to
+# avoid.
+public/robots.txt text eol=lf
+public/sitemap.xml text eol=lf
