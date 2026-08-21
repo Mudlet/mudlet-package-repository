@@ -1,0 +1,60 @@
+name: Build package site
+
+# The site is built and served by Vercel, where a failed build is silent: Vercel keeps
+# serving the last good deployment and nothing here says otherwise. That is how
+# packages.mudlet.org spent a year on an August 2025 build (#766). Building it here too
+# means a break fails on the pull request that caused it, where someone will see it.
+#
+# Deliberately needs no secrets - the build reads packages/mpkg.packages.json out of the
+# checkout rather than the network, so a bare clone is enough.
+
+on:
+  pull_request:
+    paths:
+      - 'upload-site/**'
+      - 'packages/mpkg.packages.json'
+      - '.github/workflows/build-package-site.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'upload-site/**'
+      - 'packages/mpkg.packages.json'
+      - '.github/workflows/build-package-site.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: build-package-site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+        cache-dependency-path: upload-site/package-lock.json
+
+    # npm ci, not npm install: it installs exactly what the lockfile pins and refuses a
+    # lockfile that has drifted from package.json. Vercel installs the same way, so a
+    # lockfile it would choke on - a stale integrity hash, say - is caught here first.
+    - name: Install dependencies
+      working-directory: upload-site
+      run: npm ci
+
+    - name: Lint
+      working-directory: upload-site
+      run: npm run lint
+
+    # Prerenders a page per package from the index in the checkout, so this also covers
+    # an index the site cannot read - the failure #764 fixed. The commits that rewrite
+    # that index are automated ones pushed straight to main, which is why the push
+    # trigger above watches it as well.
+    - name: Build
+      working-directory: upload-site
+      run: npm run build
