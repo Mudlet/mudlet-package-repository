@@ -38,6 +38,8 @@ jobs:
       contents: write
       pull-requests: write
       checks: read
+      actions: write # to ask for the index refresh after a merge
+      issues: write # to report an index refresh that could not be requested
 
     steps:
       - name: Evaluate gate and merge
@@ -202,6 +204,33 @@ jobs:
                   commit_title: `${pr.title} (#${prNumber})`,
                 });
                 core.notice(`auto-merge: merged PR #${prNumber}`);
+
+                // The merge is a GITHUB_TOKEN push, so it cannot fire the index
+                // workflow's own push trigger; workflow_dispatch is exempt (#752).
+                let refreshRequested = false;
+                for (let attempt = 1; attempt <= 3 && !refreshRequested; attempt++) {
+                  try {
+                    await github.rest.actions.createWorkflowDispatch({
+                      owner, repo, workflow_id: 'create-package-index.yml', ref: 'main',
+                    });
+                    refreshRequested = true;
+                    core.info('Requested a package index refresh.');
+                  } catch (e) {
+                    core.warning(`Could not request the index refresh (attempt ${attempt}): ${e.message}`);
+                    await new Promise(resolve => setTimeout(resolve, attempt * 5000));
+                  }
+                }
+                if (!refreshRequested) {
+                  // the PR is merged, so no later event re-runs this gate: without a
+                  // refresh the listing keeps the previous version and only says so here
+                  await github.rest.issues.create({
+                    owner, repo,
+                    title: 'Package index refresh could not be requested',
+                    body: `Merging #${prNumber} did not manage to request an index refresh, so `
+                      + `\`packages/mpkg.packages.json\` may still advertise the previous version. `
+                      + `Run "Refresh json index" by hand to publish it.`,
+                  });
+                }
               } catch (e) {
                 // Branch protection, a moved head (409), or merge conflicts land here.
                 // Leave the PR for a maintainer rather than failing the run.

@@ -1,72 +1,112 @@
 name: Update core packages
 
+# Mudlet bundles a handful of the packages published here, and they are edited in Mudlet's
+# repository rather than this one. This brings the copies mpkg serves in line with what
+# Mudlet's development branch ships.
+#
+# It commits to main rather than opening a pull request, which would need a personal access
+# token: a PR opened with GITHUB_TOKEN does not run the validation and auto-merge workflows
+# such a PR would depend on. Nothing is lost by skipping them - every archive comes from
+# Mudlet's development branch, where check-mpackages has already confirmed it matches its
+# sources.
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * fri'
 
+permissions:
+  contents: write
+  actions: write # for gh workflow run
+  issues: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'Mudlet' }}
-    strategy:
-      matrix:
-        package:
-          - name: deleteOldProfiles
-            description: "Delete Old Profiles package"
-            path: src/packages/deleteOldProfiles/deleteOldProfiles.mpackage
-          - name: echo
-            description: "Echo package"
-            path: src/packages/echo/echo.mpackage
-          - name: enable-accessibility
-            description: "Enable Accessibility package"
-            path: src/packages/enable-accessibility/enable-accessibility.mpackage
-          - name: run-lua-code
-            description: "Run Lua Code package"
-            path: src/packages/run-lua-code/run-lua-code.mpackage
-          - name: generic_mapper
-            description: "Generic Mapper package"
-            path: src/packages/generic_mapper/generic_mapper.mpackage
-          - name: mudlet-base-ui
-            description: "Mudlet base UI package"
-            path: src/packages/mudlet-base-ui/mudlet-base-ui.mpackage
-          # - name: gui-drop
-          #   description: "GUI Drop package"
-          #   path: src/packages/gui-drop/gui-drop.mpackage
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Download ${{ matrix.package.name }} package
-        uses: carlosperate/download-file-action@v2.0.2
-        with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/${{ matrix.package.path }}
-          file-name: ${{ matrix.package.name }}.mpackage
-          location: packages/
-
-      - name: Check for changes in ${{ matrix.package.name }}
-        id: check-changes
+      - name: Fetch the packages Mudlet bundles
+        id: fetch
+        env:
+          PACKAGES: deleteOldProfiles echo enable-accessibility run-lua-code generic_mapper mudlet-base-ui
         run: |
-          echo "Checking for changes in packages/${{ matrix.package.name }}.mpackage..."
-          if git diff --quiet "packages/${{ matrix.package.name }}.mpackage"; then
-            echo "No changes detected in ${{ matrix.package.name }}"
-          else
-            echo "Changes detected in ${{ matrix.package.name }}"
-            echo "changes=true" >> $GITHUB_OUTPUT
+          set -uo pipefail
+          unfetched=
+          for package in $PACKAGES; do
+            archive="packages/${package}.mpackage"
+            # download beside the published copy rather than onto it: curl opens its
+            # output file before it knows the response. Reading config.lua back out
+            # rejects anything that is not the archive we asked for - nothing else
+            # inspects these before they reach main
+            if curl -fsSL --retry 3 \
+                 "https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/packages/${package}/${package}.mpackage" \
+                 -o "${archive}.new" \
+               && unzip -p "${archive}.new" config.lua > /dev/null 2>&1; then
+              mv "${archive}.new" "${archive}"
+            else
+              # one package moving upstream must not hold back the others
+              unfetched="${unfetched} ${package}"
+              rm -f "${archive}.new"
+            fi
+          done
+          echo "unfetched=${unfetched# }" >> "$GITHUB_OUTPUT"
+
+      - name: Commit the ones that changed
+        id: sync
+        run: |
+          set -euo pipefail
+          # --porcelain rather than diff, so a package added to the list above counts as
+          # a change on its first run, while it is still untracked
+          if [ -z "$(git status --porcelain -- packages)" ]; then
+            echo "Every core package already matches development."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
-      - name: Create Pull Request for ${{ matrix.package.name }}
-        uses: peter-evans/create-pull-request@v7
-        if: steps.check-changes.outputs.changes == 'true'
-        with:
-          token: ${{ secrets.GH_PAT_UPDATE_3RDPARTY }}
-          add-paths: packages/${{ matrix.package.name }}.mpackage
-          branch: update-${{ matrix.package.name }}-package
-          commit-message: "(autocommit) Updated ${{ matrix.package.description }} to latest version"
-          title: "Infrastructure: update ${{ matrix.package.description }} to latest version"
-          body: |
-            #### Brief overview of PR changes/additions
-            🔄 An automated PR to update the ${{ matrix.package.description }} to its latest version.
+          git status --porcelain -- packages
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A packages
+          git commit -qm "Update the packages Mudlet bundles to what development ships"
+          # a package upload may have landed while we were downloading
+          git pull --rebase --quiet origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
 
-            #### Other info
-            _update triggered by ${{ github.ref }} ${{ github.sha }}_
-          author: mudlet-machine-account <mudlet-machine-account@users.noreply.github.com>
+      - name: Refresh the package index
+        # also on a manual run with nothing to commit: that is the repair when an earlier
+        # run pushed packages but the refresh did not happen
+        if: steps.sync.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The push above cannot fire the index workflow's own push trigger: GitHub does
+          # not run workflows for events a GITHUB_TOKEN action causes, except dispatches.
+          gh workflow run create-package-index.yml --ref main
+
+      - name: Fail if a package could not be fetched
+        if: steps.fetch.outputs.unfetched != ''
+        env:
+          UNFETCHED: ${{ steps.fetch.outputs.unfetched }}
+        run: |
+          echo "::error::could not fetch: ${UNFETCHED} - moved in Mudlet's repository?"
+          exit 1
+
+      - name: Report a sync that failed
+        if: failure() || cancelled()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title='Core package sync is failing'
+          # a failed search must not cost us the report as well
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty') || existing=
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "Failed again: ${RUN_URL}"
+          else
+            gh issue create --title "$title" \
+              --body "The weekly sync of the packages Mudlet bundles did not finish, so mpkg may be serving older copies than Mudlet ships: ${RUN_URL}"
+          fi
