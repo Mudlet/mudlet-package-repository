@@ -112,7 +112,7 @@ export default async function PackagePage({ params }: PageProps) {
             />
           )}
           <div className="min-w-0">
-            <h1 className="text-3xl font-bold tracking-tight">{pkg.mpackage}</h1>
+            <h1 className="break-words text-3xl font-bold tracking-tight">{pkg.mpackage}</h1>
             {pkg.title && <p className="mt-1 text-muted">{pkg.title}</p>}
           </div>
         </div>
@@ -134,7 +134,7 @@ export default async function PackagePage({ params }: PageProps) {
         ))}
       </dl>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-[minmax(0,1fr)_16rem] md:items-start">
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_16rem] md:items-start">
         <InstallCommands
           packageName={pkg.mpackage ?? ''}
           downloadUrl={packageDownloadUrl(pkg.filename)}

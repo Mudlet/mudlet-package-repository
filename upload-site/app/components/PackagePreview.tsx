@@ -73,7 +73,7 @@ export function PackagePreview({
 
         <dl className="mt-6 space-y-3">
           {FIELDS.map(({ key, label }) => (
-            <div key={key} className="grid grid-cols-[7rem,1fr] items-baseline gap-3 text-sm">
+            <div key={key} className="grid grid-cols-[7rem_minmax(0,1fr)] items-baseline gap-3 text-sm">
               <dt className="flex items-center gap-1.5 font-medium text-muted">
                 {label} <Status field={key} />
               </dt>
@@ -83,7 +83,7 @@ export function PackagePreview({
             </div>
           ))}
 
-          <div className="grid grid-cols-[7rem,1fr] items-baseline gap-3 text-sm">
+          <div className="grid grid-cols-[7rem_minmax(0,1fr)] items-baseline gap-3 text-sm">
             <dt className="flex items-center gap-1.5 font-medium text-muted">
               Description <Status field="description" />
             </dt>
