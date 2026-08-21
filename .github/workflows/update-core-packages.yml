@@ -1,16 +1,14 @@
 name: Update core packages
 
-# Mudlet bundles a handful of packages that are also published here, and they are edited
-# in Mudlet's repository rather than this one. This brings the copies mpkg serves in line
-# with what Mudlet's development branch ships.
+# Mudlet bundles a handful of the packages published here, and they are edited in Mudlet's
+# repository rather than this one. This brings the copies mpkg serves in line with what
+# Mudlet's development branch ships.
 #
-# It commits to main instead of opening a pull request. The PR version needed a personal
-# access token, because a PR opened with GITHUB_TOKEN does not run the validation and
-# auto-merge workflows it depends on; that token stopped being accepted in July 2025 and
-# every weekly run since then died at the push, unnoticed, leaving mpkg serving packages
-# over a year old. There is nothing to review in these syncs anyway: each archive comes
-# from Mudlet's development branch, where check-mpackages has already confirmed it matches
-# its sources. Nothing here holds a credential.
+# It commits to main rather than opening a pull request, which would need a personal access
+# token: a PR opened with GITHUB_TOKEN does not run the validation and auto-merge workflows
+# such a PR would depend on. Nothing is lost by skipping them - every archive comes from
+# Mudlet's development branch, where check-mpackages has already confirmed it matches its
+# sources.
 
 on:
   workflow_dispatch:
@@ -18,9 +16,9 @@ on:
     - cron: '0 0 * * fri'
 
 permissions:
-  contents: write # commit the refreshed archives to main
-  actions: write # ask for the index refresh (see "Refresh the package index")
-  issues: write # so a broken sync is visible without opening the Actions tab
+  contents: write
+  actions: write # for gh workflow run
+  issues: write
 
 jobs:
   update:
@@ -31,23 +29,37 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Fetch the packages Mudlet bundles
+        id: fetch
         env:
-          # gui-drop is bundled by Mudlet as well, but is not published through mpkg
           PACKAGES: deleteOldProfiles echo enable-accessibility run-lua-code generic_mapper mudlet-base-ui
         run: |
-          set -euo pipefail
+          set -uo pipefail
+          unfetched=
           for package in $PACKAGES; do
-            curl -fsSL --retry 3 \
-              "https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/packages/${package}/${package}.mpackage" \
-              -o "packages/${package}.mpackage"
+            archive="packages/${package}.mpackage"
+            # download beside the published copy rather than onto it: curl opens its
+            # output file before it knows the response. Reading config.lua back out
+            # rejects anything that is not the archive we asked for - nothing else
+            # inspects these before they reach main
+            if curl -fsSL --retry 3 \
+                 "https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/packages/${package}/${package}.mpackage" \
+                 -o "${archive}.new" \
+               && unzip -p "${archive}.new" config.lua > /dev/null 2>&1; then
+              mv "${archive}.new" "${archive}"
+            else
+              # one package moving upstream must not hold back the others
+              unfetched="${unfetched} ${package}"
+              rm -f "${archive}.new"
+            fi
           done
+          echo "unfetched=${unfetched# }" >> "$GITHUB_OUTPUT"
 
       - name: Commit the ones that changed
         id: sync
         run: |
           set -euo pipefail
-          # --porcelain rather than diff, so a package added to the list above counts
-          # as a change on its first run, when it is still untracked
+          # --porcelain rather than diff, so a package added to the list above counts as
+          # a change on its first run, while it is still untracked
           if [ -z "$(git status --porcelain -- packages)" ]; then
             echo "Every core package already matches development."
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -65,29 +77,36 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Refresh the package index
-        if: steps.sync.outputs.changed == 'true'
+        # also on a manual run with nothing to commit: that is the repair when an earlier
+        # run pushed packages but the refresh did not happen
+        if: steps.sync.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # GitHub suppresses the triggers a GITHUB_TOKEN push would normally fire, to
-          # avoid workflows setting each other off forever, so the index workflow's own
-          # "push to main" trigger will not see the commit above. Asking for it by hand
-          # does work: workflow_dispatch is one of the two events that always runs.
-          # Without this mpkg keeps advertising the versions it served before.
+          # The push above cannot fire the index workflow's own push trigger: GitHub does
+          # not run workflows for events a GITHUB_TOKEN action causes, except dispatches.
           gh workflow run create-package-index.yml --ref main
 
+      - name: Fail if a package could not be fetched
+        if: steps.fetch.outputs.unfetched != ''
+        env:
+          UNFETCHED: ${{ steps.fetch.outputs.unfetched }}
+        run: |
+          echo "::error::could not fetch: ${UNFETCHED} - moved in Mudlet's repository?"
+          exit 1
+
       - name: Report a sync that failed
-        if: failure()
+        if: failure() || cancelled()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          # A weekly job that fails quietly is one nobody notices for a year.
           title='Core package sync is failing'
-          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          # a failed search must not cost us the report as well
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty') || existing=
           if [ -n "$existing" ]; then
             gh issue comment "$existing" --body "Failed again: ${RUN_URL}"
           else
             gh issue create --title "$title" \
-              --body "The weekly sync of the packages Mudlet bundles failed, so mpkg is serving whatever it served before: ${RUN_URL}"
+              --body "The weekly sync of the packages Mudlet bundles did not finish, so mpkg may be serving older copies than Mudlet ships: ${RUN_URL}"
           fi

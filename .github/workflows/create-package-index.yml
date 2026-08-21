@@ -7,6 +7,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:    
 
+# Two runs indexing at once is last-writer-wins on a stale tree: each one regenerates the
+# index from the packages it checked out, and whichever pushes second wins with whatever
+# it saw. Queue them instead.
+concurrency:
+  group: package-index
+
 jobs:
   reindex-json-file:
     runs-on: ubuntu-latest
@@ -16,6 +22,7 @@ jobs:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository
       contents: write
+      issues: write
 
     steps:
     - uses: actions/checkout@v4
@@ -51,3 +58,20 @@ jobs:
       with:
         commit_message: Automated package index update.
         file_pattern: 'packages/*.packages.json packages/icons/*'
+
+    # The workflows that ask for a refresh cannot see how it went, and a run that fails
+    # here leaves mpkg offering whatever the listing said before.
+    - name: Report a refresh that failed
+      if: failure() || cancelled()
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      run: |
+        title='Package index refresh is failing'
+        existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty') || existing=
+        if [ -n "$existing" ]; then
+          gh issue comment "$existing" --body "Failed again: ${RUN_URL}"
+        else
+          gh issue create --title "$title" \
+            --body "packages/mpkg.packages.json was not regenerated, so mpkg is still offering the versions it listed before. Re-running this workflow republishes it: ${RUN_URL}"
+        fi
