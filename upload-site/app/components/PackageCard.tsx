@@ -31,7 +31,7 @@ export const PackageCard = ({ pkg, authorPackageCount = 0 }: PackageCardProps) =
           />
         )}
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-semibold text-foreground group-hover:text-accent">
+          <h3 className="line-clamp-2 break-words font-semibold text-foreground group-hover:text-accent">
             {pkg.mpackage}
           </h3>
           <p className="truncate text-sm text-muted">

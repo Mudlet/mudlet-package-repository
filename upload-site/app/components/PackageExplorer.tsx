@@ -613,7 +613,7 @@ export const PackageExplorer = ({ contents, slug }: PackageExplorerProps) => {
     })
 
   return (
-    <div className="grid gap-4 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
       <div className="card flex h-[32rem] flex-col overflow-hidden lg:col-span-2 lg:h-[36rem]">
         <div className="border-b border-border p-3">
           <input

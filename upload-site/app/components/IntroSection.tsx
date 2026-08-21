@@ -3,7 +3,7 @@ import { CopyableCommand } from './CopyableCommand'
 
 export function IntroSection() {
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       <section className="card p-6">
         <h2 className="text-xl font-semibold">What is this?</h2>
         <p className="mt-3 text-sm leading-relaxed text-foreground/90">
@@ -40,7 +40,7 @@ export function IntroSection() {
           </a>
           !
         </p>
-        <ul className="mt-3 grid gap-1.5 text-sm text-foreground/90 sm:grid-cols-2">
+        <ul className="mt-3 grid grid-cols-1 gap-1.5 text-sm text-foreground/90 sm:grid-cols-2">
           <li className="flex gap-2">
             <span aria-hidden="true" className="text-accent">
               →
