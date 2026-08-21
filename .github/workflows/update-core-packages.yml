@@ -1,72 +1,93 @@
 name: Update core packages
 
+# Mudlet bundles a handful of packages that are also published here, and they are edited
+# in Mudlet's repository rather than this one. This brings the copies mpkg serves in line
+# with what Mudlet's development branch ships.
+#
+# It commits to main instead of opening a pull request. The PR version needed a personal
+# access token, because a PR opened with GITHUB_TOKEN does not run the validation and
+# auto-merge workflows it depends on; that token stopped being accepted in July 2025 and
+# every weekly run since then died at the push, unnoticed, leaving mpkg serving packages
+# over a year old. There is nothing to review in these syncs anyway: each archive comes
+# from Mudlet's development branch, where check-mpackages has already confirmed it matches
+# its sources. Nothing here holds a credential.
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * fri'
 
+permissions:
+  contents: write # commit the refreshed archives to main
+  actions: write # ask for the index refresh (see "Refresh the package index")
+  issues: write # so a broken sync is visible without opening the Actions tab
+
 jobs:
   update:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'Mudlet' }}
-    strategy:
-      matrix:
-        package:
-          - name: deleteOldProfiles
-            description: "Delete Old Profiles package"
-            path: src/packages/deleteOldProfiles/deleteOldProfiles.mpackage
-          - name: echo
-            description: "Echo package"
-            path: src/packages/echo/echo.mpackage
-          - name: enable-accessibility
-            description: "Enable Accessibility package"
-            path: src/packages/enable-accessibility/enable-accessibility.mpackage
-          - name: run-lua-code
-            description: "Run Lua Code package"
-            path: src/packages/run-lua-code/run-lua-code.mpackage
-          - name: generic_mapper
-            description: "Generic Mapper package"
-            path: src/packages/generic_mapper/generic_mapper.mpackage
-          - name: mudlet-base-ui
-            description: "Mudlet base UI package"
-            path: src/packages/mudlet-base-ui/mudlet-base-ui.mpackage
-          # - name: gui-drop
-          #   description: "GUI Drop package"
-          #   path: src/packages/gui-drop/gui-drop.mpackage
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Download ${{ matrix.package.name }} package
-        uses: carlosperate/download-file-action@v2.0.2
-        with:
-          file-url: https://raw.githubusercontent.com/Mudlet/Mudlet/development/${{ matrix.package.path }}
-          file-name: ${{ matrix.package.name }}.mpackage
-          location: packages/
-
-      - name: Check for changes in ${{ matrix.package.name }}
-        id: check-changes
+      - name: Fetch the packages Mudlet bundles
+        env:
+          # gui-drop is bundled by Mudlet as well, but is not published through mpkg
+          PACKAGES: deleteOldProfiles echo enable-accessibility run-lua-code generic_mapper mudlet-base-ui
         run: |
-          echo "Checking for changes in packages/${{ matrix.package.name }}.mpackage..."
-          if git diff --quiet "packages/${{ matrix.package.name }}.mpackage"; then
-            echo "No changes detected in ${{ matrix.package.name }}"
-          else
-            echo "Changes detected in ${{ matrix.package.name }}"
-            echo "changes=true" >> $GITHUB_OUTPUT
+          set -euo pipefail
+          for package in $PACKAGES; do
+            curl -fsSL --retry 3 \
+              "https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/packages/${package}/${package}.mpackage" \
+              -o "packages/${package}.mpackage"
+          done
+
+      - name: Commit the ones that changed
+        id: sync
+        run: |
+          set -euo pipefail
+          # --porcelain rather than diff, so a package added to the list above counts
+          # as a change on its first run, when it is still untracked
+          if [ -z "$(git status --porcelain -- packages)" ]; then
+            echo "Every core package already matches development."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
-      - name: Create Pull Request for ${{ matrix.package.name }}
-        uses: peter-evans/create-pull-request@v7
-        if: steps.check-changes.outputs.changes == 'true'
-        with:
-          token: ${{ secrets.GH_PAT_UPDATE_3RDPARTY }}
-          add-paths: packages/${{ matrix.package.name }}.mpackage
-          branch: update-${{ matrix.package.name }}-package
-          commit-message: "(autocommit) Updated ${{ matrix.package.description }} to latest version"
-          title: "Infrastructure: update ${{ matrix.package.description }} to latest version"
-          body: |
-            #### Brief overview of PR changes/additions
-            🔄 An automated PR to update the ${{ matrix.package.description }} to its latest version.
+          git status --porcelain -- packages
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A packages
+          git commit -qm "Update the packages Mudlet bundles to what development ships"
+          # a package upload may have landed while we were downloading
+          git pull --rebase --quiet origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
 
-            #### Other info
-            _update triggered by ${{ github.ref }} ${{ github.sha }}_
-          author: mudlet-machine-account <mudlet-machine-account@users.noreply.github.com>
+      - name: Refresh the package index
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # GitHub suppresses the triggers a GITHUB_TOKEN push would normally fire, to
+          # avoid workflows setting each other off forever, so the index workflow's own
+          # "push to main" trigger will not see the commit above. Asking for it by hand
+          # does work: workflow_dispatch is one of the two events that always runs.
+          # Without this mpkg keeps advertising the versions it served before.
+          gh workflow run create-package-index.yml --ref main
+
+      - name: Report a sync that failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          # A weekly job that fails quietly is one nobody notices for a year.
+          title='Core package sync is failing'
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "Failed again: ${RUN_URL}"
+          else
+            gh issue create --title "$title" \
+              --body "The weekly sync of the packages Mudlet bundles failed, so mpkg is serving whatever it served before: ${RUN_URL}"
+          fi

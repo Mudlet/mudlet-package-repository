@@ -38,6 +38,7 @@ jobs:
       contents: write
       pull-requests: write
       checks: read
+      actions: write # to ask for the index refresh after a merge
 
     steps:
       - name: Evaluate gate and merge
@@ -202,6 +203,20 @@ jobs:
                   commit_title: `${pr.title} (#${prNumber})`,
                 });
                 core.notice(`auto-merge: merged PR #${prNumber}`);
+
+                // The merge above is a GITHUB_TOKEN push, and GitHub does not fire
+                // triggers for those, so "Refresh json index" never saw it and the
+                // published listing kept the previous version - mpkg then never offered
+                // the update (#752). workflow_dispatch always creates a run, token or
+                // not, so ask for the refresh explicitly.
+                try {
+                  await github.rest.actions.createWorkflowDispatch({
+                    owner, repo, workflow_id: 'create-package-index.yml', ref: 'main',
+                  });
+                  core.info('Requested a package index refresh.');
+                } catch (e) {
+                  core.warning(`Could not request the index refresh: ${e.message}`);
+                }
               } catch (e) {
                 // Branch protection, a moved head (409), or merge conflicts land here.
                 // Leave the PR for a maintainer rather than failing the run.
