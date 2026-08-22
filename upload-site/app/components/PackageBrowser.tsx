@@ -2,6 +2,7 @@
 
 import { useDeferredValue, useMemo, useState } from 'react'
 import { UploadedPackageMetadata, UploadedPackageSortByOptions } from '@/app/lib/types'
+import { authorPackageCounts, authorSlug, parseAuthorNames } from '@/app/lib/authors'
 import { PackageCard } from './PackageCard'
 
 const SORTS = [
@@ -21,14 +22,16 @@ export const PackageBrowser = ({ packages }: { packages: UploadedPackageMetadata
   )
   const deferredQuery = useDeferredValue(query)
 
-  const authorCounts = useMemo(() => {
-    const counts = new Map<string, number>()
-    for (const pkg of packages) {
-      if (!pkg.author) continue
-      counts.set(pkg.author, (counts.get(pkg.author) ?? 0) + 1)
-    }
-    return counts
-  }, [packages])
+  // Counted per credited person rather than per author line, so a package
+  // shared by two authors counts towards both, and "Demonnic" and "demonnic"
+  // are one prolific author instead of two smaller ones.
+  const authorCounts = useMemo(() => authorPackageCounts(packages), [packages])
+
+  const packageAuthorCount = (pkg: UploadedPackageMetadata) =>
+    parseAuthorNames(pkg.author).reduce(
+      (highest, name) => Math.max(highest, authorCounts.get(authorSlug(name)) ?? 0),
+      0
+    )
 
   const visible = useMemo(() => {
     const needle = deferredQuery.trim().toLowerCase()
@@ -106,7 +109,7 @@ export const PackageBrowser = ({ packages }: { packages: UploadedPackageMetadata
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((pkg) => (
             <li key={pkg.filename ?? pkg.mpackage}>
-              <PackageCard pkg={pkg} authorPackageCount={authorCounts.get(pkg.author ?? '') ?? 0} />
+              <PackageCard pkg={pkg} authorPackageCount={packageAuthorCount(pkg)} />
             </li>
           ))}
         </ul>

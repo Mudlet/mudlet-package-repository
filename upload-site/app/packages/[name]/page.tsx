@@ -13,6 +13,7 @@ import { PackageExplorer } from '@/app/components/PackageExplorer'
 import { InstallCommands } from '@/app/components/InstallCommands'
 import { DragToInstall } from '@/app/components/DragToInstall'
 import { PackageDescription } from '@/app/components/PackageDescription'
+import { AuthorCredit } from '@/app/components/AuthorCredit'
 import { formatDate, packageDownloadUrl, packageIconUrl, packageSlug } from '@/app/lib/urls'
 
 type PageProps = { params: Promise<{ name: string }> }
@@ -88,10 +89,10 @@ export default async function PackagePage({ params }: PageProps) {
   const iconUrl = packageIconUrl(pkg.icon)
   const facts = [
     pkg.version && { label: 'Version', value: pkg.version },
-    pkg.author && { label: 'Author', value: pkg.author },
+    pkg.author && { label: 'Author', value: <AuthorCredit author={pkg.author} /> },
     formatDate(pkg.created) && { label: 'Created', value: formatDate(pkg.created) as string },
     formatDate(pkg.uploaded) && { label: 'Updated', value: formatDate(pkg.uploaded) as string },
-  ].filter(Boolean) as { label: string; value: string }[]
+  ].filter(Boolean) as { label: string; value: React.ReactNode }[]
 
   return (
     <main className="py-8">

@@ -4,6 +4,7 @@ import { IntroSection } from './components/IntroSection'
 import { ProgressBar } from './components/ProgressBar'
 import { CopyableCommand } from './components/CopyableCommand'
 import { fetchRepositoryPackages } from './lib/packages'
+import { collectAuthors } from './lib/authors'
 
 /**
  * The index used to carry this window on its own fetch; read off the checkout
@@ -16,7 +17,9 @@ const nextMilestone = (count: number) => Math.max(50, Math.ceil((count + 1) / 50
 
 export default async function Home() {
   const packages = await fetchRepositoryPackages()
-  const authors = new Set(packages.map((pkg) => pkg.author).filter(Boolean)).size
+  // Counted per person, not per author line: two packages credited to
+  // "Akaya" and "Akaya, mods by Zooka" are the work of two authors.
+  const authors = collectAuthors(packages).length
   const goal = nextMilestone(packages.length)
 
   const recent = packages

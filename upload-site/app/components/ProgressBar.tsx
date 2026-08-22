@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 interface ProgressBarProps {
@@ -25,7 +26,9 @@ export function ProgressBar({ current, goal, authors }: ProgressBarProps) {
         <h2 className="text-lg font-semibold">Community packages</h2>
         <p className="text-sm text-muted">
           <span className="font-semibold text-foreground">{current}</span> packages from{' '}
-          <span className="font-semibold text-foreground">{authors}</span> authors
+          <Link href="/authors" className="font-semibold text-accent hover:text-accent-hover">
+            {authors} authors
+          </Link>
         </p>
       </div>
 

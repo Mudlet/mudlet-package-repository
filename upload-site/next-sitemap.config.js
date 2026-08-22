@@ -43,6 +43,54 @@ function readPackageIndex() {
 const packageSlug = (name) =>
   (name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 
+/**
+ * Must stay in step with parseAuthorNames() and authorSlug() in
+ * app/lib/authors.ts - this config is CommonJS and cannot import the TypeScript
+ * the site itself uses, and a sitemap of author pages is only worth having if
+ * its URLs are the ones the app actually serves. See that file for why the
+ * author field is split at all.
+ */
+const CREDIT_PREFIX = /^(?:[\p{L}][\p{L}\p{N}'’-]*\s+){0,3}by\s+/iu
+const CONTACT = /@|https?:\/\/|www\.|\.(?:com|net|org|io|dev|eu)\b/i
+const EDGE_PUNCTUATION = /^[\s\-–—:.·|]+|[\s\-–—:.·|]+$/g
+
+function parseAuthorNames(author) {
+  if (!author) return []
+
+  const credited = []
+  const remainder = author.replace(/\(([^)]*)\)/g, (whole, inner) => {
+    const trimmed = inner.trim()
+    if (CREDIT_PREFIX.test(trimmed)) {
+      credited.push(trimmed)
+      return ' '
+    }
+    return CONTACT.test(trimmed) ? ' ' : whole
+  })
+
+  const names = []
+  const seen = new Set()
+  for (const part of [remainder, ...credited]) {
+    for (const segment of part.split(/[,;&]+/)) {
+      const name = segment
+        .replace(/\s+/g, ' ')
+        .replace(EDGE_PUNCTUATION, '')
+        .replace(CREDIT_PREFIX, '')
+        .replace(EDGE_PUNCTUATION, '')
+      if (!name || seen.has(name.toLowerCase())) continue
+      seen.add(name.toLowerCase())
+      names.push(name)
+    }
+  }
+  return names
+}
+
+const authorSlug = (name) =>
+  name
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '')
+
 /** reindex.lua writes `uploaded` as a unix timestamp in seconds. */
 function uploadedAt(pkg) {
   const seconds = Number(pkg && pkg.uploaded)
@@ -75,7 +123,7 @@ module.exports = {
     const uploads = packages.map(uploadedAt).filter(Boolean).sort()
     const newestUpload = uploads.length ? uploads[uploads.length - 1] : undefined
 
-    const listingPages = new Set(['/', '/packages'])
+    const listingPages = new Set(['/', '/packages', '/authors'])
 
     // Per-package detail pages live under the dynamic [name] route, which the
     // directory walk deliberately skips, so list them from the index.
@@ -83,12 +131,29 @@ module.exports = {
       .map((pkg) => ({ loc: `/packages/${packageSlug(pkg.mpackage)}`, lastmod: uploadedAt(pkg) }))
       .filter((entry) => entry.loc !== '/packages/')
 
+    // Same for author pages, which are as new as the newest package crediting
+    // them - a package with two authors dates both of their pages.
+    const authorLastmod = new Map()
+    for (const pkg of packages) {
+      const lastmod = uploadedAt(pkg)
+      for (const name of parseAuthorNames(pkg.author)) {
+        const slug = authorSlug(name)
+        if (!slug) continue
+        const known = authorLastmod.get(slug)
+        if (!known || (lastmod && lastmod > known)) authorLastmod.set(slug, lastmod)
+      }
+    }
+    const authorPaths = [...authorLastmod].map(([slug, lastmod]) => ({
+      loc: `/authors/${encodeURIComponent(slug)}`,
+      lastmod,
+    }))
+
     const staticPaths = ['/', ...getPathsFromDir(path.join(process.cwd(), 'app'))].map((loc) => ({
       loc,
       lastmod: listingPages.has(loc) ? newestUpload : undefined,
     }))
 
-    return [...staticPaths, ...packagePaths].map((entry) => ({
+    return [...staticPaths, ...packagePaths, ...authorPaths].map((entry) => ({
       loc: entry.loc,
       ...(entry.lastmod ? { lastmod: entry.lastmod } : {}),
     }))
