@@ -5,8 +5,9 @@ name: Build package site
 # packages.mudlet.org spent a year on an August 2025 build (#766). Building it here too
 # means a break fails on the pull request that caused it, where someone will see it.
 #
-# Deliberately needs no secrets - the build reads packages/mpkg.packages.json out of the
-# checkout rather than the network, so a bare clone is enough.
+# Deliberately needs no secrets - the build reads packages/mpkg.packages.json and the
+# archives out of the checkout, and the one thing it does fetch (Mudlet's published Lua
+# function list, for the API usage stats) is public.
 
 on:
   pull_request:

@@ -7,6 +7,7 @@ import { useState } from 'react'
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/packages', label: 'All packages' },
+  { href: '/stats', label: 'API usage' },
   { href: '/upload', label: 'Upload package' },
 ]
 
