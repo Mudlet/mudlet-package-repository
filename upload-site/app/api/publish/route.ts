@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import AdmZip from 'adm-zip'
 import {
+  branchExists,
   createBranch,
   createPullRequest,
   deleteBranch,
@@ -266,6 +267,16 @@ export async function POST(request: Request) {
           { status: 409 },
         )
       }
+      // Anything else may have failed on the way back rather than on the way
+      // out: GitHub made the branch and the answer never arrived. Ask whether
+      // the ref is there before concluding this request created nothing -
+      // otherwise the branch is left behind with no one willing to tidy it,
+      // and every later request for this run meets it as a 409.
+      try {
+        ownsBranch = await branchExists(branchName)
+      } catch (lookupError) {
+        console.error('Trusted publishing: could not tell whether the branch was created', lookupError)
+      }
       throw error
     }
 
@@ -364,13 +375,24 @@ export async function POST(request: Request) {
     // clean. Only ever the branch this request created, though: the name is
     // shared by every request for this run, and tidying away one that another
     // request is still building would break its pull request rather than clean
-    // up after this one. Best-effort - a branch that cannot be removed is not
-    // worth failing over, since the response is already an error.
+    // up after this one.
+    let strandedBranch = false
     if (ownsBranch) {
-      await deleteBranch(branchName)
+      strandedBranch = !(await deleteBranch(branchName))
     }
+
+    const message = error instanceof Error ? error.message : 'Failed to create the pull request'
+    // A branch we could not take away outlives this request, and the name
+    // comes from the run, so every retry of this attempt will be turned away
+    // as "already in progress". Better to name the wreckage here than to let
+    // the workflow retry into a 409 it cannot read.
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to create the pull request' },
+      {
+        error: strandedBranch
+          ? `${message}. The branch ${branchName} was left behind and could not be removed: ` +
+            're-run the workflow to publish, and delete that branch by hand.'
+          : message,
+      },
       { status: 500 },
     )
   }

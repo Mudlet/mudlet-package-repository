@@ -24,6 +24,25 @@ export async function createBranch(newBranch: string, fromBranch: string) {
   })
 }
 
+/** Whether a branch is there, without caring what it points at. */
+export async function branchExists(branch: string): Promise<boolean> {
+  try {
+    await octokit.rest.git.getRef({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      ref: `heads/${branch}`,
+    })
+    return true
+  } catch (error) {
+    const status =
+      typeof error === 'object' && error && 'status' in error ? error.status : null
+    if (status === 404) {
+      return false
+    }
+    throw error
+  }
+}
+
 /**
  * Drop a branch, ignoring one that is already gone.
  *
@@ -31,16 +50,29 @@ export async function createBranch(newBranch: string, fromBranch: string) {
  * between creating the branch and opening the pull request would leave the
  * branch behind, and the retry - which derives the same name - would collide
  * with it rather than start clean.
+ *
+ * Returns whether the branch is now gone. A caller that derives the branch
+ * name deterministically needs to know when it is not: the wreckage will meet
+ * every later request for that run, so the failure has to be said out loud
+ * rather than swallowed here.
  */
-export async function deleteBranch(branch: string): Promise<void> {
+export async function deleteBranch(branch: string): Promise<boolean> {
   try {
     await octokit.rest.git.deleteRef({
       owner: REPO_OWNER,
       repo: REPO_NAME,
       ref: `heads/${branch}`,
     })
+    return true
   } catch (error) {
+    const status =
+      typeof error === 'object' && error && 'status' in error ? error.status : null
+    // Already gone is the outcome we wanted.
+    if (status === 404 || status === 422) {
+      return true
+    }
     console.warn(`Could not delete branch ${branch}:`, error)
+    return false
   }
 }
 
