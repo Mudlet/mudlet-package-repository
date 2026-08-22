@@ -40,11 +40,33 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
-        FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
-        
-        # check only 1 file has been uploaded per PR
-        if [ `echo "$FILE" |wc -l` -gt 1 ]; then
+        # Statuses matter here, so this reads the API rather than `gh pr view`:
+        # publishing a package under a new filename deletes the old one in the
+        # same pull request, and that deletion must not count towards the limit.
+        PATHS=$(gh api --paginate \
+          "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" \
+          --jq '.[] | select(.status != "removed") | .filename')
+
+        PACKAGE_RE='^packages/[^/]+\.(mpackage|zip)$'
+        FILE=$(echo "$PATHS" | grep -E "$PACKAGE_RE" || true)
+
+        # A trusted publish also records where the archive came from, pinned to
+        # its digest (see TRUSTED-PUBLISHING.md), so the package's own file
+        # under provenance/ may ride along. Nothing else may.
+        OTHER=$(echo "$PATHS" | grep -vE "$PACKAGE_RE|^provenance/[^/]+\.json$" || true)
+        if [ -n "$OTHER" ]; then
+          echo "Error: this pull request changes files that are not a package:"
+          echo "$OTHER" | sed 's/^/  /'
+          exit 1
+        fi
+
+        # check only 1 package file has been uploaded per PR
+        COUNT=$(echo "$FILE" | grep -c . || true)
+        if [ "$COUNT" -gt 1 ]; then
           echo "Error: Only one package file per pull request please."
+          exit 1
+        elif [ "$COUNT" -eq 0 ]; then
+          echo "Error: no package file found in this pull request."
           exit 1
         else
           echo "Pass: just one file uploaded."

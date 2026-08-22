@@ -60,6 +60,15 @@ jobs:
             const SELF_CHECK_NAME = 'auto-merge';
             const GREPTILE_LOGIN = 'greptile-apps[bot]';
             const PACKAGE_FILE_RE = /^packages\/[^/]+\.(mpackage|zip)$/;
+            // A trusted publish records where the archive came from, pinned to
+            // its digest, so it writes the package's file under provenance/ as
+            // well as the package itself. Those files are what the site's
+            // "built and published from source" panel trusts, so one is in
+            // scope for exactly these pull requests and no others - and only
+            // ever the one belonging to the package being published.
+            const provenanceFileFor = (pkg) => `provenance/${pkg.replace(/^packages\//, '')}.json`;
+            const MACHINE_ACCOUNT = 'mudlet-machine-account';
+            const TRUSTED_BRANCH_PREFIX = 'trusted-publish/';
 
             const skip = (msg) => { core.notice(`auto-merge: skip — ${msg}`); };
 
@@ -102,8 +111,29 @@ jobs:
                 owner, repo, pull_number: prNumber, per_page: 100,
               });
               if (files.length === 0) return skip('PR changes no files');
+
+              // Only the package site can create a branch in this repository,
+              // and it names trusted-publish branches itself, so a fork PR can
+              // never satisfy all three of these - which is what keeps
+              // provenance records out of reach of anyone submitting by hand.
+              const isTrustedPublish =
+                pr.head.repo && pr.head.repo.full_name === `${owner}/${repo}` &&
+                pr.head.ref.startsWith(TRUSTED_BRANCH_PREFIX) &&
+                pr.user && pr.user.login === MACHINE_ACCOUNT;
+
+              // Tie the provenance file to the package in this same PR, so an
+              // authorised publish still cannot write a record vouching for
+              // some other package.
+              const allowedProvenance = new Set(
+                isTrustedPublish
+                  ? files.filter(f => PACKAGE_FILE_RE.test(f.filename))
+                         .map(f => provenanceFileFor(f.filename))
+                  : []);
+
               for (const f of files) {
-                if (!PACKAGE_FILE_RE.test(f.filename)) {
+                const inScope = PACKAGE_FILE_RE.test(f.filename) ||
+                  allowedProvenance.has(f.filename);
+                if (!inScope) {
                   return skip(`file outside package scope: ${f.filename}`);
                 }
                 if (f.status !== 'added' && f.status !== 'modified') {
