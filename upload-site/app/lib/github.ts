@@ -66,6 +66,33 @@ export async function createPullRequest(branch: string, title: string, body: str
   })
 }
 
+/**
+ * Reads a text file off the default branch, or null when it is not there.
+ *
+ * Goes through the API rather than raw.githubusercontent.com so the answer is
+ * never a CDN-cached copy - which matters for anything that grants access, such
+ * as the trusted publisher registry.
+ */
+export async function getFileContent(path: string): Promise<string | null> {
+  try {
+    const { data } = await octokit.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path,
+      headers: { 'If-None-Match': '' },
+    })
+    if (Array.isArray(data) || data.type !== 'file' || typeof data.content !== 'string') {
+      return null
+    }
+    return Buffer.from(data.content, 'base64').toString('utf8')
+  } catch (error) {
+    if (typeof error === 'object' && error && 'status' in error && error.status === 404) {
+      return null
+    }
+    throw error
+  }
+}
+
 export async function deleteFile(path: string, message: string, sha: string, branch: string) {
   return octokit.rest.repos.deleteFile({
     owner: REPO_OWNER,

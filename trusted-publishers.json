@@ -1,0 +1,23 @@
+{
+  "_readme": [
+    "Trusted publishers: GitHub Actions workflows allowed to publish a package",
+    "without anyone storing a credential. See TRUSTED-PUBLISHING.md.",
+    "",
+    "Adding an entry here grants publish rights, so every change to this file",
+    "needs a maintainer's review - it is never auto-merged.",
+    "",
+    "repositoryId and repositoryOwnerId are GitHub's numeric ids and are what a",
+    "token is matched against; the repository name is for humans. Read them with:",
+    "  curl -s https://api.github.com/repos/OWNER/REPO | jq '.id, .owner.id'"
+  ],
+  "publishers": [
+    {
+      "mpackage": "arkadia",
+      "filename": "arkadia.mpackage",
+      "repository": "tjurczyk/arkadia",
+      "repositoryId": "80291515",
+      "repositoryOwnerId": "1749428",
+      "workflow": ".github/workflows/publish-package-repository.yml"
+    }
+  ]
+}
