@@ -1,6 +1,13 @@
 import { NextResponse } from 'next/server'
 import AdmZip from 'adm-zip'
-import { createBranch, uploadFile, createPullRequest, getFileSha, deleteFile } from '@/app/lib/github'
+import {
+  createBranch,
+  createPullRequest,
+  deleteBranch,
+  deleteFile,
+  getFileSha,
+  uploadFile,
+} from '@/app/lib/github'
 import { parseConfigLua } from '@/app/lib/packageParser'
 import { MAX_METADATA_BYTES, readEntryWithin } from '@/app/lib/packageArchive'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
@@ -330,6 +337,12 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error('Trusted publishing: GitHub API error', error)
+    // Leave nothing half-done behind. A branch with commits but no pull request
+    // is invisible to every gate here, and the retry derives the same name from
+    // the same run, so it would collide with the wreckage instead of starting
+    // clean. Best-effort: a branch that cannot be removed is not worth failing
+    // the response over, since the response is already an error.
+    await deleteBranch(branchName)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to create the pull request' },
       { status: 500 },

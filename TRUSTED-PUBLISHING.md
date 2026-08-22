@@ -168,6 +168,18 @@ badge trusts, so they are kept out of reach of anything else:
 A maintainer merging a hand-made pull request that touches anything under
 `provenance/` should treat it exactly like a change to `trusted-publishers.json`.
 
+### Renaming a package's file needs a manual merge
+
+If the `filename` in a publisher's entry changes, the next publish deletes the
+old archive and its record as well as adding the new pair. Auto-merge only
+accepts files with status `added` or `modified`, so a pull request containing
+those deletions will pass validation and then wait for a maintainer.
+
+That is the pre-existing rule and it applies to a rename through the upload form
+too. It is left alone deliberately: renames are rare — they only happen when a
+maintainer edits the registry — and teaching the auto-merge gate to accept
+deletions is a wider change to what can land unattended than the case justifies.
+
 ## What the endpoint checks
 
 In order, and the request stops at the first failure:

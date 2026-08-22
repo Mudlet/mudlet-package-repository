@@ -24,6 +24,26 @@ export async function createBranch(newBranch: string, fromBranch: string) {
   })
 }
 
+/**
+ * Drop a branch, ignoring one that is already gone.
+ *
+ * Used to undo a publish that failed partway: without it a run that died
+ * between creating the branch and opening the pull request would leave the
+ * branch behind, and the retry - which derives the same name - would collide
+ * with it rather than start clean.
+ */
+export async function deleteBranch(branch: string): Promise<void> {
+  try {
+    await octokit.rest.git.deleteRef({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      ref: `heads/${branch}`,
+    })
+  } catch (error) {
+    console.warn(`Could not delete branch ${branch}:`, error)
+  }
+}
+
 export async function getFileSha(path: string) {
   try {
     const response = await octokit.rest.repos.getContent({

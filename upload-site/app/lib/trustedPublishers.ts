@@ -121,7 +121,13 @@ export function authorise(
     throw new PublisherError('the token\'s job_workflow_ref claim is malformed')
   }
 
-  const match = forRepo.find((p) => sameName(path, `${p.repository}/${p.workflow}`))
+  // Built from the token's own repository name, not the registry's copy of it.
+  // Which repository this is has already been settled by the ids above, and the
+  // name in the registry is only a label for people reading the file - it goes
+  // stale the moment the repository is renamed or transferred, and comparing
+  // against it would then reject every publish from the very workflow the entry
+  // exists to authorise. What is actually being pinned here is the workflow path.
+  const match = forRepo.find((p) => sameName(path, `${claims.repository}/${p.workflow}`))
   if (!match) {
     throw new PublisherError(
       `workflow ${path} is not the workflow registered to publish for this repository`,
