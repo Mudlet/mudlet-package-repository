@@ -26,57 +26,111 @@ const CREDIT_PREFIX = /^(?:[\p{L}][\p{L}\p{N}'’-]*\s+){0,3}by\s+/iu
 /** A parenthetical carrying contact details rather than a name. */
 const CONTACT = /@|https?:\/\/|www\.|\.(?:com|net|org|io|dev|eu)\b/i
 
-/** Punctuation that separates one credit from the next. */
-const SEPARATORS = /[,;&]+/
+/** Punctuation that separates one credit from the next, kept when splitting. */
+const SEPARATORS = /([,;&]+)/
 
-/** Leading or trailing punctuation left behind once a credit is split out. */
-const EDGE_PUNCTUATION = /^[\s\-–—:.·|]+|[\s\-–—:.·|]+$/g
+/** Punctuation left on the front or the back of a credit once it is split out. */
+const LEADING_EDGE = /^[\s\-–—:.·|]+/
+const TRAILING_EDGE = /[\s\-–—:.·|]+$/
+
+/** One person credited by an author field, and where it credits them. */
+export interface AuthorCreditRef {
+  /** The name, with runs of whitespace collapsed - what identifies the author. */
+  name: string
+  /** Where the credit begins in the author field it was read from. */
+  at: number
+  /** Its length there, so the field's own wording can be quoted back exactly. */
+  length: number
+}
 
 /**
- * The individual people credited by one `author` field, in the order they are
- * named, without repeats (case-insensitively - "Demonnic, demonnic" is one
- * person twice).
+ * The people credited by one `author` field, in the order the field names
+ * them, without repeats (case-insensitively - "Demonnic, demonnic" is one
+ * person twice; the first mention is the one kept).
+ *
+ * Each credit carries where it was found, so a caller rendering the field can
+ * mark up the names in place instead of searching for them afterwards - a
+ * search would have to guess which mention of a name it had reached.
  */
-export function parseAuthorNames(author: string | null | undefined): string[] {
+export function parseAuthorCredits(author: string | null | undefined): AuthorCreditRef[] {
   if (!author) return []
 
   // A parenthetical is either a credit of its own ("(mods by Zooka)"), contact
   // details that are not part of the name ("(caevorasmailbox@gmail.com)"), or
   // something this cannot read - which stays in the name, so that two authors
   // distinguished only by their parenthetical are not merged into one.
-  const credited: string[] = []
-  const remainder = author.replace(/\(([^)]*)\)/g, (whole, inner: string) => {
+  //
+  // The two it does read are blanked out of the field rather than removed from
+  // it: same length, so every index taken below still points into the original
+  // string, whichever end of the field the parenthetical sits at.
+  const segments: { text: string; at: number }[] = []
+  let outer = author
+
+  for (const match of author.matchAll(/\(([^)]*)\)/g)) {
+    const at = match.index
+    const inner = match[1]
     const trimmed = inner.trim()
-    if (CREDIT_PREFIX.test(trimmed)) {
-      credited.push(trimmed)
-      return ' '
-    }
-    return CONTACT.test(trimmed) ? ' ' : whole
-  })
+    const isCredit = CREDIT_PREFIX.test(trimmed)
+    if (!isCredit && !CONTACT.test(trimmed)) continue
 
-  const names: string[] = []
-  const seen = new Set<string>()
+    outer =
+      outer.slice(0, at) + ' '.repeat(match[0].length) + outer.slice(at + match[0].length)
+    if (isCredit) segments.push({ text: inner, at: at + 1 })
+  }
 
-  for (const part of [remainder, ...credited]) {
-    for (const segment of part.split(SEPARATORS)) {
-      // Trimmed before the credit phrase is stripped rather than after: the
-      // phrase is anchored to the start of the segment, and splitting on a
-      // comma leaves the space that followed it on the front.
-      const name = segment
-        .replace(/\s+/g, ' ')
-        .replace(EDGE_PUNCTUATION, '')
-        .replace(CREDIT_PREFIX, '')
-        .replace(EDGE_PUNCTUATION, '')
+  segments.unshift({ text: outer, at: 0 })
 
-      if (!name) continue
-      const key = name.toLowerCase()
-      if (seen.has(key)) continue
-      seen.add(key)
-      names.push(name)
+  const credits: AuthorCreditRef[] = []
+  for (const segment of segments) {
+    let offset = segment.at
+    for (const [index, piece] of segment.text.split(SEPARATORS).entries()) {
+      // split() with a capturing group hands back the separators too, so that
+      // what is skipped here still advances the offset past them.
+      if (index % 2 === 0) {
+        const credit = readCredit(piece, offset)
+        if (credit) credits.push(credit)
+      }
+      offset += piece.length
     }
   }
 
-  return names
+  credits.sort((a, b) => a.at - b.at)
+
+  const seen = new Set<string>()
+  return credits.filter((credit) => {
+    const key = credit.name.toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+/**
+ * One split-off piece of an author field, narrowed to the name inside it -
+ * measured rather than rewritten, so the caller keeps the offsets.
+ */
+function readCredit(piece: string, at: number): AuthorCreditRef | null {
+  let start = 0
+  let end = piece.length
+
+  // The credit phrase is anchored to the start of the piece, so the space that
+  // followed the comma comes off first.
+  start += piece.match(LEADING_EDGE)?.[0].length ?? 0
+  start += piece.slice(start, end).match(CREDIT_PREFIX)?.[0].length ?? 0
+  start += piece.slice(start, end).match(LEADING_EDGE)?.[0].length ?? 0
+  end -= piece.slice(start, end).match(TRAILING_EDGE)?.[0].length ?? 0
+
+  const name = piece.slice(start, end).replace(/\s+/g, ' ')
+  return name ? { name, at: at + start, length: end - start } : null
+}
+
+/**
+ * The names of the people credited by one `author` field, in the order it
+ * names them. Callers that need to know where each was written use
+ * parseAuthorCredits instead.
+ */
+export function parseAuthorNames(author: string | null | undefined): string[] {
+  return parseAuthorCredits(author).map((credit) => credit.name)
 }
 
 /**

@@ -48,7 +48,9 @@ const packageSlug = (name) =>
  * app/lib/authors.ts - this config is CommonJS and cannot import the TypeScript
  * the site itself uses, and a sitemap of author pages is only worth having if
  * its URLs are the ones the app actually serves. See that file for why the
- * author field is split at all.
+ * author field is split at all. Only the names matter here, never the order
+ * they were written in, so this keeps none of the offset bookkeeping that
+ * marking the names up in place needs.
  */
 const CREDIT_PREFIX = /^(?:[\p{L}][\p{L}\p{N}'’-]*\s+){0,3}by\s+/iu
 const CONTACT = /@|https?:\/\/|www\.|\.(?:com|net|org|io|dev|eu)\b/i
