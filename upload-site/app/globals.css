@@ -119,7 +119,7 @@
    * a description are stepped down a level.
    */
   .prose-package {
-    @apply prose prose-sm max-w-none dark:prose-invert prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-sm;
+    @apply prose prose-sm max-w-none dark:prose-invert prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-sm prose-a:break-words;
   }
 
   /* Inline `code` inside prose and body copy. */
