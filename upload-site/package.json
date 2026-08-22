@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "predev": "node scripts/scan-api-usage.mjs || true",
     "build": "next build",
+    "prebuild": "node scripts/scan-api-usage.mjs",
     "start": "next start",
     "lint": "eslint app",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "scan-api-usage": "node scripts/scan-api-usage.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.0.1",
