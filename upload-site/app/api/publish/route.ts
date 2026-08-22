@@ -245,8 +245,29 @@ export async function POST(request: Request) {
     .replace(/^-+|-+$/g, '')
     .substring(0, 40)}-${metadata.version}-${claims.run_id}-${claims.run_attempt}`
 
+  // Whether this request is the one that made the branch, and so the only one
+  // entitled to take it away again on the way out.
+  let ownsBranch = false
+
   try {
-    await createBranch(branchName, 'main')
+    try {
+      await createBranch(branchName, 'main')
+      ownsBranch = true
+    } catch (error) {
+      // The name is derived from the run, so the only thing that already holds
+      // it is another request for this same run - a replayed token, or a
+      // duplicate call - which is partway through building it right now. That
+      // publish owns the branch and its pull request; say so and leave.
+      const status =
+        typeof error === 'object' && error && 'status' in error ? error.status : null
+      if (status === 422) {
+        return NextResponse.json(
+          { error: 'A publish for this workflow run is already in progress' },
+          { status: 409 },
+        )
+      }
+      throw error
+    }
 
     // A renamed file would otherwise leave the old one behind as a second copy.
     if (existingFilename && existingFilename !== filename) {
@@ -340,9 +361,14 @@ export async function POST(request: Request) {
     // Leave nothing half-done behind. A branch with commits but no pull request
     // is invisible to every gate here, and the retry derives the same name from
     // the same run, so it would collide with the wreckage instead of starting
-    // clean. Best-effort: a branch that cannot be removed is not worth failing
-    // the response over, since the response is already an error.
-    await deleteBranch(branchName)
+    // clean. Only ever the branch this request created, though: the name is
+    // shared by every request for this run, and tidying away one that another
+    // request is still building would break its pull request rather than clean
+    // up after this one. Best-effort - a branch that cannot be removed is not
+    // worth failing over, since the response is already an error.
+    if (ownsBranch) {
+      await deleteBranch(branchName)
+    }
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to create the pull request' },
       { status: 500 },
