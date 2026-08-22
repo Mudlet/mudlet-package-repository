@@ -50,6 +50,14 @@ const MAX_ARCHIVE_BYTES = 50 * 1024 * 1024
 /** Uncompressed cap per entry; deflate ratios say nothing about what unpacks. */
 const MAX_XML_BYTES = 16 * 1024 * 1024
 const MAX_LUA_BYTES = 8 * 1024 * 1024
+/**
+ * Cap on everything one package unpacks to. The per-entry caps above say
+ * nothing about the total: an archive well inside MAX_ARCHIVE_BYTES can hold
+ * thousands of entries that each pass, and deflate ratios reach the thousands,
+ * so the sum is what decides whether a single package can exhaust the build.
+ * The largest package here unpacks to 3.7 MB, and the whole repository to 20.
+ */
+const MAX_PACKAGE_LUA_BYTES = 32 * 1024 * 1024
 
 /** How many "beyond the API" names to keep, and how many packages one needs. */
 const MAX_BEYOND_NAMES = 250
@@ -126,13 +134,28 @@ function collectScripts(node, into) {
 function readLuaSources(zip) {
   const xmlScripts = []
   const luaFiles = []
+  let budget = MAX_PACKAGE_LUA_BYTES
+  let truncated = false
+
+  /** Whether an entry fits what is left of the budget, charged against it if so. */
+  const affordable = (size, limit) => {
+    if (size > limit) return false
+    if (size > budget) {
+      // Decided from the zip header, so an entry past the budget is never
+      // expanded - which is the point: getData() is where the memory goes.
+      truncated = true
+      return false
+    }
+    budget -= size
+    return true
+  }
 
   for (const entry of zip.getEntries()) {
     if (entry.isDirectory) continue
     const name = entry.entryName
 
     if (/^[^/]+\.xml$/i.test(name)) {
-      if (entry.header.size > MAX_XML_BYTES) continue
+      if (!affordable(entry.header.size, MAX_XML_BYTES)) continue
       try {
         const parsed = parser.parse(entry.getData().toString('utf8'))
         collectScripts(parsed?.MudletPackage ?? parsed, xmlScripts)
@@ -144,12 +167,12 @@ function readLuaSources(zip) {
 
     // config.lua is the package manifest, not code that runs in Mudlet.
     if (/\.lua$/i.test(name) && name !== 'config.lua') {
-      if (entry.header.size > MAX_LUA_BYTES) continue
+      if (!affordable(entry.header.size, MAX_LUA_BYTES)) continue
       luaFiles.push(entry.getData().toString('utf8'))
     }
   }
 
-  return { xmlScripts, luaFiles }
+  return { xmlScripts, luaFiles, truncated }
 }
 
 // ---------------------------------------------------------------------------
@@ -516,6 +539,7 @@ async function main() {
   const beyondCalls = new Map()
   const packages = []
   const skipped = []
+  const truncated = []
 
   let luaBytes = 0
   let luaFileBytes = 0
@@ -542,6 +566,9 @@ async function main() {
       skipped.push({ filename, reason: 'not a readable archive' })
       continue
     }
+
+    // Partial counts, so say so rather than presenting them as the whole story.
+    if (sources.truncated) truncated.push(filename)
 
     const fileLua = sources.luaFiles.join('\n')
     const source = stripLuaNoise([...sources.xmlScripts, fileLua].join('\n'))
@@ -606,6 +633,8 @@ async function main() {
       .slice(0, MAX_BEYOND_NAMES),
     packages: packages.sort((a, b) => b.functions - a.functions || a.name.localeCompare(b.name)),
     skipped,
+    /** Packages read only as far as the per-package budget; counts are partial. */
+    truncated,
   }
 
   await mkdir(path.dirname(outputPath), { recursive: true })
@@ -615,7 +644,8 @@ async function main() {
     `API usage: ${report.listedFunctionsUsed} of ${report.apiFunctionCount} listed functions used, `+
       `${report.functions.length - report.listedFunctionsUsed} namespaced, ` +
       `across ${report.packagesScanned} packages` +
-      (skipped.length ? `, ${skipped.length} skipped` : '')
+      (skipped.length ? `, ${skipped.length} skipped` : '') +
+      (truncated.length ? `, ${truncated.length} read only in part` : '')
   )
 }
 
