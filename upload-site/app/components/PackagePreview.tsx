@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import ReactMarkdown from 'react-markdown'
 import { PackageContents as Contents, PackageMetadata, ValidationResult } from '@/app/lib/types'
+import { PackageDescription } from './PackageDescription'
 import { PackageExplorer } from './PackageExplorer'
 
 interface PackagePreviewProps {
@@ -89,9 +89,7 @@ export function PackagePreview({
             </dt>
             <dd>
               {metadata.description ? (
-                <ReactMarkdown className="prose-package">
-                  {metadata.description}
-                </ReactMarkdown>
+                <PackageDescription>{metadata.description}</PackageDescription>
               ) : (
                 <span className="text-danger">required</span>
               )}

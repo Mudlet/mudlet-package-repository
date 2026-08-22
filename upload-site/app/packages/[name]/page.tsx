@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
 import type { Metadata } from 'next'
 import {
   fetchPackageBySlug,
@@ -13,6 +12,7 @@ import { parsePackageContents } from '@/app/lib/packageContents'
 import { PackageExplorer } from '@/app/components/PackageExplorer'
 import { InstallCommands } from '@/app/components/InstallCommands'
 import { DragToInstall } from '@/app/components/DragToInstall'
+import { PackageDescription } from '@/app/components/PackageDescription'
 import { formatDate, packageDownloadUrl, packageIconUrl, packageSlug } from '@/app/lib/urls'
 
 type PageProps = { params: Promise<{ name: string }> }
@@ -148,9 +148,7 @@ export default async function PackagePage({ params }: PageProps) {
       {pkg.description && (
         <section className="mt-8">
           <h2 className="mb-2 text-lg font-semibold">Description</h2>
-          <ReactMarkdown className="prose-package">
-            {pkg.description}
-          </ReactMarkdown>
+          <PackageDescription>{pkg.description}</PackageDescription>
         </section>
       )}
 
