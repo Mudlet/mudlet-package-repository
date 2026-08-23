@@ -13,6 +13,7 @@
  */
 
 import { readFile } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
 
 const path = process.argv[2] ?? 'trusted-publishers.json'
 const problems = []
@@ -41,6 +42,7 @@ const REQUIRED = ['mpackage', 'filename', 'repository', 'repositoryId', 'reposit
 const KNOWN = new Set([...REQUIRED, 'ref', 'environment', 'allowSelfHostedRunner'])
 
 const seen = new Map()
+const seenFiles = new Map()
 
 for (const [index, entry] of registry.publishers.entries()) {
   const label = entry?.mpackage ? `${index}: ${entry.mpackage}` : String(index)
@@ -87,6 +89,47 @@ for (const [index, entry] of registry.publishers.entries()) {
       note(label, `duplicates the entry at index ${seen.get(key)} for the same package`)
     } else {
       seen.set(key, index)
+    }
+  }
+
+  // Two entries for one file are two packages publishing over each other:
+  // every check at publish time is against the entry's own ids and its own
+  // package name, so nothing there notices that the archive lands on somebody
+  // else's path. This is where it has to be caught.
+  if (typeof entry.filename === 'string') {
+    const key = entry.filename.trim().toLowerCase()
+    if (seenFiles.has(key)) {
+      note(label, `"filename" is also claimed by the entry at index ${seenFiles.get(key)}`)
+    } else {
+      seenFiles.set(key, index)
+    }
+  }
+}
+
+// And the same collision against packages already published. The index names
+// the file each package occupies; an entry pointing at one of them for a
+// different package would publish straight over it.
+const indexPath = join(dirname(path), 'packages', 'mpkg.packages.json')
+const index = await readFile(indexPath, 'utf8').then(
+  (text) => JSON.parse(text).packages,
+  // Not every checkout has a generated index, and a validator that cannot read
+  // one has nothing to say about it either way.
+  () => null,
+)
+
+if (Array.isArray(index)) {
+  for (const [index_, entry] of registry.publishers.entries()) {
+    if (typeof entry?.filename !== 'string' || typeof entry?.mpackage !== 'string') continue
+    const occupied = index.find(
+      (pkg) =>
+        String(pkg?.filename ?? '').trim().toLowerCase() === entry.filename.trim().toLowerCase() &&
+        String(pkg?.mpackage ?? '').trim().toLowerCase() !== entry.mpackage.trim().toLowerCase(),
+    )
+    if (occupied) {
+      note(
+        `${index_}: ${entry.mpackage}`,
+        `"filename" is packages/${entry.filename}, which is already the file of "${occupied.mpackage}"`,
+      )
     }
   }
 }

@@ -50,16 +50,6 @@ jobs:
         PACKAGE_RE='^packages/[^/]+\.(mpackage|zip)$'
         FILE=$(echo "$PATHS" | grep -E "$PACKAGE_RE" || true)
 
-        # A trusted publish also records where the archive came from, pinned to
-        # its digest (see TRUSTED-PUBLISHING.md), so the package's own file
-        # under provenance/ may ride along. Nothing else may.
-        OTHER=$(echo "$PATHS" | grep -vE "$PACKAGE_RE|^provenance/[^/]+\.json$" || true)
-        if [ -n "$OTHER" ]; then
-          echo "Error: this pull request changes files that are not a package:"
-          echo "$OTHER" | sed 's/^/  /'
-          exit 1
-        fi
-
         # check only 1 package file has been uploaded per PR
         COUNT=$(echo "$FILE" | grep -c . || true)
         if [ "$COUNT" -gt 1 ]; then
@@ -68,9 +58,23 @@ jobs:
         elif [ "$COUNT" -eq 0 ]; then
           echo "Error: no package file found in this pull request."
           exit 1
-        else
-          echo "Pass: just one file uploaded."
         fi
+
+        # A trusted publish also records where the archive came from, pinned to
+        # its digest (see TRUSTED-PUBLISHING.md), so the package's own record
+        # under provenance/ may ride along - that one file and no other. Named
+        # exactly rather than matched by shape: "any provenance/*.json" let a
+        # pull request carry records for packages it does not touch.
+        ALLOWED_PROVENANCE="provenance/$(basename "$FILE").json"
+        OTHER=$(echo "$PATHS" | grep -vE "$PACKAGE_RE" | grep -vxF "$ALLOWED_PROVENANCE" || true)
+        if [ -n "$OTHER" ]; then
+          echo "Error: this pull request changes files that are not a package:"
+          echo "$OTHER" | sed 's/^/  /'
+          echo "The only file that may accompany one is $ALLOWED_PROVENANCE."
+          exit 1
+        fi
+
+        echo "Pass: just one file uploaded."
 
         echo "FILE=$FILE" >> $GITHUB_OUTPUT
       
