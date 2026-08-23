@@ -76,6 +76,7 @@ const REQUIRED_CLAIMS = [
   'event_name',
   'runner_environment',
   'run_id',
+  'run_attempt',
 ] as const
 
 export class TokenError extends Error {}

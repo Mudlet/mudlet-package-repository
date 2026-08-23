@@ -80,11 +80,21 @@ export async function loadRegistry(): Promise<TrustedPublisher[]> {
 /**
  * job_workflow_ref is "owner/repo/.github/workflows/file.yml@refs/heads/main".
  * The ref is checked separately, so only the path half is compared here.
+ *
+ * Split at the "@" that introduces the ref, not at the last one in the string:
+ * a ref may carry an "@" of its own - "refs/tags/arkadia@1.2.3" is what
+ * changesets and semantic-release produce, and git accepts it - and splitting
+ * on the last would hand back a path with half the tag glued to it, refusing
+ * the publish with a message about a workflow file nobody wrote.
  */
 function workflowPathOf(jobWorkflowRef: string): string | null {
-  const at = jobWorkflowRef.lastIndexOf('@')
-  if (at === -1) return null
-  return jobWorkflowRef.slice(0, at)
+  const at = jobWorkflowRef.lastIndexOf('@refs/')
+  // GitHub has always put a full ref here, but a claim shaped some other way
+  // is better split on its last "@" than refused outright - the path still has
+  // to match an entry character for character afterwards.
+  const fallback = at === -1 ? jobWorkflowRef.lastIndexOf('@') : at
+  if (fallback === -1) return null
+  return jobWorkflowRef.slice(0, fallback)
 }
 
 /**
@@ -107,7 +117,13 @@ function sameName(a: string, b: string): boolean {
 }
 
 /**
- * Finds the registry entry that authorises this run, or explains why none did.
+ * Every registry entry this run may act for, or an explanation of why none did.
+ *
+ * A list rather than one entry: a repository is free to register several of its
+ * packages against the same workflow file, and picking the first of them here
+ * would leave every package but that one unpublishable. Which of these the run
+ * is actually publishing is not known until config.lua has been read, so
+ * publisherFor below finishes the job.
  *
  * The explanation deliberately does not distinguish "no entry for this
  * repository" from "entry exists but the workflow differs" in a way that would
@@ -118,7 +134,7 @@ function sameName(a: string, b: string): boolean {
 export function authorise(
   claims: ActionsClaims,
   publishers: TrustedPublisher[],
-): TrustedPublisher {
+): TrustedPublisher[] {
   const forRepo = publishers.filter(
     (p) =>
       p.repositoryId === claims.repository_id &&
@@ -149,10 +165,37 @@ export function authorise(
   // different files that can sit in one repository at once. Folding case would
   // let the one nobody registered publish under the registered one's name.
   const actualWorkflow = repoRelativeWorkflow(path, claims.repository)
-  const match = forRepo.find((p) => p.workflow.trim() === actualWorkflow)
-  if (!match) {
+  const forWorkflow = forRepo.filter((p) => p.workflow.trim() === actualWorkflow)
+  if (forWorkflow.length === 0) {
     throw new PublisherError(
       `workflow ${path} is not the workflow registered to publish for this repository`,
+    )
+  }
+
+  return forWorkflow
+}
+
+/**
+ * Which of the authorised entries this archive is, and whether the run meets
+ * the conditions that entry puts on it.
+ *
+ * The package named in config.lua is what chooses the entry - without that an
+ * authorised workflow could publish over anything else in the repository. The
+ * ref, environment and runner conditions are checked here rather than in
+ * authorise because they belong to the entry rather than to the repository: two
+ * packages published by one workflow may each be pinned differently.
+ */
+export function publisherFor(
+  claims: ActionsClaims,
+  authorised: TrustedPublisher[],
+  mpackage: string | null,
+): TrustedPublisher {
+  const match = mpackage ? authorised.find((p) => sameName(p.mpackage, mpackage)) : undefined
+  if (!match) {
+    const registered = authorised.map((p) => `"${p.mpackage}"`).join(', ')
+    throw new PublisherError(
+      `config.lua declares mpackage "${mpackage ?? ''}", but this workflow is ` +
+        `registered to publish ${registered}`,
     )
   }
 
@@ -176,22 +219,6 @@ export function authorise(
   }
 
   return match
-}
-
-/**
- * The package being uploaded has to be the package the entry is for. Without
- * this an authorised workflow could publish over anything in the repository.
- */
-export function assertPackageMatches(
-  publisher: TrustedPublisher,
-  mpackage: string | null,
-): void {
-  if (!mpackage || !sameName(mpackage, publisher.mpackage)) {
-    throw new PublisherError(
-      `config.lua declares mpackage "${mpackage ?? ''}", but this publisher is ` +
-        `registered for "${publisher.mpackage}"`,
-    )
-  }
 }
 
 /** Guards against an entry naming a path instead of a file in packages/. */

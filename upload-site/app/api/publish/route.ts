@@ -24,11 +24,12 @@ import {
 } from '@/app/lib/provenance'
 import {
   assertFilenameSane,
-  assertPackageMatches,
   authorise,
   loadRegistry,
+  publisherFor,
   PublisherError,
   REGISTRY_PATH,
+  type TrustedPublisher,
 } from '@/app/lib/trustedPublishers'
 
 /**
@@ -133,11 +134,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'This token has already been used' }, { status: 409 })
   }
 
-  // ---- 2. May they publish this package ---------------------------------
-  let publisher
+  // ---- 2. May this workflow publish anything ----------------------------
+  // Which package it is publishing is not known until config.lua has been
+  // read, so this settles only that the run is one the registry knows, and
+  // hands back every entry it may act for.
+  let authorised: TrustedPublisher[]
   try {
-    publisher = authorise(claims, await loadRegistry())
-    assertFilenameSane(publisher.filename)
+    authorised = authorise(claims, await loadRegistry())
   } catch (error) {
     if (error instanceof PublisherError) {
       return NextResponse.json({ error: error.message }, { status: 403 })
@@ -202,8 +205,12 @@ export async function POST(request: Request) {
     )
   }
 
+  // Which of the authorised entries this is, and whether the run satisfies the
+  // conditions that entry puts on it.
+  let publisher: TrustedPublisher
   try {
-    assertPackageMatches(publisher, metadata.mpackage)
+    publisher = publisherFor(claims, authorised, metadata.mpackage)
+    assertFilenameSane(publisher.filename)
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof PublisherError ? error.message : 'Package mismatch' },
