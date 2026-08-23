@@ -153,7 +153,52 @@ jobs:
             # a diff hunk covers the handler or function a match sits in, so a match shows
             # up in one when it is added, when it moves, and when the code around it is
             # rewritten. Removed lines are dropped - taking a match out needs no review.
-            hits=$(diff -a -U20 "$base_file" "$new_file" | grep -v '^-' | grep -a -E "$PATTERN") || true
+        PATTERN_STRICT='os\.exec|lfs\.rmdir'
+        PATTERN_CONTEXTUAL='sysDataSendRequest'
+
+        # Check for unconditionally dangerous patterns anywhere in the package.
+        if grep -q -R -a -E "$PATTERN_STRICT" unzipped_package/; then
+          echo "::error:: unconditionally dangerous functions found (os.exec, lfs.rmdir), please validate manually"
+          exit 1
+        fi
+
+        # Unpack the version of this package that is already on the base branch, so the
+        # two can be compared file by file. Whatever it matched there was looked at when
+        # it was merged; only what this pull request changes needs another manual look.
+        # Checking the whole package instead would freeze every package that legitimately
+        # uses one of these - handling sysDataSendRequest is how a mapper tracks
+        # movement, so those packages could never be updated again (#755).
+        if git fetch --no-tags --depth=1 origin "$BASE_SHA" >/dev/null 2>&1 \
+           && git cat-file -e "$BASE_SHA:$FILE" 2>/dev/null \
+           && git show "$BASE_SHA:$FILE" > base_package.zip \
+           && unzip -q -o base_package.zip -d unzipped_base_package; then
+          echo "Comparing against ${FILE} as of ${BASE_SHA}."
+        else
+          # a new package, or the previous version could not be read: check it whole
+          echo "No previous version of ${FILE} to compare against, checking the whole package."
+        fi
+
+        : > findings.txt
+        while IFS= read -r new_file; do
+          base_file="unzipped_base_package/${new_file#unzipped_package/}"
+          if [ -f "$base_file" ]; then
+            hits=$(diff -a -U20 "$base_file" "$new_file" | grep -v '^-' | grep -a -E "$PATTERN_CONTEXTUAL") || true
+          else
+            hits=$(grep -a -E "$PATTERN_CONTEXTUAL" "$new_file") || true
+          fi
+          if [ -n "$hits" ]; then
+            printf '%s:\n%s\n' "${new_file#unzipped_package/}" "$hits" >> findings.txt
+          fi
+        done < <(find unzipped_package -type f)
+
+        if [ -s findings.txt ]; then
+          echo "Added or changed by this pull request:"
+          cat findings.txt
+          echo "::error:: questionable functions or events used, please validate manually"
+          exit 1
+        fi
+
+        echo "Pass: security checks"
           else
             hits=$(grep -a -E "$PATTERN" "$new_file") || true
           fi
