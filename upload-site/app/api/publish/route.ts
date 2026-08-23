@@ -404,6 +404,39 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error('Trusted publishing: GitHub API error', error)
+
+    // Opening the pull request is the last thing this request does, so one
+    // standing open on this branch means the publish landed and only the
+    // answer was lost on the way back. That is a success wearing an error's
+    // clothes: report it as the success it is, and - the point of looking
+    // before the cleanup below - do not delete the branch out from under a
+    // pull request that is already waiting for review.
+    if (ownsBranch) {
+      try {
+        const opened = await openPullRequestForBranch(branchName)
+        if (opened) {
+          return NextResponse.json({
+            success: true,
+            pullRequest: opened.html_url,
+            filename,
+            version: metadata.version,
+          })
+        }
+      } catch (lookupError) {
+        console.error('Trusted publishing: could not tell whether a pull request was opened', lookupError)
+        // Unknown is not "no". Leave the branch: an orphan costs a stray
+        // branch, deleting a live pull request's head costs the publish.
+        return NextResponse.json(
+          {
+            error:
+              (error instanceof Error ? error.message : 'Failed to create the pull request') +
+              `. Check whether a pull request was opened from ${branchName} before publishing again.`,
+          },
+          { status: 500 },
+        )
+      }
+    }
+
     // Leave nothing half-done behind: a branch with commits but no pull
     // request is invisible to every gate here. Only ever this request's own
     // branch, which the nonce in the name guarantees.
