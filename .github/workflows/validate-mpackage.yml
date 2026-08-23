@@ -123,14 +123,73 @@ jobs:
     - name: Check for malicious content
       if: steps.skip-if-deleted.outputs.skip != 'true'
       id: check-malicious-content
+      env:
+        FILE: ${{ steps.check-file-count.outputs.FILE }}
+        BASE_SHA: ${{ github.event.pull_request.base.sha }}
       run: |
-        FILE="${{ steps.check-file-count.outputs.FILE }}"
-        if grep -q -R -E 'os\.exec|lfs\.rmdir|sysDataSendRequest' unzipped_package/; then
-          echo "::error:: questionable functions or events used, please validate manually"
+        # Nothing a package legitimately does needs these, so they are looked at by
+        # hand wherever they turn up, however long they have been in the package.
+        PATTERN_STRICT='os\.exec|lfs\.rmdir'
+        # A standard Mudlet event: registering a handler for it is how a mapper tracks
+        # movement, and it is also how a package would read everything you type. Worth
+        # a look when a pull request touches one, not worth freezing every package that
+        # has always had one - that is what made them impossible to update (#755).
+        PATTERN_CONTEXTUAL='sysDataSendRequest'
+
+        if grep -a -n -R -E "$PATTERN_STRICT" unzipped_package/; then
+          echo "::error:: questionable functions used, please validate manually"
           exit 1
-        else
-          echo "Pass: security checks"
         fi
+
+        # Unpack the version of this package that is already on the base branch, so the
+        # two can be compared file by file. Whatever it matched there was looked at when
+        # it was merged; only what this pull request changes needs another manual look.
+        if git fetch --no-tags --depth=1 origin "$BASE_SHA" >/dev/null 2>&1 \
+           && git cat-file -e "$BASE_SHA:$FILE" 2>/dev/null \
+           && git show "$BASE_SHA:$FILE" > base_package.zip \
+           && unzip -q -o base_package.zip -d unzipped_base_package; then
+          echo "Comparing against ${FILE} as of ${BASE_SHA}."
+        else
+          # A new package, or a previous version that could not be read: check it whole.
+          # unzip reports a warning with a non-zero status once it has already unpacked
+          # everything, so drop what it left rather than half-comparing against it.
+          rm -rf unzipped_base_package
+          echo "No previous version of ${FILE} to compare against, checking the whole package."
+        fi
+
+        : > findings.txt
+        while IFS= read -r new_file; do
+          base_file="unzipped_base_package/${new_file#unzipped_package/}"
+          if [ -f "$base_file" ]; then
+            # Only report a match that this pull request touched: with 20 lines of context
+            # a diff hunk covers the handler or function a match sits in, so a match shows
+            # up in one when it is added, when it moves, and when the code around it is
+            # rewritten. Removed lines are dropped - taking a match out needs no review -
+            # and so are the two header lines, which carry a path rather than any code.
+            changed=$(diff -a -U20 "$base_file" "$new_file") && rc=0 || rc=$?
+            if [ "$rc" -ge 2 ]; then
+              # diff says 0 for same and 1 for differs. Anything above that means it could
+              # not do the comparison, which must not pass for a file with nothing in it.
+              echo "::error:: could not compare ${new_file#unzipped_package/} against the version in ${FILE}"
+              exit 1
+            fi
+            hits=$(printf '%s\n' "$changed" | tail -n +3 | grep -v '^-' | grep -a -E "$PATTERN_CONTEXTUAL") || true
+          else
+            hits=$(grep -a -E "$PATTERN_CONTEXTUAL" "$new_file") || true
+          fi
+          if [ -n "$hits" ]; then
+            printf '%s:\n%s\n' "${new_file#unzipped_package/}" "$hits" >> findings.txt
+          fi
+        done < <(find unzipped_package -type f)
+
+        if [ -s findings.txt ]; then
+          echo "Added or changed by this pull request:"
+          cat findings.txt
+          echo "::error:: questionable events used, please validate manually"
+          exit 1
+        fi
+
+        echo "Pass: security checks"
 
     - name: Extract package name and author, check for duplicates
       if: steps.skip-if-deleted.outputs.skip != 'true'
