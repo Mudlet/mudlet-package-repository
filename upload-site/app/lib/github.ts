@@ -43,18 +43,46 @@ export async function branchExists(branch: string): Promise<boolean> {
   }
 }
 
+/** Every branch whose name begins with `prefix`, newest-first order not promised. */
+export async function branchesWithPrefix(prefix: string): Promise<string[]> {
+  try {
+    const { data } = await octokit.rest.git.listMatchingRefs({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      ref: `heads/${prefix}`,
+    })
+    return data.map((ref) => ref.ref.replace(/^refs\/heads\//, ''))
+  } catch (error) {
+    const status =
+      typeof error === 'object' && error && 'status' in error ? error.status : null
+    if (status === 404) {
+      return []
+    }
+    throw error
+  }
+}
+
+/** The open pull request built on `branch`, or null when nothing is open for it. */
+export async function openPullRequestForBranch(branch: string) {
+  const { data } = await octokit.rest.pulls.list({
+    owner: REPO_OWNER,
+    repo: REPO_NAME,
+    state: 'open',
+    head: `${REPO_OWNER}:${branch}`,
+    per_page: 1,
+  })
+  return data[0] ?? null
+}
+
 /**
  * Drop a branch, ignoring one that is already gone.
  *
  * Used to undo a publish that failed partway: without it a run that died
  * between creating the branch and opening the pull request would leave the
- * branch behind, and the retry - which derives the same name - would collide
- * with it rather than start clean.
+ * branch behind, unreachable by every gate that reviews a publish.
  *
- * Returns whether the branch is now gone. A caller that derives the branch
- * name deterministically needs to know when it is not: the wreckage will meet
- * every later request for that run, so the failure has to be said out loud
- * rather than swallowed here.
+ * Returns whether the branch is now gone, so a caller can say so rather than
+ * have the failure swallowed here.
  */
 export async function deleteBranch(branch: string): Promise<boolean> {
   try {

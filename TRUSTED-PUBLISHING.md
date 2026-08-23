@@ -197,5 +197,9 @@ In order, and the request stops at the first failure:
 It then opens a pull request adding the archive and recording its digest under
 `provenance/`.
 
+A token is accepted once. Calling twice from one workflow run — a retry whose
+first reply was lost, say — answers `409` with the pull request the earlier call
+already opened, in the same `pullRequest` field a success returns.
+
 The audience pin means a token minted for some other service cannot be
 forwarded here, and a token minted for us is useless anywhere else.

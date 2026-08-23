@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server'
+import { randomUUID } from 'node:crypto'
 import AdmZip from 'adm-zip'
 import {
   branchExists,
+  branchesWithPrefix,
   createBranch,
   createPullRequest,
   deleteBranch,
   deleteFile,
   getFileSha,
+  openPullRequestForBranch,
   uploadFile,
 } from '@/app/lib/github'
 import { parseConfigLua } from '@/app/lib/packageParser'
@@ -240,47 +243,72 @@ export async function POST(request: Request) {
 
   // ---- 5. Same landing path as a website upload --------------------------
   const runUrl = `https://github.com/${claims.repository}/actions/runs/${claims.run_id}`
-  const branchName = `trusted-publish/${publisher.mpackage
+
+  // Everything but the last segment says which run this branch belongs to; the
+  // last segment says which request made it. Both halves earn their place: the
+  // shared part is how a second request for this run recognises the first, and
+  // the unique part is what makes ownership a fact rather than a guess, so a
+  // failed publish can clean up after itself without ever reaching for a
+  // branch some other request is still uploading to.
+  const branchPrefix = `trusted-publish/${publisher.mpackage
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-    .substring(0, 40)}-${metadata.version}-${claims.run_id}-${claims.run_attempt}`
+    .substring(0, 40)}-${metadata.version}-${claims.run_id}-${claims.run_attempt}-`
+  const branchName = `${branchPrefix}${randomUUID().slice(0, 8)}`
+
+  // Has a request for this same run already got a pull request open? Then this
+  // one is a duplicate call or a retry of a publish whose reply was lost, and
+  // the answer it wants is that pull request, not a second one beside it.
+  //
+  // Deliberately keyed on the pull request rather than on the branch: a branch
+  // with nothing open on it is either wreckage or a sibling seconds ahead of
+  // this request, and refusing on that would let one abandoned branch turn
+  // away every later publish for the run. Two simultaneous first calls can
+  // still slip through into two pull requests - a duplicate a human closes,
+  // which beats a publish path that jams shut.
+  try {
+    for (const sibling of await branchesWithPrefix(branchPrefix)) {
+      const open = await openPullRequestForBranch(sibling)
+      if (open) {
+        return NextResponse.json(
+          {
+            error: 'A publish for this workflow run is already open',
+            pullRequest: open.html_url,
+          },
+          { status: 409 },
+        )
+      }
+    }
+  } catch (error) {
+    // Only a courtesy check - a publish is not worth failing over it.
+    console.warn('Trusted publishing: could not look for an earlier publish of this run', error)
+  }
 
   // Whether this request is the one that made the branch, and so the only one
-  // entitled to take it away again on the way out.
+  // entitled to take it away again on the way out. The name carries a nonce no
+  // other request can produce, so a branch under it is ours by construction.
   let ownsBranch = false
-  // A branch that is there after a create whose answer never came back. It may
-  // be the one this request made, or a duplicate request's - nothing here can
-  // tell - so it is named in the error rather than removed.
-  let branchOfUnknownOwner = false
 
   try {
     try {
       await createBranch(branchName, 'main')
       ownsBranch = true
     } catch (error) {
-      // The name is derived from the run, so the only thing that already holds
-      // it is another request for this same run - a replayed token, or a
-      // duplicate call - which is partway through building it right now. That
-      // publish owns the branch and its pull request; say so and leave.
       const status =
         typeof error === 'object' && error && 'status' in error ? error.status : null
+      // Nothing else can be holding this name, so a refusal to create it is
+      // not a story about another publish - and a branch this request did not
+      // make is not a branch it may delete. Fail without touching anything.
       if (status === 422) {
-        return NextResponse.json(
-          { error: 'A publish for this workflow run is already in progress' },
-          { status: 409 },
-        )
+        throw error
       }
-      // Anything else may have failed on the way back rather than on the way
-      // out: GitHub made the branch and the answer never arrived. A branch
-      // that is there now is either that one or a duplicate request's, and the
-      // two look exactly alike - both sit at main's tip under the one name
-      // this run can produce. Claiming it on a guess would mean deleting a
-      // sibling's branch while it is still uploading to it, leaving its pull
-      // request without a head; a branch nobody removes only costs a re-run.
-      // So: look, report, do not touch.
+      // The call may have failed on the way back rather than on the way out:
+      // GitHub made the branch and the answer never arrived. The nonce settles
+      // whose it is - only this request could have asked for that name - so
+      // finding it there is enough to own it and tidy it away below.
       try {
-        branchOfUnknownOwner = await branchExists(branchName)
+        ownsBranch = await branchExists(branchName)
       } catch (lookupError) {
         console.error('Trusted publishing: could not tell whether the branch was created', lookupError)
       }
@@ -376,27 +404,19 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error('Trusted publishing: GitHub API error', error)
-    // Leave nothing half-done behind. A branch with commits but no pull request
-    // is invisible to every gate here, and the retry derives the same name from
-    // the same run, so it would collide with the wreckage instead of starting
-    // clean. Only ever the branch this request created, though: the name is
-    // shared by every request for this run, and tidying away one that another
-    // request is still building would break its pull request rather than clean
-    // up after this one.
-    const strandedBranch = ownsBranch
-      ? !(await deleteBranch(branchName))
-      : branchOfUnknownOwner
+    // Leave nothing half-done behind: a branch with commits but no pull
+    // request is invisible to every gate here. Only ever this request's own
+    // branch, which the nonce in the name guarantees.
+    const strandedBranch = ownsBranch && !(await deleteBranch(branchName))
 
     const message = error instanceof Error ? error.message : 'Failed to create the pull request'
-    // A branch still standing outlives this request, and the name comes from
-    // the run attempt, so retrying this attempt only meets it again as a 409.
-    // Better to name it here than to let the workflow retry into that.
+    // Nothing downstream depends on this branch going away - the next attempt
+    // picks its own name - but somebody has to be told it is sitting there.
     return NextResponse.json(
       {
         error: strandedBranch
-          ? `${message}. The publish branch ${branchName} is still there: if no pull request ` +
-            'appears for this run, re-run the workflow - a retry of this attempt would land ' +
-            'on the same branch name.'
+          ? `${message}. The publish branch ${branchName} could not be removed and needs ` +
+            'deleting by hand; publishing again is unaffected.'
           : message,
       },
       { status: 500 },
