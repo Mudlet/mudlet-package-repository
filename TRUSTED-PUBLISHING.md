@@ -99,6 +99,10 @@ The artifact is passed as a URL rather than uploaded, so a large package does
 not run into the request body limits on the site, and the URL must be a release
 asset of the same repository the token was issued to.
 
+One workflow may publish several packages: give each its own entry, all naming
+the same `workflow`. Which entry a run is acting under is decided by the
+`mpackage` in the `config.lua` it uploads.
+
 ### Reusable workflows are not supported
 
 The registry pins `job_workflow_ref`, which names the workflow file that
@@ -123,6 +127,11 @@ review it like a credential. Worth checking:
 - **The package is theirs.** An entry for a package someone else already
   publishes is refused at publish time (the author in `config.lua` must match
   the index), but it should not get that far.
+- **The `filename` is theirs too.** It is the path the archive lands on, and
+  nothing about the rest of the entry constrains it: an entry that names another
+  package's file would publish over that file. `validate-trusted-publishers.yml`
+  rejects one that collides with another entry or with a published package, and
+  the endpoint refuses it as well, but the diff is where it is obvious.
 
 `trusted-publishers.json` is outside `packages/`, so the auto-merge workflow —
 which only ever touches `packages/*.mpackage` and `packages/*.zip` — will not
@@ -130,9 +139,15 @@ merge a change to it.
 
 ## Provenance, and why the badge is not driven by this file
 
-A package published this way gets a "Built and published from source" panel on
-its page, linking the repository, the workflow file and the commit it was built
-from.
+A package published this way gets a "Published from source by CI" panel on its
+page, linking the repository, the workflow file and the commit the run was on.
+
+The panel says *published*, not *built*, because that is what the record can
+support: a release asset can be attached to a release by hand. What is proven is
+that these exact bytes were submitted by that run, from that repository, by that
+workflow file. A run on a tag is pinned further — the asset must belong to that
+tag's own release — but a run on a branch can offer any asset the repository
+has.
 
 That panel is deliberately **not** driven by `trusted-publishers.json`. This
 file records an intention, decided before any archive exists — it cannot say how
@@ -159,7 +174,8 @@ same path.
 This is why a trusted publish changes two files. Those records are what the
 badge trusts, so they are kept out of reach of anything else:
 
-- `validate-mpackage.yml` allows one to accompany a package, and still rejects
+- `validate-mpackage.yml` allows the record *for that package* to accompany it —
+  `provenance/<the file in packages/>.json`, named exactly — and still rejects
   any other extra file, and still allows only one package per pull request.
 - `auto-merge-packages.yml` allows one in scope **only** when the pull request
   comes from a `trusted-publish/*` branch in this repository, opened by the
@@ -188,21 +204,26 @@ In order, and the request stops at the first failure:
 
 1. The token is signed by `https://token.actions.githubusercontent.com`, has
    audience `https://packages.mudlet.org`, and is under 15 minutes old.
-2. `repository_id` and `repository_owner_id` match a registry entry.
+2. `repository_id` and `repository_owner_id` match at least one registry entry.
 3. `job_workflow_ref` names the registered workflow file, character for
-   character.
-4. `ref`, `environment` and runner type match, where the entry constrains them.
-5. `artifactUrl` is an HTTPS release asset of the repository in the token.
-6. The archive holds a `config.lua` with all six required fields.
-7. `config.lua`'s `mpackage` is the package the entry is for.
-8. If that package is already in the index, its author matches.
+   character. What is left is every entry that workflow may publish.
+4. `artifactUrl` is an HTTPS release asset of the repository in the token — and
+   of that tag's own release, when the run is on a tag.
+5. The archive holds a `config.lua` with all six required fields.
+6. `config.lua`'s `mpackage` picks one of those entries. That is the publisher.
+7. `ref`, `environment` and runner type match, where **that entry** constrains
+   them.
+8. `packages/<filename>` is not already some other package's file.
+9. If the package is already in the index, its author matches.
 
 It then opens a pull request adding the archive and recording its digest under
 `provenance/`.
 
-A token is accepted once. Calling twice from one workflow run — a retry whose
-first reply was lost, say — answers `409` with the pull request the earlier call
-already opened, in the same `pullRequest` field a success returns.
+A token is accepted once, and a workflow run gets one pull request. Calling
+twice from one run — a retry whose first reply was lost, say — answers `409`:
+with the earlier pull request in the same `pullRequest` field a success returns,
+when that call got far enough to open one, and with `This token has already been
+used` when the retry re-sent the very same token.
 
 The audience pin means a token minted for some other service cannot be
 forwarded here, and a token minted for us is useless anywhere else.
