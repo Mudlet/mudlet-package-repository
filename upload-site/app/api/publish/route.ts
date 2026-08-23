@@ -422,7 +422,15 @@ export async function POST(request: Request) {
     // A 4xx is GitHub having read the request and refused it, so whatever it
     // asked for did not happen. A timeout, a dropped connection, a 5xx: those
     // may have happened and lost the answer on the way back.
-    const refusedOutright = status !== null && status >= 400 && status < 500
+    //
+    // 422 is the exception, and the reason it is spelled out. It is what
+    // opening a pull request answers once one is already open - so it is the
+    // shape a *succeeded* create takes when the reply is lost and octokit's
+    // retry plugin asks a second time. Reading it as a refusal would have this
+    // request delete the branch under the pull request it just opened, which
+    // closes it.
+    const refusedOutright =
+      status !== null && status >= 400 && status < 500 && status !== 422
 
     // Opening the pull request is the last thing this request does, so once it
     // has been asked for, no failure short of an outright refusal says it was
