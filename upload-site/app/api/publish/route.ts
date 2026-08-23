@@ -289,6 +289,9 @@ export async function POST(request: Request) {
   // entitled to take it away again on the way out. The name carries a nonce no
   // other request can produce, so a branch under it is ours by construction.
   let ownsBranch = false
+  // Whether the pull request was asked for. Once it has been, no failure can
+  // be read as proof that it was not opened.
+  let pullRequestAttempted = false
 
   try {
     try {
@@ -375,6 +378,8 @@ export async function POST(request: Request) {
       }
     }
 
+    // From here on a failure cannot be read as "no pull request was opened".
+    pullRequestAttempted = true
     const pr = await createPullRequest(
       branchName,
       `${existingFilename ? 'Update' : 'Add'} package: ${filename} (${metadata.version})`,
@@ -404,45 +409,55 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error('Trusted publishing: GitHub API error', error)
+    const message = error instanceof Error ? error.message : 'Failed to create the pull request'
+    const status =
+      typeof error === 'object' && error && 'status' in error ? Number(error.status) : null
+    // A 4xx is GitHub having read the request and refused it, so whatever it
+    // asked for did not happen. A timeout, a dropped connection, a 5xx: those
+    // may have happened and lost the answer on the way back.
+    const refusedOutright = status !== null && status >= 400 && status < 500
 
-    // Opening the pull request is the last thing this request does, so one
-    // standing open on this branch means the publish landed and only the
-    // answer was lost on the way back. That is a success wearing an error's
-    // clothes: report it as the success it is, and - the point of looking
-    // before the cleanup below - do not delete the branch out from under a
-    // pull request that is already waiting for review.
-    if (ownsBranch) {
+    // Opening the pull request is the last thing this request does, so once it
+    // has been asked for, no failure short of an outright refusal says it was
+    // not opened - and the branch must not be touched on a guess, because
+    // deleting the head of an open pull request closes it.
+    if (ownsBranch && pullRequestAttempted && !refusedOutright) {
+      let opened = null
       try {
-        const opened = await openPullRequestForBranch(branchName)
-        if (opened) {
-          return NextResponse.json({
-            success: true,
-            pullRequest: opened.html_url,
-            filename,
-            version: metadata.version,
-          })
-        }
+        opened = await openPullRequestForBranch(branchName)
       } catch (lookupError) {
         console.error('Trusted publishing: could not tell whether a pull request was opened', lookupError)
-        // Unknown is not "no". Leave the branch: an orphan costs a stray
-        // branch, deleting a live pull request's head costs the publish.
-        return NextResponse.json(
-          {
-            error:
-              (error instanceof Error ? error.message : 'Failed to create the pull request') +
-              `. Check whether a pull request was opened from ${branchName} before publishing again.`,
-          },
-          { status: 500 },
-        )
       }
+      // Found: a success wearing an error's clothes. The publish landed and
+      // only the reply went missing, so hand back what the caller came for.
+      if (opened) {
+        return NextResponse.json({
+          success: true,
+          pullRequest: opened.html_url,
+          filename,
+          version: metadata.version,
+        })
+      }
+      // Not found is not proof either: a pull request seconds old can be
+      // missing from a listing that has not caught up yet. Every reading of
+      // silence here is a guess, and the cheap guess is the branch - an orphan
+      // costs a stray ref, closing a live pull request costs the publish.
+      return NextResponse.json(
+        {
+          error:
+            `${message}. A pull request may have been opened from ${branchName}: check for ` +
+            'one before publishing again, and delete that branch if there is none.',
+        },
+        { status: 500 },
+      )
     }
 
-    // Leave nothing half-done behind: a branch with commits but no pull
-    // request is invisible to every gate here. Only ever this request's own
-    // branch, which the nonce in the name guarantees.
+    // Otherwise the pull request was never reached, or was refused outright,
+    // so the branch carries commits nothing will ever review. Leave nothing
+    // half-done behind - and only ever this request's own branch, which the
+    // nonce in the name guarantees.
     const strandedBranch = ownsBranch && !(await deleteBranch(branchName))
 
-    const message = error instanceof Error ? error.message : 'Failed to create the pull request'
     // Nothing downstream depends on this branch going away - the next attempt
     // picks its own name - but somebody has to be told it is sitting there.
     return NextResponse.json(
