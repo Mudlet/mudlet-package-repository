@@ -320,7 +320,7 @@ export async function POST(request: Request) {
 
     // A renamed file would otherwise leave the old one behind as a second copy.
     if (existingFilename && existingFilename !== filename) {
-      const oldSha = await getFileSha(`packages/${existingFilename}`)
+      const oldSha = await getFileSha(`packages/${existingFilename}`, branchName)
       if (oldSha) {
         await deleteFile(
           `packages/${existingFilename}`,
@@ -331,11 +331,18 @@ export async function POST(request: Request) {
       }
     }
 
+    // Every publish after the first writes over an archive that is already on
+    // the branch, and GitHub refuses that unless it is told which blob is being
+    // replaced. Asked of the branch rather than worked out from the index: the
+    // index describes the last build of the site, while this has to describe
+    // the tree the commit lands on.
+    const packagePath = `packages/${filename}`
     await uploadFile(
-      `packages/${filename}`,
+      packagePath,
       fileBuffer.toString('base64'),
       branchName,
       existingFilename ? `Update package: ${filename}` : `Add package: ${filename}`,
+      (await getFileSha(packagePath, branchName)) ?? undefined,
     )
 
     // Pin the provenance to these exact bytes. Anything that replaces the
@@ -365,14 +372,14 @@ export async function POST(request: Request) {
       Buffer.from(serialiseRecord(record), 'utf8').toString('base64'),
       branchName,
       `Record provenance for ${filename} ${metadata.version}`,
-      (await getFileSha(provenancePath)) ?? undefined,
+      (await getFileSha(provenancePath, branchName)) ?? undefined,
     )
 
     // A renamed package must not leave its old record behind vouching for a
     // file that is no longer published.
     if (existingFilename && existingFilename !== filename) {
       const stalePath = provenancePathFor(existingFilename)
-      const staleSha = await getFileSha(stalePath)
+      const staleSha = await getFileSha(stalePath, branchName)
       if (staleSha) {
         await deleteFile(stalePath, `Remove provenance for ${existingFilename}`, staleSha, branchName)
       }

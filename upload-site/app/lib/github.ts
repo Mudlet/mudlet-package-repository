@@ -104,22 +104,38 @@ export async function deleteBranch(branch: string): Promise<boolean> {
   }
 }
 
-export async function getFileSha(path: string) {
+/**
+ * The blob sha of a file, or null when there is no such file.
+ *
+ * A caller reads null as "not there yet" and goes on to create the file, so
+ * only a 404 may answer null: turning a rate limit or a 502 into the same
+ * answer has them write over a file they believe is absent, which GitHub then
+ * refuses for want of the sha they did not pass.
+ *
+ * `ref` is the branch, tag or commit to look on, and defaults to the
+ * repository's default branch.
+ */
+export async function getFileSha(path: string, ref?: string): Promise<string | null> {
   try {
     const response = await octokit.rest.repos.getContent({
       owner: REPO_OWNER,
       repo: REPO_NAME,
       path,
+      ref,
     })
-    
-    // Response is a single file
-    if (!Array.isArray(response.data)) {
-      return response.data.sha
+
+    // A directory rather than a file: nothing here to replace.
+    if (Array.isArray(response.data)) {
+      return null
     }
-    return null
+    return response.data.sha
   } catch (error) {
-    // File doesn't exist
-    return null
+    const status =
+      typeof error === 'object' && error && 'status' in error ? error.status : null
+    if (status === 404) {
+      return null
+    }
+    throw error
   }
 }
 
