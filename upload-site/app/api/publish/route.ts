@@ -15,7 +15,14 @@ import {
 import { parseConfigLua } from '@/app/lib/packageParser'
 import { MAX_METADATA_BYTES, readEntryWithin } from '@/app/lib/packageArchive'
 import { fetchRepositoryPackages } from '@/app/lib/packages'
-import { bearerToken, rememberToken, verifyActionsToken, TokenError, PUBLISH_AUDIENCE } from '@/app/lib/oidc'
+import {
+  bearerToken,
+  rememberToken,
+  verifyActionsToken,
+  TokenError,
+  PUBLISH_AUDIENCE,
+  type ActionsClaims,
+} from '@/app/lib/oidc'
 import {
   provenancePathFor,
   serialiseRecord,
@@ -50,8 +57,19 @@ import {
 /** Refuse an archive larger than the website's own upload ceiling. */
 const MAX_ARCHIVE_BYTES = 50 * 1024 * 1024
 
-/** The artifact must be a release asset of the very repository that was authenticated. */
-function assertArtifactBelongsToRun(artifactUrl: string, repository: string): URL {
+/**
+ * The artifact must be a release asset of the very repository that was
+ * authenticated, and - when the run is on a tag - of that tag's own release.
+ *
+ * The tag is what ties the archive to the run rather than merely to the
+ * repository. A run triggered by a release publishes that release's assets, so
+ * pinning it costs nothing and closes the gap where a run on today's code
+ * submits an asset from a release of two years ago. Nothing pins a run on a
+ * branch, which is why the provenance panel says the archive was published by
+ * this run rather than built by it.
+ */
+function assertArtifactBelongsToRun(artifactUrl: string, claims: ActionsClaims): URL {
+  const repository = claims.repository
   let url: URL
   try {
     url = new URL(artifactUrl)
@@ -83,6 +101,21 @@ function assertArtifactBelongsToRun(artifactUrl: string, repository: string): UR
     )
   }
 
+  // Everything between .../download/ and the file name is the tag, which may
+  // itself contain slashes.
+  const tag = claims.ref.startsWith('refs/tags/') ? claims.ref.slice('refs/tags/'.length) : null
+  if (tag) {
+    const assetTag = parts
+      .slice(4, -1)
+      .map((segment) => decodeURIComponent(segment))
+      .join('/')
+    if (assetTag !== tag) {
+      throw new PublisherError(
+        `artifactUrl is an asset of the ${assetTag} release, but this run is on ${tag}`,
+      )
+    }
+  }
+
   return url
 }
 
@@ -91,21 +124,42 @@ async function downloadArtifact(url: URL): Promise<Buffer> {
   if (!response.ok) {
     throw new PublisherError(`could not download the artifact (HTTP ${response.status})`)
   }
+  if (!response.body) {
+    throw new PublisherError('the artifact download returned no content')
+  }
 
-  const declared = Number(response.headers.get('content-length') ?? '')
+  // A header worth believing saves the download entirely. It is only ever a
+  // shortcut: an absent or nonsensical one - a chunked response has none - says
+  // nothing about the size, so it must not be read as saying the size is fine.
+  const declared = Number(response.headers.get('content-length'))
   if (Number.isFinite(declared) && declared > MAX_ARCHIVE_BYTES) {
     throw new PublisherError(`artifact is larger than ${MAX_ARCHIVE_BYTES} bytes`)
   }
 
-  const buffer = Buffer.from(await response.arrayBuffer())
-  // Re-check: content-length may have been absent or wrong.
-  if (buffer.length > MAX_ARCHIVE_BYTES) {
-    throw new PublisherError(`artifact is larger than ${MAX_ARCHIVE_BYTES} bytes`)
+  // So the ceiling is enforced on the bytes as they arrive, and a body that
+  // runs past it is dropped mid-flight rather than held whole in memory first.
+  const reader = response.body.getReader()
+  const chunks: Buffer[] = []
+  let received = 0
+  try {
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) break
+      received += value.byteLength
+      if (received > MAX_ARCHIVE_BYTES) {
+        await reader.cancel().catch(() => {})
+        throw new PublisherError(`artifact is larger than ${MAX_ARCHIVE_BYTES} bytes`)
+      }
+      chunks.push(Buffer.from(value))
+    }
+  } finally {
+    reader.releaseLock()
   }
-  if (buffer.length === 0) {
+
+  if (received === 0) {
     throw new PublisherError('the artifact is empty')
   }
-  return buffer
+  return Buffer.concat(chunks)
 }
 
 export async function POST(request: Request) {
@@ -166,7 +220,7 @@ export async function POST(request: Request) {
 
   let fileBuffer: Buffer
   try {
-    const url = assertArtifactBelongsToRun(body.artifactUrl, claims.repository)
+    const url = assertArtifactBelongsToRun(body.artifactUrl, claims)
     fileBuffer = await downloadArtifact(url)
   } catch (error) {
     if (error instanceof PublisherError) {
@@ -224,14 +278,35 @@ export async function POST(request: Request) {
   // under a different author, the registry entry and reality disagree and a
   // human needs to look rather than one of them silently winning.
   const filename = publisher.filename
+  const sameText = (a: string | null | undefined, b: string | null | undefined) =>
+    (a || '').trim().toLowerCase() === (b || '').trim().toLowerCase()
   let existingFilename: string | null = null
   try {
     const packages = await fetchRepositoryPackages()
-    const existing = packages.find(
-      (pkg) => (pkg.mpackage || '').trim().toLowerCase() === publisher.mpackage.trim().toLowerCase(),
+
+    // Two entries may name one file, and the registry alone cannot tell: each
+    // is checked against its own ids and its own package name, so an entry
+    // whose filename happens to be somebody else's would authorise a write
+    // straight over their archive. What settles it is the index - if
+    // packages/<filename> is some other package's file, this publish is not
+    // the one entitled to it.
+    const occupied = packages.find(
+      (pkg) => sameText(pkg.filename, filename) && !sameText(pkg.mpackage, publisher.mpackage),
     )
+    if (occupied) {
+      return NextResponse.json(
+        {
+          error:
+            `packages/${filename} is the file of "${occupied.mpackage}", so "${publisher.mpackage}" ` +
+            `cannot be published to it. The filename in ${REGISTRY_PATH} needs changing.`,
+        },
+        { status: 409 },
+      )
+    }
+
+    const existing = packages.find((pkg) => sameText(pkg.mpackage, publisher.mpackage))
     if (existing) {
-      if ((existing.author || '').trim().toLowerCase() !== (metadata.author || '').trim().toLowerCase()) {
+      if (!sameText(existing.author, metadata.author)) {
         return NextResponse.json(
           {
             error:
@@ -257,11 +332,20 @@ export async function POST(request: Request) {
   // the unique part is what makes ownership a fact rather than a guess, so a
   // failed publish can clean up after itself without ever reaching for a
   // branch some other request is still uploading to.
-  const branchPrefix = `trusted-publish/${publisher.mpackage
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .substring(0, 40)}-${metadata.version}-${claims.run_id}-${claims.run_attempt}-`
+  // Both halves are reduced to what a git ref may hold. config.lua is the
+  // package author's file, and a version reading "1.0 beta", "2.0~rc1" or
+  // "v1.0^2" - or, since the parser accepts a [[...]] literal, one carrying a
+  // newline - would otherwise reach GitHub as an invalid ref name and come back
+  // as a 422 that never mentions the version.
+  const slug = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .substring(0, 40)
+  const branchPrefix =
+    `trusted-publish/${slug(publisher.mpackage)}-${slug(String(metadata.version))}-` +
+    `${claims.run_id}-${claims.run_attempt}-`
   const branchName = `${branchPrefix}${randomUUID().slice(0, 8)}`
 
   // Has a request for this same run already got a pull request open? Then this
