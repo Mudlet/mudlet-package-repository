@@ -249,6 +249,10 @@ export async function POST(request: Request) {
   // Whether this request is the one that made the branch, and so the only one
   // entitled to take it away again on the way out.
   let ownsBranch = false
+  // A branch that is there after a create whose answer never came back. It may
+  // be the one this request made, or a duplicate request's - nothing here can
+  // tell - so it is named in the error rather than removed.
+  let branchOfUnknownOwner = false
 
   try {
     try {
@@ -268,12 +272,15 @@ export async function POST(request: Request) {
         )
       }
       // Anything else may have failed on the way back rather than on the way
-      // out: GitHub made the branch and the answer never arrived. Ask whether
-      // the ref is there before concluding this request created nothing -
-      // otherwise the branch is left behind with no one willing to tidy it,
-      // and every later request for this run meets it as a 409.
+      // out: GitHub made the branch and the answer never arrived. A branch
+      // that is there now is either that one or a duplicate request's, and the
+      // two look exactly alike - both sit at main's tip under the one name
+      // this run can produce. Claiming it on a guess would mean deleting a
+      // sibling's branch while it is still uploading to it, leaving its pull
+      // request without a head; a branch nobody removes only costs a re-run.
+      // So: look, report, do not touch.
       try {
-        ownsBranch = await branchExists(branchName)
+        branchOfUnknownOwner = await branchExists(branchName)
       } catch (lookupError) {
         console.error('Trusted publishing: could not tell whether the branch was created', lookupError)
       }
@@ -376,21 +383,20 @@ export async function POST(request: Request) {
     // shared by every request for this run, and tidying away one that another
     // request is still building would break its pull request rather than clean
     // up after this one.
-    let strandedBranch = false
-    if (ownsBranch) {
-      strandedBranch = !(await deleteBranch(branchName))
-    }
+    const strandedBranch = ownsBranch
+      ? !(await deleteBranch(branchName))
+      : branchOfUnknownOwner
 
     const message = error instanceof Error ? error.message : 'Failed to create the pull request'
-    // A branch we could not take away outlives this request, and the name
-    // comes from the run, so every retry of this attempt will be turned away
-    // as "already in progress". Better to name the wreckage here than to let
-    // the workflow retry into a 409 it cannot read.
+    // A branch still standing outlives this request, and the name comes from
+    // the run attempt, so retrying this attempt only meets it again as a 409.
+    // Better to name it here than to let the workflow retry into that.
     return NextResponse.json(
       {
         error: strandedBranch
-          ? `${message}. The branch ${branchName} was left behind and could not be removed: ` +
-            're-run the workflow to publish, and delete that branch by hand.'
+          ? `${message}. The publish branch ${branchName} is still there: if no pull request ` +
+            'appears for this run, re-run the workflow - a retry of this attempt would land ' +
+            'on the same branch name.'
           : message,
       },
       { status: 500 },
