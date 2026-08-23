@@ -116,7 +116,9 @@ review it like a credential. Worth checking:
 
 - **The ids are right.** Fetch them yourself rather than trusting the diff.
 - **The workflow path is the one they described**, and lives in the repository
-  the ids point at.
+  the ids point at — spelled exactly as the file is. The match is
+  case-sensitive, so a run from `Publish.yml` does not satisfy an entry for
+  `publish.yml`.
 - **The person asking controls that repository.** The registry cannot tell.
 - **The package is theirs.** An entry for a package someone else already
   publishes is refused at publish time (the author in `config.lua` must match
@@ -187,7 +189,8 @@ In order, and the request stops at the first failure:
 1. The token is signed by `https://token.actions.githubusercontent.com`, has
    audience `https://packages.mudlet.org`, and is under 15 minutes old.
 2. `repository_id` and `repository_owner_id` match a registry entry.
-3. `job_workflow_ref` names the registered workflow file.
+3. `job_workflow_ref` names the registered workflow file, character for
+   character.
 4. `ref`, `environment` and runner type match, where the entry constrains them.
 5. `artifactUrl` is an HTTPS release asset of the repository in the token.
 6. The archive holds a `config.lua` with all six required fields.

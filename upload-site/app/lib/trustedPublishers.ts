@@ -30,9 +30,10 @@ export interface TrustedPublisher {
   repositoryOwnerId: string
   /**
    * Repo-relative path of the workflow allowed to publish, e.g.
-   * ".github/workflows/publish.yml". Matched against the token's
-   * job_workflow_ref, so it pins the actual file the job came from - without
-   * it, *any* workflow anyone can land in that repository could publish.
+   * ".github/workflows/publish.yml". Matched exactly, case included, against
+   * the token's job_workflow_ref, so it pins the actual file the job came from
+   * - without it, *any* workflow anyone can land in that repository could
+   * publish.
    */
   workflow: string
   /** Optional: require the run to be on this exact ref, e.g. "refs/heads/main". */
@@ -86,6 +87,21 @@ function workflowPathOf(jobWorkflowRef: string): string | null {
   return jobWorkflowRef.slice(0, at)
 }
 
+/**
+ * Strips the leading "owner/repo/" so what is left is what the registry stores.
+ *
+ * Only the repository half folds case - GitHub treats owner and repository
+ * names case-insensitively - and only that half. A job run through a reusable
+ * workflow in another repository names that repository here, and keeping its
+ * path whole is what stops it from ever equalling a repo-relative entry.
+ */
+function repoRelativeWorkflow(path: string, repository: string): string {
+  const prefix = `${repository}/`
+  return path.slice(0, prefix.length).toLowerCase() === prefix.toLowerCase()
+    ? path.slice(prefix.length)
+    : path
+}
+
 function sameName(a: string, b: string): boolean {
   return a.trim().toLowerCase() === b.trim().toLowerCase()
 }
@@ -121,13 +137,19 @@ export function authorise(
     throw new PublisherError('the token\'s job_workflow_ref claim is malformed')
   }
 
-  // Built from the token's own repository name, not the registry's copy of it.
-  // Which repository this is has already been settled by the ids above, and the
-  // name in the registry is only a label for people reading the file - it goes
-  // stale the moment the repository is renamed or transferred, and comparing
-  // against it would then reject every publish from the very workflow the entry
-  // exists to authorise. What is actually being pinned here is the workflow path.
-  const match = forRepo.find((p) => sameName(path, `${claims.repository}/${p.workflow}`))
+  // Compared against the token's own repository name, not the registry's copy
+  // of it. Which repository this is has already been settled by the ids above,
+  // and the name in the registry is only a label for people reading the file -
+  // it goes stale the moment the repository is renamed or transferred, and
+  // comparing against it would then reject every publish from the very workflow
+  // the entry exists to authorise. What is pinned here is the workflow path.
+  //
+  // Character for character, case included: git paths are case-sensitive, so
+  // .github/workflows/Publish.yml and .github/workflows/publish.yml are two
+  // different files that can sit in one repository at once. Folding case would
+  // let the one nobody registered publish under the registered one's name.
+  const actualWorkflow = repoRelativeWorkflow(path, claims.repository)
+  const match = forRepo.find((p) => p.workflow.trim() === actualWorkflow)
   if (!match) {
     throw new PublisherError(
       `workflow ${path} is not the workflow registered to publish for this repository`,
