@@ -123,11 +123,48 @@ jobs:
     - name: Check for malicious content
       if: steps.skip-if-deleted.outputs.skip != 'true'
       id: check-malicious-content
+      env:
+        FILE: ${{ steps.check-file-count.outputs.FILE }}
+        BASE_SHA: ${{ github.event.pull_request.base.sha }}
       run: |
-        FILE="${{ steps.check-file-count.outputs.FILE }}"
-        if grep -q -R -E 'os\.exec|lfs\.rmdir|sysDataSendRequest' unzipped_package/; then
+        PATTERN='os\.exec|lfs\.rmdir|sysDataSendRequest'
+
+        # every line matching PATTERN, whitespace-normalised and sorted, so that two
+        # versions of the same package can be compared with comm
+        collect_matches() {
+          [ -d "$1" ] || return 0
+          grep -a -h -R -E "$PATTERN" "$1" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//' | LC_ALL=C sort
+        }
+
+        collect_matches unzipped_package > new_matches.txt
+
+        # Compare against the version of this package that is already on the base
+        # branch: whatever it matched there was looked at when it was merged, so only
+        # what this pull request introduces needs another manual look. Checking the
+        # whole package instead would freeze every package that legitimately uses one
+        # of these - handling sysDataSendRequest is how a mapper tracks movement (#755).
+        : > base_matches.txt
+        if git fetch --no-tags --depth=1 origin "$BASE_SHA" >/dev/null 2>&1 \
+           && git cat-file -e "$BASE_SHA:$FILE" 2>/dev/null \
+           && git show "$BASE_SHA:$FILE" > base_package.zip \
+           && unzip -q -o base_package.zip -d unzipped_base_package; then
+          collect_matches unzipped_base_package > base_matches.txt
+          echo "Comparing against ${FILE} as of ${BASE_SHA}."
+        else
+          # a new package, or the previous version could not be read: check it whole
+          echo "No previous version of ${FILE} to compare against, checking the whole package."
+        fi
+
+        INTRODUCED=$(LC_ALL=C comm -13 base_matches.txt new_matches.txt)
+        if [ -n "$INTRODUCED" ]; then
+          echo "Introduced by this pull request:"
+          echo "$INTRODUCED"
           echo "::error:: questionable functions or events used, please validate manually"
           exit 1
+        fi
+
+        if [ -s new_matches.txt ]; then
+          echo "Pass: security checks - every match was in the previous version of this package already"
         else
           echo "Pass: security checks"
         fi
