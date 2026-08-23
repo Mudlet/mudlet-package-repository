@@ -150,7 +150,10 @@ jobs:
            && unzip -q -o base_package.zip -d unzipped_base_package; then
           echo "Comparing against ${FILE} as of ${BASE_SHA}."
         else
-          # a new package, or the previous version could not be read: check it whole
+          # A new package, or a previous version that could not be read: check it whole.
+          # unzip reports a warning with a non-zero status once it has already unpacked
+          # everything, so drop what it left rather than half-comparing against it.
+          rm -rf unzipped_base_package
           echo "No previous version of ${FILE} to compare against, checking the whole package."
         fi
 
@@ -161,8 +164,16 @@ jobs:
             # Only report a match that this pull request touched: with 20 lines of context
             # a diff hunk covers the handler or function a match sits in, so a match shows
             # up in one when it is added, when it moves, and when the code around it is
-            # rewritten. Removed lines are dropped - taking a match out needs no review.
-            hits=$(diff -a -U20 "$base_file" "$new_file" | grep -v '^-' | grep -a -E "$PATTERN_CONTEXTUAL") || true
+            # rewritten. Removed lines are dropped - taking a match out needs no review -
+            # and so are the two header lines, which carry a path rather than any code.
+            changed=$(diff -a -U20 "$base_file" "$new_file") && rc=0 || rc=$?
+            if [ "$rc" -ge 2 ]; then
+              # diff says 0 for same and 1 for differs. Anything above that means it could
+              # not do the comparison, which must not pass for a file with nothing in it.
+              echo "::error:: could not compare ${new_file#unzipped_package/} against the version in ${FILE}"
+              exit 1
+            fi
+            hits=$(printf '%s\n' "$changed" | tail -n +3 | grep -v '^-' | grep -a -E "$PATTERN_CONTEXTUAL") || true
           else
             hits=$(grep -a -E "$PATTERN_CONTEXTUAL" "$new_file") || true
           fi
