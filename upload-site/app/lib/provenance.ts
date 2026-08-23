@@ -1,6 +1,7 @@
 import { createHash } from 'crypto'
 import { existsSync, promises as fs } from 'fs'
 import path from 'path'
+import { readsFromCheckout } from './packages'
 import { RAW_BASE } from './urls'
 
 /**
@@ -66,13 +67,46 @@ export function serialiseRecord(record: ProvenanceRecord): string {
 const localProvenanceDir = path.join(process.cwd(), '..', PROVENANCE_DIR)
 
 /**
+ * Every field the record is written with, and every field a reader may reach
+ * for without checking first. A record short of any of them was not written by
+ * the publish endpoint, and the digest matching says nothing about the rest of
+ * it - the panel dereferences `commit` and `workflow`, so a record carrying
+ * only a sha256 would throw during the render of a page that has no business
+ * failing over its provenance panel.
+ */
+const RECORD_FIELDS = [
+  'filename',
+  'mpackage',
+  'sha256',
+  'version',
+  'repository',
+  'repositoryId',
+  'workflow',
+  'ref',
+  'commit',
+  'runId',
+  'publishedAt',
+] as const
+
+function isRecord(value: unknown): value is ProvenanceRecord {
+  if (!value || typeof value !== 'object') return false
+  const fields = value as Record<string, unknown>
+  return RECORD_FIELDS.every((field) => typeof fields[field] === 'string' && fields[field] !== '')
+}
+
+/**
  * Read one package's record: the checkout during the build, the published copy
  * at request time. A package with no record is the normal case, not an error.
+ *
+ * Which of the two is decided by whether the checkout is there at all, not by
+ * whether it holds a provenance directory. Before the first trusted publish
+ * there is no such directory, and reading its absence as "ask the network" had
+ * the build fetch a 404 for every package it prerendered.
  */
 async function loadRecord(filename: string): Promise<ProvenanceRecord | null> {
   try {
     let raw: string | null
-    if (existsSync(localProvenanceDir)) {
+    if (readsFromCheckout) {
       const file = path.join(localProvenanceDir, `${filename}.json`)
       if (!existsSync(file)) return null
       raw = await fs.readFile(file, 'utf8')
@@ -82,8 +116,8 @@ async function loadRecord(filename: string): Promise<ProvenanceRecord | null> {
       raw = response.ok ? await response.text() : null
     }
     if (raw === null) return null
-    const parsed = JSON.parse(raw)
-    return parsed && typeof parsed.sha256 === 'string' ? (parsed as ProvenanceRecord) : null
+    const parsed: unknown = JSON.parse(raw)
+    return isRecord(parsed) ? parsed : null
   } catch {
     // A package page is worth rendering without its provenance panel.
     return null

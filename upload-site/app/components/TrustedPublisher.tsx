@@ -11,8 +11,11 @@ import { formatDate } from '@/app/lib/urls'
  * against the file being offered rather than taken on trust. Replace the file
  * by any other route and this panel stops appearing.
  *
- * The panel therefore states only what was verified: the repository, the
- * workflow file, and the commit it was built from.
+ * The panel therefore states only what was verified. What the record proves is
+ * that these bytes were submitted by that run, not that the run compiled them:
+ * a release asset can be attached to a release by hand, and only a run on a tag
+ * is pinned to the release it publishes. So the wording is "published from",
+ * and the commit is named as the one the run was on.
  */
 export function TrustedPublisherPanel({ record }: { record: ProvenanceRecord }) {
   const repoUrl = `https://github.com/${record.repository}`
@@ -26,12 +29,12 @@ export function TrustedPublisherPanel({ record }: { record: ProvenanceRecord }) 
         <svg viewBox="0 0 16 16" aria-hidden="true" className="h-4 w-4 shrink-0 fill-success">
           <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm3.78 5.97a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L4.22 9.03a.75.75 0 1 1 1.06-1.06L7 9.69l3.72-3.72a.75.75 0 0 1 1.06 0Z" />
         </svg>
-        Built and published from source
+        Published from source by CI
       </h2>
 
       <p className="mt-2 text-sm text-muted">
-        This exact file was uploaded by a GitHub Actions run in the repository below,
-        which proves where it was built. It is not a file anyone uploaded by hand.
+        This exact file was submitted by a GitHub Actions run in the repository below,
+        which proves where it came from. It is not a file anyone uploaded by hand.
       </p>
 
       <dl className="mt-3 flex flex-wrap gap-x-8 gap-y-3 text-sm">
@@ -67,7 +70,7 @@ export function TrustedPublisherPanel({ record }: { record: ProvenanceRecord }) 
         </div>
 
         <div className="min-w-0">
-          <dt className="text-xs uppercase tracking-wide text-muted">Built from</dt>
+          <dt className="text-xs uppercase tracking-wide text-muted">Published from</dt>
           <dd className="mt-0.5">
             <a
               href={`${repoUrl}/commit/${record.commit}`}
