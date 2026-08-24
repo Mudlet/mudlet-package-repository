@@ -1463,8 +1463,8 @@
                      "filename": "exchange-walker-live-3.0.0-live.mpackage",
                      "mpackage": "exchange-walker-live",
                         "title": "Exchange Walker Live",
-                     "uploaded": 1787550226,
-                      "version": "3.0.0-live"
+                     "uploaded": 1787553226,
+                      "version": "3.0.1-live"
                 },
                 {
                        "author": "tmtocloud",
@@ -2310,5 +2310,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Aug 24 05:46:23 2026"
+   "updated": "Mon Aug 24 06:36:17 2026"
 }
