@@ -1457,6 +1457,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Ersella of Serenity",
+                      "created": "2026-08-24T00:00:00-0400",
+                  "description": "Live-server Mudlet stockpile preview and explicitly applied update tool. Requires f2ce-tools.",
+                     "filename": "exchange-walker-live-3.0.0-live.mpackage",
+                     "mpackage": "exchange-walker-live",
+                        "title": "Exchange Walker Live",
+                     "uploaded": 1787550226,
+                      "version": "3.0.0-live"
+                },
+                {
                        "author": "tmtocloud",
                       "created": "2026-08-18T18:51:12+0000",
                   "description": "F2CE-Tools — Mudlet package for Federation 2 Community Edition.",
@@ -2300,5 +2310,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Aug 23 12:20:19 2026"
+   "updated": "Mon Aug 24 05:46:23 2026"
 }
