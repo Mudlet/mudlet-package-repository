@@ -1007,6 +1007,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "tjurczyk, Delwing",
+                      "created": "2026-08-22T00:00:00+02:00",
+                  "description": "Kompletny zestaw skryptów do polskiego MUD-a **Arkadia** (arkadia.rpg.pl, port 23 lub 20023) - walka, interfejs, ekwipunek, zioła, baza postaci i statystyki w jednej paczce.\n\n## Wymagania\n\nSkrypty wymagają **GMCP**. Przed instalacją trzeba włączyć opcję _Enable GMCP_ w ustawieniach Mudleta i uruchomić go ponownie - bez tego skrypty nie będą działać poprawnie. Wymagany jest Mudlet 4.12 lub nowszy.\n\n## Zawartość\n\n- **Walka** - okno kondycji z paskami życia wszystkich na lokacji, znacznikami celu ataku i obrony oraz informacją, kto kogo bije; do tego komplet bindów i klikalnych akcji (`/walka`).\n- **Interfejs** - dolna belka i okno stanów; w ustawieniach można wskazać, które linie z gry są gagowane, które tagowane, a które zostają bez zmian (`/ui`).\n- **Ekwipunek i pojemniki** - liczenie butelek do lampy z przypomnieniem o dopełnieniu, bindy na monety i paczki, do trzech pojemników na bronie (`/ekwipunek`, `/pojemniki`, `/bronie`).\n- **Zioła** - rozpoznawanie zawartości woreczków, bindy biorące zioło z właściwego oraz pakowanie komendą `/zapakuj` (`/ziola`).\n- **Baza postaci** - zapamiętuje osoby i lokacje, na których się przedstawiły; na poczcie podświetla właścicieli paczek, których adres jest już znany (`/baza`).\n- **Statystyki i liczniki** - parowania i otrzymane ciosy, zabici, postępy, cechy i poziom postaci (`/stat`, `/zabici`, `/postepy`, `/cechy`).\n- **Podróże** - statki i dyliżanse obsłużone od kupienia biletu po zejście, pod klawiszem `[`.\n- **Dźwięki** - każdy event podnoszony przez skrypty można udźwiękowić, umieszczając plik w katalogu `sounds` w profilu.\n- **Wtyczki** - własne skrypty ładowane automatycznie z katalogu `plugins`, bez ruszania samej paczki.\n\n## Pierwsze kroki\n\nPrzy pierwszym uruchomieniu kreator konfiguracji pojawia się sam; później można go wywołać komendą `/konfiguracja`. Najszybszy start to imię postaci i to samo imię w wołaczu:\n\n`/init Adremen Adremenie`\n\nPomoc ogólna znajduje się pod `/skrypty`, a każdy dział ma własną - `/walka`, `/ekwipunek`, `/ziola`, `/ui`, `/bindy`, `/baza`.\n\n## Uwaga\n\nPaczka zakłada katalog `arkadia` w Triggers, Aliases, Scripts i Keys. Nie należy niczego w nim umieszczać - przy każdej aktualizacji jest kasowany i tworzony od nowa. Własne triggery i aliasy powinny znaleźć się obok niego, nie w środku.\n\n## Pomoc i kontakt\n\n- Dokumentacja i źródła: https://github.com/tjurczyk/arkadia\n- Opis kluczy konfiguracyjnych: https://github.com/tjurczyk/arkadia/blob/master/config.md\n- Discord: https://discord.gg/76yaZnw\n- Forum: https://arkadia.rpg.pl/forum/viewtopic.php?f=15&t=1023",
+                     "filename": "arkadia.mpackage",
+                         "icon": "packages/icons/arkadia.png",
+                     "mpackage": "arkadia",
+                        "title": "Skrypty do Arkadii",
+                     "uploaded": 1787652913,
+                      "version": "4.112"
+                },
+                {
                        "author": "Greg",
                       "created": "2013-06-24T03:16:51+00:00",
                   "description": "An ASCII-based compass script for RetroMUD, designed to help map and navigate game environments in Lua. The script provides visual directional indicators and tracking functionality for mapping MUD game spaces. It appears to be a utility tool for players or developers looking to create navigational aids within text-based multiplayer game environments.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=3498&sid=77f29e53407d5a2046fa27119a2c55b0) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2310,5 +2321,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Aug 25 08:30:47 2026"
+   "updated": "Tue Aug 25 10:18:56 2026"
 }
