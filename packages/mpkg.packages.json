@@ -1721,6 +1721,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Isithunzi000",
+                      "created": "2026-08-20T11:13:44+00:00",
+                  "description": "Przyblizony czas do najblizszych swiat i wydarzen w domenie Starszego Ludu (Ishtar), kalendarz 360-dniowy z silnikiem okien (na podstawie komendy 'czas'). Aliasy: /ishtar, /ishtar help.",
+                     "filename": "ishtar_cal.mpackage",
+                     "mpackage": "ishtar_cal",
+                        "title": "Kalendarz Ishtar",
+                     "uploaded": 1787665199,
+                      "version": "1.8.21m"
+                },
+                {
                        "author": "Yetzederixx",
                       "created": "2011-04-15T22:35:46+00:00",
                   "description": "Mudlet's keypad package provides a customizable input solution for MUD gaming, enabling users to map and utilize numeric keypad functions within the Mudlet interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2163&sid=7fcf9295181de03042a95c0a4aa533eb) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2341,5 +2351,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Aug 25 13:36:17 2026"
+   "updated": "Tue Aug 25 13:42:50 2026"
 }
