@@ -1,0 +1,35 @@
+name: Validate trusted publishers
+
+# An entry in trusted-publishers.json grants a workflow the right to publish a
+# package, so it gets checked like a credential: the shape of every entry, and
+# whether each pair of GitHub ids really belongs to the repository it names.
+#
+# This file is outside packages/, so auto-merge-packages.yml will not merge a
+# change to it - a maintainer always reviews one.
+
+on:
+  pull_request:
+    paths:
+      - 'trusted-publishers.json'
+      - '.github/scripts/validate-trusted-publishers.mjs'
+  push:
+    branches: [main]
+    paths:
+      - 'trusted-publishers.json'
+      - '.github/scripts/validate-trusted-publishers.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check trusted-publishers.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/validate-trusted-publishers.mjs

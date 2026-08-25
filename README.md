@@ -36,6 +36,16 @@ Contribute your mpackage using Github's "[fork and pull request](https://docs.gi
 - copy your mpackage to the cloned repository subdirectory `packages/` (no further files need to be changed, Github workflows take care of rebuilding the repository index),
 - commit, push and submit a pull request.
 
+#### via Trusted Publishing (from your CI) ####
+
+If your package is built by GitHub Actions, its workflow can publish new versions
+by itself, with no token stored anywhere: it presents the short-lived OIDC token
+GitHub mints for the run, and a maintainer-reviewed entry in
+[`trusted-publishers.json`](trusted-publishers.json) says which workflow is allowed
+to act for which package. The result is an ordinary pull request, reviewed as usual.
+
+See [TRUSTED-PUBLISHING.md](TRUSTED-PUBLISHING.md) to set it up.
+
 ### Development ###
 
 Using Docker, run `./mpkg/muddle` or run Muddler [manually](https://github.com/demonnic/muddler/wiki/Installation) to generate the new `./mpkg/build/mpkg.mpackage` file can be loaded into Mudlet as a module.

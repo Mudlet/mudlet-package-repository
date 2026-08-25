@@ -40,15 +40,41 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
       run: |
-        FILE=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
-        
-        # check only 1 file has been uploaded per PR
-        if [ `echo "$FILE" |wc -l` -gt 1 ]; then
+        # Statuses matter here, so this reads the API rather than `gh pr view`:
+        # publishing a package under a new filename deletes the old one in the
+        # same pull request, and that deletion must not count towards the limit.
+        PATHS=$(gh api --paginate \
+          "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" \
+          --jq '.[] | select(.status != "removed") | .filename')
+
+        PACKAGE_RE='^packages/[^/]+\.(mpackage|zip)$'
+        FILE=$(echo "$PATHS" | grep -E "$PACKAGE_RE" || true)
+
+        # check only 1 package file has been uploaded per PR
+        COUNT=$(echo "$FILE" | grep -c . || true)
+        if [ "$COUNT" -gt 1 ]; then
           echo "Error: Only one package file per pull request please."
           exit 1
-        else
-          echo "Pass: just one file uploaded."
+        elif [ "$COUNT" -eq 0 ]; then
+          echo "Error: no package file found in this pull request."
+          exit 1
         fi
+
+        # A trusted publish also records where the archive came from, pinned to
+        # its digest (see TRUSTED-PUBLISHING.md), so the package's own record
+        # under provenance/ may ride along - that one file and no other. Named
+        # exactly rather than matched by shape: "any provenance/*.json" let a
+        # pull request carry records for packages it does not touch.
+        ALLOWED_PROVENANCE="provenance/$(basename "$FILE").json"
+        OTHER=$(echo "$PATHS" | grep -vE "$PACKAGE_RE" | grep -vxF "$ALLOWED_PROVENANCE" || true)
+        if [ -n "$OTHER" ]; then
+          echo "Error: this pull request changes files that are not a package:"
+          echo "$OTHER" | sed 's/^/  /'
+          echo "The only file that may accompany one is $ALLOWED_PROVENANCE."
+          exit 1
+        fi
+
+        echo "Pass: just one file uploaded."
 
         echo "FILE=$FILE" >> $GITHUB_OUTPUT
       

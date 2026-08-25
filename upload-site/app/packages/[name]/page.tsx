@@ -14,6 +14,8 @@ import { InstallCommands } from '@/app/components/InstallCommands'
 import { DragToInstall } from '@/app/components/DragToInstall'
 import { PackageDescription } from '@/app/components/PackageDescription'
 import { AuthorCredit } from '@/app/components/AuthorCredit'
+import { TrustedPublisherPanel } from '@/app/components/TrustedPublisher'
+import { verifiedProvenance, type ProvenanceRecord } from '@/app/lib/provenance'
 import { formatDate, packageDownloadUrl, packageIconUrl, packageSlug } from '@/app/lib/urls'
 
 type PageProps = { params: Promise<{ name: string }> }
@@ -63,6 +65,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 /**
+ * Provenance is checked against the archive itself, so this hashes the file the
+ * page is offering rather than trusting the record. getArchiveBuffer reads the
+ * checkout during the build and caches at request time, and ContentsSection
+ * below wants the same bytes, so this costs a hash rather than a download.
+ */
+async function provenanceFor(filename: string | null): Promise<ProvenanceRecord | null> {
+  if (!filename) return null
+  try {
+    return await verifiedProvenance(filename, await getArchiveBuffer(filename))
+  } catch {
+    // An archive we cannot read is one we cannot vouch for.
+    return null
+  }
+}
+
+/**
  * Unpacking runs during the page render rather than behind a Suspense
  * boundary: streamed boundaries in this app never hydrate on a hard load, which
  * left the explorer dead until a client-side navigation.
@@ -87,6 +105,7 @@ export default async function PackagePage({ params }: PageProps) {
   if (!pkg || !pkg.filename) notFound()
 
   const iconUrl = packageIconUrl(pkg.icon)
+  const provenance = await provenanceFor(pkg.filename)
   const facts = [
     pkg.version && { label: 'Version', value: pkg.version },
     pkg.author && { label: 'Author', value: <AuthorCredit author={pkg.author} /> },
@@ -145,6 +164,8 @@ export default async function PackagePage({ params }: PageProps) {
           downloadUrl={packageDownloadUrl(pkg.filename)}
         />
       </div>
+
+      {provenance && <TrustedPublisherPanel record={provenance} />}
 
       {pkg.description && (
         <section className="mt-8">
