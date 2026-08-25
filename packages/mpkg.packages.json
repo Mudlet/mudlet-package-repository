@@ -1986,13 +1986,13 @@
                 },
                 {
                        "author": "Nichademus",
-                      "created": "2026-06-05T21:49:26.346109-04:00",
+                      "created": "2026-08-08T22:09:27.067235-04:00",
                   "description": "This is a GUI interface and scripts for mapping, vitals, and group members data on Rites of Passage MUD.  Just go to package manager to install.",
-                     "filename": "rop-mudlet-v.1.4.0.mpackage",
+                     "filename": "rop-mudlet-v.1.6.0.mpackage",
                      "mpackage": "rop-mudlet-candidate",
                         "title": "Rites of Passage Mudlet Package",
-                     "uploaded": 1780784896,
-                      "version": "1.4.0"
+                     "uploaded": 1787637087,
+                      "version": "1.6.0"
                 },
                 {
                        "author": "Mudlet Default Package",
@@ -2310,5 +2310,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Aug 24 06:36:17 2026"
+   "updated": "Tue Aug 25 05:53:43 2026"
 }
