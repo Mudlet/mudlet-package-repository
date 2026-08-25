@@ -1661,6 +1661,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Isithunzi000",
+                      "created": "2026-08-20T11:13:48+00:00",
+                  "description": "Przyblizony czas do najblizszych swiat i wydarzen w domenie Imperium (Kalendarz Imperialny): wydarzenia ksiezycowe, sezonowe i swieta interkalarne (na podstawie komendy 'czas'). Aliasy: /imperium, /imperium help.",
+                     "filename": "imperium_cal.mpackage",
+                     "mpackage": "imperium_cal",
+                        "title": "Kalendarz Imperium",
+                     "uploaded": 1787664683,
+                      "version": "1.8.22m"
+                },
+                {
                        "author": "breakone9r",
                       "created": "2020-09-15T20:20:55+00:00",
                   "description": "MapImporter is a Mudlet package designed to facilitate crowd-sourced mapping for MUDs that lack built-in mapping support. The tool allows users to import room data from exported files, with options to import specific rooms or update entire maps without modifying existing room configurations. Users can also update environment colors using simple commands within the Mudlet interface.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22960&sid=5a7771a7f60fc59e653267903efc59fd) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1922,6 +1932,16 @@
                         "title": "MLObj: Dynamic Triggers & Timers Management",
                      "uploaded": 1738849227,
                       "version": "1"
+                },
+                {
+                       "author": "Isithunzi000",
+                      "created": "2026-08-20T11:03:17+00:00",
+                  "description": "Zyjacy pasek kalendarza: zegar gry, data Ishtar/Imperium, dzien/noc, wskaznik CIEMNO pod paskiem. Synchronizacja wylacznie na swiadome zadanie gracza (komenda czas, klik w pasek, alias /pasek) oraz pasywnie z GMCP; rekalibracja na wschodzie/zachodzie slonca. Plugin nigdy nie wysyla komend samodzielnie (pkt 2 Zasad Arkadii). Autoaktualizacja z GitHub Releases. Komendy: /pasek pomoc (pozycja, kolory, wartosci, aktualizuj).",
+                     "filename": "pasek_kalendarz_arkadia.mpackage",
+                     "mpackage": "pasek_kalendarz_arkadia",
+                        "title": "Pasek kalendarza Arkadii (Ishtar / Imperium)",
+                     "uploaded": 1787664784,
+                      "version": "1.6.6"
                 },
                 {
                        "author": "Avikare",
@@ -2321,5 +2341,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Aug 25 11:59:47 2026"
+   "updated": "Tue Aug 25 13:36:17 2026"
 }
