@@ -87,6 +87,23 @@ jobs:
         
         # unzip the mpackage
         unzip -q -o "${FILE}" -d unzipped_package
+
+        # An archive carries the mode of every entry it creates, and a directory
+        # stored 0111 extracts unreadable: find and grep in the malicious-content
+        # check walk straight past everything under it. Mudlet's own unzip never
+        # reads the stored mode, so it installs that subtree as normal - only the
+        # checks here are blinded. Take the modes back before anything looks.
+        chmod -R u+rwX unzipped_package
+
+        # Nothing but files and directories is a package's to ship, and a symlink
+        # is another way to show the checks one thing and Mudlet another.
+        ODD=$(find unzipped_package ! -type f ! -type d)
+        if [ -n "$ODD" ]; then
+          echo "Error: this package contains entries that are neither files nor directories:"
+          echo "$ODD" | sed 's|^unzipped_package/|  |'
+          exit 1
+        fi
+
         ls -al unzipped_package
 
         #only valid if it has a config.lua
@@ -174,6 +191,9 @@ jobs:
            && git cat-file -e "$BASE_SHA:$FILE" 2>/dev/null \
            && git show "$BASE_SHA:$FILE" > base_package.zip \
            && unzip -q -o base_package.zip -d unzipped_base_package; then
+          # Same as for the package under review: a previous version could have
+          # stored a directory unreadable, and the comparison has to see inside it.
+          chmod -R u+rwX unzipped_base_package
           echo "Comparing against ${FILE} as of ${BASE_SHA}."
         else
           # A new package, or a previous version that could not be read: check it whole.
