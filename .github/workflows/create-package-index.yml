@@ -32,7 +32,12 @@ jobs:
       with:
         fetch-depth: 0
 
+    # Pinned so the cache key below can name the interpreter the rocks were compiled
+    # against. Left to the action, a new default would move us to a different Lua ABI
+    # without changing anything the key can see.
     - uses: leafo/gh-actions-lua@v10
+      with:
+        luaVersion: "5.4"
 
     - uses: leafo/gh-actions-luarocks@v4
   
@@ -42,7 +47,11 @@ jobs:
       run: sudo apt-get install -y libzzip-dev libyajl-dev
 
     # Building these takes two minutes for a two-second indexing job, and the tree ages
-    # the whole time. The key covers this file, so changing the rock list rebuilds them.
+    # the whole time. The key covers this file, so changing the rock list rebuilds them,
+    # plus everything luazip and lua-yajl are compiled against: the runner image and the
+    # Lua version. A hit skips the install step below, so a restore that does not match
+    # the runner would hand reindex.lua modules it cannot load, with nothing to rebuild
+    # them.
     - name: Cache luarocks modules
       id: luarocks-cache
       uses: actions/cache@v4
@@ -50,7 +59,7 @@ jobs:
         path: |
           .luarocks
           ~/.luarocks
-        key: luarocks-${{ runner.os }}-${{ hashFiles('.github/workflows/create-package-index.yml') }}
+        key: luarocks-${{ runner.os }}-${{ runner.arch }}-${{ env.ImageOS }}-${{ env.ImageVersion }}-lua5.4-${{ hashFiles('.github/workflows/create-package-index.yml') }}
 
     - name: Install luarocks modules
       if: steps.luarocks-cache.outputs.cache-hit != 'true'
