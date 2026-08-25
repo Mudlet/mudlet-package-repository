@@ -366,12 +366,31 @@ function countCalls(source, globals, classify) {
   // itself and its parameters are not read as calls to their arguments.
   let skipTo = 0
 
+  /**
+   * Scope changes Lua applies only once the current statement is over: a local
+   * comes into scope after its own initializer, so `local prefix = prefix()`
+   * calls Mudlet's, and a repeat body outlives itself just long enough for the
+   * `until` condition to read the locals it declared.
+   *
+   * The end of the line is where a scanner can see a statement ending, which is
+   * close enough - both are single-line in practice, and a multi-line one only
+   * lands the change where it already landed before there was a queue at all.
+   * Entries queue in source order, since the line ends in that order too.
+   */
+  const pending = []
+  const defer = (from, apply) => {
+    const lineEnd = source.indexOf('\n', from)
+    pending.push({ at: lineEnd === -1 ? source.length : lineEnd, apply })
+  }
+
   const bump = (map, name) => map.set(name, (map.get(name) ?? 0) + 1)
 
   for (const match of source.matchAll(TOKEN)) {
     const token = match[0]
     const at = match.index
     if (at < skipTo) continue
+
+    while (pending.length > 0 && pending[0].at < at) pending.shift().apply()
 
     const root = token.split(/[.:]/)[0]
 
@@ -409,9 +428,18 @@ function countCalls(source, globals, classify) {
           close()
           break
         case 'end':
-        case 'until':
           close()
           break
+        // Lua reads the condition with the repeat body still in scope, so the
+        // pop waits for it: `repeat local done = check() until done()` is
+        // calling the local, not Mudlet.
+        case 'until': {
+          const depth = scopes.length
+          defer(at, () => {
+            while (scopes.length >= depth && scopes.length > 1) scopes.pop()
+          })
+          break
+        }
         case 'for': {
           const header = /^([^=]*?)\bin\b|^([^\n]*?)=/.exec(rest)
           loopVariables = (header?.[1] ?? header?.[2] ?? '')
@@ -421,6 +449,8 @@ function countCalls(source, globals, classify) {
           break
         }
         case 'local': {
+          // `local function f` is in scope inside its own body, which is what
+          // makes a local function able to recurse, so this one lands at once.
           const named = /^\s*function\s+([A-Za-z_]\w*)/.exec(rest)
           if (named) {
             declare(named[1])
@@ -428,10 +458,17 @@ function countCalls(source, globals, classify) {
           }
           // `local a, b = ...` and `local a` both, hence the optional assignment.
           const names = /^\s*([A-Za-z_][\w\s,]*?)\s*(?:=|$|\r|\n)/.exec(rest)
-          for (const name of names?.[1].split(',') ?? []) {
-            const trimmed = name.trim()
-            if (/^[A-Za-z_]\w*$/.test(trimmed)) declare(trimmed)
-          }
+          const declared = (names?.[1].split(',') ?? [])
+            .map((name) => name.trim())
+            .filter((name) => /^[A-Za-z_]\w*$/.test(name))
+          if (declared.length === 0) break
+          // The scope is caught now rather than at the end of the statement:
+          // `local draw = function() ... end` belongs to the scope holding the
+          // declaration, not to the function body the initializer opens.
+          const target = scopes[scopes.length - 1]
+          defer(at, () => {
+            for (const name of declared) target.add(name)
+          })
           break
         }
         default:
