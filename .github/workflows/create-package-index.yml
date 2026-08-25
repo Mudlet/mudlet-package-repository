@@ -54,7 +54,10 @@ jobs:
     # them.
     - name: Cache luarocks modules
       id: luarocks-cache
-      uses: actions/cache@v4
+      # Pinned by commit, not tag: a tag is a pointer its owner can move, and this job
+      # holds a token that can write to main. Dependabot bumps the SHA and the comment
+      # together when a new release lands.
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       with:
         path: |
           .luarocks
