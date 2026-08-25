@@ -259,35 +259,25 @@ function stripLuaNoise(source) {
 }
 
 /**
- * Names the package defines itself. A package with its own `display()` is not
- * calling Mudlet's, so these are struck from its counts - conservatively: one
- * `local echo` anywhere in a package discounts every `echo` in it, which
- * undercounts rather than crediting Mudlet with a call that never reached it.
+ * Names a package installs as globals, which really do replace Mudlet's own for
+ * the rest of the session: a package carrying `function display(...)` is not
+ * calling Mudlet's display() anywhere, in that file or any other, so these are
+ * struck package-wide.
+ *
+ * `local` declarations and parameters are deliberately not here - they shadow
+ * only inside the block that introduces them, and countCalls() tracks that.
+ * Folding them in here is what made one `local prefix` in a UI helper discount
+ * all 24 prefix() calls elsewhere in the same package.
  */
-function definedNames(source) {
-  // Implicit in every method, so never the package's own library namespace.
-  const defined = new Set(['self'])
+function globalDefinitions(source) {
+  const defined = new Set()
 
-  for (const match of source.matchAll(/\bfunction\s+([A-Za-z_]\w*)\s*[(.:]/g)) {
-    defined.add(match[1])
-  }
-  // Parameters, which are locals too: a callback taking `fn` or `wrapper` is
-  // calling its argument, not something the package expects Mudlet to provide.
-  for (const match of source.matchAll(/\bfunction\s*[\w.:]*\s*\(([^)]*)\)/g)) {
-    for (const parameter of match[1].split(',')) {
-      const trimmed = parameter.trim()
-      if (/^[A-Za-z_]\w*$/.test(trimmed)) defined.add(trimmed)
-    }
-  }
-  for (const match of source.matchAll(/\blocal\s+function\s+([A-Za-z_]\w*)/g)) {
-    defined.add(match[1])
-  }
-  // `local a, b = ...` and `local a` both, hence the optional assignment.
-  for (const match of source.matchAll(/\blocal\s+([A-Za-z_][\w\s,]*?)\s*(?:=|$|\n)/g)) {
-    for (const name of match[1].split(',')) {
-      const trimmed = name.trim()
-      if (/^[A-Za-z_]\w*$/.test(trimmed)) defined.add(trimmed)
-    }
+  // The name after `function` even when a field follows it: `function a.b.c()`
+  // needs `a` to exist already, so a call to `a(...)` is the package's own.
+  for (const match of source.matchAll(/(^|[^\w.:])function\s+([A-Za-z_]\w*)\s*[(.:]/g)) {
+    const before = source.slice(Math.max(0, match.index - 6), match.index + match[1].length)
+    if (/\blocal\s*$/.test(before)) continue
+    defined.add(match[2])
   }
   for (const match of source.matchAll(/^[ \t]*([A-Za-z_]\w*)\s*=\s*function\b/gm)) {
     defined.add(match[1])
@@ -339,27 +329,157 @@ function isCall(source, index) {
   return char === '[' && (source[i + 1] === '[' || source[i + 1] === '=')
 }
 
+/** The `(params)` of a function header, given the source just past `function`. */
+const FUNCTION_HEADER = /^\s*(?:[A-Za-z_][\w.:]*)?\s*\(([^)]*)\)/
+
 /**
- * Count the calls one package makes, split into Mudlet's own API and everything
- * else that looks like a call to something the package did not define.
+ * Count the calls one chunk makes, split into Mudlet's own API and everything
+ * else that looks like a call to something the chunk did not define.
  *
+ * Locals and parameters are tracked on a stack of block scopes, so they shadow
+ * a Mudlet function only where Lua says they do. It is a scanner rather than a
+ * parser, so the scopes are approximate in both directions - an `if` branch
+ * that fails to close leaves its scope open until the chunk ends - but the
+ * error is bounded by the block rather than running to the whole package.
+ *
+ * `globals` are the package's own global definitions, which shadow everywhere.
  * `classify` decides which side a name falls on - see mudletApi() in the
  * driver, which builds it from the function list and the manual.
  */
-function countCalls(source, classify) {
+function countCalls(source, globals, classify) {
   const api = new Map()
   const beyond = new Map()
-  const defined = definedNames(source)
+
+  // Innermost scope last. `self` is implicit in every method, so it is never
+  // the package reaching for a library namespace of that name.
+  const scopes = [new Set(['self'])]
+  const declare = (name) => scopes[scopes.length - 1].add(name)
+  const isLocal = (name) => scopes.some((scope) => scope.has(name))
+  const open = (names) => scopes.push(new Set(names))
+  const close = () => {
+    if (scopes.length > 1) scopes.pop()
+  }
+
+  // Names between `for` and the `do` that opens the loop body they belong to.
+  let loopVariables = []
+  // A function header consumed whole, so its name is not read as a call to
+  // itself and its parameters are not read as calls to their arguments.
+  let skipTo = 0
+
+  /**
+   * Scope changes Lua applies only once the current statement is over: a local
+   * comes into scope after its own initializer, so `local prefix = prefix()`
+   * calls Mudlet's, and a repeat body outlives itself just long enough for the
+   * `until` condition to read the locals it declared.
+   *
+   * The end of the line is where a scanner can see a statement ending, which is
+   * close enough - both are single-line in practice, and a multi-line one only
+   * lands the change where it already landed before there was a queue at all.
+   * Entries queue in source order, since the line ends in that order too.
+   */
+  const pending = []
+  const defer = (from, apply) => {
+    const lineEnd = source.indexOf('\n', from)
+    pending.push({ at: lineEnd === -1 ? source.length : lineEnd, apply })
+  }
 
   const bump = (map, name) => map.set(name, (map.get(name) ?? 0) + 1)
 
   for (const match of source.matchAll(TOKEN)) {
     const token = match[0]
-    if (!isCall(source, match.index + token.length)) continue
-    if (isReachedThroughValue(source, match.index)) continue
+    const at = match.index
+    if (at < skipTo) continue
+
+    while (pending.length > 0 && pending[0].at < at) pending.shift().apply()
 
     const root = token.split(/[.:]/)[0]
-    if (defined.has(root) || LUA_KEYWORDS.has(root)) continue
+
+    if (LUA_KEYWORDS.has(root)) {
+      const rest = source.slice(at + token.length)
+
+      switch (root) {
+        case 'function': {
+          const header = FUNCTION_HEADER.exec(rest)
+          const parameters = (header?.[1] ?? '')
+            .split(',')
+            .map((parameter) => parameter.trim())
+            .filter((parameter) => /^[A-Za-z_]\w*$/.test(parameter))
+          open(['self', ...parameters])
+          if (header) skipTo = at + token.length + header[0].length
+          break
+        }
+        // `do` closes a `for`/`while` header and opens the body those loop
+        // variables live in; a bare `do ... end` block just opens a scope.
+        case 'do':
+          open(loopVariables)
+          loopVariables = []
+          break
+        case 'then':
+        case 'repeat':
+          open([])
+          break
+        // Each branch of an `if` is its own scope; `elseif` opens the next one
+        // through the `then` that follows it.
+        case 'else':
+          close()
+          open([])
+          break
+        case 'elseif':
+          close()
+          break
+        case 'end':
+          close()
+          break
+        // Lua reads the condition with the repeat body still in scope, so the
+        // pop waits for it: `repeat local done = check() until done()` is
+        // calling the local, not Mudlet.
+        case 'until': {
+          const depth = scopes.length
+          defer(at, () => {
+            while (scopes.length >= depth && scopes.length > 1) scopes.pop()
+          })
+          break
+        }
+        case 'for': {
+          const header = /^([^=]*?)\bin\b|^([^\n]*?)=/.exec(rest)
+          loopVariables = (header?.[1] ?? header?.[2] ?? '')
+            .split(',')
+            .map((name) => name.trim())
+            .filter((name) => /^[A-Za-z_]\w*$/.test(name))
+          break
+        }
+        case 'local': {
+          // `local function f` is in scope inside its own body, which is what
+          // makes a local function able to recurse, so this one lands at once.
+          const named = /^\s*function\s+([A-Za-z_]\w*)/.exec(rest)
+          if (named) {
+            declare(named[1])
+            break
+          }
+          // `local a, b = ...` and `local a` both, hence the optional assignment.
+          const names = /^\s*([A-Za-z_][\w\s,]*?)\s*(?:=|$|\r|\n)/.exec(rest)
+          const declared = (names?.[1].split(',') ?? [])
+            .map((name) => name.trim())
+            .filter((name) => /^[A-Za-z_]\w*$/.test(name))
+          if (declared.length === 0) break
+          // The scope is caught now rather than at the end of the statement:
+          // `local draw = function() ... end` belongs to the scope holding the
+          // declaration, not to the function body the initializer opens.
+          const target = scopes[scopes.length - 1]
+          defer(at, () => {
+            for (const name of declared) target.add(name)
+          })
+          break
+        }
+        default:
+          break
+      }
+      continue
+    }
+
+    if (!isCall(source, at + token.length)) continue
+    if (isReachedThroughValue(source, at)) continue
+    if (globals.has(root) || isLocal(root)) continue
 
     // Namespaced calls are recorded at two segments: Geyser.Label, table.save.
     // Anything deeper (Geyser.Label.someField) folds into those. A chain
@@ -374,6 +494,25 @@ function countCalls(source, classify) {
     const kind = classify(name)
     if (kind === 'lua') continue
     bump(kind === 'mudlet' ? api : beyond, name)
+  }
+
+  return { api, beyond }
+}
+
+/**
+ * The calls a whole package makes. Each script body and each .lua file is
+ * scanned as its own chunk, which is what Mudlet runs them as - a top-level
+ * `local` in one does not reach into the next.
+ */
+function countPackageCalls(chunks, classify) {
+  const globals = globalDefinitions(chunks.join('\n'))
+  const api = new Map()
+  const beyond = new Map()
+
+  for (const chunk of chunks) {
+    const counts = countCalls(chunk, globals, classify)
+    for (const [name, count] of counts.api) api.set(name, (api.get(name) ?? 0) + count)
+    for (const [name, count] of counts.beyond) beyond.set(name, (beyond.get(name) ?? 0) + count)
   }
 
   return { api, beyond }
@@ -570,12 +709,11 @@ async function main() {
     // Partial counts, so say so rather than presenting them as the whole story.
     if (sources.truncated) truncated.push(filename)
 
-    const fileLua = sources.luaFiles.join('\n')
-    const source = stripLuaNoise([...sources.xmlScripts, fileLua].join('\n'))
-    luaBytes += source.length
-    luaFileBytes += fileLua.length
+    const chunks = [...sources.xmlScripts, ...sources.luaFiles].map(stripLuaNoise)
+    luaBytes += chunks.reduce((total, chunk) => total + chunk.length, 0)
+    luaFileBytes += sources.luaFiles.reduce((total, file) => total + file.length, 0)
 
-    const { api, beyond } = countCalls(source, classify)
+    const { api, beyond } = countPackageCalls(chunks, classify)
 
     for (const [name, count] of api) {
       apiPackages.set(name, (apiPackages.get(name) ?? 0) + 1)
