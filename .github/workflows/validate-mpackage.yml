@@ -60,6 +60,16 @@ jobs:
           exit 1
         fi
 
+        # The name travels to later steps through $GITHUB_OUTPUT and is handled as
+        # a shell word at the other end, so keep it to characters that mean nothing
+        # to a shell rather than trusting every one of those steps to quote it.
+        if printf '%s' "$FILE" | LC_ALL=C grep -q "[^A-Za-z0-9 ._(),'/-]"; then
+          echo "Error: this package's filename contains characters that are not allowed:"
+          echo "  $FILE"
+          echo "Please rename it using letters, digits, spaces and . _ - ( ) , ' only."
+          exit 1
+        fi
+
         # A trusted publish also records where the archive came from, pinned to
         # its digest (see TRUSTED-PUBLISHING.md), so the package's own record
         # under provenance/ may ride along - that one file and no other. Named
@@ -81,10 +91,11 @@ jobs:
     - name: Unzip the mpackage and check config.lua exists
       if: steps.skip-if-deleted.outputs.skip != 'true'
       id: unzip-mpackage-file
+      env:
+        FILE: ${{ steps.check-file-count.outputs.FILE }}
       run: |
-        FILE="${{ steps.check-file-count.outputs.FILE }}"
         echo "${FILE}"
-        
+
         # unzip the mpackage
         unzip -q -o "${FILE}" -d unzipped_package
         ls -al unzipped_package
@@ -101,8 +112,6 @@ jobs:
       if: steps.skip-if-deleted.outputs.skip != 'true'
       id: check-config-lua
       run: |
-        FILE="${{ steps.check-file-count.outputs.FILE }}"
-        
         # grep for some vital details
         if grep -q "mpackage =" unzipped_package/config.lua; then
           echo "Pass: has a valid mpackage name"
@@ -220,6 +229,8 @@ jobs:
     - name: Extract package name and author, check for duplicates
       if: steps.skip-if-deleted.outputs.skip != 'true'
       id: check-package-name
+      env:
+        FILE: ${{ steps.check-file-count.outputs.FILE }}
       run: |
         # Extract the package name and author from config.lua
         PACKAGE_NAME=$(lua -e "dofile('unzipped_package/config.lua'); print(_G['mpackage'])")
@@ -228,7 +239,7 @@ jobs:
         echo "Package author: $PACKAGE_AUTHOR"
         
         # Get current PR file name
-        CURRENT_FILE="${{ steps.check-file-count.outputs.FILE }}"
+        CURRENT_FILE="${FILE}"
         CURRENT_BASENAME=$(basename "${CURRENT_FILE}")
         
         # Create temporary directory for checking other packages
