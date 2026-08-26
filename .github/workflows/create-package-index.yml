@@ -27,7 +27,8 @@ jobs:
 
     steps:
     # No ref: the publish step below indexes main's tip as of the moment it runs, not
-    # whichever commit happened to trigger this run.
+    # whichever commit happened to trigger this run. The full history is what dates the
+    # packages -- reindex.lua asks git when each one last changed.
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
@@ -73,11 +74,6 @@ jobs:
         luarocks install lua-yajl YAJL_LIBDIR=`find /usr -name "libyajl.so" -printf '%h\n'` YAJL_INCDIR=/usr/include
 
 
-    # Fix timestamps: the index dates each package by its file mtime, which a fresh
-    # checkout would otherwise report as today for every one of them.
-    - name: restore timestamps
-      uses: chetan/git-restore-mtime-action@v2
-
     - name: Publish the refreshed index
       run: |
         set -euo pipefail
@@ -87,8 +83,7 @@ jobs:
         for attempt in 1 2 3; do
           # Index what is on main now. Everything above this line takes minutes, and
           # packages merge while it runs, so the checkout is routinely behind by the
-          # time we get here. Only the files that actually differ are rewritten, so
-          # the restored mtimes survive for every package that did not just land.
+          # time we get here.
           git fetch --quiet origin main
           git reset --quiet --hard origin/main
 

@@ -40,12 +40,39 @@ local function urlEncode(str)
   return str:gsub("[^%w]", encodeChars)
 end
 
-local function getFileModTime(filepath)
-    local attr = lfs.attributes(filepath)
-    if attr and attr.mode == "file" then
-        return attr.modification
+-- When each package landed, according to git rather than to the filesystem. A checkout
+-- has no upload dates to report: git writes every file at clone time, so dating packages
+-- by their mtime makes the entire repository look like it was uploaded today.
+local function readUploadTimes()
+    local times = {}
+
+    -- One walk of the history, newest first, so the first commit that names a path is the
+    -- one that last touched it. --first-parent -m dates a package by the commit that
+    -- brought it into this branch, which for a merged pull request is the merge itself and
+    -- not whenever the branch happened to be written. quotePath off keeps non-ASCII
+    -- filenames spelled the way the package loop below sees them, rather than as escapes.
+    local out = io.popen("git -c core.quotePath=false log --first-parent -m --format=@%ct --name-only -- packages")
+    if not out then return times end
+
+    local commitTime
+    for line in out:lines() do
+        local timestamp = line:match("^@(%d+)$")
+        if timestamp then
+            commitTime = tonumber(timestamp)
+        elseif commitTime and line ~= "" and not times[line] then
+            times[line] = commitTime
+        end
     end
-    return os.time() -- fallback to current time if we can't get the file time
+    out:close()
+
+    return times
+end
+
+local uploadTimes = readUploadTimes()
+
+local function getUploadTime(filepath)
+    -- Not committed yet: a package the history has never seen is as new as it gets.
+    return uploadTimes[filepath] or os.time()
 end
 
 local function clearPackageVariables()
@@ -121,7 +148,7 @@ for file in io.popen("ls -pa packages/*"):lines() do
             ["description"] = description,
             ["created"] = created,
             ["version"] = version,
-            ["uploaded"] = getFileModTime(file),
+            ["uploaded"] = getUploadTime(file),
             ["filename"] = file:gsub("packages/", ""),
             ["icon"] = iconUrl
         })
