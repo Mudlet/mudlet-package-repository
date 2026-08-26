@@ -1,13 +1,13 @@
 {
   "filename": "ishtar_cal.mpackage",
   "mpackage": "ishtar_cal",
-  "sha256": "23596af10920329682e2829c18794b39c30a8a11871d38ae1541e1c620e0a6ba",
-  "version": "1.8.21m",
+  "sha256": "79b686d87a80e5235dce607d636549c7710992034b092b30042595b0f4404a37",
+  "version": "1.8.22m",
   "repository": "Isithunzi000/arkadia-mpackage",
   "repositoryId": "1346062051",
   "workflow": ".github/workflows/sync-publish.yml",
   "ref": "refs/heads/main",
-  "commit": "5e32faba892c00baa2997ac57ce5c48c0839473e",
-  "runId": "32853532596",
-  "publishedAt": "2026-08-25T13:28:37.899Z"
+  "commit": "5d386af701719a157740ea53cb38b6e1ee303116",
+  "runId": "32958677851",
+  "publishedAt": "2026-08-26T10:31:42.169Z"
 }
