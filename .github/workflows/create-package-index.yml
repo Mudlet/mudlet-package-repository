@@ -7,11 +7,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:    
 
-# Two runs indexing at once is last-writer-wins on a stale tree: each one regenerates the
-# index from the packages it checked out, and whichever pushes second wins with whatever
-# it saw. Queue them instead.
+# Every merge asks for its own refresh, and the index is a pure function of the packages
+# on main: an older run has nothing to say that the newer one won't say too. Cancel it
+# rather than pay for it twice.
 concurrency:
   group: package-index
+  cancel-in-progress: true
 
 jobs:
   reindex-json-file:
@@ -25,19 +26,46 @@ jobs:
       issues: write
 
     steps:
+    # No ref: the publish step below indexes main's tip as of the moment it runs, not
+    # whichever commit happened to trigger this run.
     - uses: actions/checkout@v4
       with:
-        ref: ${{ github.head_ref }}
         fetch-depth: 0
 
+    # Pinned so the cache key below can name the interpreter the rocks were compiled
+    # against. Left to the action, a new default would move us to a different Lua ABI
+    # without changing anything the key can see.
     - uses: leafo/gh-actions-lua@v10
+      with:
+        luaVersion: "5.4"
 
     - uses: leafo/gh-actions-luarocks@v4
   
+    # Needed whether or not the rocks come from the cache: the compiled modules link
+    # against these at runtime.
     - name: Install apt dependencies
       run: sudo apt-get install -y libzzip-dev libyajl-dev
 
+    # Building these takes two minutes for a two-second indexing job, and the tree ages
+    # the whole time. The key covers this file, so changing the rock list rebuilds them,
+    # plus everything luazip and lua-yajl are compiled against: the runner image and the
+    # Lua version. A hit skips the install step below, so a restore that does not match
+    # the runner would hand reindex.lua modules it cannot load, with nothing to rebuild
+    # them.
+    - name: Cache luarocks modules
+      id: luarocks-cache
+      # Pinned by commit, not tag: a tag is a pointer its owner can move, and this job
+      # holds a token that can write to main. Dependabot bumps the SHA and the comment
+      # together when a new release lands.
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      with:
+        path: |
+          .luarocks
+          ~/.luarocks
+        key: luarocks-${{ runner.os }}-${{ runner.arch }}-${{ env.ImageOS }}-${{ env.ImageVersion }}-lua5.4-${{ hashFiles('.github/workflows/create-package-index.yml') }}
+
     - name: Install luarocks modules
+      if: steps.luarocks-cache.outputs.cache-hit != 'true'
       run: |
         luarocks install json-lua
         luarocks install luazip
@@ -45,24 +73,53 @@ jobs:
         luarocks install lua-yajl YAJL_LIBDIR=`find /usr -name "libyajl.so" -printf '%h\n'` YAJL_INCDIR=/usr/include
 
 
-    # Fix timestamps
+    # Fix timestamps: the index dates each package by its file mtime, which a fresh
+    # checkout would otherwise report as today for every one of them.
     - name: restore timestamps
       uses: chetan/git-restore-mtime-action@v2
 
-    - name: Run indexing
+    - name: Publish the refreshed index
       run: |
-        lua reindex.lua
+        set -euo pipefail
+        git config user.name 'github-actions[bot]'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-    # Commit all changed files back to the repository
-    - uses: stefanzweifel/git-auto-commit-action@v5        
-      with:
-        commit_message: Automated package index update.
-        file_pattern: 'packages/*.packages.json packages/icons/*'
+        for attempt in 1 2 3; do
+          # Index what is on main now. Everything above this line takes minutes, and
+          # packages merge while it runs, so the checkout is routinely behind by the
+          # time we get here. Only the files that actually differ are rewritten, so
+          # the restored mtimes survive for every package that did not just land.
+          git fetch --quiet origin main
+          git reset --quiet --hard origin/main
+
+          lua reindex.lua
+
+          git add -A -- 'packages/*.packages.json' 'packages/icons'
+          if git diff --cached --quiet; then
+            echo "Index already matches the packages on main; nothing to publish."
+            exit 0
+          fi
+
+          git commit --quiet -m 'Automated package index update.'
+
+          if git push --quiet origin HEAD:main; then
+            echo "Published the refreshed index."
+            exit 0
+          fi
+
+          # Something landed on main between the fetch and the push. Whatever it is has
+          # to stay, so drop our commit and index the new tip instead of forcing.
+          echo "main moved while publishing (attempt ${attempt}); re-indexing its new tip."
+        done
+
+        echo "Could not publish the index: main kept moving across 3 attempts." >&2
+        exit 1
 
     # The workflows that ask for a refresh cannot see how it went, and a run that fails
-    # here leaves mpkg offering whatever the listing said before.
+    # here leaves mpkg offering whatever the listing said before. A cancelled run is not
+    # worth reporting: it was superseded by a newer refresh that covers the same packages.
     - name: Report a refresh that failed
-      if: failure() || cancelled()
+      if: failure()
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
