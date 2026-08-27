@@ -1,13 +1,13 @@
 {
   "filename": "pasek_kalendarz_arkadia.mpackage",
   "mpackage": "pasek_kalendarz_arkadia",
-  "sha256": "e9d692d8fd3fb8786c7ae5d139e241e65f2e7b9a12ffc4b8933942274dbb612b",
-  "version": "1.6.7",
+  "sha256": "f0581fe9948cadfef316cda43ab917963c6e9c14012d3c5d62cb5817665026d3",
+  "version": "1.6.8",
   "repository": "Isithunzi000/arkadia-mpackage",
   "repositoryId": "1346062051",
   "workflow": ".github/workflows/sync-publish.yml",
   "ref": "refs/heads/main",
-  "commit": "5d386af701719a157740ea53cb38b6e1ee303116",
-  "runId": "32958677851",
-  "publishedAt": "2026-08-26T10:31:56.874Z"
+  "commit": "c5196b40e144be3b2e62122f16e3ccccd6c5d2f0",
+  "runId": "33067231639",
+  "publishedAt": "2026-08-27T11:24:47.688Z"
 }
