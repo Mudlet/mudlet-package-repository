@@ -1946,12 +1946,12 @@
                 {
                        "author": "Isithunzi000",
                       "created": "2026-08-20T11:03:17+00:00",
-                  "description": "Zyjacy pasek kalendarza: zegar gry, data Ishtar/Imperium, dzien/noc, wskaznik CIEMNO pod paskiem. Synchronizacja wylacznie na swiadome zadanie gracza (komenda czas, klik w pasek, alias /pasek) oraz pasywnie z GMCP; rekalibracja na wschodzie/zachodzie slonca. Plugin nigdy nie wysyla komend samodzielnie (pkt 2 Zasad Arkadii). Autoaktualizacja z GitHub Releases. Komendy: /pasek pomoc (pozycja, kolory, wartosci, aktualizuj). Wtyczka do gry Arkadia MUD (arkadia.rpg.pl) / Plugin for Arkadia MUD (arkadia.rpg.pl).",
+                  "description": "Zyjacy pasek kalendarza: zegar gry, data Ishtar/Imperium, dzien/noc, wskaznik CIEMNO pod paskiem. Synchronizacja wylacznie na swiadome zadanie gracza (komenda czas, klik w pasek, alias /pasek) oraz pasywnie z GMCP; rekalibracja na wschodzie/zachodzie slonca. Plugin nigdy nie wysyla komend samodzielnie (pkt 2 Zasad Arkadii). Autoaktualizacja z GitHub Releases. Komendy: /pasek pomoc (pozycja, kolory, wartosci, on/off, float, window, aktualizuj). Wtyczka do gry Arkadia MUD (arkadia.rpg.pl) / Plugin for Arkadia MUD (arkadia.rpg.pl).",
                      "filename": "pasek_kalendarz_arkadia.mpackage",
                      "mpackage": "pasek_kalendarz_arkadia",
                         "title": "Pasek kalendarza Arkadii (Ishtar / Imperium)",
-                     "uploaded": 1787740448,
-                      "version": "1.6.7"
+                     "uploaded": 1787830153,
+                      "version": "1.6.8"
                 },
                 {
                        "author": "Avikare",
@@ -2351,5 +2351,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Aug 26 17:50:13 2026"
+   "updated": "Thu Aug 27 11:29:51 2026"
 }
