@@ -1950,8 +1950,8 @@
                      "filename": "pasek_kalendarz_arkadia.mpackage",
                      "mpackage": "pasek_kalendarz_arkadia",
                         "title": "Pasek kalendarza Arkadii (Ishtar / Imperium)",
-                     "uploaded": 1787830153,
-                      "version": "1.6.8"
+                     "uploaded": 1787848064,
+                      "version": "1.6.11"
                 },
                 {
                        "author": "Avikare",
@@ -2351,5 +2351,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Aug 27 11:29:51 2026"
+   "updated": "Thu Aug 27 16:28:16 2026"
 }
