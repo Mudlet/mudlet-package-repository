@@ -1350,8 +1350,8 @@
                          "icon": "packages/icons/deleteOldProfiles.png",
                      "mpackage": "deleteOldProfiles",
                         "title": "Remove excess backup files.",
-                     "uploaded": 1724926757,
-                      "version": "1"
+                     "uploaded": 1787910230,
+                      "version": "3"
                 },
                 {
                        "author": "Demonnic",
@@ -1433,8 +1433,8 @@
                          "icon": "packages/icons/echo.png",
                      "mpackage": "echo",
                         "title": "A set of aliases to test triggers on the command line.",
-                     "uploaded": 1724926757,
-                      "version": "1"
+                     "uploaded": 1787910230,
+                      "version": "2"
                 },
                 {
                        "author": "Mosr",
@@ -1454,8 +1454,8 @@
                          "icon": "packages/icons/enable-accessibility.png",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
-                     "uploaded": 1749797696,
-                      "version": "2"
+                     "uploaded": 1787910230,
+                      "version": "3"
                 },
                 {
                        "author": "Heiko",
@@ -1576,8 +1576,8 @@
                          "icon": "packages/icons/generic_mapper.png",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1784443825,
-                      "version": "2.1.9"
+                     "uploaded": 1787910230,
+                      "version": "2.1.11"
                 },
                 {
                        "author": "Vadi",
@@ -2043,8 +2043,8 @@
                          "icon": "packages/icons/run-lua-code.png",
                      "mpackage": "run-lua-code",
                         "title": "Run Lua code directly from the command line.",
-                     "uploaded": 1737298564,
-                      "version": "5"
+                     "uploaded": 1787910230,
+                      "version": "6"
                 },
                 {
                        "author": "kaeus",
@@ -2351,5 +2351,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Aug 27 19:58:33 2026"
+   "updated": "Fri Aug 28 09:44:25 2026"
 }
