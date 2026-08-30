@@ -13,7 +13,11 @@ name: Update core packages
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * fri'
+    # Every six hours. A run costs six conditional downloads and commits only when
+    # something actually moved upstream, so the cost of checking often is close to
+    # nothing - and it caps how long mpkg serves an older copy than Mudlet ships at
+    # six hours rather than a week.
+    - cron: '0 */6 * * *'
 
 permissions:
   contents: write
@@ -108,5 +112,5 @@ jobs:
             gh issue comment "$existing" --body "Failed again: ${RUN_URL}"
           else
             gh issue create --title "$title" \
-              --body "The weekly sync of the packages Mudlet bundles did not finish, so mpkg may be serving older copies than Mudlet ships: ${RUN_URL}"
+              --body "The sync of the packages Mudlet bundles did not finish, so mpkg may be serving older copies than Mudlet ships: ${RUN_URL}"
           fi
