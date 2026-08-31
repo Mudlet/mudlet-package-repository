@@ -45,6 +45,14 @@
       "repositoryOwnerId": "263814053",
       "workflow": ".github/workflows/sync-publish.yml",
       "ref": "refs/heads/main"
+    },
+    {
+      "mpackage": "exchange-walker-live",
+      "filename": "exchange-walker-live.mpackage",
+      "repository": "ralphcma/fed2-exchange-walker-live",
+      "repositoryId": "1344569891",
+      "repositoryOwnerId": "65855516",
+      "workflow": ".github/workflows/publish.yml"
     }
   ]
 }
