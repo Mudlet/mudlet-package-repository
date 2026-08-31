@@ -559,6 +559,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "Bowser",
+                      "created": "2026-08-30",
+                  "description": "Customizable HUD Orbs for Health, Mana, Movement, Blood, and Enemy status. Dependencies: MSDP.",
+                     "filename": "Orblet.mpackage",
+                         "icon": "packages/icons/Orblet.png",
+                     "mpackage": "Orblet",
+                        "title": "Realms of Despair - V1.0.0",
+                     "uploaded": 1788210506,
+                      "version": "1.0.0"
+                },
+                {
                        "author": "Stack",
                       "created": "2023-09-28T17:08:53+0000",
                   "description": "The Procedural Realms Script [PRS] project gives Procedural Realms MUD players improved access to the advanced features of the Mudlet MUD client. By leveraging the specific \"out of band\" packets sent by Procedural Realms' server, PRS uses Mudlet's mapper to identify rooms/exits, prevent creation of duplicate rooms/areas, manage instanced areas, and accurately track your character's location on the map as you move about the realm. Additional convenience features include speedwalking/pathfinding, self-updating gauges (vitals, combat, and skills), combat buttons and targetting, communication containers, quick slot buttons/keybindings, and a user-adjustable UI layout.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23126) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2373,5 +2384,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Aug 31 21:08:00 2026"
+   "updated": "Mon Aug 31 21:09:01 2026"
 }
