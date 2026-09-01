@@ -529,13 +529,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-08-26T17:45:26+0000",
+                      "created": "2026-09-01T21:46:09+0000",
                   "description": "A game-agnostic tiling window manager for Mudlet. Inspired by tmux: panes, splits, workspaces, a way to register and insert custom content, helpful UI widgets, and registered actions for common tasks.",
                      "filename": "Muxlet.mpackage",
                      "mpackage": "Muxlet",
                         "title": "Muxlet",
-                     "uploaded": 1787766523,
-                      "version": "2.3.0"
+                     "uploaded": 1788299387,
+                      "version": "2.3.1"
                 },
                 {
                        "author": "Cherry",
@@ -2384,5 +2384,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Sep  1 20:44:30 2026"
+   "updated": "Tue Sep  1 21:50:55 2026"
 }
