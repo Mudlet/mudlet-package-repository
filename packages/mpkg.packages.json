@@ -1908,13 +1908,13 @@
                 {
                        "author": "Mudlet Makers",
                       "created": "2026-07-25T12:00:00+00:00",
-                  "description": "# Mudlet base UI\n\nA modest starter interface for players new to Mudlet: an adjustable dock\nwith your map, tabbed chat (All/Tells/Channels with unread counters) and\nhealth, mana, movement and experience gauges - built only from data your\ngame actually provides (GMCP, MSDP, or recognisable prompt and score\nlines). Nothing appears until the game sends something to show.\n\nNo section is stuck in the dock: drag the map, the chat window or the\nhealth bars out by its header row and it will sit wherever you drop it\nover the game's text. The sections left behind share out the space it\nhad, and where you leave each one is remembered.\n\nIt comes in three looks - Midnight, Ember and Hardlight. Click the ◐ in\nthe dock's title bar to try each in turn; a look colors the dock and,\nif you have not chosen a background color of your own, the background\nthe game's text sits on as well.\n\nCommands:\n\n```\n> baseui           -- show status and options\n> baseui hide      -- remove the interface (remembered between sessions)\n> baseui show      -- bring it back\n> baseui dock      -- put every section back in the dock\n> baseui ember     -- change the look (midnight, ember or hardlight)\n```\n\nWhen a game installs an interface of its own, this one quietly stands\naside - `baseui show` brings it back if you prefer it.\n",
+                  "description": "# Mudlet base UI\n\nA modest starter interface for new profiles: an adjustable dock with\nyour map, tabbed chat (All/Tells/Channels with unread counters) and\nhealth, mana, movement and experience gauges - built only from data your\ngame actually provides (GMCP, MSDP, or recognisable prompt and score\nlines). Nothing appears until the game sends something to show.\n\nNo section is stuck in the dock: drag the map, the chat window or the\nhealth bars out by its header row and it will sit wherever you drop it\nover the game's text. The sections left behind share out the space it\nhad, and where you leave each one is remembered.\n\nIt comes in three looks - Midnight, Ember and Hardlight. Click the ◐ in\nthe dock's title bar to try each in turn; a look colors the dock and,\nif you have not chosen a background color of your own, the background\nthe game's text sits on as well.\n\nCommands:\n\n```\n> baseui           -- show status and options\n> baseui hide      -- remove the interface (remembered between sessions)\n> baseui show      -- bring it back\n> baseui dock      -- put every section back in the dock\n> baseui ember     -- change the look (midnight, ember or hardlight)\n```\n\nWhen a game installs an interface of its own, this one quietly stands\naside - `baseui show` brings it back if you prefer it.\n",
                      "filename": "mudlet-base-ui.mpackage",
                          "icon": "packages/icons/mudlet-base-ui.png",
                      "mpackage": "mudlet-base-ui",
                         "title": "A starter interface with health bars, map and chat, built from what your game provides.",
-                     "uploaded": 1788263521,
-                      "version": "1.6.2"
+                     "uploaded": 1788280122,
+                      "version": "1.7.0"
                 },
                 {
                        "author": "Denarii",
@@ -2384,5 +2384,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Sep  1 11:53:02 2026"
+   "updated": "Tue Sep  1 16:29:31 2026"
 }
