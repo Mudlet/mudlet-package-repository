@@ -442,8 +442,8 @@
                      "filename": "MoralDecay-GUI.mpackage",
                      "mpackage": "MoralDecay-GUI",
                         "title": "Moral Decay MUD GUI — Customized Mapping, Comms Channels, Stats Panel and Enemy Panel!",
-                     "uploaded": 1786423133,
-                      "version": "1.0.9"
+                     "uploaded": 1788295419,
+                      "version": "1.0.10"
                 },
                 {
                        "author": "Demonnic",
@@ -2384,5 +2384,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Sep  1 16:29:31 2026"
+   "updated": "Tue Sep  1 20:44:30 2026"
 }
