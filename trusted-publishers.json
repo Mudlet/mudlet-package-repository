@@ -53,6 +53,24 @@
       "repositoryId": "1344569891",
       "repositoryOwnerId": "65855516",
       "workflow": ".github/workflows/publish.yml"
+    },
+    {
+      "mpackage": "STT",
+      "filename": "STT.mpackage",
+      "repository": "mpconley/MudletSTT",
+      "repositoryId": "1341197754",
+      "repositoryOwnerId": "3058178",
+      "workflow": ".github/workflows/release.yml",
+      "ref": "refs/heads/main"
+    },
+    {
+      "mpackage": "MCVP",
+      "filename": "MCVP.mpackage",
+      "repository": "mpconley/MudletMCVP",
+      "repositoryId": "1335536631",
+      "repositoryOwnerId": "3058178",
+      "workflow": ".github/workflows/release.yml",
+      "ref": "refs/heads/main"
     }
   ]
 }
