@@ -1047,8 +1047,8 @@
                          "icon": "packages/icons/arkadia.png",
                      "mpackage": "arkadia",
                         "title": "Skrypty do Arkadii",
-                     "uploaded": 1787652913,
-                      "version": "4.112"
+                     "uploaded": 1788434381,
+                      "version": "4.113"
                 },
                 {
                        "author": "Greg",
@@ -2384,5 +2384,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Sep  1 21:50:55 2026"
+   "updated": "Thu Sep  3 11:20:16 2026"
 }
