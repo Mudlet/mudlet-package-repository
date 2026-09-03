@@ -33,8 +33,7 @@ export function TrustedPublisherPanel({ record }: { record: ProvenanceRecord }) 
       </h2>
 
       <p className="mt-2 text-sm text-muted">
-        This exact file was submitted by a GitHub Actions run in the repository below,
-        which proves where it came from. It is not a file anyone uploaded by hand.
+        This exact file was submitted by a GitHub Actions run in the repository below.
       </p>
 
       <dl className="mt-3 flex flex-wrap gap-x-8 gap-y-3 text-sm">
