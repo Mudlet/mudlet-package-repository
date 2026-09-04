@@ -45,7 +45,10 @@ jobs:
             # output file before it knows the response. Reading config.lua back out
             # rejects anything that is not the archive we asked for - nothing else
             # inspects these before they reach main
-            if curl -fsSL --retry 3 \
+            # --retry-all-errors as well as --retry: bare --retry covers timeouts and 5xx,
+            # but raw.githubusercontent.com also drops connections mid-transfer, and a
+            # reset that goes unretried reads downstream as the package having moved
+            if curl -fsSL --retry 3 --retry-all-errors \
                  "https://raw.githubusercontent.com/Mudlet/Mudlet/development/src/packages/${package}/${package}.mpackage" \
                  -o "${archive}.new" \
                && unzip -p "${archive}.new" config.lua > /dev/null 2>&1; then
