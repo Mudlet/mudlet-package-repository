@@ -80,6 +80,10 @@ jobs:
         git config user.name 'github-actions[bot]'
         git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
+        # git push explains itself on stderr, and only one of the things it can say is
+        # worth another attempt. Keep the message so the retry can tell them apart.
+        push_error=$(mktemp)
+
         for attempt in 1 2 3; do
           # Index what is on main now. Everything above this line takes minutes, and
           # packages merge while it runs, so the checkout is routinely behind by the
@@ -97,9 +101,18 @@ jobs:
 
           git commit --quiet -m 'Automated package index update.'
 
-          if git push --quiet origin HEAD:main; then
+          if git push --quiet origin HEAD:main 2>"${push_error}"; then
             echo "Published the refreshed index."
             exit 0
+          fi
+          cat "${push_error}" >&2
+
+          # A branch that will not take a direct push from this token will not take one
+          # on the next two attempts either, and reporting that as contention sends
+          # whoever reads the issue hunting for a race that never happened.
+          if grep -qE 'GH006|protected branch' "${push_error}"; then
+            echo "Could not publish the index: main refused a direct push from github-actions[bot]. Branch protection has to let it bypass the pull request requirement." >&2
+            exit 1
           fi
 
           # Something landed on main between the fetch and the push. Whatever it is has
