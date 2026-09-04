@@ -1,0 +1,13 @@
+{
+  "filename": "MCVP.mpackage",
+  "mpackage": "MCVP",
+  "sha256": "0c9b233c1cef46e781b5f54fd9bb924505ca3462d8d7018dc87461863e77f3f9",
+  "version": "2.0.2",
+  "repository": "mpconley/MudletMCVP",
+  "repositoryId": "1335536631",
+  "workflow": ".github/workflows/release.yml",
+  "ref": "refs/heads/main",
+  "commit": "5183b5f75c66456fd5c35fa46f69cad79adea40f",
+  "runId": "33901847957",
+  "publishedAt": "2026-09-04T17:41:07.961Z"
+}
