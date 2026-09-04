@@ -111,7 +111,7 @@ jobs:
           # on the next two attempts either, and reporting that as contention sends
           # whoever reads the issue hunting for a race that never happened.
           if grep -qE 'GH006|protected branch' "${push_error}"; then
-            echo "Could not publish the index: main refused a direct push from github-actions[bot]. Branch protection has to let it bypass the pull request requirement." >&2
+            echo "Could not publish the index: branch protection on main rejected the push from github-actions[bot], for the reason given above. Retrying cannot settle that one." >&2
             exit 1
           fi
 
