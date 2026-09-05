@@ -385,14 +385,14 @@
                 },
                 {
                        "author": "Tamarindo",
-                      "created": "2026-09-04T17:40:55+0000",
+                      "created": "2026-09-05T19:39:09+0000",
                   "description": "Mudlet consumer package for the MUD Client Vocabulary Protocol (Client.Vocabulary over GMCP).",
                      "filename": "MCVP.mpackage",
                          "icon": "packages/icons/MCVP.png",
                      "mpackage": "MCVP",
                         "title": "MudletMCVP",
-                     "uploaded": 1788543828,
-                      "version": "2.0.2"
+                     "uploaded": 1788637338,
+                      "version": "2.1.0"
                 },
                 {
                        "author": "Demonnic",
@@ -2396,5 +2396,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Sep  5 16:35:07 2026"
+   "updated": "Sat Sep  5 19:42:58 2026"
 }
