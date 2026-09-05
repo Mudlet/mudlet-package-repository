@@ -80,6 +80,10 @@ jobs:
         git config user.name 'github-actions[bot]'
         git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
+        # git push says on stderr why it was refused, and exactly one of its answers is
+        # worth another attempt. Keep the message so the loop can tell them apart.
+        push_error=$(mktemp)
+
         for attempt in 1 2 3; do
           # Index what is on main now. Everything above this line takes minutes, and
           # packages merge while it runs, so the checkout is routinely behind by the
@@ -97,9 +101,26 @@ jobs:
 
           git commit --quiet -m 'Automated package index update.'
 
-          if git push --quiet origin HEAD:main; then
+          push_status=0
+          git push --quiet origin HEAD:main 2>"${push_error}" || push_status=$?
+          # a push that succeeded still carries the remote's notices - deprecations,
+          # quota warnings - on this channel, so this is not only the failure path
+          cat "${push_error}" >&2
+
+          if [ "${push_status}" -eq 0 ]; then
             echo "Published the refreshed index."
             exit 0
+          fi
+
+          # Only losing a race to another push is worth going round again, and that
+          # reaches us under three spellings: main was already ahead when this push
+          # started ("[rejected] ... fetch first"), or it moved during the push itself
+          # ("incorrect old value provided", "cannot lock ref"). Anything else - branch
+          # protection, a ruleset, a token that can no longer write - turns down the next
+          # two attempts identically, so let the remote's words above stand and stop.
+          if ! grep -qE '! \[rejected\]|incorrect old value provided|cannot lock ref' "${push_error}"; then
+            echo "Could not publish the index: the push was refused for the reason above, which retrying cannot settle." >&2
+            exit 1
           fi
 
           # Something landed on main between the fetch and the push. Whatever it is has
@@ -125,5 +146,5 @@ jobs:
           gh issue comment "$existing" --body "Failed again: ${RUN_URL}"
         else
           gh issue create --title "$title" \
-            --body "packages/mpkg.packages.json was not regenerated, so mpkg is still offering the versions it listed before. Re-running this workflow republishes it: ${RUN_URL}"
+            --body "packages/mpkg.packages.json was not regenerated, so mpkg is still offering the versions it listed before. The run log says which it was: a refresh that lost a race republishes on a re-run, one the remote refused needs its cause fixed first. ${RUN_URL}"
         fi
