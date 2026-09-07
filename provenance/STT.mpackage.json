@@ -1,13 +1,13 @@
 {
   "filename": "STT.mpackage",
   "mpackage": "STT",
-  "sha256": "0ae98c036a54c9823ec86ba68a5b47ac538e89700dc0a33dbbb8d571656a8647",
-  "version": "1.2.4",
+  "sha256": "c78d1b295eea2d04b87741be98fad9778f8a048831f8dfb97c3f151122470e73",
+  "version": "1.2.5",
   "repository": "mpconley/MudletSTT",
   "repositoryId": "1341197754",
   "workflow": ".github/workflows/release.yml",
   "ref": "refs/heads/main",
-  "commit": "78ec69843b2b23c7beab268b7210925ed25deae9",
-  "runId": "34040209866",
-  "publishedAt": "2026-09-06T14:46:39.564Z"
+  "commit": "873076dd7e5e055c9638481adf06546e8a2a1032",
+  "runId": "34142465347",
+  "publishedAt": "2026-09-07T16:16:31.275Z"
 }
