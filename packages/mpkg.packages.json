@@ -678,14 +678,14 @@
                 },
                 {
                        "author": "Tamarindo",
-                      "created": "2026-09-07T18:57:53+0000",
+                      "created": "2026-09-07T21:29:11+0000",
                   "description": "Speech-to-text for Mudlet: microphone toggle, command-line routing, and MCVP vocabulary correction over the stt.* bridge.",
                      "filename": "STT.mpackage",
                          "icon": "packages/icons/STT.png",
                      "mpackage": "STT",
                         "title": "MudletSTT",
-                     "uploaded": 1788807808,
-                      "version": "1.2.6"
+                     "uploaded": 1788816715,
+                      "version": "1.2.7"
                 },
                 {
                        "author": "keneanung",
@@ -2396,5 +2396,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Sep  7 19:03:58 2026"
+   "updated": "Mon Sep  7 21:32:25 2026"
 }
