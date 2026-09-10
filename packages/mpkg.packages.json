@@ -598,7 +598,7 @@
                      "filename": "PetriaMapper.mpackage",
                      "mpackage": "PetriaMapper",
                         "title": "Mapa automatico para Petria MUD (game.petriamud.com:6600) - cartografo GMCP + viaje por ruta.",
-                     "uploaded": 1785135091,
+                     "uploaded": 1789028069,
                       "version": "2.21"
                 },
                 {
@@ -2396,5 +2396,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Sep  8 11:27:39 2026"
+   "updated": "Thu Sep 10 08:15:10 2026"
 }
