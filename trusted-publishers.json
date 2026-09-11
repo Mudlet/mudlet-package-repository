@@ -71,6 +71,14 @@
       "repositoryOwnerId": "3058178",
       "workflow": ".github/workflows/release.yml",
       "ref": "refs/heads/main"
+    },
+    {
+      "mpackage": "AchaeaBeckon",
+      "filename": "AchaeaBeckon.mpackage",
+      "repository": "PrincessSiren/achaea-beckon",
+      "repositoryId": "1363383989",
+      "repositoryOwnerId": "48842744",
+      "workflow": ".github/workflows/release.yml"
     }
   ]
 }
