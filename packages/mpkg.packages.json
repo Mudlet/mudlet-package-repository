@@ -593,13 +593,13 @@
                 },
                 {
                        "author": "Narwhal",
-                      "created": "2026-07-26T21:00:00+0000",
+                      "created": "2026-09-11T00:00:00+0000",
                   "description": "### Petria Mapper\n\nCartografo **automatico** para [Petria MUD](http://www.petriamud.com) (ROM 2.4, en espanol).\nNo trae el mundo dibujado: **el mapa se construye solo mientras TU andas** (GMCP Room.Info),\nsala a sala, con tus propios pasos. Explorar sigue siendo cosa tuya.\n\n**Comandos** (escribe `mapayuda` para la ayuda completa):\n- **doble click en una sala del mapa** = viajar hasta ella (puertas, vetos y desvios incluidos).\n- `mapa ir <vnum>` — viaja andando a cualquier sala que ya hayas visitado.\n- `mapa donde` — que sala es esta (vnum y area).\n- `mapa pendientes` — que te queda por explorar: salidas vistas y nunca cruzadas del area.\n- `mapa buscar <texto>` — encuentra salas por nombre entre lo que has explorado; `mapa buscar ir <n>` viaja.\n- `mapa marca <nombre>` / `mapa a <nombre>` — favoritos: bautiza salas y vuelve a ellas por nombre.\n- `mapa cofradias <tu clase>` — veta de una tacada los vestibulos de las cofradias ajenas.\n- `mapa vetadas` / `mapa vetar <vnum> <dir>` / `mapa liberar <vnum> <dir>` — salidas vetadas\n  (cofradias de otras clases, zonas prohibidas): las rutas las esquivan.\n\n**Sabe apanarselas**: abre puertas cerradas en ruta, esquiva salidas sin permiso (y las veta\npara la proxima), recalcula si algo te desvia (oscuridad, empujones) y pausa el paseo si\nentras en combate, reanudando al acabar.\n\n**Requisitos**: Mudlet 4.10+ con el mapper activado. Petria emite GMCP de serie: no hay que\nconfigurar nada. Compatible con castellano del servidor (norte/sur/este/oeste/arriba/abajo).\n\n---\n\n*Automatic GMCP mapper for Petria MUD (Spanish ROM 2.4). The map draws itself as you walk;\n`mapa ir <vnum>` walks you back to any visited room. Handles closed doors, forbidden exits\n(vetoes them), deviations and combat pauses.*\n",
                      "filename": "PetriaMapper.mpackage",
                      "mpackage": "PetriaMapper",
                         "title": "Mapa automatico para Petria MUD (game.petriamud.com:6600) - cartografo GMCP + viaje por ruta.",
-                     "uploaded": 1789028069,
-                      "version": "2.21"
+                     "uploaded": 1789130503,
+                      "version": "2.22"
                 },
                 {
                        "author": "Kymbahl",
@@ -2396,5 +2396,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Sep 10 08:15:10 2026"
+   "updated": "Fri Sep 11 12:43:44 2026"
 }
