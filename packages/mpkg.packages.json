@@ -13,13 +13,13 @@
                 },
                 {
                        "author": "PrincessSiren",
-                      "created": "2026-09-10",
+                      "created": "2026-09-11",
                   "description": "# AchaeaBeckon\n\nA whitelist for who is allowed to move you.\n\nSomeone beckons. If they are on your list you follow them automatically; if\nthey are not, you get a red line naming them and nothing is sent.\n\n**Nobody is trusted out of the box.** A list of people who may move your\ncharacter is not something to ship pre-populated, so until you add a name every\nbeckon is a red line and nothing is sent.\n\n```\nbeckonlist add Vellis: raids\nbeckonlist on\n```\n\nType `beckonlist` in game for the full command list, and `beckonlist off` to\nwatch and report without sending anything while you are still deciding.\n\nWhy it is built this way, and the captured game output the trigger is read off,\nare in the docs: https://github.com/PrincessSiren/achaea-beckon/tree/main/docs\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-beckon",
                      "filename": "AchaeaBeckon.mpackage",
                      "mpackage": "AchaeaBeckon",
                         "title": "Beckon whitelist for Achaea",
-                     "uploaded": 1789147820,
-                      "version": "0.1.1"
+                     "uploaded": 1789152257,
+                      "version": "0.1.2"
                 },
                 {
                        "author": "Erikka, Demonnic",
@@ -2406,5 +2406,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Sep 11 17:30:58 2026"
+   "updated": "Fri Sep 11 18:45:03 2026"
 }
