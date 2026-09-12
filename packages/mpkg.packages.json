@@ -18,8 +18,8 @@
                      "filename": "AchaeaBeckon.mpackage",
                      "mpackage": "AchaeaBeckon",
                         "title": "Beckon whitelist for Achaea",
-                     "uploaded": 1789174724,
-                      "version": "0.1.3"
+                     "uploaded": 1789176365,
+                      "version": "0.1.4"
                 },
                 {
                        "author": "Erikka, Demonnic",
@@ -2406,5 +2406,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Sep 12 00:59:16 2026"
+   "updated": "Sat Sep 12 01:26:36 2026"
 }
