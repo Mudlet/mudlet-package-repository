@@ -2326,6 +2326,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "Isithunzi000",
+                      "created": "2026-09-08T07:23:26+00:00",
+                  "description": "Asystent scenek RP: spiewanie, recytacja, odgrywanie scen krok po kroku z prompterem (port pluginu z klientow Dargoth/WWW). Aliasy: /truwer, /truwer pomoc. Wtyczka do gry Arkadia MUD (arkadia.rpg.pl) / Plugin for Arkadia MUD (arkadia.rpg.pl).",
+                     "filename": "truwer.mpackage",
+                     "mpackage": "truwer",
+                        "title": "Truwer",
+                     "uploaded": 1789391270,
+                      "version": "1.0.10m"
+                },
+                {
                        "author": "xanthia",
                       "created": "2019-26-04T00:00:00+00:00",
                   "description": "This is a UI package that includes text-to-speech support for accessibility on Cities Of M'Dhoria, with graphic bars for player and enemy and a working auto-mapper (which just require some walking rules/discipline).\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=22736&sid=f8b58b442e976180e3f6220553eccb8e) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2406,5 +2416,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Sep 14 11:39:53 2026"
+   "updated": "Mon Sep 14 13:08:40 2026"
 }
