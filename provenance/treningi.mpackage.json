@@ -1,0 +1,13 @@
+{
+  "filename": "treningi.mpackage",
+  "mpackage": "treningi",
+  "sha256": "fd380cbd2c5ecee4404e360ae9ace7234bafaaddfbf3effe8cc215f37455d846",
+  "version": "1.0.12",
+  "repository": "Isithunzi000/arkadia-mpackage",
+  "repositoryId": "1346062051",
+  "workflow": ".github/workflows/sync-publish.yml",
+  "ref": "refs/heads/main",
+  "commit": "478ffefd47241d3af72c27695f9a82cfdae319dc",
+  "runId": "36267096613",
+  "publishedAt": "2026-09-26T19:44:51.122Z"
+}
