@@ -268,14 +268,14 @@
                 },
                 {
                        "author": "Ping",
-                      "created": "2025-06-21T01:05:41+08:00",
+                      "created": "2026-09-26T15:13:04+08:00",
                   "description": "Big thank you to Virelen for getting this started! A simple trigger that captures words encapsulated in colons like :this: and turns them into unicode emojis. Uses discord naming conventions for the most part, should be easy to update on your own end. Work in progress!",
                      "filename": "Emojis.mpackage",
                          "icon": "packages/icons/Emojis.png",
                      "mpackage": "Emojis",
                         "title": "A trigger and script to convert text emojis into unicode emojis!",
-                     "uploaded": 1750443956,
-                      "version": "1.005"
+                     "uploaded": 1790451323,
+                      "version": "1.006"
                 },
                 {
                        "author": "Daikojun",
@@ -1792,8 +1792,8 @@
                      "filename": "ishtar_cal.mpackage",
                      "mpackage": "ishtar_cal",
                         "title": "Kalendarz Ishtar",
-                     "uploaded": 1790406533,
-                      "version": "1.8.23"
+                     "uploaded": 1790451283,
+                      "version": "1.8.24"
                 },
                 {
                        "author": "Yetzederixx",
@@ -2015,8 +2015,8 @@
                      "filename": "pasek_kalendarz_arkadia.mpackage",
                      "mpackage": "pasek_kalendarz_arkadia",
                         "title": "Pasek kalendarza Arkadii (Ishtar / Imperium)",
-                     "uploaded": 1787860675,
-                      "version": "1.6.14"
+                     "uploaded": 1790451256,
+                      "version": "1.6.15"
                 },
                 {
                        "author": "Avikare",
@@ -2342,8 +2342,8 @@
                      "filename": "truwer.mpackage",
                      "mpackage": "truwer",
                         "title": "Truwer",
-                     "uploaded": 1790406513,
-                      "version": "1.0.11"
+                     "uploaded": 1790451195,
+                      "version": "1.0.12"
                 },
                 {
                        "author": "xanthia",
@@ -2426,5 +2426,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Sep 26 19:13:24 2026"
+   "updated": "Sat Sep 26 19:50:03 2026"
 }
