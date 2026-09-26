@@ -1732,8 +1732,8 @@
                      "filename": "imperium_cal.mpackage",
                      "mpackage": "imperium_cal",
                         "title": "Kalendarz Imperium",
-                     "uploaded": 1787740499,
-                      "version": "1.8.23m"
+                     "uploaded": 1790406508,
+                      "version": "1.8.24"
                 },
                 {
                        "author": "breakone9r",
@@ -1792,8 +1792,8 @@
                      "filename": "ishtar_cal.mpackage",
                      "mpackage": "ishtar_cal",
                         "title": "Kalendarz Ishtar",
-                     "uploaded": 1787740442,
-                      "version": "1.8.22m"
+                     "uploaded": 1790406533,
+                      "version": "1.8.23"
                 },
                 {
                        "author": "Yetzederixx",
@@ -2342,8 +2342,8 @@
                      "filename": "truwer.mpackage",
                      "mpackage": "truwer",
                         "title": "Truwer",
-                     "uploaded": 1789391270,
-                      "version": "1.0.10m"
+                     "uploaded": 1790406513,
+                      "version": "1.0.11"
                 },
                 {
                        "author": "xanthia",
@@ -2426,5 +2426,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Sep 23 22:45:18 2026"
+   "updated": "Sat Sep 26 07:09:05 2026"
 }
