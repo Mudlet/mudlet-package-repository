@@ -56,6 +56,15 @@
       "ref": "refs/heads/main"
     },
     {
+      "mpackage": "treningi",
+      "filename": "treningi.mpackage",
+      "repository": "Isithunzi000/arkadia-mpackage",
+      "repositoryId": "1346062051",
+      "repositoryOwnerId": "263814053",
+      "workflow": ".github/workflows/sync-publish.yml",
+      "ref": "refs/heads/main"
+    },
+    {
       "mpackage": "exchange-walker-live",
       "filename": "exchange-walker-live.mpackage",
       "repository": "ralphcma/fed2-exchange-walker-live",
