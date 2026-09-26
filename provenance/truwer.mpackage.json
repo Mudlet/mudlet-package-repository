@@ -1,13 +1,13 @@
 {
   "filename": "truwer.mpackage",
   "mpackage": "truwer",
-  "sha256": "8420fb3a75ed99aea9de8e38c88852967bb85983f919a18ec1c7fed43c503e41",
-  "version": "1.0.11",
+  "sha256": "fd1e37f6af32039b881dd5205d4e53523a23a33cb019cb51ffc2e8715c8c5370",
+  "version": "1.0.12",
   "repository": "Isithunzi000/arkadia-mpackage",
   "repositoryId": "1346062051",
   "workflow": ".github/workflows/sync-publish.yml",
   "ref": "refs/heads/main",
-  "commit": "cf2e0b607cf09b1d58f4ff7ae14db511ddef559b",
-  "runId": "36225745334",
-  "publishedAt": "2026-09-26T07:06:33.170Z"
+  "commit": "7241a495a5d80575dc1f141952c35138f8ecce3d",
+  "runId": "36264419893",
+  "publishedAt": "2026-09-26T18:58:51.004Z"
 }
