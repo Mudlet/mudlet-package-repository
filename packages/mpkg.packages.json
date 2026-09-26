@@ -2337,6 +2337,16 @@
                 },
                 {
                        "author": "Isithunzi000",
+                      "created": "2026-09-24T05:18:55+00:00",
+                  "description": "Kalkulator cen treningow umiejetnosci dla Arkadii MUD. Aliasy: /treningi, /treningi pomoc, /treningi tabela, /treningi aktualizuj. Czysty kalkulator, zero automatyki. Wtyczka do gry Arkadia MUD (arkadia.rpg.pl) / Plugin for Arkadia MUD (arkadia.rpg.pl).",
+                     "filename": "treningi.mpackage",
+                     "mpackage": "treningi",
+                        "title": "Treningi",
+                     "uploaded": 1790452906,
+                      "version": "1.0.12"
+                },
+                {
+                       "author": "Isithunzi000",
                       "created": "2026-09-08T07:23:26+00:00",
                   "description": "Asystent scenek RP: spiewanie, recytacja, odgrywanie scen krok po kroku z prompterem (port pluginu z klientow Dargoth/WWW). Aliasy: /truwer, /truwer pomoc. Wtyczka do gry Arkadia MUD (arkadia.rpg.pl) / Plugin for Arkadia MUD (arkadia.rpg.pl).",
                      "filename": "truwer.mpackage",
@@ -2426,5 +2436,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Sep 26 19:50:03 2026"
+   "updated": "Sat Sep 26 20:05:36 2026"
 }
