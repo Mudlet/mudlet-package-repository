@@ -214,14 +214,14 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-04-13T22:45:12+0000",
-                  "description": "# Copier\n\nConvenient copy functions for Mudlet.\n\nUse this feature to copy text from the game that can be useful for pasting in\nother situations. Functions are accessed after selecting text and then\nright-clicking them.\n\n## Copy collapsed\n\nSelect text that is in a say, a tell, or a channel, to copy it in a collapsed\nmanner. This is useful for removing all line feeds and indents from text and is\nready to paste.\n\nExample:\n\n```text\n   Marble pillars about five feet high each stand at mid-intervals between the\\n\ndangling cords. On each of the pillars, a crystal vase bearing a single, fresh\\n\nred rose sits. The air is slightly warmer in this room, while light seems to\\n\nshimmer iridescently from the silks on the wall.\n```\n\nResults in the following in your clipboard, ready to paste:\n\n> Marble pillars about five feet high each stand at mid-intervals between the dangling cords. On each of the pillars, a crystal vase bearing a single, fresh red rose sits. The air is slightly warmer in this room, while light seems to shimmer iridescently from the silks on the wall.\n\n## Use cases\n\nPresently, only one use case has been accommodated for. If there are others,\nwish upon the first star on the left and maybe it will manifest.\n\n## License\n\n`threshcopy` is released under the [0BSD](LICENSE.txt).\n",
+                      "created": "2026-10-01T16:36:26+0000",
+                  "description": "# Copier\n\nConvenient copy functions for Mudlet.\n\nUse this feature to copy text from the game that can be useful for pasting in\nother situations. Functions are accessed after selecting text and then\nright-clicking them.\n\n## Copy collapsed\n\nSelect text that is in a say, a tell, or a channel, to copy it in a collapsed\nmanner. This is useful for removing all line feeds and indents from text and is\nready to paste.\n\nExample:\n\n```text\n   Marble pillars about five feet high each stand at mid-intervals between the\\n\ndangling cords. On each of the pillars, a crystal vase bearing a single, fresh\\n\nred rose sits. The air is slightly warmer in this room, while light seems to\\n\nshimmer iridescently from the silks on the wall.\n```\n\nResults in the following in your clipboard, ready to paste:\n\n> Marble pillars about five feet high each stand at mid-intervals between the dangling cords. On each of the pillars, a crystal vase bearing a single, fresh red rose sits. The air is slightly warmer in this room, while light seems to shimmer iridescently from the silks on the wall.\n\n## Use cases\n\nPresently, only one use case has been accommodated for. If there are others,\nwish upon the first star on the left and maybe it will manifest.\n\n## License\n\n`Copier` is released under the [0BSD](LICENSE.txt).\n",
                      "filename": "Copier.mpackage",
                          "icon": "packages/icons/Copier.png",
                      "mpackage": "Copier",
                         "title": "Convenient copy functions for Mudlet.",
-                     "uploaded": 1776123366,
-                      "version": "2.0.0"
+                     "uploaded": 1790873558,
+                      "version": "2.0.1"
                 },
                 {
                        "author": "Multiple DSL Contributors, Packaged by Zooka",
@@ -2436,5 +2436,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Sep 27 19:43:39 2026"
+   "updated": "Thu Oct  1 16:53:45 2026"
 }
