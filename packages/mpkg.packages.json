@@ -32,6 +32,16 @@
                       "version": "1.3.3"
                 },
                 {
+                       "author": "PrincessSiren",
+                      "created": "2026-10-01",
+                  "description": "# AchaeaHidden\n\nWhen a venom gives you an affliction without saying which, clear the queue and\ndiagnose.\n\nThe game's whole notice is one line:\n\n```\nYou are confused as to the effects of the venom.\n```\n\nOn that line the package sends `clearqueue all` and then `queue add bal\ndiagnose`, so the diagnose runs as soon as you have balance. A second\nbite inside two seconds sends nothing more.\n\n```\nhidden\nhidden off\nhidden clear off\nhidden send queue add bal diagnose\n```\n\n`hidden` is the full command list. What it sends is a setting, so it can be\nchanged without rebuilding anything.\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-hidden",
+                     "filename": "AchaeaHidden.mpackage",
+                     "mpackage": "AchaeaHidden",
+                        "title": "Diagnose a hidden affliction in Achaea",
+                     "uploaded": 1790922522,
+                      "version": "0.3.0"
+                },
+                {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
                       "created": "2026-07-09T23:37:25-07:00",
                   "description": "Achaean Curing System (Iron Realms Entertainment)",
@@ -2436,5 +2446,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct  2 05:59:08 2026"
+   "updated": "Fri Oct  2 06:29:16 2026"
 }
