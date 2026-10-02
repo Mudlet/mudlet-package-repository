@@ -1,0 +1,13 @@
+{
+  "filename": "AchaeaHidden.mpackage",
+  "mpackage": "AchaeaHidden",
+  "sha256": "963fa6e826eb5f4645420a876ba4bbd0e909b2386021218871b590c0ca8e6773",
+  "version": "0.3.0",
+  "repository": "PrincessSiren/achaea-hidden",
+  "repositoryId": "1399072257",
+  "workflow": ".github/workflows/release.yml",
+  "ref": "refs/tags/v0.3.0",
+  "commit": "903b3096add70de71aa4f9b5d8e955d47c94ca24",
+  "runId": "36973403280",
+  "publishedAt": "2026-10-02T06:24:57.472Z"
+}
