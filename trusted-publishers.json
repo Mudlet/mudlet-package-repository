@@ -97,6 +97,14 @@
       "repositoryId": "1363383989",
       "repositoryOwnerId": "48842744",
       "workflow": ".github/workflows/release.yml"
+    },
+    {
+      "mpackage": "AchaeaHidden",
+      "filename": "AchaeaHidden.mpackage",
+      "repository": "PrincessSiren/achaea-hidden",
+      "repositoryId": "1399072257",
+      "repositoryOwnerId": "48842744",
+      "workflow": ".github/workflows/release.yml"
     }
   ]
 }
