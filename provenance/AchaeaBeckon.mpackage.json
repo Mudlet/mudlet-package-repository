@@ -1,13 +1,13 @@
 {
   "filename": "AchaeaBeckon.mpackage",
   "mpackage": "AchaeaBeckon",
-  "sha256": "5b94e2ef0e1bf7abc118841d94483c0e01e52ac14ebcfd90baef9fc144738d69",
-  "version": "0.1.4",
+  "sha256": "7a1bfcf6930cf71b9d8b27aca0388ff18a0091e230934a90443e1501022ffbc8",
+  "version": "0.2.1",
   "repository": "PrincessSiren/achaea-beckon",
   "repositoryId": "1363383989",
   "workflow": ".github/workflows/release.yml",
-  "ref": "refs/tags/v0.1.4",
-  "commit": "770c77a338509fafaabad0269b61c39696136a49",
-  "runId": "34664440810",
-  "publishedAt": "2026-09-12T01:18:59.344Z"
+  "ref": "refs/tags/v0.2.1",
+  "commit": "5818240ae1138212e4f4752210037dd8476d2f59",
+  "runId": "36977316539",
+  "publishedAt": "2026-10-02T07:12:26.965Z"
 }
