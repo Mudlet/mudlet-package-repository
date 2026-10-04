@@ -33,13 +33,13 @@
                 },
                 {
                        "author": "PrincessSiren",
-                      "created": "2026-10-01",
-                  "description": "# AchaeaHidden\n\nWhen a venom gives you an affliction without saying which, clear the queue and\ndiagnose.\n\nThe game's whole notice is one line:\n\n```\nYou are confused as to the effects of the venom.\n```\n\nOn that line the package sends `clearqueue all` and then `queue add bal\ndiagnose`, so the diagnose runs as soon as you have balance. A second\nbite inside two seconds sends nothing more.\n\n```\nhidden\nhidden off\nhidden clear off\nhidden send queue add bal diagnose\n```\n\n`hidden` is the full command list. What it sends is a setting, so it can be\nchanged without rebuilding anything.\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-hidden",
+                      "created": "2026-10-02",
+                  "description": "# AchaeaHidden\n\nWhen a venom gives you an affliction without saying which, clear the queue and\ndiagnose.\n\nThe game's whole notice is one line:\n\n```\nYou are confused as to the effects of the venom.\n```\n\nOn that line the package sends `clearqueue all` and then `queue add bal\ndiagnose`, so the diagnose runs as soon as you have balance. A second\nbite inside two seconds sends nothing more.\n\n```\nhidden\nhidden off\nhidden clear off\nhidden send queue add bal diagnose\n```\n\n`hidden` is the full command list. What it sends is a setting, so it can be\nchanged without rebuilding anything.\n\nIt also predicts recklessness. Recklessness makes your prompt read full health\nand mana whatever you really have, so when the prompt after that venom line,\nor after a bleeding tick of more than 50, reads exactly full, the package\nsends\n\n```\ncuring predict recklessness\n```\n\nso server-side curing can treat it without waiting for the diagnose. It sends\nthis once, and again only after recklessness has been cured, a prompt has read\nbelow full, or you have logged in again. This is on by default; `hidden\nreckless off` turns it off.\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-hidden",
                      "filename": "AchaeaHidden.mpackage",
                      "mpackage": "AchaeaHidden",
                         "title": "Diagnose a hidden affliction in Achaea",
-                     "uploaded": 1790924979,
-                      "version": "0.3.1"
+                     "uploaded": 1791089918,
+                      "version": "0.4.1"
                 },
                 {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
@@ -2446,5 +2446,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct  2 07:16:22 2026"
+   "updated": "Sun Oct  4 05:00:28 2026"
 }
