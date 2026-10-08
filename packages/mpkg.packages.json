@@ -1661,8 +1661,8 @@
                          "icon": "packages/icons/generic_mapper.png",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1791351446,
-                      "version": "2.1.12"
+                     "uploaded": 1791419109,
+                      "version": "2.1.13"
                 },
                 {
                        "author": "Vadi",
@@ -2456,5 +2456,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Oct  7 05:38:08 2026"
+   "updated": "Thu Oct  8 00:29:03 2026"
 }
