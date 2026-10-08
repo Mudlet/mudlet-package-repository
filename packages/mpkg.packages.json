@@ -463,8 +463,8 @@
                      "filename": "MapRebalance.mpackage",
                      "mpackage": "MapRebalance",
                         "title": "MapRebalance - repair a mapped area's layout",
-                     "uploaded": 1791329919,
-                      "version": "1.1.1"
+                     "uploaded": 1791472729,
+                      "version": "1.2.0"
                 },
                 {
                        "author": "Kymbahl, Kronos",
@@ -2456,5 +2456,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Oct  8 00:29:03 2026"
+   "updated": "Thu Oct  8 16:05:20 2026"
 }
