@@ -1752,8 +1752,8 @@
                      "filename": "imperium_cal.mpackage",
                      "mpackage": "imperium_cal",
                         "title": "Kalendarz Imperium",
-                     "uploaded": 1790449927,
-                      "version": "1.8.25"
+                     "uploaded": 1791541862,
+                      "version": "1.8.26"
                 },
                 {
                        "author": "breakone9r",
@@ -2456,5 +2456,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Oct  8 16:05:20 2026"
+   "updated": "Fri Oct  9 10:31:45 2026"
 }
