@@ -1965,8 +1965,8 @@
                          "icon": "packages/icons/mudlet-base-ui.png",
                      "mpackage": "mudlet-base-ui",
                         "title": "A starter interface with health bars, map and chat, built from what your game provides.",
-                     "uploaded": 1792253436,
-                      "version": "1.7.7"
+                     "uploaded": 1792344020,
+                      "version": "1.7.8"
                 },
                 {
                        "author": "Denarii",
@@ -2456,5 +2456,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Oct 17 21:12:35 2026"
+   "updated": "Sun Oct 18 17:21:23 2026"
 }
