@@ -105,6 +105,14 @@
       "repositoryId": "1399072257",
       "repositoryOwnerId": "48842744",
       "workflow": ".github/workflows/release.yml"
+    },
+    {
+      "mpackage": "AchaeaRestock",
+      "filename": "AchaeaRestock.mpackage",
+      "repository": "PrincessSiren/achaea-restock",
+      "repositoryId": "1376364740",
+      "repositoryOwnerId": "48842744",
+      "workflow": ".github/workflows/release.yml"
     }
   ]
 }
