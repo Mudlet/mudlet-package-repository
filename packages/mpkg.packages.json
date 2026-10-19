@@ -1917,6 +1917,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "ealanta",
+                      "created": "2026-10-16T00:00:00-05:00",
+                  "description": "*Built 2026-10-19 18:21*\n\nDock panels and vitals bars for Merentha.\n\n### What you get\n* **Chat** panel with two tabs: *Chat* and *Path & Buffs*\n* **Stats** panel (STAT / CUR / MAX / PROG)\n* **Status** panel: XP/hr, bag, pet health, salve count, mana gem (shown as the game draws it, in its colours; red when low), and the path rows used by merentha-paths\n  (set the salve count by hand with `setsalve 25`)\n  Tip: buy salve one vial at a time (`buy 1 legend salve`, not `buy 25 legend salve`) so the salve counter stays accurate; if it drifts, fix it with `setsalve`.\n* Health / endurance / mana / xp bars along the bottom\n\nThe panels are fixed in a column on the right, 25% of the window wide: Status and Stats stacked at\nthe bottom, each just as tall as its contents, and Chat filling the rest above them. Type `muilayout` to redraw the layout.\nWritten against Mudlet 5.0.\n\n### Settings\nOpen the script *Merentha UI* and edit the **SETTINGS** block at the top.\n\n### Works with\n* **merentha-paths** writes the path, next/last step and progress into the Status panel.\n* **merentha-songs** prints its messages in the Path & Buffs tab.\n",
+                     "filename": "merentha-ui.mpackage",
+                         "icon": "packages/icons/merentha-ui.png",
+                     "mpackage": "merentha-ui",
+                        "title": "Merentha UI",
+                     "uploaded": 1792452432,
+                      "version": "2.9.9"
+                },
+                {
                        "author": "Caelic",
                       "created": "2011-11-29T18:26:20+00:00",
                   "description": "This software package is a customized combo script for a monk character in a game, designed to automatically execute different combat combinations based on the target type. When targeting a specific type of in-game entity (denizen), the script performs a default bashing combo, and when no specific target is selected, it allows the player to choose from multiple predefined combo sequences using keypad numbers 1-9. The script is flexible and can potentially be adapted for other character classes, with ongoing plans to expand its functionality by adding more key variations and target lists.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2581&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2466,5 +2477,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Oct 19 22:15:41 2026"
+   "updated": "Mon Oct 19 23:27:45 2026"
 }
