@@ -1544,13 +1544,13 @@
                 {
                        "author": "Mudlet Default Package",
                       "created": "2025-06-07T20:44:12-04:00",
-                  "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
+                  "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- lets Tab reach buttons made by scripts and packages, pressed with Space or Enter\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
                      "filename": "enable-accessibility.mpackage",
                          "icon": "packages/icons/enable-accessibility.png",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
-                     "uploaded": 1787910230,
-                      "version": "3"
+                     "uploaded": 1792448092,
+                      "version": "4"
                 },
                 {
                        "author": "Heiko",
@@ -1671,8 +1671,8 @@
                          "icon": "packages/icons/generic_mapper.png",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1792414315,
-                      "version": "2.1.18"
+                     "uploaded": 1792448092,
+                      "version": "2.1.19"
                 },
                 {
                        "author": "Vadi",
@@ -1970,13 +1970,13 @@
                 {
                        "author": "Mudlet Makers",
                       "created": "2026-07-25T12:00:00+00:00",
-                  "description": "# Mudlet base UI\n\nA modest starter interface for new profiles: an adjustable dock with\nyour map, tabbed chat (All/Tells/Channels with unread counters) and\nhealth, mana, movement and experience gauges - built only from data your\ngame actually provides (GMCP, MSDP, or recognisable prompt and score\nlines). Nothing appears until your game has sent something to show.\n\nNo section is stuck in the dock: drag the map, the chat window or the\nhealth bars out by its header row and it will sit wherever you drop it\nover the game's text. The sections left behind share out the space it\nhad, and where you leave each one is remembered.\n\nIt comes in three looks - Midnight, Ember and Hardlight. Click the ◐ in\nthe dock's title bar to try each in turn; a look colors the dock and,\nif you have not chosen a background color of your own, the background\nthe game's text sits on as well.\n\nCommands:\n\n```\n> baseui           -- show status and options\n> baseui hide      -- remove the interface (remembered between sessions)\n> baseui show      -- bring it back\n> baseui dock      -- put every section back in the dock\n> baseui ember     -- change the look (midnight, ember or hardlight)\n```\n\nWhen a game installs an interface of its own, this one quietly stands\naside - `baseui show` brings it back if you prefer it.\n",
+                  "description": "# Mudlet base UI\n\nA modest starter interface for new profiles: an adjustable dock with\nyour map, tabbed chat (All/Tells/Channels with unread counters) and\nhealth, mana, movement and experience gauges - built only from data your\ngame actually provides (GMCP, MSDP, or recognisable prompt and score\nlines). An enemy bar follows your opponent's health, from GMCP or\nMSDP or from the sentence some games print describing it (\"The orc\nhas a few scratches.\"). Nothing appears until your game has sent\nsomething to show.\n\nNo section is stuck in the dock: drag the map, the chat window or the\nhealth bars out by its header row and it will sit wherever you drop it\nover the game's text. The sections left behind share out the space it\nhad, and where you leave each one is remembered.\n\nIt comes in three looks - Midnight, Ember and Hardlight. Click the ◐ in\nthe dock's title bar to try each in turn; a look colors the dock and,\nif you have not chosen a background color of your own, the background\nthe game's text sits on as well.\n\nCommands:\n\n```\n> baseui           -- show status and options\n> baseui hide      -- remove the interface (remembered between sessions)\n> baseui show      -- bring it back\n> baseui dock      -- put every section back in the dock\n> baseui ember     -- change the look (midnight, ember or hardlight)\n> baseui background <file>  -- put a picture behind the whole window\n> baseui background off     -- take it away again\n```\n\nThe ▣ beside the ◐ picks a background picture too; right-click it to\nremove the picture. While a picture is up, the game's text, chat and\ndocked sections let it show through; sections dragged out of the dock\nstay solid.\n\nWhen a game installs an interface of its own, this one quietly stands\naside - `baseui show` brings it back if you prefer it.\n",
                      "filename": "mudlet-base-ui.mpackage",
                          "icon": "packages/icons/mudlet-base-ui.png",
                      "mpackage": "mudlet-base-ui",
                         "title": "A starter interface with health bars, map and chat, built from what your game provides.",
-                     "uploaded": 1792387964,
-                      "version": "1.7.9"
+                     "uploaded": 1792448092,
+                      "version": "1.9.0"
                 },
                 {
                        "author": "Denarii",
@@ -2466,5 +2466,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Oct 19 16:49:29 2026"
+   "updated": "Mon Oct 19 22:15:41 2026"
 }
