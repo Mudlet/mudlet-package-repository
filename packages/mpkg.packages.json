@@ -717,6 +717,16 @@
                       "version": "2.0.0"
                 },
                 {
+                       "author": "Odo",
+                      "created": "2026-10-19T10:33:49+0000",
+                  "description": "Automapper for Realm of Magic. Builds the map from GMCP Room.Info as you walk: rooms grouped into areas by the places you know, unexplored exits as stubs, doors and terrain colours. Click a room to walk there, or use walk to / walk stop / walk speed, and keep named bookmarks with walk remember / walk recall / walk forget. Type walk or rmap for help.",
+                     "filename": "RoMMapper.mpackage",
+                     "mpackage": "RoMMapper",
+                        "title": "Automapper for Realm of Magic",
+                     "uploaded": 1792425244,
+                      "version": "1.1.8"
+                },
+                {
                        "author": "Tamarindo",
                       "created": "2026-09-21T22:38:10+0000",
                   "description": "Speech-to-text for Mudlet: microphone toggle, command-line routing, and MCVP vocabulary correction over the stt.* bridge.",
@@ -2456,5 +2466,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Oct 19 12:52:38 2026"
+   "updated": "Mon Oct 19 16:49:29 2026"
 }
