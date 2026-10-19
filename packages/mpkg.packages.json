@@ -1918,6 +1918,28 @@
                 },
                 {
                        "author": "ealanta",
+                      "created": "2026-10-13T08:35:16-05:00",
+                  "description": "*Built 2026-10-19 18:09*\n\nPath walking for Merentha: step through a list of rooms, find monsters, and build short paths automatically.\n\n### Commands (type `pathhelp` in game)\n* `paths` - list your paths, `path <name>` - load one\n* `f` or **F1** - walk the next step, **Shift+F1** - move the counter back one\n* `pathstep zx` - use `zx` (or any word or regex) instead of `f` to walk the next step; `pathstep reset` goes back to `f`\n* **F11** - walk the rest of the loop to get back to the start, press again to return\n* **Genpath**: `gp <name>` walks a path that visits every room and saves only the rooms with monsters as `ztemp_path`. `tp` loads it. `mincount <n>` / `maxcount <n>` limit how many monsters a room needs.\n* **Path builder**: `createpath`, walk with n/e/s/w, `setroom` at each stop, `printpath` prints the list to paste into the pathlist.\n\n### Your paths\nThe script *pathlist* holds a few paths to start with: cab, wdnorth, wdsouth, havennorth, haveneast, havensouth, haventown, gofurtown and gofurmines. Add your own there, or install **merentha-pathlist** for the full list.\n\n### Settings\nOpen the script *Merentha Paths* and edit the **SETTINGS** block at the top.\n\nRequires **merentha-ui** (the Status panel shows the path, next step and progress).\n",
+                     "filename": "merentha-paths.mpackage",
+                         "icon": "packages/icons/merentha-paths.png",
+                     "mpackage": "merentha-paths",
+                        "title": "Merentha Paths",
+                     "uploaded": 1792452488,
+                      "version": "1.1.3"
+                },
+                {
+                       "author": "ealanta",
+                      "created": "2026-10-13T08:16:35-05:00",
+                  "description": "*Built 2026-10-19 08:57*\n\nBard song queue for Merentha.\n\n### What it does\n* Keeps a queue of songs and sings them one after another.\n* Re-queues owl and fortune songs when their buff fades, and the spider song too if you switch that on\n  (`spiderrenew on` / `spiderrenew off`, default on).\n* Notices when your INT bonus drops (the song buffs ran out) and re-queues your full self-buff set.\n\n### Commands (type `songhelp` in game)\n* `singme` - queue your full self-buff set\n* `q <song>` - sing one song next, e.g. `q rock`\n* `q` - show the queue, `qreset` - empty it\n* `qowl`, `qspider`, `qfortune [name]`\n* `singattack`, `singdragon`, `singmonk`, `singspell <name>` - buff sets on someone else\n* **F4** forces the next song right now\n\n### Settings\nOpen the script *Merentha Songs* and edit the **SETTINGS** block at the top (default songs, instrument, key, what gets re-queued).\n\nWorks on its own. If merentha-ui is installed, messages go to the Path & Buffs tab.\n",
+                     "filename": "merentha-songs.mpackage",
+                         "icon": "packages/icons/merentha-songs.png",
+                     "mpackage": "merentha-songs",
+                        "title": "Merentha Songs",
+                     "uploaded": 1792452509,
+                      "version": "1.2.5"
+                },
+                {
+                       "author": "ealanta",
                       "created": "2026-10-16T00:00:00-05:00",
                   "description": "*Built 2026-10-19 18:21*\n\nDock panels and vitals bars for Merentha.\n\n### What you get\n* **Chat** panel with two tabs: *Chat* and *Path & Buffs*\n* **Stats** panel (STAT / CUR / MAX / PROG)\n* **Status** panel: XP/hr, bag, pet health, salve count, mana gem (shown as the game draws it, in its colours; red when low), and the path rows used by merentha-paths\n  (set the salve count by hand with `setsalve 25`)\n  Tip: buy salve one vial at a time (`buy 1 legend salve`, not `buy 25 legend salve`) so the salve counter stays accurate; if it drifts, fix it with `setsalve`.\n* Health / endurance / mana / xp bars along the bottom\n\nThe panels are fixed in a column on the right, 25% of the window wide: Status and Stats stacked at\nthe bottom, each just as tall as its contents, and Chat filling the rest above them. Type `muilayout` to redraw the layout.\nWritten against Mudlet 5.0.\n\n### Settings\nOpen the script *Merentha UI* and edit the **SETTINGS** block at the top.\n\n### Works with\n* **merentha-paths** writes the path, next/last step and progress into the Status panel.\n* **merentha-songs** prints its messages in the Path & Buffs tab.\n",
                      "filename": "merentha-ui.mpackage",
@@ -2477,5 +2499,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Oct 19 23:27:45 2026"
+   "updated": "Mon Oct 19 23:28:42 2026"
 }
