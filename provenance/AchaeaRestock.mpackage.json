@@ -1,13 +1,13 @@
 {
   "filename": "AchaeaRestock.mpackage",
   "mpackage": "AchaeaRestock",
-  "sha256": "8bccd1cb3b51384756c1d1b161f1a25f869036a7f0de3774596a00edc3059a0f",
-  "version": "0.3.0",
+  "sha256": "bd7d0c1487335964d53d43431c7b102445932121f6e4f9c29798cc84fdc79785",
+  "version": "0.3.1",
   "repository": "PrincessSiren/achaea-restock",
   "repositoryId": "1376364740",
   "workflow": ".github/workflows/release.yml",
-  "ref": "refs/tags/v0.3.0",
-  "commit": "dcc97e6a0669566bdcdd5376aef8f28dfcf56b36",
-  "runId": "39398094076",
-  "publishedAt": "2026-10-20T09:05:41.279Z"
+  "ref": "refs/tags/v0.3.1",
+  "commit": "2360ea208a665e1ccde129e66d97e1c8e77ac23e",
+  "runId": "39501717617",
+  "publishedAt": "2026-10-20T21:36:44.658Z"
 }
