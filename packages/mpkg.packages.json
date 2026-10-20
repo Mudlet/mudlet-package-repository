@@ -42,6 +42,16 @@
                       "version": "0.4.1"
                 },
                 {
+                       "author": "PrincessSiren",
+                      "created": "2026-10-15",
+                  "description": "# AchaeaRestock\n\nWhat to buy before you go out.\n\nReads your rift over GMCP, compares it against targets you set, and prints what\nis short and how much of it to buy. It sends IRE.Rift.Request, with a blank\nline behind it for a report, and triggers on nothing.\n\n**Nothing ships with a target.** How much bloodroot you want is a preference\nrather than a game fact, so setting one is what opts a heading or an item into\nthe report:\n\n```\nrestock target herbs 500\nrestock target health 1500\nrestock\n```\n\nEvery mineral does exactly what one herb does (HELP 13.7.1), and\nserver-side curing falls back to the other when you run out of one, so\n`restock cures 500` watches each pair together -- 300 ash and 300 stannum are\n600 sanity cures -- and `restock cures herbs` makes the report name the herb\nto buy rather than either:\n\n```\nrestock cures 500\nrestock cures herbs\nrestock\n```\n\n`restock all` prints the whole rift grouped the way RIFT groups it, and\n`restock help` is the full command list.\n\nCapacities come from HELP 7.14, so `restock` knows what the rift will not hold\nmore of. Minerals take the scroll's \"crystal\" cap of 2500, which is a reading\nrather than a quotation, and the cap is printed with a note saying so.\n\nWhy it is built this way, and the captured game output the tables are read off,\nare in the docs: https://github.com/PrincessSiren/achaea-restock/tree/main/docs\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-restock",
+                     "filename": "AchaeaRestock.mpackage",
+                     "mpackage": "AchaeaRestock",
+                        "title": "Rift restock list for Achaea",
+                     "uploaded": 1792514836,
+                      "version": "0.3.0"
+                },
+                {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
                       "created": "2026-07-09T23:37:25-07:00",
                   "description": "Achaean Curing System (Iron Realms Entertainment)",
@@ -2499,5 +2509,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Tue Oct 20 05:39:29 2026"
+   "updated": "Tue Oct 20 16:48:04 2026"
 }
