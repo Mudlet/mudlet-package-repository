@@ -38,8 +38,8 @@
                      "filename": "AchaeaHidden.mpackage",
                      "mpackage": "AchaeaHidden",
                         "title": "Diagnose a hidden affliction in Achaea",
-                     "uploaded": 1791089918,
-                      "version": "0.4.1"
+                     "uploaded": 1792646805,
+                      "version": "0.4.2"
                 },
                 {
                        "author": "PrincessSiren",
@@ -2509,5 +2509,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Oct 21 17:38:07 2026"
+   "updated": "Thu Oct 22 05:27:18 2026"
 }
