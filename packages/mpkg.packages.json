@@ -136,6 +136,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Larval",
+                      "created": "2026-10-22T12:10:00-05:00",
+                  "description": "Its own window: monsters by region and area, kills, exp per kill, coins, loot with drop %, limbs to aim at, ranks, hunter / explorer titles. Sort by name, kills or exp (click \"sort\" in the window or type bestiary sort kills|exp|name). Kills from the same round are all counted, with the exp split between them. Never sends anything to the game.",
+                     "filename": "BestiaryV2.mpackage",
+                     "mpackage": "Bestiary",
+                        "title": "Bestiary - learns every monster you fight",
+                     "uploaded": 1792734478,
+                      "version": "3"
+                },
+                {
                        "author": "fried",
                       "created": "2025-01-27T12:39:16-0800",
                   "description": "![shenron](src/resources/shenron.png)\n\n# CK\n\nCK is a package for CKMud, its hopes to be the best automation PERIOD. \n\n## Installation\n\n`lua installPackage(\"https://github.com/CKMud-Mudlet-Scripts/CK/releases/latest/download/CK.mpackage\")`\n\nAfter installation `CK update` alias will take care of updating the script. \n\n## Usage\n\nYou must turn on `msdp` in settings to use this script.  Also while you are there disable MSSP and GMCP\n\nThis script should figure out who and what you are and be able to automaticlly configure itself and help you with the following\n\n1. Automatic Buff Handling\n2. Zetabot - Like autobot but better faster more insane\n3. Auto Learning - Master all those skills, and learn news skills if you have all the pre-req skills. \n4. Auto Training - Train up your stats, and rest and train again\n\nThe script will from time to time issue the following commands so its aware of the various states of your character, though most comes from MSDP\n\n1. status\n\n\n# Aliases\n\n`zetabot <aoe> <target>` - Start the zetabot, you don't need to be in the room of the target to start, and you don't have to the aoe mastered. If you have a Zeta it will automaticlly use it based on your Max Gravity from `status`\n\n`autolearn <target> <speedwalk_to_isolation>` - Start the auto learn process using <target> to train every skill until its mastered.  Androids can ignore the speedwalk argument. \nThe following CK constants should be used by organics \n\n1. `learning.recall_isolation` this will get you to an isolation tank from any location on the mud. Mine is \"recall;s;w;enter vort;s\"\n2. `learning.return_to_target` this will get you back to the original target from the recall_isolation constant.  Mine is \"crecall;n;n;n;e;n\" this will change based on target\n\n`autotrain <speedwalk_to_isolation> [<exercise>]` - Start training using exercise, if no exercise is specified then pick on based on current stats.  \n\n`strike <target>` - Strike a target using a Physical attack you can currently afford\n\n`blast <target>` - Blast a target using a Ki Attack you can currently afford\n\n`redeem all` - Redeem all loot boxes until you have no more\n\n`sell all.<thing>` - Sell all of a type of thing to a pawn shop,  `sell all.epic`\n\n`CK` - get a list of CK commands\n\n`CK update` - update the CK script from github\n\n`CK features` - list feature flags\n\n`CK feature <name> <on|off>` - turn the feature on/off\n\n`CK constants` - List Script Constants (These survive resetProfile())\n\n`CK constant <name>=<value>` - Set a Script Constant\n\n`CK pkg` - CK Package Manager\n\n`CK pkg versions` - Show whats currently installed\n\n`CK pkg install <map|chat>` - Get the map or chat scripts\n\n`CK pkg update all` - Upgrade all install packages\n`CK pkg update <name>` - Upgrade named package\n\n`quit` - Quit but disable reconnecting first\n",
@@ -495,16 +505,6 @@
                         "title": "A database of the constellations in Aetolia's heavenscape. Includes a colour script so it doesn't break.",
                      "uploaded": 1739100518,
                       "version": "1.0"
-                },
-                {
-                       "author": "Larval",
-                      "created": "2026-10-22T12:10:00-05:00",
-                  "description": "Its own window: monsters by region and area, kills, exp per kill, coins, loot with drop %, limbs to aim at, ranks, hunter / explorer titles. Sort by name, kills or exp (click \"sort\" in the window or type bestiary sort kills|exp|name). Never sends anything to the game.",
-                     "filename": "Merentha Bestiary.mpackage",
-                     "mpackage": "Bestiary",
-                        "title": "Bestiary - learns every monster you fight",
-                     "uploaded": 1792690893,
-                      "version": "2"
                 },
                 {
                        "author": "Excelsior",
@@ -2519,5 +2519,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Oct 22 21:26:56 2026"
+   "updated": "Fri Oct 23 05:48:43 2026"
 }
