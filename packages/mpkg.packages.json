@@ -254,6 +254,17 @@
                       "version": "2.0.1"
                 },
                 {
+                       "author": "Narwhal",
+                      "created": "2026-10-11",
+                  "description": "Automatic map and health, mana, movement and enemy bars for **Crisol**, a\nbilingual English/Spanish MUD (crisolmud.duckdns.org, port 4000).\n\n- The map draws itself as you walk, from the room data the game sends by\n  GMCP (Room.Info). Double-click a room to walk there.\n- Bars for health, mana (one bar, or one per school for classes that split\n  it), movement and your current enemy, plus your level and the experience\n  you need for the next one.\n- It speaks your in-game language: English or Spanish.\n- It doesn't read or change the text on screen. With GMCP off it does\n  nothing: turn it on in Mudlet's settings and connect again.\n\nCommands: `crisol` (help), `crisol panel` (hide or show the panel),\n`crisol clean` (remove Mudlet's generic_mapper, which isn't needed).\n\n---\n\nMapa automático y barras de vida, maná, movimiento y enemigo para\n**Crisol**, un MUD en castellano y en inglés. El mapa se dibuja solo según\nandas (pincha dos veces en una sala para ir) y las barras salen de lo que el\njuego manda por GMCP. Órdenes: `crisol`, `crisol panel` y `crisol limpiar`.",
+                     "filename": "Crisol.mpackage",
+                         "icon": "packages/icons/Crisol.png",
+                     "mpackage": "Crisol",
+                        "title": "Crisol: map and bars / mapa y barras",
+                     "uploaded": 1792794337,
+                      "version": "1.4"
+                },
+                {
                        "author": "Multiple DSL Contributors, Packaged by Zooka",
                       "created": "2026-06-02T11:25:32+10:00",
                   "description": "The famous PNP system for Dark, Shattered Lands.\n\nA comprehensive package for Dark, Shattered Lands.  Install and reconnect\nor run `lua dslpnp.update.update_scripts()` on the command line.\n\nPackaged up by Zooka for packages.mudlet.org as a gift to the DSL community.\nAll credits to original authors.\n\n2026-06-02: fixes some stylesheet issues and filepaths, and added all available scripts.",
@@ -2519,5 +2530,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct 23 05:48:43 2026"
+   "updated": "Fri Oct 23 22:26:20 2026"
 }
