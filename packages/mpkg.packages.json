@@ -261,8 +261,8 @@
                          "icon": "packages/icons/Crisol.png",
                      "mpackage": "Crisol",
                         "title": "Crisol: map and bars / mapa y barras",
-                     "uploaded": 1792794337,
-                      "version": "1.4"
+                     "uploaded": 1792794886,
+                      "version": "1.5"
                 },
                 {
                        "author": "Multiple DSL Contributors, Packaged by Zooka",
@@ -2530,5 +2530,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct 23 22:26:20 2026"
+   "updated": "Fri Oct 23 22:35:19 2026"
 }
