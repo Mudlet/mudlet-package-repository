@@ -96,6 +96,17 @@
                       "version": "1.0.4"
                 },
                 {
+                       "author": "Nero",
+                      "created": "2026-10-26T02:46:17-05:00",
+                  "description": "A full-screen Mudlet interface for GMCP-enabled MUDs. It adds a mapper (https://wiki.mudlet.org/w/Manual:Mapper), buff and debuff tracker with tick timers and equipment effects, spell modifier and resistance readouts, hunger, thirst, alignment, gold and resource gauges, an animated weather, moon and time panel, a group display with charmed pets, and a tabbed chat window.\n\nRequires Apocalypse IV or any MUD that sends the matching GMCP data (Char.Affects, Char.Stats, Char.Vitals, Char.Environment, Char.Group).",
+                     "filename": "ApocalypseMudletGUI.mpackage",
+                         "icon": "packages/icons/ApocalypseMudletGUI.jpg",
+                     "mpackage": "ApocalypseMudletGUI",
+                        "title": "Apocalypse VI GUI",
+                     "uploaded": 1793000961,
+                      "version": "1"
+                },
+                {
                        "author": "tjurczyk, Delwing",
                       "created": "2025-01-24T15:25:45+01:00",
                   "description": "Arkadia script set installer.\n\nFor reference go to: https://github.com/tjurczyk/arkadia\n\nArkadia MUD: https://arkadia.rpg.pl/",
@@ -2530,5 +2541,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Oct 25 06:35:39 2026"
+   "updated": "Mon Oct 26 07:50:01 2026"
 }
