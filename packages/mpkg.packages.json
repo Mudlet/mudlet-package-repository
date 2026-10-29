@@ -1713,8 +1713,8 @@
                          "icon": "packages/icons/generic_mapper.png",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1792704380,
-                      "version": "2.1.21"
+                     "uploaded": 1793231461,
+                      "version": "2.1.23"
                 },
                 {
                        "author": "Vadi",
@@ -2050,8 +2050,8 @@
                          "icon": "packages/icons/mudlet-base-ui.png",
                      "mpackage": "mudlet-base-ui",
                         "title": "A starter interface with health bars, map and chat, built from what your game provides.",
-                     "uploaded": 1792448092,
-                      "version": "1.9.0"
+                     "uploaded": 1793231461,
+                      "version": "1.9.1"
                 },
                 {
                        "author": "Denarii",
@@ -2541,5 +2541,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Oct 26 07:50:01 2026"
+   "updated": "Thu Oct 29 00:13:54 2026"
 }
