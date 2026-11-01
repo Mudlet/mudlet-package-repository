@@ -97,6 +97,17 @@
                 },
                 {
                        "author": "Nero",
+                      "created": "2026-10-31T20:53:53-05:00",
+                  "description": "The Apocalypse6MUD Mudlet UI is a custom graphical interface built specifically for Apocalypse6MUD, a D&D-inspired text-based MUD. It transforms the traditional text-based game experience with an integrated collection of graphical panels, information displays, gauges, and environmental indicators.\nThe interface uses the game's GMCP data to keep displayed information synchronized with your character and the game world. Rather than relying entirely on manually entered commands, the UI receives updates directly from the server and presents relevant information in an organized, easy-to-read format.\nFeatures include:\nCharacter Information: Graphical displays for character-related information and progression.\nExperience and Legend Progression: Displays normal experience progression and, at level 40, the character's Legend status and progression through ten Legend ranks.\nEnvironmental Information: Displays current weather conditions, moon phase, lighting intensity, and in-game time and calendar information using GMCP.\nDynamic Visual Elements: Interface panels that respond to environmental conditions, including weather effects such as rain and snow.\nGMCP Integration: Automatically receives and processes supported game information from Apocalypse6MUD.\nCustom GUI Layout: A collection of coordinated graphical panels designed to make important game information accessible without cluttering the main game output.\nThis package is designed specifically for Apocalypse6MUD and requires a Mudlet client with GMCP support. It does not currently include automatic package updates.\nUsage\nInstall the package through Mudlet's Package Manager and connect to Apocalypse6MUD with GMCP enabled.\nThe graphical interface initializes and updates automatically as the game server provides information. No manual configuration or recurring commands should be necessary for the supported GMCP displays.",
+                     "filename": "Apocalypse6GUI.mpackage",
+                         "icon": "packages/icons/Apocalypse6GUI.jpg",
+                     "mpackage": "Apocalypse6GUI",
+                        "title": "Apocalypse6MUD Mudlet UI",
+                     "uploaded": 1793517201,
+                      "version": "1"
+                },
+                {
+                       "author": "Nero",
                       "created": "2026-10-26T02:46:17-05:00",
                   "description": "A full-screen Mudlet interface for GMCP-enabled MUDs. It adds a mapper (https://wiki.mudlet.org/w/Manual:Mapper), buff and debuff tracker with tick timers and equipment effects, spell modifier and resistance readouts, hunger, thirst, alignment, gold and resource gauges, an animated weather, moon and time panel, a group display with charmed pets, and a tabbed chat window.\n\nRequires Apocalypse IV or any MUD that sends the matching GMCP data (Char.Affects, Char.Stats, Char.Vitals, Char.Environment, Char.Group).",
                      "filename": "ApocalypseMudletGUI.mpackage",
@@ -2541,5 +2552,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct 30 12:39:22 2026"
+   "updated": "Sun Nov  1 07:13:53 2026"
 }
