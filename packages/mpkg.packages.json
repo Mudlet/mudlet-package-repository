@@ -864,6 +864,17 @@
                       "version": "1.2.0"
                 },
                 {
+                       "author": "Mudlet",
+                      "created": "2026-11-01T09:20:19+00:00",
+                  "description": "A small window that shows off the SVG label backgrounds new in Mudlet 5.1: a compass needle turned with `setSvgRotation`, a banner waving with `setSvgShear`, and stat icons coloured with `setSvgTint` - all drawn from plain .svg files that stay sharp at any size and screen scaling.\n\nType `svgdemo` to show or hide it. It opens in its own window and leaves your main window alone, and uninstalling it removes everything it made.\n\nNeeds Mudlet 5.1 or later. See [setSvgTint and friends](https://wiki.mudlet.org/w/Manual:UI_Functions#setSvgTint) in the manual to use them in your own scripts.",
+                     "filename": "SvgLabelsDemo.mpackage",
+                         "icon": "packages/icons/SvgLabelsDemo.png",
+                     "mpackage": "SvgLabelsDemo",
+                        "title": "SVG labels demo",
+                     "uploaded": 1793525306,
+                      "version": "1.0"
+                },
+                {
                        "author": "takilara",
                       "created": "2013-06-25T07:58:31+00:00",
                   "description": "This package can consume commands from Telegram, and run them on the mud, and send messages back to Telegram\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23057) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2552,5 +2563,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Nov  1 07:13:53 2026"
+   "updated": "Sun Nov  1 09:29:15 2026"
 }
