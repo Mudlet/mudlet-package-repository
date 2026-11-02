@@ -1,13 +1,13 @@
 {
   "filename": "imperium_cal.mpackage",
   "mpackage": "imperium_cal",
-  "sha256": "6a7d18e7b2f67efb3d3090e003d83458dff7749b0316e704dc86097ebc9f19c4",
-  "version": "1.8.26",
+  "sha256": "c9877c61eaedd5dd32d25dd1722028f24aa30b417e41fc8f8fd5ce34ec9d7c33",
+  "version": "1.8.31",
   "repository": "Isithunzi000/arkadia-mpackage",
   "repositoryId": "1346062051",
   "workflow": ".github/workflows/sync-publish.yml",
   "ref": "refs/heads/main",
-  "commit": "443f49edff38eaa856bae62ddec70b35f6e39fe9",
-  "runId": "37917709374",
-  "publishedAt": "2026-10-09T10:27:42.448Z"
+  "commit": "2b344d6208ee72b56e9cc794c82197ec903f23db",
+  "runId": "41497485631",
+  "publishedAt": "2026-11-02T18:07:28.908Z"
 }
