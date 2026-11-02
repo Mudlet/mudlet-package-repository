@@ -108,13 +108,13 @@
                 },
                 {
                        "author": "Nero",
-                      "created": "2026-10-26T02:46:17-05:00",
-                  "description": "A full-screen Mudlet interface for GMCP-enabled MUDs. It adds a mapper (https://wiki.mudlet.org/w/Manual:Mapper), buff and debuff tracker with tick timers and equipment effects, spell modifier and resistance readouts, hunger, thirst, alignment, gold and resource gauges, an animated weather, moon and time panel, a group display with charmed pets, and a tabbed chat window.\n\nRequires Apocalypse IV or any MUD that sends the matching GMCP data (Char.Affects, Char.Stats, Char.Vitals, Char.Environment, Char.Group).",
+                      "created": "2026-11-01T16:22:54-06:00",
+                  "description": "A full-screen Mudlet interface for GMCP-enabled MUDs. It adds a mapper (https://wiki.mudlet.org/w/Manual:Mapper), buff and debuff tracker with tick timers and equipment effects, spell modifier and resistance readouts, hunger, thirst, alignment, gold and resource gauges, an animated weather, moon and time panel, a group display with charmed pets, and a tabbed chat window.\nRequires Apocalypse IV or any MUD that sends the matching GMCP data (Char.Affects, Char.Stats, Char.Vitals, Char.Environment, Char.Group).",
                      "filename": "ApocalypseMudletGUI.mpackage",
                          "icon": "packages/icons/ApocalypseMudletGUI.jpg",
                      "mpackage": "ApocalypseMudletGUI",
-                        "title": "Apocalypse VI GUI",
-                     "uploaded": 1793000961,
+                        "title": "A GUI for the Apocalypse 6: Reborn MUD",
+                     "uploaded": 1793601047,
                       "version": "1"
                 },
                 {
@@ -2563,5 +2563,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Nov  1 09:29:15 2026"
+   "updated": "Mon Nov  2 06:31:27 2026"
 }
