@@ -885,6 +885,17 @@
                       "version": "1"
                 },
                 {
+                       "author": "gesslar",
+                      "created": "2026-11-05T04:21:20+0000",
+                  "description": "# ThreshBuff\n\nThis package will show temporary buffs and debuffs for your character and how\nlong before they will expire.\n\n* Buffs are in green\n* Debuffs are in red\n* Handicaps are in purpl-y-lilac-y colour\n\n## License\n\nThreshBuff is released under the [0BSD](https://opensource.org/license/0bsd).\n",
+                     "filename": "ThreshBuff.mpackage",
+                         "icon": "packages/icons/ThreshBuff.png",
+                     "mpackage": "ThreshBuff",
+                        "title": "Threshold Buff/Debuff Package for Mudlet",
+                     "uploaded": 1793960560,
+                      "version": "1.7.2"
+                },
+                {
                        "author": "Darmir",
                       "created": "2011-12-04T00:14:51+00:00",
                   "description": "The Darmir Butterfly Counter is a script for the Achaea game that allows players to track the number of butterflies they have caught. It provides simple commands to start the counting process and display the current butterfly count, making it particularly useful for new players. The script is based on a similar rat-counting utility and offers an easy way to monitor butterfly collection progress.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2589&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -2563,5 +2574,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Wed Nov  4 07:21:31 2026"
+   "updated": "Fri Nov  6 10:42:40 2026"
 }
