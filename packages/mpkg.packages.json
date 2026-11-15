@@ -2240,6 +2240,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "retromud contributors",
+                      "created": "2026-11-15T09:30:39+0000",
+                  "description": "Geyser GUI for RetroMUD (www.retromud.org): status bar and mapper host.",
+                     "filename": "retromud-gui.mpackage",
+                     "mpackage": "retromud-gui",
+                        "title": "RetroMUD GUI",
+                     "uploaded": 1794762653,
+                      "version": "0.0.3"
+                },
+                {
                        "author": "Vadi",
                       "created": "2025-01-28T19:05:36+07:00",
                   "description": "Would you like to save the paragraph you've written to do something quickly? Now you can.\n\nDrag and drop this script into Mudlet, then hit __Ctrl+Page Up__ to save and __Ctrl+Page Down__ to load.",
@@ -2596,5 +2606,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Nov 14 19:31:23 2026"
+   "updated": "Sun Nov 15 17:11:40 2026"
 }
