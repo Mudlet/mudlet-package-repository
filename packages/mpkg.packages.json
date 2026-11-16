@@ -781,14 +781,14 @@
                 },
                 {
                        "author": "Tamarindo",
-                      "created": "2026-09-21T22:38:10+0000",
+                      "created": "2026-11-14T19:28:08+0000",
                   "description": "Speech-to-text for Mudlet: microphone toggle, command-line routing, and MCVP vocabulary correction over the stt.* bridge.",
                      "filename": "STT.mpackage",
                          "icon": "packages/icons/STT.png",
                      "mpackage": "STT",
                         "title": "MudletSTT",
-                     "uploaded": 1790030537,
-                      "version": "1.6.0"
+                     "uploaded": 1794684652,
+                      "version": "1.6.1"
                 },
                 {
                        "author": "keneanung",
@@ -2240,6 +2240,16 @@
                       "version": "1"
                 },
                 {
+                       "author": "retromud contributors",
+                      "created": "2026-11-15T09:30:39+0000",
+                  "description": "Geyser GUI for RetroMUD (www.retromud.org): status bar and mapper host.",
+                     "filename": "retromud-gui.mpackage",
+                     "mpackage": "retromud-gui",
+                        "title": "RetroMUD GUI",
+                     "uploaded": 1794762653,
+                      "version": "0.0.3"
+                },
+                {
                        "author": "Vadi",
                       "created": "2025-01-28T19:05:36+07:00",
                   "description": "Would you like to save the paragraph you've written to do something quickly? Now you can.\n\nDrag and drop this script into Mudlet, then hit __Ctrl+Page Up__ to save and __Ctrl+Page Down__ to load.",
@@ -2596,5 +2606,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sun Nov  8 05:44:58 2026"
+   "updated": "Mon Nov 16 08:50:36 2026"
 }
