@@ -886,14 +886,14 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-11-06T21:23:15+0000",
+                      "created": "2026-11-15T00:01:02+0000",
                   "description": "# ThreshBuff\n\nThis package will show temporary buffs and debuffs for your character and how\nlong before they will expire.\n\n* Buffs are in green\n* Debuffs are in red\n* Handicaps are in purpl-y-lilac-y colour\n\nThreshBuff also installs [Helper](https://github.com/gesslar/Helper), which\nformats the `/tbuff` help.\n\n## Commands\n\n| Command | What it does |\n| --- | --- |\n| `/tbuff` | List the commands. |\n| `/tbuff buff [<colour>\\|default]` | Set the colour for buff names (default `forest_green`). |\n| `/tbuff debuff [<colour>\\|default]` | Set the colour for debuff names (default `indian_red`). |\n| `/tbuff affliction [<colour>\\|default]` | Set the colour for affliction names (default `medium_orchid`). |\n| `/tbuff time [<colour>\\|default]` | Set the colour for the times (default `grey`). |\n| `/tbuff palette` | Show the Mudlet colour names you can use. |\n| `/tbuff reset` | Put the window back on the left at its default size. |\n\nColours are Mudlet colour names. With no colour given, each shows the current\none. Your choices are remembered between sessions and reinstalls.\n\n## License\n\nThreshBuff is released under the [0BSD](https://opensource.org/license/0bsd).\n",
                      "filename": "ThreshBuff.mpackage",
                          "icon": "packages/icons/ThreshBuff.png",
                      "mpackage": "ThreshBuff",
                         "title": "Threshold Buff/Debuff Package for Mudlet",
-                     "uploaded": 1794049520,
-                      "version": "2.1.0"
+                     "uploaded": 1794821929,
+                      "version": "2.2.0"
                 },
                 {
                        "author": "gesslar",
@@ -2250,6 +2250,16 @@
                       "version": "0.0.3"
                 },
                 {
+                       "author": "retromud contributors",
+                      "created": "2026-11-13",
+                  "description": "Trigger-based auto-mapper for RetroMUD (no GMCP).",
+                     "filename": "retromud.mpackage",
+                     "mpackage": "retromud",
+                        "title": "RetroMUD mapper",
+                     "uploaded": 1794822272,
+                      "version": "0.0.13"
+                },
+                {
                        "author": "Vadi",
                       "created": "2025-01-28T19:05:36+07:00",
                   "description": "Would you like to save the paragraph you've written to do something quickly? Now you can.\n\nDrag and drop this script into Mudlet, then hit __Ctrl+Page Up__ to save and __Ctrl+Page Down__ to load.",
@@ -2606,5 +2616,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Nov 16 08:50:36 2026"
+   "updated": "Mon Nov 16 09:48:50 2026"
 }
