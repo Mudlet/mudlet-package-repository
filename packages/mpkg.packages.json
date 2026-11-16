@@ -18,8 +18,8 @@
                      "filename": "AchaeaBeckon.mpackage",
                      "mpackage": "AchaeaBeckon",
                         "title": "Beckon whitelist for Achaea",
-                     "uploaded": 1790925347,
-                      "version": "0.2.1"
+                     "uploaded": 1792869523,
+                      "version": "0.2.3"
                 },
                 {
                        "author": "Erikka, Demonnic",
@@ -38,8 +38,18 @@
                      "filename": "AchaeaHidden.mpackage",
                      "mpackage": "AchaeaHidden",
                         "title": "Diagnose a hidden affliction in Achaea",
-                     "uploaded": 1791089918,
-                      "version": "0.4.1"
+                     "uploaded": 1792646805,
+                      "version": "0.4.2"
+                },
+                {
+                       "author": "PrincessSiren",
+                      "created": "2026-10-20",
+                  "description": "# AchaeaRestock\n\nWhat to buy before you go out.\n\nReads your rift over GMCP, compares it against targets you set, and prints what\nis short and how much of it to buy. It sends IRE.Rift.Request, with a blank\nline behind it for a report, and triggers on nothing.\n\n**Nothing ships with a target.** How much bloodroot you want is a preference\nrather than a game fact, so setting one is what opts a heading or an item into\nthe report:\n\n```\nrestock target herbs 500\nrestock target health 1500\nrestock\n```\n\nEvery mineral does exactly what one herb does (HELP 13.7.1), and\nserver-side curing falls back to the other when you run out of one, so\n`restock cures 500` watches each pair together -- 300 ash and 300 stannum are\n600 sanity cures -- and `restock cures herbs` makes the report name the herb\nto buy rather than either:\n\n```\nrestock cures 500\nrestock cures herbs\nrestock\n```\n\n`restock all` prints the whole rift grouped the way RIFT groups it, and\n`restock help` is the full command list.\n\nCapacities come from HELP 7.14, so `restock` knows what the rift will not hold\nmore of. Minerals take the scroll's \"crystal\" cap of 2500, which is a reading\nrather than a quotation, and the cap is printed with a note saying so.\n\nWhy it is built this way, and the captured game output the tables are read off,\nare in the docs: https://github.com/PrincessSiren/achaea-restock/tree/main/docs\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-restock",
+                     "filename": "AchaeaRestock.mpackage",
+                     "mpackage": "AchaeaRestock",
+                        "title": "Rift restock list for Achaea",
+                     "uploaded": 1792532389,
+                      "version": "0.3.1"
                 },
                 {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
@@ -86,6 +96,28 @@
                       "version": "1.0.4"
                 },
                 {
+                       "author": "Nero",
+                      "created": "2026-10-31T20:53:53-05:00",
+                  "description": "The Apocalypse6MUD Mudlet UI is a custom graphical interface built specifically for Apocalypse6MUD, a D&D-inspired text-based MUD. It transforms the traditional text-based game experience with an integrated collection of graphical panels, information displays, gauges, and environmental indicators.\nThe interface uses the game's GMCP data to keep displayed information synchronized with your character and the game world. Rather than relying entirely on manually entered commands, the UI receives updates directly from the server and presents relevant information in an organized, easy-to-read format.\nFeatures include:\nCharacter Information: Graphical displays for character-related information and progression.\nExperience and Legend Progression: Displays normal experience progression and, at level 40, the character's Legend status and progression through ten Legend ranks.\nEnvironmental Information: Displays current weather conditions, moon phase, lighting intensity, and in-game time and calendar information using GMCP.\nDynamic Visual Elements: Interface panels that respond to environmental conditions, including weather effects such as rain and snow.\nGMCP Integration: Automatically receives and processes supported game information from Apocalypse6MUD.\nCustom GUI Layout: A collection of coordinated graphical panels designed to make important game information accessible without cluttering the main game output.\nThis package is designed specifically for Apocalypse6MUD and requires a Mudlet client with GMCP support. It does not currently include automatic package updates.\nUsage\nInstall the package through Mudlet's Package Manager and connect to Apocalypse6MUD with GMCP enabled.\nThe graphical interface initializes and updates automatically as the game server provides information. No manual configuration or recurring commands should be necessary for the supported GMCP displays.",
+                     "filename": "Apocalypse6GUI.mpackage",
+                         "icon": "packages/icons/Apocalypse6GUI.jpg",
+                     "mpackage": "Apocalypse6GUI",
+                        "title": "Apocalypse6MUD Mudlet UI",
+                     "uploaded": 1793517201,
+                      "version": "1"
+                },
+                {
+                       "author": "Nero",
+                      "created": "2026-11-01T16:22:54-06:00",
+                  "description": "A full-screen Mudlet interface for GMCP-enabled MUDs. It adds a mapper (https://wiki.mudlet.org/w/Manual:Mapper), buff and debuff tracker with tick timers and equipment effects, spell modifier and resistance readouts, hunger, thirst, alignment, gold and resource gauges, an animated weather, moon and time panel, a group display with charmed pets, and a tabbed chat window.\nRequires Apocalypse IV or any MUD that sends the matching GMCP data (Char.Affects, Char.Stats, Char.Vitals, Char.Environment, Char.Group).",
+                     "filename": "ApocalypseMudletGUI.mpackage",
+                         "icon": "packages/icons/ApocalypseMudletGUI.jpg",
+                     "mpackage": "ApocalypseMudletGUI",
+                        "title": "A GUI for the Apocalypse 6: Reborn MUD",
+                     "uploaded": 1793601047,
+                      "version": "1"
+                },
+                {
                        "author": "tjurczyk, Delwing",
                       "created": "2025-01-24T15:25:45+01:00",
                   "description": "Arkadia script set installer.\n\nFor reference go to: https://github.com/tjurczyk/arkadia\n\nArkadia MUD: https://arkadia.rpg.pl/",
@@ -126,6 +158,16 @@
                       "version": "1.0.0"
                 },
                 {
+                       "author": "Larval",
+                      "created": "2026-10-22T12:10:00-05:00",
+                  "description": "Its own window: monsters by region and area, kills, exp per kill, coins, loot with drop %, limbs to aim at, ranks, hunter / explorer titles. Sort by name, kills or exp (click \"sort\" in the window or type bestiary sort kills|exp|name). Kills from the same round are all counted, with the exp split between them. Never sends anything to the game.",
+                     "filename": "BestiaryV2.mpackage",
+                     "mpackage": "Bestiary",
+                        "title": "Bestiary - learns every monster you fight",
+                     "uploaded": 1792734478,
+                      "version": "3"
+                },
+                {
                        "author": "fried",
                       "created": "2025-01-27T12:39:16-0800",
                   "description": "![shenron](src/resources/shenron.png)\n\n# CK\n\nCK is a package for CKMud, its hopes to be the best automation PERIOD. \n\n## Installation\n\n`lua installPackage(\"https://github.com/CKMud-Mudlet-Scripts/CK/releases/latest/download/CK.mpackage\")`\n\nAfter installation `CK update` alias will take care of updating the script. \n\n## Usage\n\nYou must turn on `msdp` in settings to use this script.  Also while you are there disable MSSP and GMCP\n\nThis script should figure out who and what you are and be able to automaticlly configure itself and help you with the following\n\n1. Automatic Buff Handling\n2. Zetabot - Like autobot but better faster more insane\n3. Auto Learning - Master all those skills, and learn news skills if you have all the pre-req skills. \n4. Auto Training - Train up your stats, and rest and train again\n\nThe script will from time to time issue the following commands so its aware of the various states of your character, though most comes from MSDP\n\n1. status\n\n\n# Aliases\n\n`zetabot <aoe> <target>` - Start the zetabot, you don't need to be in the room of the target to start, and you don't have to the aoe mastered. If you have a Zeta it will automaticlly use it based on your Max Gravity from `status`\n\n`autolearn <target> <speedwalk_to_isolation>` - Start the auto learn process using <target> to train every skill until its mastered.  Androids can ignore the speedwalk argument. \nThe following CK constants should be used by organics \n\n1. `learning.recall_isolation` this will get you to an isolation tank from any location on the mud. Mine is \"recall;s;w;enter vort;s\"\n2. `learning.return_to_target` this will get you back to the original target from the recall_isolation constant.  Mine is \"crecall;n;n;n;e;n\" this will change based on target\n\n`autotrain <speedwalk_to_isolation> [<exercise>]` - Start training using exercise, if no exercise is specified then pick on based on current stats.  \n\n`strike <target>` - Strike a target using a Physical attack you can currently afford\n\n`blast <target>` - Blast a target using a Ki Attack you can currently afford\n\n`redeem all` - Redeem all loot boxes until you have no more\n\n`sell all.<thing>` - Sell all of a type of thing to a pawn shop,  `sell all.epic`\n\n`CK` - get a list of CK commands\n\n`CK update` - update the CK script from github\n\n`CK features` - list feature flags\n\n`CK feature <name> <on|off>` - turn the feature on/off\n\n`CK constants` - List Script Constants (These survive resetProfile())\n\n`CK constant <name>=<value>` - Set a Script Constant\n\n`CK pkg` - CK Package Manager\n\n`CK pkg versions` - Show whats currently installed\n\n`CK pkg install <map|chat>` - Get the map or chat scripts\n\n`CK pkg update all` - Upgrade all install packages\n`CK pkg update <name>` - Upgrade named package\n\n`quit` - Quit but disable reconnecting first\n",
@@ -149,14 +191,14 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-09-01T07:21:00+0000",
-                  "description": "# Carto\n\n## Description\n\nThis is a Mudlet package that allows you to map your adventures. It relies on\nGMCP to get the room information.\n\n## What happens\n\nWhen I do some lua example?\n\n```lua\n-- This is how you can do long strings in lua...\n[[text\nand more\n\ntext\n\nawesome\n\nright?]]\n\n-- we can all agree that this is awesome, yes?\n```\n\n## GMCP Configuration\n\nTo configure the package, type `carto` in Mudlet. You will be provided with a\nlist of commands to set various options in order to get the package to work\nwith your current mud.\n\n- `carto event <event>` - Set the event that triggers the Mapper (default:\n  `gmcp.Room.Info`).\n- `carto expect_coordinates <boolean>` - Set whether to expect coordinates from\n  the GMCP event (default: `true`).\n- `carto expect_hash <boolean>` - Set whether to expect a hash or vnum from the\n  GMCP event (default: `true`).\n- `carto properties` - View the current property names we can expect from the\n  GMCP event.\n- `carto properties <properties>` - Set the property names we can expect from\n  the GMCP event.\n\n  Defaults:\n\n  - `hash` - The hash value of the room (default: `hash`).\n  - `vnum` - The vnum of the room (default: `vnum`).\n  - `area` - The area of the room (default: `area`).\n  - `name` - The name of the room (default: `name`).\n  - `environment` - The environment of the room (default: `environment`).\n  - `symbol` - The symbol of the room (default: `symbol`).\n  - `exits` - The exits of the room (default: `exits`).\n  - `coords` - The coordinates of the room (default: `coords`).\n  - `doors` - The doors of the room (default: `doors`).\n  - `type` - The type of the room (default: `type`).\n  - `subtype` - The subtype of the room (default: `subtype`).\n  - `icon` - The icon of the room (default: `icon`).\n\n## Usage\n\nIn Mudlet, type `walk` to see the help information for this package.\n\n- `walk stop` - Stop walking.\n- `walk slow` - Set walk speed to 3 seconds per step.\n- `walk fast` - Set walk speed to 0.5 seconds per step.\n- `walk speed` - See your current walk speed.\n- `walk speed <n>` - Set walk speed to `n` seconds per step.\n- `walk to <room_id>` - Walk to room `room_id`.\n- `walk remember` - Remember the current room.\n- `walk remember <position>` - Remember the current room at `position`.\n- `walk forget` - Forget the current room.\n- `walk forget <position>` - Forget the room at `position`.\n- `walk recall` - List all recall positions.\n- `walk recall <position>` - Recall to the room at `position`.\n\n## Support\n\nWhile there is no official support and this is a hobby project, you are welcome\nto report issues on the [GitHub repo](https://github.com/gesslar/Carto).\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n- [Helper](https://github.com/gesslar/Helper)\n\n## Credits\n\n[Compass icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/map)\n\n## License\n\n`carto` is released under the [0BSD](LICENSE.txt).\n",
+                      "created": "2026-11-04T03:38:33+0000",
+                  "description": "# Carto\n\n## Description\n\nThis is a Mudlet package that allows you to map your adventures. It relies on\nGMCP to get the room information, so it builds the map as you walk, with no\ntriggers or prompt patterns to set up.\n\nCarto takes the place of Mudlet's generic mapper, and uninstalls it if it finds\nit when installing.\n\n## Usage\n\nIn Mudlet, type `walk` to see the help information for walking, and `carto` for\nconfiguration.\n\nDouble-clicking a room on the map walks you there, the same as `walk to`.\n\n### Walking\n\n- `walk to <room_id>` - Walk to room `room_id`.\n- `walk stop` - Stop walking.\n- `walk pause` - Pause walking.\n- `walk resume` - Resume walking, finding a new path if you've moved since\n  pausing.\n- `walk path [from_id] <to_id>` - See the way to a room, without walking it.\n- `walk slow` - Set walk speed to 3 seconds per step.\n- `walk fast` - Set walk speed to 0.5 seconds per step.\n- `walk speed` - See your current walk speed.\n- `walk speed <n>` - Set walk speed to `n` seconds per step (default: 0).\n- `walk timeout` - See how long to wait for a step before giving up on the walk.\n- `walk timeout <n>` - Wait `n` seconds for a step (default: 5), or 0 for as long\n  as it takes.\n\nA closed or locked door on the way is opened before stepping through it, using\nthe commands from `carto doors`. The walk ends if a step lands somewhere\nunexpected, or hasn't landed by the end of the timeout.\n\n### Recall points\n\nRecall points are saved for each Mudlet profile.\n\n- `walk remember` - Remember the current room.\n- `walk remember <position>` - Remember the current room at `position`.\n- `walk forget` - Forget the current room.\n- `walk forget <position>` - Forget the room at `position`.\n- `walk recall` - List all recall positions.\n- `walk recall <position>` - Recall to the room at `position`.\n\n### The map\n\n- `carto room [room_id]` - See what the map knows about a room, or the current\n  one.\n\n## Configuration\n\n- `carto` - See the help for these commands.\n- `carto config` - See the current GMCP settings.\n- `carto mode <quick|normal>` - Set how exits are built (default: `quick`).\n  - `quick` builds an exit as soon as you see one leading to a room that's\n    already on the map, along with a way back when there isn't one already.\n  - `normal` builds an exit only when you walk through it.\n- `carto doors` - See the commands used to get through doors while walking.\n- `carto doors <open|unlock> <command>` - Set one of those commands, for games\n  that word them differently. `{dir}` is replaced with the full name of the\n  direction (defaults: `open {dir}` and `unlock {dir}`), for example\n  `carto doors open open {dir} door`.\n- `carto event <event>` - Set the event that triggers the mapper (default:\n  `gmcp.Room.Info`).\n- `carto expect_coordinates <true|false>` - Set whether to expect coordinates\n  from the GMCP event (default: `true`).\n- `carto expect_hash <true|false>` - Set whether rooms are identified by hash\n  rather than vnum (default: `true`).\n- `carto properties` - See the property names expected from the GMCP event.\n- `carto properties <property> <name>` - Set the name a property goes by in your\n  game's GMCP. Each one defaults to its own name:\n  `hash`, `vnum`, `area`, `name`, `environment`, `symbol`, `exits`, `coords`,\n  `doors`, `type`, `subtype` and `icon`.\n\n## What Carto expects from GMCP\n\nEach room update needs a `hash` or a `vnum`, depending on `expect_hash`. Anything\nelse that's missing is left out or given a default.\n\n```json\n{\n  \"hash\": \"abc123\",\n  \"name\": \"The Town Square\",\n  \"area\": \"Town\",\n  \"environment\": \"road\",\n  \"coords\": [10, 20, 0],\n  \"exits\": { \"north\": \"def456\", \"enter portal\": \"ghi789\" },\n  \"doors\": { \"north\": { \"status\": 2 } }\n}\n```\n\n- `exits` - Directions and the `hash` or `vnum` they lead to. Directions can be\n  short (`n`) or in full (`north`). When `exits` is there, exits and exit stubs\n  the room no longer lists are removed from the map. When it's left out, they\n  are left alone.\n- `doors` - The same keys as `exits`, each with a `status` of 1 (open), 2 (closed)\n  or 3 (locked). A door the room no longer lists is removed from the map, which\n  means all of them if `doors` is left out, unlike `exits`.\n- `coords` - An `[x, y, z]` array, or a string such as `\"10,20,0\"`. Without usable\n  coordinates, a new room is placed relative to the one you came from, and a room\n  already on the map stays where it is.\n- `environment` - The room's terrain, which sets its colour on the map. These are\n  known, and anything else gets a default colour: `beach`, `desert`, `dirt road`,\n  `dusty`, `forest`, `grass`, `grassy`, `impassable`, `indoor`, `mountain`, `mud`,\n  `path`, `road`, `rocky`, `sand`, `sandy`, `shallow water`, `snow`, `swamp`,\n  `tunnels`, `water` and `deep water`. When a room's terrain changes, `deep water`\n  locks it against pathfinding and `water` makes it costly to path through. Locks\n  and weights you've set yourself stay until then.\n- `icon`, `symbol`, `subtype`, `type` - The first of these sets the room's\n  character on the map. `icon` and `symbol` are used as they are, while `subtype`\n  and `type` get a glyph if they're one of `bank`, `shop`, `food`, `drink`,\n  `library`, `tavern`, `inn` or `storage`.\n\nYour game can send a room update for reasons other than moving, such as a door\nbeing opened. Carto applies those to the map, and they don't affect a walk.\n\n### Special exits\n\nAny entry in `exits` that isn't a standard direction is a special exit. Its key\nis the command to send, and its value is the `hash` or `vnum` it leads to, the\nsame as any other exit.\n\n- A special exit is added once the room it leads to is on the map. In `quick`\n  mode that's as soon as you see the exit and know the room, and in `normal`\n  mode it's when you walk through it.\n- Doors on special exits go in `doors` under the same key, though walking doesn't\n  open them.\n- Special exits aren't removed when the server stops listing them, because the\n  ones you add yourself look just the same.\n- Keys starting with `script:` are ignored. Speedwalking runs those as Lua, so\n  they can only be added to the map by you, not by the server.\n\n## Events\n\nThese are raised for other scripts to use.\n\n- `onMoveMap(room_id)` - A room update has been applied to the map. This happens\n  on every update, including ones where you haven't moved.\n- `onNewRoom()` - A room update is being applied to the map, and its name, area and\n  terrain are done, but not yet its coordinates, exits or doors. Despite the name,\n  this happens on every update, not just for new rooms.\n- `onDoorChange(room_id, command, status, old_status)` - A door has been added,\n  changed, or removed, in which case `status` is 0. `command` is the name the door\n  goes by in the map, which is short for directions other than `up` and `down`.\n- `sysSpeedwalkStarted()` - A walk has started, before its first step.\n- `sysSpeedwalkPaused()` - A walk has been paused.\n- `sysSpeedwalkResumed()` - A walk has been resumed.\n- `sysSpeedwalkFinished(exception, reason)` - A walk has reached its destination.\n- `sysSpeedwalkStopped(exception, reason)` - A walk was ended with `walk stop`.\n- `onSpeedwalkReset(exception, reason)` - A walk was interrupted, such as by being\n  blocked, landing somewhere unexpected, or disconnecting. `reason` says which.\n- `onSpeedwalkFailed(reason)` - A walk couldn't start, raised during the call that\n  asked for it. If a walk was already under way, it carries on. `gotoRoom` only\n  gets as far as Carto once Mudlet has found a path, so check what `gotoRoom`\n  returns as well.\n- `mapperScriptLoaded(package_name)` - Carto has loaded, as the generic mapper\n  also announces. `package_name` is `Carto`.\n\n## Functions\n\nThese are for other scripts to use.\n\n- `Carto:GetSpeedwalkDelay()` - The walk speed, in seconds per step.\n- `Carto:SetSpeedwalkDelay(delay, override)` - Set and save the walk speed, which\n  takes effect from the next step. `override` allows a delay below the minimum.\n- `Carto:GetSpeedwalkTimeout()` - How many seconds to wait for a step, where 0\n  means for as long as it takes.\n- `Carto:SetSpeedwalkTimeout(timeout)` - Set and save that, which takes effect\n  from the next step.\n\n## Support\n\nWhile there is no official support and this is a hobby project, you are welcome\nto report issues on the [GitHub repo](https://github.com/gesslar/Carto).\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n- [Helper](https://github.com/gesslar/Helper)\n\n## Development\n\n- `npm run build` - Build the package with\n  [muddy](https://github.com/gesslar/muddy).\n- `npm run watch` - Build whenever something changes.\n- `npm test` - Run the specs in `src/resources/test`, inside real Mudlet, using\n  the `gesslardev/mudlet-busted` Docker image.\n- `npm run test:tree` - The same, with each spec listed.\n- `npm run docker:update` - Get the latest version of that image.\n- `npm run update-glu` - Get the latest version of the vendored Glu.\n\n## Credits\n\n[Compass icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/map)\n\n## License\n\n`carto` is released under the [0BSD](LICENSE.txt).\n",
                      "filename": "Carto.mpackage",
                          "icon": "packages/icons/Carto.png",
                      "mpackage": "Carto",
                         "title": "GMCP mapper script for Mudlet",
-                     "uploaded": 1788247419,
-                      "version": "1.4.0"
+                     "uploaded": 1793776794,
+                      "version": "1.5.0"
                 },
                 {
                        "author": "bscross32",
@@ -170,25 +212,25 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-04-09T03:47:54+0000",
-                  "description": "# Chatter\n\nGMCP Chat Package for Mudlet.\n\n## Syntax\n\n`chatter [command]`\n\n* `chatter add <channel> to <group>` - Add a channel to a group.\n* `chatter remove <channel> from <group>` - Remove a channel from a group.\n* `chatter mute <channel>` - Mute a channel.\n* `chatter unmute <channel>` - Unmute a channel.\n* `chatter list <group>` - List the channels in a group.\n* `chatter list all`- List all channels and groups.\n* `chatter toggle` - Toggle the visibility of the chatter window.\n* `chatter show` - Show the chatter window.\n* `chatter hide` - Hide the chatter window.\n* `chatter flash` - Flash the chatter window.\n* `chatter lock` - Lock the chatter window to prevent it from being changed.\n* `chatter unlock` - Unlock the chatter window.\n* `chatter minimize` - Minimize the chatter window.\n* `chatter restore` - Restore the chatter window from minimized state.\n* `chatter save` - Save the chatter window lock, visibility, and position.\n* `chatter load` - Load the last saved chatter window lock, visibility, and position.\n* `chatter size` - Set the font size for the chatter window.\n\n## Credits\n\n### Icons\n\n[Communication icons created by Vectors Market - Flaticon](https://www.flaticon.com/free-icons/communication)\n",
+                      "created": "2026-11-06T15:49:23+0000",
+                  "description": "# Chatter\n\nGMCP Chat Package for Mudlet.\n\n## Syntax\n\n`chatter [command]`\n\n* `chatter add <channel> to <group>` - Add a channel to a group.\n* `chatter remove <channel> from <group>` - Remove a channel from a group.\n* `chatter mute <channel>` - Mute a channel.\n* `chatter unmute <channel>` - Unmute a channel.\n* `chatter list <group>` - List the channels in a group.\n* `chatter list all`- List all channels and groups.\n* `chatter toggle` - Toggle the visibility of the chatter window.\n* `chatter show` - Show the chatter window.\n* `chatter hide` - Hide the chatter window.\n* `chatter flash` - Flash the chatter window.\n* `chatter lock` - Lock the chatter window to prevent it from being changed.\n* `chatter unlock` - Unlock the chatter window.\n* `chatter minimize` - Minimize the chatter window.\n* `chatter restore` - Restore the chatter window from minimized state.\n* `chatter save` - Save the chatter window lock, visibility, and position.\n* `chatter load` - Load the last saved chatter window lock, visibility, and position.\n* `chatter size` - Set the font size for the chatter window.\n\n## License\n\n`chatter` is released under the [0BSD](https://opensource.org/license/0bsd).\n",
                      "filename": "Chatter.mpackage",
                          "icon": "packages/icons/Chatter.png",
                      "mpackage": "Chatter",
                         "title": "Manage messages on channels in a separate window using GMCP.",
-                     "uploaded": 1775713200,
-                      "version": "2.3.1"
+                     "uploaded": 1794049475,
+                      "version": "2.5.0"
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-04-13T18:52:28+0000",
-                  "description": "# Clicker\n\nEnable clickable links in Mudlet! That's pretty nice, right?\n\n## License\n\n`clicker` is released under the [0BSD](LICENSE.txt).\n",
+                      "created": "2026-11-06T17:39:19+0000",
+                  "description": "# Clicker\n\nEnable clickable links in Mudlet! That's pretty nice, right?\n\n## License\n\n`clicker` is released under the [0BSD](https://opensource.org/license/0bsd).\n",
                      "filename": "Clicker.mpackage",
                          "icon": "packages/icons/Clicker.png",
                      "mpackage": "Clicker",
                         "title": "Make URLs clickable",
-                     "uploaded": 1776108805,
-                      "version": "2.0.1"
+                     "uploaded": 1794049502,
+                      "version": "2.0.4"
                 },
                 {
                        "author": "Bowser",
@@ -232,6 +274,17 @@
                         "title": "Convenient copy functions for Mudlet.",
                      "uploaded": 1790873558,
                       "version": "2.0.1"
+                },
+                {
+                       "author": "Narwhal",
+                      "created": "2026-10-11",
+                  "description": "Automatic map and health, mana, movement and enemy bars for **Crisol**, a\nbilingual English/Spanish MUD (crisolmud.duckdns.org, port 4000).\n\n- The map draws itself as you walk, from the room data the game sends by\n  GMCP (Room.Info). Double-click a room to walk there.\n- Bars for health, mana (one bar, or one per school for classes that split\n  it), movement and your current enemy, plus your level and the experience\n  you need for the next one.\n- It speaks your in-game language: English or Spanish.\n- It doesn't read or change the text on screen. With GMCP off it does\n  nothing: turn it on in Mudlet's settings and connect again.\n\nCommands: `crisol` (help), `crisol panel` (hide or show the panel),\n`crisol clean` (remove Mudlet's generic_mapper, which isn't needed).\n\n---\n\nMapa automático y barras de vida, maná, movimiento y enemigo para\n**Crisol**, un MUD en castellano y en inglés. El mapa se dibuja solo según\nandas (pincha dos veces en una sala para ir) y las barras salen de lo que el\njuego manda por GMCP. Órdenes: `crisol`, `crisol panel` y `crisol limpiar`.",
+                     "filename": "Crisol.mpackage",
+                         "icon": "packages/icons/Crisol.png",
+                     "mpackage": "Crisol",
+                        "title": "Crisol: map and bars / mapa y barras",
+                     "uploaded": 1792794886,
+                      "version": "1.5"
                 },
                 {
                        "author": "Multiple DSL Contributors, Packaged by Zooka",
@@ -310,14 +363,14 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-06-17T15:18:33+0000",
-                  "description": "# Explorer\n\nDeveloper's Automapping tool for Mudlet\n\n## Description\n\nThis package is intended for use by developers who are looking to automatically\nexplore their game world. It is not intended for use by players, as it will\nautomatically move your character around the game world, and as well, it\nmay contravene the rules of your game.\n\n## Configuration\n\nIn Mudlet, type `explore` to see the help information for this package.\n\n* `explore start` - Start exploring\n* `explore stop` - Stop exploring\n* `explore set` - See your current preference settings\n* `explore set <preference> <value>` - Set a preference to a value\n\n  Available preferences:\n  * `shuffle` - Set the maximum number of steps to take before selecting a\n     random exit stub to explore (default: 0). If set to 0, Explorer will not\n     shuffle.\n  * `zoom` - Set the zoom level of the map during exploration (default:\n    10)\n\n## Events\n\n### Listening\n\nThis package listens to the following events in order to function. You will\nneed to ensure that these events are passed along with the required arguments\n(if any).\n\n#### `onMoveMap`\n\nTrigger this event when the player has moved to a new room. Explorer sets a\ntimer to check if the player has moved to a new room. When this event is\ntriggered, it confirms that the player has moved to a new room and will then\nproceed to explore a new room.\n\n##### Arguments\n\n* `current room id` - The id of the room the player has arrived in.\n\n#### `sysSpeedwalkFinished`\n\nTrigger this event when the speedwalk system has finished. The package listens\nfor this event to understand that speedwalking has completed and that it can\nnow schedule other activities.\n\n##### Arguments\n\nNone\n\n### Raising\n\nThe following events are raised by this package:\n\n#### `onExplorationStarted`\n\nThis event is raised when exploration has begun.\n\n##### Arguments\n\nNone\n\n#### `onExplorationStopped`\n\nThis event is raised when exploration has stopped.\n\n##### Arguments\n\n* `canceled` - Boolean indicating if the exploration was canceled.\n* `silent` - Boolean indicating that no messages should be printed.\n\n#### `onDetermineNextRoom`\n\nThis event is raised when the next room to explore is being determined.\n\n##### Arguments\n\n* `room_id` - The id of the room the player is currently in.\n* `area_id` - The id of the area the player is currently in.\n\n#### `onNextRoomDetermined`\n\nThis event is raised when the next room to explore has been determined.\n\n##### Arguments\n\n* `room_id` - The id of the next room to explore.\n* `area_id` - The id of the area the next room to explore is in.\n\n#### `onExploreDirection`\n\nThis event is raised when the explorer is about to explore a new direction. It\nfollows after `onNextRoomDetermined`, if the next room to explore is in the\nsame area and is adjacent to the current room.\n\n##### Arguments\n\n* `room_id` - The id of the room the explorer is currently in.\n* `direction` - The direction the explorer is about to explore.\n* `stub` - The exit stub of the room the explorer is about to explore.\n\n#### `onDirectionExplored`\n\nThis event is raised when the player has moved into a new room following a\ndirection exploration.\n\n##### Arguments\n\n* `room_id` - The id of the room the explorer has arrived in.\n* `direction` - The direction that was explored.\n\n#### `onStubIgnored`\n\nThis event is raised when an exit stub is ignored.\n\n##### Arguments\n\n* `room_id` - The id of the room the stub is in.\n* `stub` - The stub that was ignored.\n* `direction` - The direction of the stub that was ignored.\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n* [Helper](https://github.com/gesslar/Helper)\n\n### Support\n\nWhile there is no official support and this is a hobby project, you are welcome\nto report issues on the [GitHub repo](https://github.com/gesslar/Explorer).\n\n## License\n\n`explorer` is released under the [0BSD](LICENSE.txt).\n\n## Credits\n\n[Compass icons created by Dimitry Miroliubov - Flaticon](https://www.flaticon.com/free-icons/compass)\n",
+                      "created": "2026-11-05T02:31:00+0000",
+                  "description": "# Explorer\n\nDeveloper's Automapping tool for Mudlet\n\n## Description\n\nThis package is intended for use by developers who are looking to automatically\nexplore their game world. It is not intended for use by players, as it will\nautomatically move your character around the game world, and as well, it\nmay contravene the rules of your game.\n\n## Configuration\n\nIn Mudlet, type `explore` to see the help information for this package.\n\n* `explore start` - Start exploring\n* `explore stop` - Stop exploring. This also ends a speedwalk that Explorer\n  started, so your character stops where it is\n* `explore set` - See your current preference settings\n* `explore set <preference> <value>` - Set a preference to a value\n* `explore ignore` - See the exit stubs being ignored\n* `explore ignore <direction> [room]` - Ignore an exit stub. The room defaults to\n  the one you are in\n* `explore unignore <direction> [room]` - Stop ignoring an exit stub\n* `explore debug` - Turn debug messages on or off\n\n### Preferences\n\n* `zoom` - Set the zoom level of the map during exploration (default: 10)\n* `speed` - Set how many seconds to wait before each move (default: 0)\n* `timeout` - Set how many seconds to wait for a move or door to respond before\n  giving up on it (default: 5). During a speedwalk, this is added to\n  generic_mapper's longest wait between steps. Carto's walks use its own\n  `walk timeout` instead.\n* `stats` - Show exploration statistics on the map during exploration\n  (default: true)\n\n### Ignoring exit stubs\n\nIf a move doesn't work, exploration stops and tells you the direction and room.\nTo carry on without that exit, ignore it and start again. Give the room if the\nmove left you somewhere else, such as through a one-way exit.\n\nIgnored exit stubs are saved with your preferences and kept between runs. This\nincludes stubs Explorer ignores on its own because a door would not open.\n\n## Events\n\n### Listening\n\nThis package listens to the following events in order to function. You will\nneed to ensure that these events are passed along with the required arguments\n(if any).\n\n#### `onMoveMap`\n\nTrigger this event when the player has moved to a new room. Explorer sets a\ntimer to check if the player has moved to a new room. When this event is\ntriggered, it confirms that the player has moved to a new room and will then\nproceed to explore a new room. An update for the room the player is leaving\ndoesn't count as arriving, unless the exit's stub is gone because it led back to\nthe same room.\n\n##### Arguments\n\n* `current room id` - The id of the room the player has arrived in.\n\n#### `sysSpeedwalkFinished`\n\nTrigger this event when the speedwalk system has finished. The package listens\nfor this event to understand that speedwalking has completed and that it can\nnow schedule other activities. It can be raised when the last command is sent,\nin which case Explorer waits for `onMoveMap` from the destination room. If no\nroom change arrives in time during the walk, exploration stops.\n\nWith Carto, this means the walk is over, so exploration stops if the player isn't\nin the destination room.\n\n##### Arguments\n\nNone\n\n#### `sysSpeedwalkStarted`\n\nTrigger this event when a speedwalk has started. Explorer prints a message about\nthe walk if it is exploring.\n\n##### Arguments\n\nNone\n\n#### `sysSpeedwalkPaused`\n\nTrigger this event when a speedwalk has been paused. If Explorer started the\nwalk, it ends the walk and exploration stops, as the character is free to go\nelsewhere while it is paused.\n\n##### Arguments\n\nNone\n\n#### `sysSpeedwalkStopped`\n\nTrigger this event when a speedwalk has been stopped. If Explorer started the\nwalk, exploration stops.\n\n##### Arguments\n\nNone\n\n#### `onSpeedwalkReset`\n\nTrigger this event when a speedwalk has been interrupted. Exploration stops if\n`exception` is true.\n\n##### Arguments\n\n* `exception` - Boolean indicating if the walk failed.\n* `reason` - The reason the walk ended.\n\n#### `onSpeedwalkFailed`\n\nTrigger this event when a speedwalk couldn't start, before `gotoRoom` returns.\nExploration stops if it is about the walk Explorer asked for. Otherwise, such as\nsomebody else trying to walk during Explorer's walk, it is ignored.\n\n##### Arguments\n\n* `reason` - The reason the walk couldn't start.\n\n#### `onDoorChange`\n\nTrigger this event when a door has changed. If Explorer is waiting on that door\nand it is now open, it goes through right away. Without this event, Explorer\nwaits for the `timeout` preference at each closed door on an exit stub.\n\n##### Arguments\n\n* `room_id` - The id of the room the door is in.\n* `command` - The door's direction, as used by `setDoor`.\n* `status` - The door's new status.\n* `old_status` - The door's previous status.\n\n### Raising\n\nThe following events are raised by this package:\n\n#### `onExplorationStarted`\n\nThis event is raised when exploration has begun.\n\n##### Arguments\n\nNone\n\n#### `onExplorationStopped`\n\nThis event is raised when exploration has stopped.\n\n##### Arguments\n\n* `canceled` - Boolean indicating if the exploration was canceled.\n* `silent` - Boolean indicating that no messages should be printed.\n\n#### `onDetermineNextRoom`\n\nThis event is raised when the next room to explore is being determined.\n\n##### Arguments\n\n* `room_id` - The id of the room the player is currently in.\n* `area_id` - The id of the area the player is currently in.\n\n#### `onNextRoomDetermined`\n\nThis event is raised when the next room to explore has been determined. It isn't\nraised when the next exit has a door, as that has to be opened first.\n\n##### Arguments\n\n* `room_id` - The id of the next room to explore. This is the current room if it\n  has an exit stub to explore.\n* `area_id` - The id of the area that room is in.\n\n#### `onExploreDirection`\n\nThis event is raised when the explorer is about to move through an exit stub in\nthe current room. If the exit has a door, it is raised once the door is open.\n\n##### Arguments\n\n* `room_id` - The id of the room the explorer is currently in.\n* `direction` - The direction the explorer is about to explore.\n* `stub` - The exit stub of the room the explorer is about to explore.\n\n#### `onDirectionExplored`\n\nThis event is raised when the player has moved into a new room following a\ndirection exploration, once the move has been confirmed.\n\n##### Arguments\n\n* `room_id` - The id of the room the explorer has arrived in.\n* `start_room_id` - The id of the room the explorer left.\n* `direction` - The direction that was explored.\n\n#### `onStubIgnored`\n\nThis event is raised when an exit stub is ignored.\n\n##### Arguments\n\n* `room_id` - The id of the room the stub is in.\n* `stub` - The stub that was ignored.\n* `direction` - The direction of the stub that was ignored.\n\n## Dependencies\n\nYou need a mapper script enabled, one that sets `mudlet.mapper_script`, or\nexploration won't start. If you use [Carto](https://github.com/gesslar/Carto), you\nneed version 1.5.0 or later, or a walk that fails can leave exploration waiting\nuntil you use `explore stop`.\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n* [Helper](https://github.com/gesslar/Helper)\n\n## Development\n\n* `npm run build` - Build the package with\n  [muddy](https://www.npmjs.com/package/@gesslar/muddy)\n* `npm run watch` - Rebuild the package when files change\n* `npm test` - Run the specs in `src/resources/test/` inside a headless Mudlet.\n  This needs Docker, and uses the\n  [mudlet-busted](https://hub.docker.com/r/gesslardev/mudlet-busted) image\n* `npm run test:tree` - Run the specs with nested describe/it output\n* `npm run docker:update` - Pull the latest mudlet-busted image\n* `npm run glu` - Update the bundled copy of\n  [Glu](https://github.com/gesslar/Glu)\n\nPull requests to `main` run the specs through the Quality workflow. Merging one\npublishes a release once Quality has passed.\n\n## Support\n\nWhile there is no official support and this is a hobby project, you are welcome\nto report issues on the [GitHub repo](https://github.com/gesslar/Explorer).\n\n## License\n\n`explorer` is released under the [0BSD](LICENSE.txt).\n\n## Credits\n\n[Compass icons created by Dimitry Miroliubov - Flaticon](https://www.flaticon.com/free-icons/compass)\n",
                      "filename": "Explorer.mpackage",
                          "icon": "packages/icons/Explorer.png",
                      "mpackage": "Explorer",
-                        "title": "Developer Automapping tool for Mudlet",
-                     "uploaded": 1781732659,
-                      "version": "1.2.3"
+                        "title": "Developer's Automapping tool for Mudlet",
+                     "uploaded": 1794049467,
+                      "version": "1.4.3"
                 },
                 {
                        "author": "Sampa",
@@ -362,14 +415,14 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-06-17T14:30:20+0000",
-                  "description": "# Highlighter\n\nSpeedwalk path highlighter for Mudlet\n\n## Description\n\nThis package allows you to highlight your speedwalk paths in a different colour\nso that you can more easily see where you are going.\n\n## Configuration\n\nIn Mudlet, type `highlight` to see the help information for this package.\n\n* `highlight set` - See your current preference settings\n* `highlight set <preference> <value>` - Set a preference to a value\n\n  Available preferences:\n  * `fade` - Enable or disable the fade effect (default: on)\n  * `step` - Set the granularity of the fade (default: 10)\n  * `delay` - Set the speed of the fade (default: 0.05)\n  * `colour` - Set the colour of the highlight (default: gold)\n\nNote that the colour must be a valid [Mudlet colour name](https://wiki.mudlet.org/images/c/c3/ShowColors.png).\n\n## Events\n\nThis package listens to the following events in order to function. You will\nneed to ensure that these events are passed along with the required arguments\n(if any).\n\n### `onMoveMap`\n\nTrigger this event when the player has moved to a new room. Highlighter uses\nthis information to know when to begin fading the previous room.\n\n#### Arguments\n\n* `current room id` - The id of the room the player has arrived in.\n\n### `sysSpeedwalkStarted`\n\nTrigger this event to indicate that the speedwalk has started. Highlighter will\nuse this notification and information provided to highlight the route.\n\n#### Arguments\n\n* `none` - No arguments are required.\n\n### `sysSpeedwalkFinished`\n\nTrigger this event when the speedwalk has finished. Highlighter will use this\nnotification to know when to fade all of the remaining highlights.\n\n#### Arguments\n\n* `none` - No arguments are required.\n\nNone\n\n### `onSpeedwalkReset`\n\nTrigger this event when the speedwalk has been reset. Highlighter will use this\nnotification immediately remove all highlights.\n\n#### Arguments\n\n* `exception` - True or false if the reset was due to an exception.\n* `reason` - The reason the speedwalk was reset.\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n* [Helper](https://github.com/gesslar/Helper)\n\n## License\n\n`highlighter` is released under the [0BSD](LICENSE.txt).\n",
+                      "created": "2026-11-04T06:22:47+0000",
+                  "description": "# Highlighter\n\nSpeedwalk path highlighter for Mudlet\n\n## Description\n\nThis package allows you to highlight your speedwalk paths in a different colour\nso that you can more easily see where you are going.\n\n## Configuration\n\nIn Mudlet, type `highlight` to see the help information for this package.\n\n* `highlight set` - See your current preference settings\n* `highlight set <preference>` - See the current value of a preference\n* `highlight set <preference> <value>` - Set a preference to a value\n\n  Available preferences:\n  * `fade` - Enable or disable the fade effect (`on` or `off`, default: off)\n  * `rollout` - Enable or disable the rollout effect (`on` or `off`, default: on)\n  * `step` - Set the granularity of the fade (default: 10)\n  * `delay` - Set the speed of the fade (default: 0.025)\n  * `colour` - Set the colour of the highlight (`auto` or a named colour,\n    default: auto)\n  * `alpha` - Set the opacity of the highlight (0-255, default: 255)\n\nNote that the colour must be a valid [Mudlet colour name](https://wiki.mudlet.org/images/c/c3/ShowColors.png).\n\n## Events\n\nThis package listens to the following events in order to function. You will\nneed to ensure that these events are passed along with the required arguments\n(if any).\n\n### `onMoveMap`\n\nTrigger this event when the player has moved to a new room. Highlighter uses\nthis information to know when to begin fading the previous room. Triggering it\nagain for the room the player is already in does nothing.\n\n#### Arguments\n\n* `current room id` - The id of the room the player has arrived in.\n\n### `sysSpeedwalkStarted`\n\nTrigger this event to indicate that the speedwalk has started. Highlighter will\nuse this notification and information provided to highlight the route.\n\n#### Arguments\n\n* `none` - No arguments are required.\n\n### `sysSpeedwalkFinished`\n\nTrigger this event when the speedwalk has finished. Highlighter will use this\nnotification to know when to fade all of the remaining highlights.\n\n#### Arguments\n\n* `none` - No arguments are required.\n\n### `sysSpeedwalkStopped`\n\nTrigger this event when the speedwalk has been stopped. Highlighter will use this\nnotification to immediately remove all highlights.\n\n#### Arguments\n\n* `none` - No arguments are required. Mappers may send `exception` and `reason`,\n  but neither changes what Highlighter does.\n\n### `onSpeedwalkReset`\n\nTrigger this event when the speedwalk has been reset. Highlighter will use this\nnotification to immediately remove all highlights.\n\n#### Arguments\n\n* `none` - No arguments are required. Mappers may send `exception` and `reason`,\n  but neither changes what Highlighter does.\n\n## Dependencies\n\nThe following packages are required and will be automatically installed if they\nare missing:\n\n* [Helper](https://github.com/gesslar/Helper)\n\n## Development\n\n* `npm run build` - Build the package with\n  [muddy](https://www.npmjs.com/package/@gesslar/muddy)\n* `npm run watch` - Rebuild the package when files change\n* `npm test` - Run the specs in `src/resources/test/` inside a headless Mudlet.\n  This needs Docker, and uses the\n  [mudlet-busted](https://hub.docker.com/r/gesslardev/mudlet-busted) image\n* `npm run test:tree` - Run the specs with nested describe/it output\n* `npm run docker:update` - Pull the latest mudlet-busted image\n* `npm run glu` - Install the latest [Glu](https://github.com/gesslar/Glu) and\n  copy it over the bundled one\n\nPull requests to `main` run the specs through the Quality workflow. Merging one\npublishes a release once Quality has passed.\n\n## License\n\n`highlighter` is released under the [0BSD](LICENSE.txt).\n",
                      "filename": "Highlighter.mpackage",
                          "icon": "packages/icons/Highlighter.png",
                      "mpackage": "Highlighter",
                         "title": "Roll out a nicely stylised path for speedwalking.",
-                     "uploaded": 1783032507,
-                      "version": "1.5.1"
+                     "uploaded": 1793776760,
+                      "version": "1.7.0"
                 },
                 {
                        "author": "Icesus MUD community",
@@ -459,12 +512,12 @@
                 {
                        "author": "Gorgar @ Icesus",
                       "created": "2026-10-05",
-                  "description": "Repairs a mapped area's layout so the drawn map matches the exits you can\nactually walk. Works with any MUD and any mapper script -- it reads nothing but\nMudlet's own map. It repairs indoor-style areas whose rooms were placed by exit\ndirection; grid-mode areas are refused, so read \"Where it does not apply\" below\nbefore installing.\n\nAutomappers place each room as they discover it, and when a room's obvious cell\nis already occupied most of them simply spiral outward and take the first free\nspot. The result is rooms stacked on top of each other, exits that point the\nwrong way, and connection lines running straight through unrelated rooms --\nand it never gets cleaned up afterwards. MapRebalance recomputes one area's\ncoordinates from its exit graph and writes them back, so the picture matches\nthe map.\n\n### What it enforces, in priority order\n\n1. No room is hidden underneath another room.\n2. No connection line passes through an unrelated room.\n3. No two connection lines cross, unless the exits make crossing unavoidable.\n4. Every exit leaves on its correct compass side -- a west exit is never drawn\n   to the north-west.\n5. Cardinal exits stay axis-aligned and diagonals stay at 45 degrees.\n6. Rooms sit one cell apart wherever that is possible; entire sections are\n   bumped outward only when they have to be.\n\n### Where it does not apply\n\nGrid-mode areas -- outworld, wilderness and overland maps, anything your mapper\nplaced with `setGridMode` -- are refused outright. `rebalance` and `rebalance\ncheck` stop with a message naming the area rather than touching it. Those rooms\nsit at absolute coordinates the server sent, instead of being positioned by the\ndirection you walked, so they are usually already consistent and none of the\nrules above mean anything there. `rebalance export` still works on them.\n\nIf the areas you wanted fixed are grid-mode, this package cannot help with\nthem. Everything else below applies to ordinary direction-placed areas.\n\nStored floors are never changed: a room recorded on another z level stays\nthere, and its exits are still checked for direction. Rooms belonging to other\nareas are never moved, and connections leaving the area are treated as fixed\nanchors rather than something to drag around.\n\n### Commands\n\n- `rebalance` -- repair every floor of the area you are standing in\n- `rebalance check` -- report what is wrong without moving anything\n- `rebalance undo` -- restore the exact coordinates from before the last run\n- `rebalance export <area>` -- write one area to JSON, for a bug report\n\nRebalancing only changes coordinates in Mudlet's live map and never saves by\nitself, so nothing reaches your map file until you save it -- and `rebalance\nundo` is exact until then. Needs no configuration and no third-party Lua, only\nMudlet's standard mapper API, so it sits alongside whatever mapper script you\nalready use rather than replacing it.\n",
+                  "description": "Repairs a mapped area's layout so the drawn map matches the exits you can\nactually walk. Works with any MUD and any mapper script -- it reads nothing but\nMudlet's own map. It repairs indoor-style areas whose rooms were placed by exit\ndirection; grid-mode areas are refused, so read \"Where it does not apply\" below\nbefore installing.\n\nAutomappers place each room as they discover it, and when a room's obvious cell\nis already occupied most of them simply spiral outward and take the first free\nspot. The result is rooms stacked on top of each other, exits that point the\nwrong way, and connection lines running straight through unrelated rooms --\nand it never gets cleaned up afterwards. MapRebalance recomputes one area's\ncoordinates from its exit graph and writes them back, so the picture matches\nthe map.\n\nIt first builds an exact coordinate embedding from all exits and checks every\ncycle, joining floors through their entrances. Crowded tree branches can be\nstretched together along their exit directions. When that fast solution does\nnot fit, a joint constraint model changes exit lengths throughout cycles while\npreserving every compass alignment, including 45-degree diagonals. Geometry\nconflicts add separation constraints, and each candidate is checked again.\nExisting repair strategies remain available for contradictory maps. A failed\nunit-length embedding is never treated as proof that an area is impossible.\n\nThe search uses an elapsed-time budget, including map collection. Each run\nreports time spent reading, analyzing, solving, and writing coordinates, so\nslow mapper operations are visible as well as solver time.\n\nUnfinished compass arrows reserve their first two cells. This includes exits\nto rooms that exist in the map database but have not been placed in an area,\nas well as ordinary unexplored exit stubs. Nearby rooms must not look like\ndestinations those arrows do not actually lead to. Whole connected sections\ncan move to leave that space while keeping their own exit directions intact.\n\n### What it enforces, in priority order\n\n1. No room is hidden underneath another room.\n2. No connection line passes through an unrelated room.\n3. No two connection lines cross, unless the exits make crossing unavoidable.\n4. Every exit leaves on its correct compass side -- a west exit is never drawn\n   to the north-west.\n5. Cardinal exits stay axis-aligned and diagonals stay at 45 degrees.\n6. Rooms sit one cell apart wherever that is possible; entire sections are\n   bumped outward only when they have to be.\n\n### Where it does not apply\n\nGrid-mode areas -- outworld, wilderness and overland maps, anything your mapper\nplaced with `setGridMode` -- are refused outright. `rebalance` and `rebalance\ncheck` stop with a message naming the area rather than touching it. Those rooms\nsit at absolute coordinates the server sent, instead of being positioned by the\ndirection you walked, so they are usually already consistent and none of the\nrules above mean anything there. `rebalance export` still works on them.\n\nIf the areas you wanted fixed are grid-mode, this package cannot help with\nthem. Everything else below applies to ordinary direction-placed areas.\n\nStored floors are never changed: a room recorded on another z level stays\nthere, and its exits are still checked for direction. Rooms belonging to other\nareas are never moved. Cross-area exits are reported separately; areas have\nindependent coordinate systems, so those exits do not constrain placement.\n\n### Commands\n\n- `rebalance` -- repair every floor of the area you are standing in\n- `rebalance check` -- report what is wrong without moving anything\n- `rebalance undo` -- restore the exact coordinates from before the last run\n- `rebalance export <area>` -- write one area to JSON, for a bug report\n\nRebalancing only changes coordinates in Mudlet's live map and never saves by\nitself, so nothing reaches your map file until you save it -- and `rebalance\nundo` is exact until then. Needs no configuration and no third-party Lua, only\nMudlet's standard mapper API, so it sits alongside whatever mapper script you\nalready use rather than replacing it.\n",
                      "filename": "MapRebalance.mpackage",
                      "mpackage": "MapRebalance",
                         "title": "MapRebalance - repair a mapped area's layout",
-                     "uploaded": 1791472729,
-                      "version": "1.2.0"
+                     "uploaded": 1792404865,
+                      "version": "1.7.1"
                 },
                 {
                        "author": "Kymbahl, Kronos",
@@ -570,13 +623,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-09-03T19:31:06+0000",
+                      "created": "2026-10-12T20:14:20+0000",
                   "description": "A game-agnostic tiling window manager for Mudlet. Inspired by tmux: panes, splits, workspaces, a way to register and insert custom content, helpful UI widgets, and registered actions for common tasks.",
                      "filename": "Muxlet.mpackage",
                      "mpackage": "Muxlet",
                         "title": "Muxlet",
-                     "uploaded": 1788469549,
-                      "version": "2.3.2"
+                     "uploaded": 1791836416,
+                      "version": "2.5.0"
                 },
                 {
                        "author": "Cherry",
@@ -707,25 +760,35 @@
                 },
                 {
                        "author": "gesslar",
-                      "created": "2026-04-12T03:15:51+0000",
-                  "description": "# Repeater\n\nUse `Ctrl-R` on Windows or Linux, or `Cmd-R` on a Mac to repeat the last\ncommand you sent to the game.\n\n## License\n\n`repeater` is released under the [0BSD](LICENSE.txt).\n",
+                      "created": "2026-11-06T17:39:00+0000",
+                  "description": "# Repeater\n\nUse `Ctrl-R` on Windows or Linux, or `Cmd-R` on a Mac to repeat the last\ncommand you sent to the game.\n\n## License\n\n`repeater` is released under the [0BSD](https://opensource.org/license/0bsd).\n",
                      "filename": "Repeater.mpackage",
                          "icon": "packages/icons/Repeater.png",
                      "mpackage": "Repeater",
                         "title": "Repeat the last command sent to the MUD with Ctrl-R (Cmd-R).",
-                     "uploaded": 1775978432,
-                      "version": "2.0.0"
+                     "uploaded": 1794049493,
+                      "version": "2.0.2"
+                },
+                {
+                       "author": "Odo",
+                      "created": "2026-10-19T10:33:49+0000",
+                  "description": "Automapper for Realm of Magic. Builds the map from GMCP Room.Info as you walk: rooms grouped into areas by the places you know, unexplored exits as stubs, doors and terrain colours. Click a room to walk there, or use walk to / walk stop / walk speed, and keep named bookmarks with walk remember / walk recall / walk forget. Type walk or rmap for help.",
+                     "filename": "RoMMapper.mpackage",
+                     "mpackage": "RoMMapper",
+                        "title": "Automapper for Realm of Magic",
+                     "uploaded": 1792425244,
+                      "version": "1.1.8"
                 },
                 {
                        "author": "Tamarindo",
-                      "created": "2026-09-21T22:38:10+0000",
+                      "created": "2026-11-14T19:28:08+0000",
                   "description": "Speech-to-text for Mudlet: microphone toggle, command-line routing, and MCVP vocabulary correction over the stt.* bridge.",
                      "filename": "STT.mpackage",
                          "icon": "packages/icons/STT.png",
                      "mpackage": "STT",
                         "title": "MudletSTT",
-                     "uploaded": 1790030537,
-                      "version": "1.6.0"
+                     "uploaded": 1794684652,
+                      "version": "1.6.1"
                 },
                 {
                        "author": "keneanung",
@@ -801,6 +864,17 @@
                       "version": "1.2.0"
                 },
                 {
+                       "author": "Mudlet",
+                      "created": "2026-11-01T09:20:19+00:00",
+                  "description": "A small window that shows off the SVG label backgrounds new in Mudlet 5.1: a compass needle turned with `setSvgRotation`, a banner waving with `setSvgShear`, and stat icons coloured with `setSvgTint` - all drawn from plain .svg files that stay sharp at any size and screen scaling.\n\nType `svgdemo` to show or hide it. It opens in its own window and leaves your main window alone, and uninstalling it removes everything it made.\n\nNeeds Mudlet 5.1 or later. See [setSvgTint and friends](https://wiki.mudlet.org/w/Manual:UI_Functions#setSvgTint) in the manual to use them in your own scripts.",
+                     "filename": "SvgLabelsDemo.mpackage",
+                         "icon": "packages/icons/SvgLabelsDemo.png",
+                     "mpackage": "SvgLabelsDemo",
+                        "title": "SVG labels demo",
+                     "uploaded": 1793525306,
+                      "version": "1.0"
+                },
+                {
                        "author": "takilara",
                       "created": "2013-06-25T07:58:31+00:00",
                   "description": "This package can consume commands from Telegram, and run them on the mud, and send messages back to Telegram\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=23057) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -809,6 +883,39 @@
                         "title": "Telegram Connector",
                      "uploaded": 1738774666,
                       "version": "1"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-11-06T21:23:15+0000",
+                  "description": "# ThreshBuff\n\nThis package will show temporary buffs and debuffs for your character and how\nlong before they will expire.\n\n* Buffs are in green\n* Debuffs are in red\n* Handicaps are in purpl-y-lilac-y colour\n\nThreshBuff also installs [Helper](https://github.com/gesslar/Helper), which\nformats the `/tbuff` help.\n\n## Commands\n\n| Command | What it does |\n| --- | --- |\n| `/tbuff` | List the commands. |\n| `/tbuff buff [<colour>\\|default]` | Set the colour for buff names (default `forest_green`). |\n| `/tbuff debuff [<colour>\\|default]` | Set the colour for debuff names (default `indian_red`). |\n| `/tbuff affliction [<colour>\\|default]` | Set the colour for affliction names (default `medium_orchid`). |\n| `/tbuff time [<colour>\\|default]` | Set the colour for the times (default `grey`). |\n| `/tbuff palette` | Show the Mudlet colour names you can use. |\n| `/tbuff reset` | Put the window back on the left at its default size. |\n\nColours are Mudlet colour names. With no colour given, each shows the current\none. Your choices are remembered between sessions and reinstalls.\n\n## License\n\nThreshBuff is released under the [0BSD](https://opensource.org/license/0bsd).\n",
+                     "filename": "ThreshBuff.mpackage",
+                         "icon": "packages/icons/ThreshBuff.png",
+                     "mpackage": "ThreshBuff",
+                        "title": "Threshold Buff/Debuff Package for Mudlet",
+                     "uploaded": 1794049520,
+                      "version": "2.1.0"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-11-06T17:38:40+0000",
+                  "description": "# ThreshColourPercent\n\nThreshold Colour Health Bar Percent Package for Mudlet\n\nIn order to make proper use of this extension, you must have\n`settings percent on` enabled in Threshold.\n\n## License\n\n`threshcolourpercent` is released under the [0BSD](https://opensource.org/license/0bsd).\n",
+                     "filename": "ThreshColourPercent.mpackage",
+                         "icon": "packages/icons/ThreshColourPercent.png",
+                     "mpackage": "ThreshColourPercent",
+                        "title": "Add colours to percents in Health bars",
+                     "uploaded": 1794049484,
+                      "version": "3.0.3"
+                },
+                {
+                       "author": "gesslar",
+                      "created": "2026-11-06T20:36:52+0000",
+                  "description": "# ThresholdUI\n\nA graphical interface for [Threshold RPG](https://www.thresholdrpg.com/) in Mudlet. It adds a status bar along the bottom of your screen that keeps your vitals, combat, and the game clock in view, all driven live by GMCP.\n\n## What you get\n\n- **Vitals** — HP, SP, and EP gauges. They dim while you're stunned or immobile.\n- **Combat** — your foe's name and health, and who your foe is fighting.\n- **Experience and shielding** — progress to your next level, plus a shielding gauge that appears only when you have shields up.\n- **Meters** — capacity (C), tummy (T), heal bank (H), and regen tick (R).\n- **Game clock** — the date, weekday, toll of the day, and current devotion on Threshold's calendar.\n- **Rest timer** — a gently pulsing bar showing how long you've been resting, meditating, or trancing.\n- **Psion feedback** — shock, net, mastery, and gaze indicators, shown only for characters that have them.\n\n## Installation\n\nEnsure that you hav GMCP enabled: `gmcp on`\n\n### Primary\n\nIf you're logged in to Threshold:\n\n1. Install the GUI: `gmcp gui`\n\n### Alternative\n\n1. Download `ThresholdUI.mpackage` from the [latest release](https://github.com/gesslar/ThresholdUI/releases/latest).\n2. In Mudlet, open **Package Manager** and install the downloaded file.\n\nThresholdUI sets up GMCP with Threshold for you as soon as it's installed. It\nalso installs [Helper](https://github.com/gesslar/Helper), which formats the\n`/tui` help.\n\n## Commands\n\n| Command | What it does |\n| --- | --- |\n| `/tui` | List the commands. |\n| `/tui regen [on\\|off]` | Show or hide the regen tick meter; toggles with no argument. |\n| `/tui datetime [on\\|off]` | Show or hide the game clock; toggles with no argument. |\n| `/tui size [<6-40>\\|default]` | Set the font size (default 13); the whole bar resizes to fit. Shows the current size with no argument. |\n\nYour choices are remembered between sessions and reinstalls.\n\n## License\n\nThresholdUI is released under the [0BSD](https://opensource.org/license/0bsd).\n",
+                     "filename": "ThresholdUI.mpackage",
+                         "icon": "packages/icons/ThresholdUI.jpg",
+                     "mpackage": "ThresholdUI",
+                        "title": "UI for ThresholdRPG",
+                     "uploaded": 1794049510,
+                      "version": "4.6.1"
                 },
                 {
                        "author": "Darmir",
@@ -1099,8 +1206,8 @@
                          "icon": "packages/icons/arkadia.png",
                      "mpackage": "arkadia",
                         "title": "Skrypty do Arkadii",
-                     "uploaded": 1789653537,
-                      "version": "4.114"
+                     "uploaded": 1794049458,
+                      "version": "4.115"
                 },
                 {
                        "author": "Greg",
@@ -1534,13 +1641,13 @@
                 {
                        "author": "Mudlet Default Package",
                       "created": "2025-06-07T20:44:12-04:00",
-                  "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
+                  "description": "# enable-accessibility Package\n\nThis package provides two aliases for visually impaired users.\n\n```\n> mudlet access on\n> mudlet access reader\n```\n\n## mudlet access on\n\nConfigures the following settings;\n\n- clears the command line after sending the command to the game\n- does not echo the commands sent on the main screen\n- adds a shortcut to switch between input line and main window, default Ctrl+Tab\n- lets Tab reach buttons made by scripts and packages, pressed with Space or Enter\n- removes blank lines on Windows OS\n\n## mudlet access reader\n\nVoiceOver is text-to-speech (TTS) for Mac OS, but will skip reading text when there's lots of it coming on.\n\nThis command configures a third-party TTS plugin called [mudlet-reader](https://github.com/tspivey/mudlet-reader) to alleviate this issue.\n\nSee [Accessibility on OSX](https://wiki.mudlet.org/w/Accessibility_on_OSX) for more information.\n",
                      "filename": "enable-accessibility.mpackage",
                          "icon": "packages/icons/enable-accessibility.png",
                      "mpackage": "enable-accessibility",
                         "title": "Configuration for visually impaired users.",
-                     "uploaded": 1787910230,
-                      "version": "3"
+                     "uploaded": 1792448092,
+                      "version": "4"
                 },
                 {
                        "author": "Heiko",
@@ -1564,13 +1671,13 @@
                 },
                 {
                        "author": "tmtocloud",
-                      "created": "2026-09-04T01:17:03+0000",
+                      "created": "2026-10-12T20:15:21+0000",
                   "description": "F2CE-Tools — Mudlet package for Federation 2 Community Edition.",
                      "filename": "f2ce-tools.mpackage",
                      "mpackage": "f2ce-tools",
                         "title": "f2ce-tools",
-                     "uploaded": 1788496527,
-                      "version": "3.3.0"
+                     "uploaded": 1791871800,
+                      "version": "3.4.0"
                 },
                 {
                        "author": "jieiku",
@@ -1661,8 +1768,8 @@
                          "icon": "packages/icons/generic_mapper.png",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1791419109,
-                      "version": "2.1.13"
+                     "uploaded": 1794115577,
+                      "version": "2.1.26"
                 },
                 {
                        "author": "Vadi",
@@ -1752,8 +1859,8 @@
                      "filename": "imperium_cal.mpackage",
                      "mpackage": "imperium_cal",
                         "title": "Kalendarz Imperium",
-                     "uploaded": 1791541862,
-                      "version": "1.8.26"
+                     "uploaded": 1793645540,
+                      "version": "1.8.31"
                 },
                 {
                        "author": "breakone9r",
@@ -1812,8 +1919,8 @@
                      "filename": "ishtar_cal.mpackage",
                      "mpackage": "ishtar_cal",
                         "title": "Kalendarz Ishtar",
-                     "uploaded": 1790451283,
-                      "version": "1.8.24"
+                     "uploaded": 1793689353,
+                      "version": "1.8.25"
                 },
                 {
                        "author": "Yetzederixx",
@@ -1907,6 +2014,39 @@
                       "version": "1"
                 },
                 {
+                       "author": "ealanta",
+                      "created": "2026-10-13T08:35:16-05:00",
+                  "description": "*Built 2026-10-19 18:09*\n\nPath walking for Merentha: step through a list of rooms, find monsters, and build short paths automatically.\n\n### Commands (type `pathhelp` in game)\n* `paths` - list your paths, `path <name>` - load one\n* `f` or **F1** - walk the next step, **Shift+F1** - move the counter back one\n* `pathstep zx` - use `zx` (or any word or regex) instead of `f` to walk the next step; `pathstep reset` goes back to `f`\n* **F11** - walk the rest of the loop to get back to the start, press again to return\n* **Genpath**: `gp <name>` walks a path that visits every room and saves only the rooms with monsters as `ztemp_path`. `tp` loads it. `mincount <n>` / `maxcount <n>` limit how many monsters a room needs.\n* **Path builder**: `createpath`, walk with n/e/s/w, `setroom` at each stop, `printpath` prints the list to paste into the pathlist.\n\n### Your paths\nThe script *pathlist* holds a few paths to start with: cab, wdnorth, wdsouth, havennorth, haveneast, havensouth, haventown, gofurtown and gofurmines. Add your own there, or install **merentha-pathlist** for the full list.\n\n### Settings\nOpen the script *Merentha Paths* and edit the **SETTINGS** block at the top.\n\nRequires **merentha-ui** (the Status panel shows the path, next step and progress).\n",
+                     "filename": "merentha-paths.mpackage",
+                         "icon": "packages/icons/merentha-paths.png",
+                     "mpackage": "merentha-paths",
+                        "title": "Merentha Paths",
+                     "uploaded": 1792452488,
+                      "version": "1.1.3"
+                },
+                {
+                       "author": "ealanta",
+                      "created": "2026-10-13T08:16:35-05:00",
+                  "description": "*Built 2026-10-19 08:57*\n\nBard song queue for Merentha.\n\n### What it does\n* Keeps a queue of songs and sings them one after another.\n* Re-queues owl and fortune songs when their buff fades, and the spider song too if you switch that on\n  (`spiderrenew on` / `spiderrenew off`, default on).\n* Notices when your INT bonus drops (the song buffs ran out) and re-queues your full self-buff set.\n\n### Commands (type `songhelp` in game)\n* `singme` - queue your full self-buff set\n* `q <song>` - sing one song next, e.g. `q rock`\n* `q` - show the queue, `qreset` - empty it\n* `qowl`, `qspider`, `qfortune [name]`\n* `singattack`, `singdragon`, `singmonk`, `singspell <name>` - buff sets on someone else\n* **F4** forces the next song right now\n\n### Settings\nOpen the script *Merentha Songs* and edit the **SETTINGS** block at the top (default songs, instrument, key, what gets re-queued).\n\nWorks on its own. If merentha-ui is installed, messages go to the Path & Buffs tab.\n",
+                     "filename": "merentha-songs.mpackage",
+                         "icon": "packages/icons/merentha-songs.png",
+                     "mpackage": "merentha-songs",
+                        "title": "Merentha Songs",
+                     "uploaded": 1792452509,
+                      "version": "1.2.5"
+                },
+                {
+                       "author": "ealanta",
+                      "created": "2026-10-16T00:00:00-05:00",
+                  "description": "*Built 2026-10-22 12:33*\n\nDock panels and vitals bars for Merentha.\n\n### What you get\n* **Chat** panel with two tabs: *Chat* and *Path & Buffs*\n* **Stats** panel (STAT / CUR / MAX / PROG)\n* **Status** panel: XP/hr, bag, pet health, salve count, mana gem (shown as the game draws it, in its colours; red when low), and the path rows used by merentha-paths\n  (set the salve count by hand with `setsalve 25`)\n  Tip: buy salve one vial at a time (`buy 1 legend salve`, not `buy 25 legend salve`) so the salve counter stays accurate; if it drifts, fix it with `setsalve`.\n* Health / endurance / mana / xp bars along the bottom\n\nThe panels are fixed in a column on the right, 25% of the window wide: Status and Stats stacked at\nthe bottom, each just as tall as its contents, and Chat filling the rest above them. Type `muilayout` to redraw the layout.\nWritten against Mudlet 5.0.\n\n### Settings\nOpen the script *Merentha UI* and edit the **SETTINGS** block at the top.\n\n### Works with\n* **merentha-paths** writes the path, next/last step and progress into the Status panel.\n* **merentha-songs** prints its messages in the Path & Buffs tab.\n",
+                     "filename": "merentha-ui.mpackage",
+                         "icon": "packages/icons/merentha-ui.png",
+                     "mpackage": "merentha-ui",
+                        "title": "Merentha UI",
+                     "uploaded": 1792690900,
+                      "version": "2.9.10"
+                },
+                {
                        "author": "Caelic",
                       "created": "2011-11-29T18:26:20+00:00",
                   "description": "This software package is a customized combo script for a monk character in a game, designed to automatically execute different combat combinations based on the target type. When targeting a specific type of in-game entity (denizen), the script performs a default bashing combo, and when no specific target is selected, it allows the player to choose from multiple predefined combo sequences using keypad numbers 1-9. The script is flexible and can potentially be adapted for other character classes, with ongoing plans to expand its functionality by adding more key variations and target lists.\n\n---\nThis package was originally shared on the [Mudlet Forums](https://forums.mudlet.org/viewtopic.php?f=6&t=2581&sid=aa12bbf669d90e2a5a6be5d034a5a4ba) by the author. We’ve automatically listed it here on packages.mudlet.org so more users can discover and benefit from it. Please let us know if you have any questions or concerns - thanks for contributing to the Mudlet community!",
@@ -1960,13 +2100,13 @@
                 {
                        "author": "Mudlet Makers",
                       "created": "2026-07-25T12:00:00+00:00",
-                  "description": "# Mudlet base UI\n\nA modest starter interface for new profiles: an adjustable dock with\nyour map, tabbed chat (All/Tells/Channels with unread counters) and\nhealth, mana, movement and experience gauges - built only from data your\ngame actually provides (GMCP, MSDP, or recognisable prompt and score\nlines). Nothing appears until the game sends something to show.\n\nNo section is stuck in the dock: drag the map, the chat window or the\nhealth bars out by its header row and it will sit wherever you drop it\nover the game's text. The sections left behind share out the space it\nhad, and where you leave each one is remembered.\n\nIt comes in three looks - Midnight, Ember and Hardlight. Click the ◐ in\nthe dock's title bar to try each in turn; a look colors the dock and,\nif you have not chosen a background color of your own, the background\nthe game's text sits on as well.\n\nCommands:\n\n```\n> baseui           -- show status and options\n> baseui hide      -- remove the interface (remembered between sessions)\n> baseui show      -- bring it back\n> baseui dock      -- put every section back in the dock\n> baseui ember     -- change the look (midnight, ember or hardlight)\n```\n\nWhen a game installs an interface of its own, this one quietly stands\naside - `baseui show` brings it back if you prefer it.\n",
+                  "description": "# Mudlet base UI\n\nA modest starter interface for new profiles: an adjustable dock with\nyour map, tabbed chat (All/Tells/Channels with unread counters) and\nhealth, mana, movement and experience gauges - built only from data your\ngame actually provides (GMCP, MSDP, or recognisable prompt and score\nlines). An enemy bar follows your opponent's health, from GMCP or\nMSDP or from the sentence some games print describing it (\"The orc\nhas a few scratches.\"). Nothing appears until your game has sent\nsomething to show.\n\nNo section is stuck in the dock: drag the map, the chat window or the\nhealth bars out by its header row and it will sit wherever you drop it\nover the game's text. The sections left behind share out the space it\nhad, and where you leave each one is remembered.\n\nIt comes in three looks - Midnight, Ember and Hardlight. Click the ◐ in\nthe dock's title bar to try each in turn; a look colors the dock and,\nif you have not chosen a background color of your own, the background\nthe game's text sits on as well.\n\nCommands:\n\n```\n> baseui           -- show status and options\n> baseui hide      -- remove the interface (remembered between sessions)\n> baseui show      -- bring it back\n> baseui dock      -- put every section back in the dock\n> baseui ember     -- change the look (midnight, ember or hardlight)\n> baseui background <file>  -- put a picture behind the whole window\n> baseui background off     -- take it away again\n```\n\nThe x in the dock's title bar hides it the same way as `baseui hide`.\n\nThe ▣ beside the ◐ picks a background picture too; right-click it to\nremove the picture. While a picture is up, the game's text, chat and\ndocked sections let it show through; sections dragged out of the dock\nstay solid.\n\nWhen a game installs an interface of its own, this one quietly stands\naside - `baseui show` brings it back if you prefer it.\n",
                      "filename": "mudlet-base-ui.mpackage",
                          "icon": "packages/icons/mudlet-base-ui.png",
                      "mpackage": "mudlet-base-ui",
                         "title": "A starter interface with health bars, map and chat, built from what your game provides.",
-                     "uploaded": 1791351446,
-                      "version": "1.7.5"
+                     "uploaded": 1793667674,
+                      "version": "1.9.4"
                 },
                 {
                        "author": "Denarii",
@@ -2098,6 +2238,16 @@
                         "title": "repeat alias",
                      "uploaded": 1756131014,
                       "version": "1"
+                },
+                {
+                       "author": "retromud contributors",
+                      "created": "2026-11-15T09:30:39+0000",
+                  "description": "Geyser GUI for RetroMUD (www.retromud.org): status bar and mapper host.",
+                     "filename": "retromud-gui.mpackage",
+                     "mpackage": "retromud-gui",
+                        "title": "RetroMUD GUI",
+                     "uploaded": 1794762653,
+                      "version": "0.0.3"
                 },
                 {
                        "author": "Vadi",
@@ -2456,5 +2606,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Fri Oct  9 10:31:45 2026"
+   "updated": "Mon Nov 16 08:50:36 2026"
 }
