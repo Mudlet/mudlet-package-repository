@@ -331,14 +331,14 @@
                 },
                 {
                        "author": "Ping",
-                      "created": "2026-09-26T15:13:04+08:00",
-                  "description": "Big thank you to Virelen for getting this started! A simple trigger that captures words encapsulated in colons like :this: and turns them into unicode emojis. Uses discord naming conventions for the most part, should be easy to update on your own end. Work in progress!",
+                      "created": "2026-11-17T03:54:59+08:00",
+                  "description": "Big thank you to Virelen for getting this started! A simple trigger that captures words encapsulated in colons like :this: and turns them into unicode emojis. Uses :shortcodes: for the most part, should be easy to update on your own end. Updated for Unicode Emoji 18, should include all emojis except for tone and gender-specific variants.",
                      "filename": "Emojis.mpackage",
                          "icon": "packages/icons/Emojis.png",
                      "mpackage": "Emojis",
-                        "title": "A trigger and script to convert text emojis into unicode emojis!",
-                     "uploaded": 1790451323,
-                      "version": "1.006"
+                        "title": "Emojis",
+                     "uploaded": 1794859105,
+                      "version": "1.7"
                 },
                 {
                        "author": "Daikojun",
@@ -2616,5 +2616,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Nov 16 09:48:50 2026"
+   "updated": "Mon Nov 16 19:58:59 2026"
 }
