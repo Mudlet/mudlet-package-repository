@@ -1,13 +1,13 @@
 {
   "filename": "arkadia.mpackage",
   "mpackage": "arkadia",
-  "sha256": "7f7bbd38a6203a92e9db58819f56a6a665adf61ed995df7256537fe137941174",
-  "version": "4.114",
+  "sha256": "b70059faa616bfe9649c21de28b2245738106cc4c46c2f7a06eca57d4daa2fe2",
+  "version": "4.115",
   "repository": "tjurczyk/arkadia",
   "repositoryId": "80291515",
   "workflow": ".github/workflows/publish-package-repository.yml",
-  "ref": "refs/tags/4.114",
-  "commit": "66503a348e91f1f490441145cc96e5b124903174",
-  "runId": "35223693392",
-  "publishedAt": "2026-09-17T12:53:27.209Z"
+  "ref": "refs/tags/4.115",
+  "commit": "b687783d247a4b0b9343625dc993649597f458b9",
+  "runId": "41656219918",
+  "publishedAt": "2026-11-03T14:42:02.624Z"
 }
