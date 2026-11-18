@@ -2241,13 +2241,13 @@
                 },
                 {
                        "author": "retromud contributors",
-                      "created": "2026-11-15T09:30:39+0000",
+                      "created": "2026-11-18T08:58:44+0000",
                   "description": "Geyser GUI for RetroMUD (www.retromud.org): status bar and mapper host.",
                      "filename": "retromud-gui.mpackage",
                      "mpackage": "retromud-gui",
                         "title": "RetroMUD GUI",
-                     "uploaded": 1794762653,
-                      "version": "0.0.3"
+                     "uploaded": 1794992850,
+                      "version": "0.0.4"
                 },
                 {
                        "author": "retromud contributors",
@@ -2616,5 +2616,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Mon Nov 16 19:58:59 2026"
+   "updated": "Wed Nov 18 09:08:21 2026"
 }
