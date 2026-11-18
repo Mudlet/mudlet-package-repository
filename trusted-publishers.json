@@ -113,6 +113,14 @@
       "repositoryId": "1376364740",
       "repositoryOwnerId": "48842744",
       "workflow": ".github/workflows/release.yml"
+    },
+    {
+      "mpackage": "AchaeaTalismans",
+      "filename": "AchaeaTalismans.mpackage",
+      "repository": "PrincessSiren/achaea-talismans",
+      "repositoryId": "1460427419",
+      "repositoryOwnerId": "48842744",
+      "workflow": ".github/workflows/release.yml"
     }
   ]
 }
