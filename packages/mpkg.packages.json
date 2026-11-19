@@ -2253,11 +2253,11 @@
                        "author": "retromud contributors",
                       "created": "2026-11-13",
                   "description": "Trigger-based auto-mapper for RetroMUD (no GMCP).",
-                     "filename": "retromud.mpackage",
-                     "mpackage": "retromud",
+                     "filename": "retromud-mapper.mpackage",
+                     "mpackage": "retromud-mapper",
                         "title": "RetroMUD mapper",
-                     "uploaded": 1794822272,
-                      "version": "0.0.13"
+                     "uploaded": 1795110327,
+                      "version": "0.0.25"
                 },
                 {
                        "author": "Vadi",
@@ -2616,5 +2616,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Nov 19 05:03:23 2026"
+   "updated": "Thu Nov 19 17:46:51 2026"
 }
