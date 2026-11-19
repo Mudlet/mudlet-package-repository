@@ -1,0 +1,13 @@
+{
+  "filename": "AchaeaTalismans.mpackage",
+  "mpackage": "AchaeaTalismans",
+  "sha256": "1772326ee0eb085b427358c0e2f2fd6100a1dc802ebe16097ad9d9f539109e9d",
+  "version": "0.4.3",
+  "repository": "PrincessSiren/achaea-talismans",
+  "repositoryId": "1460427419",
+  "workflow": ".github/workflows/release.yml",
+  "ref": "refs/tags/v0.4.3",
+  "commit": "37edb6123011f0aaeda0f08b74394f67e325d138",
+  "runId": "44464701713",
+  "publishedAt": "2026-11-19T05:22:41.400Z"
+}
