@@ -52,6 +52,16 @@
                       "version": "0.3.1"
                 },
                 {
+                       "author": "PrincessSiren",
+                      "created": "2026-11-17",
+                  "description": "# AchaeaTalismans\n\nSee how far your talisman pieces get you, in a window beside the game.\n\nIt reads what Achaea prints for `TALISMAN PIECES`, `TALISMAN INFO`,\n`TALISMAN SET`, `TALISMAN SETS` and `TALISMAN LIST` whenever you type them,\nand draws each talisman's pieces as bars:\n\n```\n▾ ◐ a Red Dragon Talisman (reddragon)  0/8 ready, 4%\n    claw    L7 ███░░░░░░░ 22/64\n    heart   L7 ░░░░░░░░░░ 0/64\n```\n\nTwo pieces of one level combine into one a level up, so a level-7 piece is\n64 level-1 pieces' worth, and everything you hold of a piece counts toward\nit whatever its level.\n\n```\ntals\ntals scan\ntals set dragon\n```\n\n`tals scan` sends `TALISMAN LIST`, `TALISMAN PIECES` and `TALISMAN SET` for\nevery set, then `TALISMAN INFO` for each talisman you hold pieces of, one at a\ntime, and keeps their answers off the screen. Below the talismans the\nwindow lists every set, with a mark per talisman: done, started or not.\n`tals` is the full command list.\n\nSource and licence (GPL-3.0-or-later): https://github.com/PrincessSiren/achaea-talismans",
+                     "filename": "AchaeaTalismans.mpackage",
+                     "mpackage": "AchaeaTalismans",
+                        "title": "See how far your talisman pieces get you in Achaea",
+                     "uploaded": 1795241040,
+                      "version": "0.4.4"
+                },
+                {
                        "author": "Caevora (caevorasmailbox@gmail.com)",
                       "created": "2026-07-09T23:37:25-07:00",
                   "description": "Achaean Curing System (Iron Realms Entertainment)",
@@ -2616,5 +2626,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Thu Nov 19 17:46:51 2026"
+   "updated": "Sat Nov 21 06:05:20 2026"
 }
