@@ -1547,13 +1547,13 @@
                 {
                        "author": "Mudlet Default Package",
                       "created": "2024-08-24T08:26:45+02:00",
-                  "description": "# deleteOldProfiles Package\n\nMudlet continuiously creates backups of important data.  This can result in a lot\nof files.  This package deletes old profiles, maps and modules in the \n\"current\", \"map\" and \"moduleBackups\" folders of the Mudlet home directory that are\nno longer required.\n\nThe commands are;\n\n```\n> delete old profiles [days]\n> delete old maps [days]\n> delete old modules[days]\n```\n\nDays is optional, the default is 31 days.\n\nThe following files are NOT deleted:\n\n- Files newer than the amount of days specified, or 31 days if not specified.\n- One file for every month before that. Specifically: The first available file of every month prior to this.\n\n```\n-- Examples: \n> delete old profiles   -- deletes profiles older than 31 days  \n> delete old maps 10    -- deletes maps older than 10 days\n```\n",
+                  "description": "# deleteOldProfiles Package\n\nMudlet continuiously creates backups of important data.  This can result in a lot\nof files.  This package deletes old profiles, maps and modules in the \n\"current\", \"map\" and \"moduleBackups\" folders of the Mudlet home directory that are\nno longer required.\n\nThe commands are;\n\n```\n> delete old profiles [days]\n> delete old maps [days]\n> delete old modules[days]\n```\n\nDays is optional, the default is 31 days.\n\nThe following files are NOT deleted:\n\n- Files newer than the amount of days specified, or 31 days if not specified.\n- One file for every month before that. Specifically: The first save of every month prior to this; a leftover from an interrupted save does not count.\n- The newest profile save (.xml) or map (.dat/.json), which is the one Mudlet loads, however old it is. Module backups are never loaded, so there it is just the single newest file in the shared folder.\n- A leftover from an interrupted save, when there is no save Mudlet would load.\n- Folders, which are left alone.\n\n```\n-- Examples: \n> delete old profiles   -- deletes profiles older than 31 days  \n> delete old maps 10    -- deletes maps older than 10 days\n```\n",
                      "filename": "deleteOldProfiles.mpackage",
                          "icon": "packages/icons/deleteOldProfiles.png",
                      "mpackage": "deleteOldProfiles",
                         "title": "Remove excess backup files.",
-                     "uploaded": 1787910230,
-                      "version": "3"
+                     "uploaded": 1795288199,
+                      "version": "4"
                 },
                 {
                        "author": "Demonnic",
@@ -1778,8 +1778,8 @@
                          "icon": "packages/icons/generic_mapper.png",
                      "mpackage": "generic_mapper",
                         "title": "Semi-automatic mapping, designed to work with many MUDs.",
-                     "uploaded": 1794115577,
-                      "version": "2.1.26"
+                     "uploaded": 1795288199,
+                      "version": "2.1.27"
                 },
                 {
                        "author": "Vadi",
@@ -2115,8 +2115,8 @@
                          "icon": "packages/icons/mudlet-base-ui.png",
                      "mpackage": "mudlet-base-ui",
                         "title": "A starter interface with health bars, map and chat, built from what your game provides.",
-                     "uploaded": 1793667674,
-                      "version": "1.9.4"
+                     "uploaded": 1795288199,
+                      "version": "1.9.5"
                 },
                 {
                        "author": "Denarii",
@@ -2626,5 +2626,5 @@
                       "version": "1"
                 }
               ],
-   "updated": "Sat Nov 21 06:05:20 2026"
+   "updated": "Sat Nov 21 19:14:38 2026"
 }
